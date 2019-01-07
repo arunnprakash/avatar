@@ -3,6 +3,9 @@
 	background-color: #008000;
 	border-radius: 4px;
 }
+.fa {
+	font-family: FontAwesome;
+}
 .selected {
     background-color: green;
     color: white;

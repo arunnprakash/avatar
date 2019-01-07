@@ -7,18 +7,18 @@
     </div>
     <div class="p-col-4 p-md-4 p-col-nogutter">
     	<p-card #pnl>
-    		<form>
-	    		<div class="p-col-12">
-					<span class="ui-float-label">
-						<label for="username">MobileNumber</label>
-						<input id="username" name="username" type="text" size="30" autocomplete="username" pInputText [(ngModel)]="username" />
-					</span>
+    		<form class="p-grid">
+	    		<div class="p-col-4 text-bold">
+	    			<label for="username">MobileNumber</label>
 				</div>
-				<div class="p-col-12">
-					<span class="ui-float-label">
-						<label for="password">Password</label>
-						<input id="password" name="password" type="password" size="30" autocomplete="current-password" pPassword [(ngModel)]="password"/>
-					</span>
+				<div class="p-col-8">
+					<input id="username" name="username" type="text" size="30" autocomplete="username" pInputText [(ngModel)]="username" />
+				</div>
+				<div class="p-col-4 text-bold">
+					<label for="password">Password</label>
+				</div>
+				<div class="p-col-8">
+					<input id="password" name="password" type="password" size="30" autocomplete="current-password" pPassword [(ngModel)]="password"/>
 				</div>
 				<div class="p-col-12">
 					<button pButton type="button" label="Login" (click)="doLogin()" class="ui-button-raised ui-button-success"></button>

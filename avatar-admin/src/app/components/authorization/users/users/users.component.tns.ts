@@ -22,7 +22,8 @@ export class UsersComponent extends BaseComponent implements OnInit {
          { field: 'userName', header: 'UserName', dataType: 'INPUT' },
          { field: 'mobileNumber', header: 'MobileNumber', dataType: 'INPUT' },
          { field: 'firstName', header: 'FirstName', dataType: 'INPUT' },
-         { field: 'lastName', header: 'LastName', dataType: 'INPUT' }
+         { field: 'lastName', header: 'LastName', dataType: 'INPUT' },
+         { field: 'dob', header: 'DateOfBirth', dataType: 'DATE' }
     ];
     constructor( userService: UserService, modalDialogService: ModalDialogService, dialogService: ModalDialogService, 
             router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef ) {

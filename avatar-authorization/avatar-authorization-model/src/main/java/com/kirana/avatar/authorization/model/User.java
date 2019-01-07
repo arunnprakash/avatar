@@ -12,6 +12,7 @@
  *******************************************************************************/
 package com.kirana.avatar.authorization.model;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -59,6 +60,8 @@ public class User extends BaseEntity<User> {
 	protected String lastName;
 	@Column(nullable = false)
 	protected String mobileNumber;
+	@Column(nullable = true)
+	protected ZonedDateTime dob;
 	@Column(nullable = false)
 	protected String password;
 	@Column(nullable = false)

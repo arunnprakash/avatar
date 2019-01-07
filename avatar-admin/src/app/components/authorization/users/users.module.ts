@@ -18,6 +18,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MessageModule } from 'primeng/message';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DataViewModule } from 'primeng/dataview';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
+
 import { routes, componentDeclarations, providerDeclarations } from './users.common';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 
@@ -42,6 +44,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
         ConfirmDialogModule,
         MessageModule,
         DataViewModule,
+        ScrollPanelModule,
         RouterModule.forChild( routes )
     ],
     exports: [

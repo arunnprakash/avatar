@@ -42,7 +42,7 @@ export const baseDataViewTemplate: string = `<p-dataView #dataView [value]="reco
                             style="width: 100%">
                 </div>
                 <div class="ui-g-12 ui-md-8" (click)="rowDataClicked(rowData)">
-                     <div class="ui-g" *ngFor="let col of cols" [ngSwitch]="col.dataType">
+                     <div class="ui-g" *ngFor="let col of localCols" [ngSwitch]="col.dataType">
                         <div class="ui-g-4 ui-sm-6 text-bold text-align-left">{{col.header}}</div>
                         <div *ngSwitchCase="'INPUT'" class="ui-g-8 ui-sm-6 text-align-left">{{rowData[col.field]}}</div>
                         <div *ngSwitchCase="'DATE'" class="ui-g-8 ui-sm-6 text-align-left">{{rowData[col.field] | date:'dd-MM-yyyy HH:mm:ss'}}</div>
@@ -61,7 +61,7 @@ export const baseDataViewTemplate: string = `<p-dataView #dataView [value]="reco
                             style="width: 100%" width="60">
                         <img *ngIf="!rowData.photo" class="card-img-top" src="/assets/images/avatar.png" alt="image"
                             style="width: 100%" width="60">
-                    <div class="car-detail">{{rowData[localCols[0].field]}} - {{rowData[localCols[1].field]}}</div>
+                    <div>{{rowData[localCols[0].field]}} - {{rowData[localCols[1].field]}}</div>
                     <hr class="ui-widget-content" style="border-top:0">
                     <p-checkbox *ngIf="recordIdList[rowIndex]" binary="true" [(ngModel)]="recordIdList[rowIndex].selected" (onChange)="checkIfAllSelected();"></p-checkbox>
                 </p-panel>

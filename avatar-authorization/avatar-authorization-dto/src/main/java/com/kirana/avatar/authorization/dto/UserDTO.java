@@ -37,6 +37,7 @@ public class UserDTO extends BaseDTO {
 	protected String firstName;
 	protected String lastName;
 	protected String mobileNumber;
+	protected ZonedDateTime dob;
 	protected Boolean suspended;
 	protected String latitude;
 	protected String longitude;
@@ -44,12 +45,13 @@ public class UserDTO extends BaseDTO {
 	@Builder
 	public UserDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
 			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, String userName, String firstName, 
-			String lastName, String mobileNumber, Boolean suspended, String latitude, String longitude, List<RoleDTO> roles) {
+			String lastName, String mobileNumber, ZonedDateTime dob, Boolean suspended, String latitude, String longitude, List<RoleDTO> roles) {
 		super(id, createdBy, createdDate, lastModifiedBy, lastModifiedDate, deleted, version);
 		this.userName = userName;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.mobileNumber = mobileNumber;
+		this.dob = dob;
 		this.suspended = suspended;
 		this.latitude = latitude;
 		this.longitude = longitude;

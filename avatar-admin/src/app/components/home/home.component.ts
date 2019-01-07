@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {trigger, state, style, transition, animate, AnimationEvent} from '@angular/animations';
-import { MenuItem } from 'primeng/api';
+import { Router, ActivatedRoute } from "@angular/router";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: 'home',
@@ -29,10 +30,19 @@ import { MenuItem } from 'primeng/api';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
       console.info("Home Component");
   }
-
+  logout() {
+      this.authService.clearAll();
+      this.router.navigate(['/login'], { relativeTo: this.activatedRoute }).then( (e) => {
+          if (e) {
+              console.log("Navigation to login successful!");
+            } else {
+              console.log("Navigation to login has failed!");
+            }
+      });
+  }
 }

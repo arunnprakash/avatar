@@ -41,7 +41,7 @@ export const baseDataViewTemplate: string = `<p-dataView #dataView [value]="reco
                         <img *ngIf="!rowData.photo" class="card-img-top" src="/assets/images/avatar.png" alt="image"
                             style="width: 100%">
                 </div>
-                <div class="ui-g-12 ui-md-8" (click)="displayDetailDialog(rowData)">
+                <div class="ui-g-12 ui-md-8" (click)="rowDataClicked(rowData)">
                      <div class="ui-g" *ngFor="let col of cols" [ngSwitch]="col.dataType">
                         <div class="ui-g-4 ui-sm-6 text-bold text-align-left">{{col.header}}</div>
                         <div *ngSwitchCase="'INPUT'" class="ui-g-8 ui-sm-6 text-align-left">{{rowData[col.field]}}</div>
@@ -68,39 +68,23 @@ export const baseDataViewTemplate: string = `<p-dataView #dataView [value]="reco
             </div>
         </ng-template>
 </p-dataView>
-<!--    <p-blockUI [target]="dataView" [blocked]="loading">
-        <p-progressSpinner></p-progressSpinner>
-    </p-blockUI> -->
-    <p-dialog [(visible)]="showDetailDialog" [transitionOptions]="'0ms'" [modal]="true" [responsive]="true" [width]="900" [minWidth]="450" [minY]="70" 
-        [maximizable]="true" [baseZIndex]="10000">
-        <p-header>
-            <span class="ui-dialog-title">{{title}} Detail</span>
-        </p-header>
-        <div *ngIf="!editDetail" class="p-grid text-align-left">
-            <div class="p-col-12 p-grid" style="text-align:center">
-                <img *ngIf="model.photo" class="card-img-top" src="data:image/png;base64,{{model.image}}" alt="image"
-                                style="width: 100%" width="60">
-                <img *ngIf="!model.photo" class="card-img-top" src="/assets/images/avatar.png" alt="image"
-                                style="width: 100%" width="60">
-            </div>
-            <div class="p-col-12 p-grid" *ngFor="let col of cols">
-                <div class="p-col-4 text-bold">{{col.header}}</div>
-                <div class="p-col-8">{{model[col.field]}}</div>
-            </div>
-        </div>
-        <div *ngIf="editDetail" class="p-grid text-align-left">
-            <div class="p-col-12 p-grid" *ngFor="let col of localCols" [ngSwitch]="col.dataType">
-                <div class="p-col-4 text-bold">{{col.header}}</div>
-                <div class="p-col-8">
-                    <input *ngSwitchCase="'INPUT'" pInputText type="text" [(ngModel)]="model[col.field]" size="12" placeholder="{{col.header}}" appendTo="body" [style]="{'width':'50%'}">
-                </div>
-            </div>
-        </div>
-        <p-footer>
-            <button type="button" *ngIf="!editDetail" pButton icon="pi pi-close" (click)="editDetail=true" label="Edit" class="ui-button-success ui-button-raised ui-button-rounded"></button>
-            <button type="button" *ngIf="editDetail" pButton icon="pi pi-close" (click)="save();" label="Save" class="ui-button-success ui-button-raised ui-button-rounded"></button>
-            <button type="button" *ngIf="editDetail" pButton icon="pi pi-close" (click)="showDetailDialog=false" label="Cancel" class="ui-button-success ui-button-raised ui-button-rounded"></button>
-            <button type="button" *ngIf="!editDetail" pButton icon="pi pi-close" (click)="showDetailDialog=false" label="Ok" class="ui-button-success ui-button-raised ui-button-rounded"></button>
-        </p-footer>
-    </p-dialog>
+<p-blockUI [blocked]="loading" [target]="dataView"></p-blockUI>
+<p-confirmDialog #cd header="Delete {{title}}s" icon="pi pi-exclamation-triangle">
+    <p-footer>
+        <button type="button" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>
+    </p-footer>
+</p-confirmDialog>
+<p-dialog [(visible)]="displayAlertDialog" 
+    [style]="{'width': '300px !important', 'height': '200px !important','min-width': '300px !important', 'min-height': '200px !important'}" 
+    [minY]="70" [maximizable]="false">
+    <p-header>
+        <p-message *ngIf="alertDialogTitle == 'Error'" severity="error" text="Error" [closable]="false"></p-message>
+        <p-message *ngIf="alertDialogTitle == 'Success'" severity="success" text="Success" [closable]="false"></p-message>
+    </p-header>
+        {{alertDialogMessage}}
+    <p-footer>
+        <button type="button" pButton icon="pi pi-close" (click)="displayAlertDialog=false" label="Ok" class="ui-button-success ui-button-raised ui-button-rounded"></button>
+    </p-footer>
+</p-dialog>
 `;

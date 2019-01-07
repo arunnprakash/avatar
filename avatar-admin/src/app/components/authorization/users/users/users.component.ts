@@ -13,7 +13,7 @@ import { UserDetailComponent } from "../user-detail/user-detail.component";
   selector: 'users',
   template: baseDataViewTemplate,
   styles: [baseCss],
-  providers: [ConfirmationService]
+  providers: [ConfirmationService, DialogService]
 })
 export class UsersComponent extends BaseComponent implements OnInit {
 

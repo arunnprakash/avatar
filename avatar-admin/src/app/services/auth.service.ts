@@ -17,8 +17,12 @@ export class AuthService {
     this.localStorage.setItem(USER_INFO, jsonString);
   }
   getUserInfo(): UserDTO {
-    let jsonString = this.localStorage.getItem(USER_INFO);
-    return JSON.parse(jsonString);
+      if (this.localStorage.getItem(USER_INFO)) {
+          let jsonString = this.localStorage.getItem(USER_INFO);
+          return JSON.parse(jsonString);
+      } else {
+          return null;
+      }
   }
   setToken(token: string): void {
     this.localStorage.setItem(TOKEN, token);
@@ -28,6 +32,9 @@ export class AuthService {
   }
   isLogged() {
     return this.localStorage.getItem(TOKEN) != null;
+  }
+  clearAll() {
+      this.localStorage.clear();
   }
   hasRole(roles: string[]): boolean {
       console.log(this.getUserInfo().roles);

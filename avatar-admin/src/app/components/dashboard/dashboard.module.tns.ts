@@ -4,14 +4,12 @@ import { NativeScriptRouterModule } from "nativescript-angular/router";
 
 import { routes, componentDeclarations } from './dashboard.common';
 import { DashboardComponent } from './dashboard.component';
-import { UsersModule } from '../users/users.module';
 
 @NgModule({
   declarations: componentDeclarations,
   imports: [
     NativeScriptCommonModule,
-    NativeScriptRouterModule.forChild(routes),
-    UsersModule
+    NativeScriptRouterModule.forChild(routes)
   ],
   exports: [
             NativeScriptRouterModule,

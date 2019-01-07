@@ -56,34 +56,6 @@ export const baseTemplate: string = `
         </tr>
     </ng-template>
 </p-table>
-<p-dialog [(visible)]="displayDetailDialog" [transitionOptions]="'0ms'" [modal]="true" [responsive]="true" [width]="900" [minWidth]="450" [minY]="70" 
-        [maximizable]="true" [baseZIndex]="10000">
-    <p-header>
-        <span class="ui-dialog-title">{{title}} Detail</span>
-    </p-header>
-        <div *ngIf="!displayEditDetail" class="p-grid text-align-left">
-            <div class="p-col-12 p-grid" *ngFor="let col of cols" [ngSwitch]="col.dataType">
-                <div class="p-col-4 text-bold">{{col.header}}</div>
-                <div class="p-col-8" *ngSwitchCase="'INPUT'">{{model[col.field]}}</div>
-                <div class="p-col-8" *ngSwitchCase="'DATE'">{{model[col.field] | date:'dd-MM-yyyy HH:mm:ss'}}</div>
-                <div class="p-col-8" *ngSwitchCase="'MULTISELECT'">{{model[col.field]}}</div>
-            </div>
-        </div>
-        <div *ngIf="displayEditDetail" class="p-grid text-align-left">
-            <div class="p-col-12 p-grid" *ngFor="let col of localCols" [ngSwitch]="col.dataType">
-                <div class="p-col-4 text-bold">{{col.header}}</div>
-                <div class="p-col-8">
-                    <input *ngSwitchCase="'INPUT'" pInputText type="text" [(ngModel)]="model[col.field]" size="12" placeholder="{{col.header}}" appendTo="body" [style]="{'width':'50%'}">
-                </div>
-            </div>
-        </div>
-    <p-footer>
-        <button type="button" *ngIf="!displayEditDetail" pButton icon="pi pi-close" (click)="displayEditDetail=true" label="Edit" class="ui-button-success ui-button-raised ui-button-rounded"></button>
-        <button type="button" *ngIf="displayEditDetail" pButton icon="pi pi-close" (click)="save();" label="Save" class="ui-button-success ui-button-raised ui-button-rounded"></button>
-        <button type="button" *ngIf="displayEditDetail" pButton icon="pi pi-close" (click)="displayDetailDialog=false" label="Cancel" class="ui-button-success ui-button-raised ui-button-rounded"></button>
-        <button type="button" *ngIf="!displayEditDetail" pButton icon="pi pi-close" (click)="displayDetailDialog=false" label="Ok" class="ui-button-success ui-button-raised ui-button-rounded"></button>
-    </p-footer>
-</p-dialog>
 <p-blockUI [blocked]="loading" [target]="dt"></p-blockUI>
 <p-confirmDialog #cd header="Delete {{title}}s" icon="pi pi-exclamation-triangle">
     <p-footer>

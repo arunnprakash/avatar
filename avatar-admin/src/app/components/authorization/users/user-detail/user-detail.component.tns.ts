@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/api';
+import { ModalDialogParams } from "nativescript-angular/modal-dialog";
 
 import { baseDetailDataViewTemplate } from '../../../base-detail/base.detail.dataView.template';
 import { baseDetailCss } from '../../../base-detail/base.detail.css';
@@ -15,7 +15,7 @@ import { UserService } from "../../../../services/authorization/userservice.gene
 })
 export class UserDetailComponent extends BaseDetailComponent implements OnInit {
 
-    constructor(userService: UserService, params: DynamicDialogConfig, dialog: DynamicDialogRef ) {
+    constructor(userService: UserService, params: ModalDialogParams, dialog: ModalDialogParams ) {
         super(userService, params, dialog);
     }
 

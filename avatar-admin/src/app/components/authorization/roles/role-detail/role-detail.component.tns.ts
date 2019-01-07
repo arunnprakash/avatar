@@ -6,7 +6,7 @@ import { baseDetailTemplate } from '../../../base-detail/base.detail.template';
 import { baseDetailCss } from '../../../base-detail/base.detail.css';
 import { BaseDetailComponent } from '../../../base-detail/base.detail.component';
 
-import { RoleService } from "../../../services/authorization/roleservice.generated";
+import { RoleService } from "../../../../services/authorization/roleservice.generated";
 
 @Component({
   selector: 'role-detail',

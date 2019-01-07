@@ -1,0 +1,8 @@
+#JWT Config
+security:
+  jwt:
+    loginUri: /api/authorization/login
+    headerName: Authorization
+    tokenPrefix: Bearer 
+    expiration: 864000000 #10 days
+    secretKey: TelmilaArunPrakashAvatar2019MobileReChargeAndFarmerApplicationSecretKey

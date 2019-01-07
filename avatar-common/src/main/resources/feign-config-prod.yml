@@ -1,0 +1,16 @@
+#Feign Config
+feign:
+  client:
+    config:
+      feignName:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: full
+#        errorDecoder: com.example.SimpleErrorDecoder
+#        retryer: com.example.SimpleRetryer
+        requestInterceptors:
+          - com.kirana.avatar.common.feign.interceptor.FeignRequestInterceptor
+        decode404: false
+#        encoder: com.example.SimpleEncoder
+#        decoder: com.example.SimpleDecoder
+#        contract: com.example.SimpleContract

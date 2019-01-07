@@ -1,0 +1,30 @@
+.box, .home-layout>div {
+	background-color: #cce4f7;
+	text-align: center;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	border-radius: 4px;
+}
+
+.box-stretched {
+	height: 100%;
+}
+
+.home-layout {
+	margin: 0;
+}
+
+.home-layout>div {
+	border: 1px solid #ffffff;
+}
+
+.vertical-container {
+	margin: 0;
+	height: 200px;
+	background: #efefef;
+	border-radius: 4px;
+}
+
+.nested-grid .p-col-4 {
+	padding-bottom: 1em;
+}

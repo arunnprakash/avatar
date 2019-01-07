@@ -1,0 +1,123 @@
+package com.kirana.avatar.authorization.config;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kirana.avatar.common.httprequest.interceptors.RequestInterceptor;
+import com.kirana.avatar.common.jwt.TokenProvider;
+import com.kirana.avatar.common.jwt.config.JwtConfig;
+import com.kirana.avatar.common.jwt.filter.JWTAuthorizationFilter;
+
+import lombok.extern.slf4j.Slf4j;
+
+
+@Slf4j
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(
+		securedEnabled = true,
+		jsr250Enabled = true,
+		prePostEnabled = true
+)
+public class WebSecurity extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
+
+	private final long MAX_AGE_SECS = 3600;
+	@Autowired
+	private UserDetailsService userDetailsService;
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	@Autowired
+	private JwtConfig jwtConfig;
+	@Autowired
+	private TokenProvider tokenProvider;
+	@Autowired
+	private ObjectMapper objectMapper;
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http
+		.cors()
+		.and()
+		.csrf()
+			.disable()
+		.exceptionHandling()
+			.authenticationEntryPoint((req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED))
+			.and()
+		.sessionManagement()
+			.sessionCreationPolicy(SessionCreationPolicy.STATELESS) // make sure we use stateless session; session won't be used to store user's state.
+			.and()
+		.authorizeRequests()
+			.antMatchers("/",
+					"/v2/api-docs",
+					"/swagger-resources/**",
+					"/error",
+					"/favicon.ico",
+					"/**/*.png",
+					"/**/*.gif",
+					"/**/*.svg",
+					"/**/*.jpg",
+					"/**/*.html",
+					"/**/*.css",
+					"/**/*.js",
+					"/**/person")
+				.permitAll()
+			.antMatchers(HttpMethod.POST, "/**/login")
+				.permitAll()
+			.anyRequest()
+				.authenticated()
+			.and()
+		.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtConfig, tokenProvider))
+		.addFilterAfter(new JWTAuthorizationFilter(jwtConfig, userDetailsService), JWTAuthenticationFilter.class);
+	}
+
+	@Override
+	public void configure(AuthenticationManagerBuilder auth) throws Exception {
+		System.out.println(bCryptPasswordEncoder.encode("admin"));
+		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
+	}
+
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
+
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**")
+		.allowedOrigins("*")
+		.allowedMethods("HEAD", "OPTIONS", "GET", "POST", "PUT", "PATCH", "DELETE")
+		.maxAge(MAX_AGE_SECS)
+		.allowCredentials(true);
+	}
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new RequestInterceptor());
+	}
+
+	@Override
+    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+		System.out.println("Converters "+ converters);
+		converters.add(new MappingJackson2HttpMessageConverter(objectMapper));
+    }
+}

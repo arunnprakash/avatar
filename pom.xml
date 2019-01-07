@@ -1,0 +1,84 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.kirana.avatar</groupId>
+	<artifactId>avatar</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+	<name>avatar</name>
+	<description>avatar</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.0.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<spring-cloud.version>Greenwich.M3</spring-cloud.version>
+		<swagger.version>2.9.2</swagger.version>
+		<org.projectlombok.version>1.18.4</org.projectlombok.version>
+		<org.projectlombok.maven.plugin.version>1.18.4.0</org.projectlombok.maven.plugin.version>
+		<!-- automatically run annotation processors within the incremental compilation -->
+		<m2e.apt.activation>jdt_apt</m2e.apt.activation>
+		<org.mapstruct.version>1.3.0.Beta2</org.mapstruct.version>
+		<jwt.version>0.10.5</jwt.version>
+		<springboot.admin.version>2.1.0</springboot.admin.version>
+		<zipkin.version>2.11.10</zipkin.version>
+		<maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+	</properties>
+
+	<modules>
+		<module>avatar-config-server</module>
+		<module>avatar-common</module>
+		<module>avatar-authorization</module>
+		<module>avatar-service-discovery</module>
+		<module>avatar-gateway</module>
+		<module>avatar-app-monitor</module>
+	</modules>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<spring.profiles.active>dev</spring.profiles.active>
+			</properties>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<spring.profiles.active>test</spring.profiles.active>
+			</properties>
+		</profile>
+		<profile>
+			<id>uat</id>
+			<properties>
+				<spring.profiles.active>uat</spring.profiles.active>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<spring.profiles.active>prod</spring.profiles.active>
+			</properties>
+		</profile>
+	</profiles>
+	<repositories>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+</project>

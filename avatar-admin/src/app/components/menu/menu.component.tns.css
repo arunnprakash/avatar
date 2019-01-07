@@ -1,0 +1,13 @@
+/* Add mobile styles for the component here.  */
+.selected {
+	background-color: green;
+	color: white;
+}
+.text-align-center {
+	text-align: center;
+}
+
+.vertical-align-center {
+	vertical-align: middle;
+	height: 100%;
+}

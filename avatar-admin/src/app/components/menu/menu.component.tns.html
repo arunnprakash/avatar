@@ -1,0 +1,11 @@
+<ListView id="root-drawer-list" [items]="menuItems"
+	 class="root-drawer-content">
+	<ng-template let-menuItem="item"> 
+		<StackLayout class="sidedrawer-content" (tap)="naviagateByMenuIem(menuItem)">
+			<GridLayout columns="auto, *" class="sidedrawer-list-item">
+				<Label col="0" text="               " class="p-r-10 text-align-left vertical-align-center" [class.selected]="isMenuSelected(menuItem)"></Label>
+				<Label col="1" [text]="menuItem.label" class="p-r-10 text-align-left vertical-align-center" [class.selected]="isMenuSelected(menuItem)"></Label>
+			</GridLayout>
+		</StackLayout>
+	</ng-template>
+</ListView>

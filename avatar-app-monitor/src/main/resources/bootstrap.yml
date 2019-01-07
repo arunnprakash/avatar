@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: Avatar-Application-Monitoring
+  cloud:
+    config:
+      uri: http://localhost:1100

@@ -1,0 +1,27 @@
+#Environment
+environment: DEV
+# Configure this Discovery Server
+eureka:
+  instance:
+    hostname: localhost
+    metadata-map:
+      user.name: "avatar"         #These two are needed so that the server
+      user.password: "eureka" #can access the protected client endpoints
+  client: 
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+# HTTP (Tomcat) port
+server:
+  port: 1100
+
+spring:
+  resources:
+    add-mappings: false
+  security:
+    user:
+      name: "avatar"
+      password: "eureka"
+

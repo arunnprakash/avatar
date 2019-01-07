@@ -1,0 +1,49 @@
+@import '~nativescript-theme-core/css/core.light.css';
+.button {
+	background-color: #008000;
+	border-radius: 4px;
+}
+.selected {
+    background-color: green;
+    color: white;
+}
+.text-bold {
+    font-weight: bold;
+}
+.text-align-center {
+    text-align: center;
+}
+.text-align-left {
+    text-align: left;
+}
+.text-align-right {
+    text-align: right;
+}
+.vertical-align-center {
+    vertical-align: middle;
+    height: 100%;
+}
+.all-sides-margin {
+	margin: 2px;
+}
+.zero-margin {
+	margin: 0px;
+}
+.all-sides-padding {
+    padding: 10px;
+}
+.zero-padding {
+	padding: 0px;
+}
+.record-content {
+	border-color: #456914;
+	border-width: 1px;
+    /*background: #73AD21;
+    background: linear-gradient(to bottom, #73AD21, #aae061);*/
+}
+.rounded-corner-border {
+    border-radius: 10px;
+}
+.detail-rounded-corner-border {
+    border-radius: 10px 30px;
+}

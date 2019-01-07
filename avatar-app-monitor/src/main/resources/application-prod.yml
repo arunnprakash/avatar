@@ -1,0 +1,30 @@
+#Environment
+environment: PROD
+# tag::configuration-eureka[]
+eureka:
+  instance:
+    metadata-map:
+      user.name: "avatar"         #These two are needed so that the server
+      user.password: "eureka" #can access the protected client endpoints
+      startup: ${random.int}    #needed to trigger info and endpoint update after restart
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+      
+  client:
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVICE_URL:http://avatar:eureka@localhost:1100}/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  #<2>
+  endpoint:
+    health:
+      show-details: ALWAYS
+# end::configuration-eureka[]
+
+# HTTP (Tomcat) port
+server:
+  port: 9999

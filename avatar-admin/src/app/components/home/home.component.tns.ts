@@ -38,4 +38,14 @@ export class HomeComponent implements OnInit {
     }
     onNavItemTap( componentPath: string ) {
     }
+    logout() {
+        this.authService.clearAll();
+        this.router.navigate(['/login'], { relativeTo: this.activatedRoute }).then( (e) => {
+            if (e) {
+                console.log("Navigation to login successful!");
+              } else {
+                console.log("Navigation to login has failed!");
+              }
+        });
+    }
 }

@@ -9,6 +9,7 @@ http://docs.telerik.com/devtools/nativescript-ui/Controls/NativeScript/SideDrawe
 			<GridLayout columns="auto, *">
 				<Label col="0" text="&#xf039;" class="fa" (tap)="toggleDrawer()"></Label>
 				<Label col="1" text="Welcome {{userDTO.firstName}}" class="p-r-10 text-align-center"></Label>
+				<Label col="2" text="Logout" class="p-r-10 text-align-right" (tap)="logout();"></Label>
 			</GridLayout>
 		</ActionBar>
 	</Page.actionBar>

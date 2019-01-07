@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {trigger, state, style, transition, animate, AnimationEvent} from '@angular/animations';
 import { Router, ActivatedRoute } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
+import { UserDTO } from "../../services/authorization/userdto.model";
 
 @Component({
   selector: 'home',
@@ -30,10 +31,13 @@ import { AuthService } from "../../services/auth.service";
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) { }
+    userDTO: UserDTO;
+
+    constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
       console.info("Home Component");
+      this.userDTO = this.authService.getUserInfo();
   }
   logout() {
       this.authService.clearAll();

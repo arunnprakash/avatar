@@ -19,6 +19,7 @@ export class AuthService {
   getUserInfo(): UserDTO {
       if (this.localStorage.getItem(USER_INFO)) {
           let jsonString = this.localStorage.getItem(USER_INFO);
+          console.log(jsonString);
           return JSON.parse(jsonString);
       } else {
           return null;

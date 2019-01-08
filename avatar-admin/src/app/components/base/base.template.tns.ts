@@ -16,7 +16,8 @@ export const baseTemplate: string = `
             <GridLayout *ngFor="let col of localCols" [ngSwitch]="col.dataType" columns="auto, *" (tap)="rowDataClicked(rowData)">
                 <Label col="0" width="120" [text]="col.header" class="text-bold text-align-left vertical-align-center"></Label>
                 <Label col="1" *ngSwitchCase="'INPUT'" [text]="rowData[col.field]" class="text-align-left vertical-align-center"></Label>
-                <Label col="1" *ngSwitchCase="'DATE'" text="{{rowData[col.field] | date:'dd-MM-yyyy HH:mm:ss'}}" class="text-align-left vertical-align-center"></Label>
+                <Label col="1" *ngSwitchCase="'DATE'" text="{{rowData[col.field] | date:'dd-MM-yyyy'}}" class="text-align-left vertical-align-center"></Label>
+                <Label col="1" *ngSwitchCase="'DATETIME'" text="{{rowData[col.field] | date:'dd-MM-yyyy HH:mm:ss'}}" class="text-align-left vertical-align-center"></Label>
                 <Label col="1" *ngSwitchCase="'MULTISELECT'" [text]="rowData[col.field]" class="text-align-left vertical-align-center"></Label>
             </GridLayout>
         </StackLayout>

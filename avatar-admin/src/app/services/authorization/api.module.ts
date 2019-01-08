@@ -1,6 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { RoleService } from './roleservice.generated';
 import { UserService } from './userservice.generated';
+import { RoleService } from './roleservice.generated';
 import { ServiceConfig } from './serviceconfig';
 
 @NgModule({})
@@ -10,8 +10,8 @@ export class APIModule {
             ngModule: APIModule,
             providers: [
                 {provide: ServiceConfig, useValue: serviceConfig},
-                RoleService,
-                UserService
+                UserService,
+                RoleService
             ]
         };
     }

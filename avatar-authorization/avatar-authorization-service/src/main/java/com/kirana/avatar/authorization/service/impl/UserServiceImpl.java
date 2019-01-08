@@ -16,6 +16,7 @@ package com.kirana.avatar.authorization.service.impl;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kirana.avatar.authorization.dto.UserDTO;
 import com.kirana.avatar.authorization.mapper.UserMapper;
@@ -43,6 +44,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @SuppressWarnings("unused")
+@Transactional
 public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, UserRepository, UserSpecification> implements UserService {
 
 	private UserRepository userRepository;
@@ -108,6 +110,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 				.orElseThrow(() -> 
 					new UsernameNotFoundException("User not found with username or mobilenumber : " + userNameOrMobileNumber)
 				);
+		log.debug("User :: {}", user);
 		return userMapper.toDTO(user);
 	}
 

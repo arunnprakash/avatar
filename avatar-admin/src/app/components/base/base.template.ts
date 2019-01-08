@@ -29,7 +29,8 @@ export const baseTemplate: string = `
                 <th *ngFor="let col of columns" [ngSwitch]="col.dataType" class="text-align-left" >
                     <input *ngSwitchCase="'INPUT'" pInputText type="text" size="{{col.size?col.size:12}}" placeholder="{{col.header}}" appendTo="body" [style]="{'width':'50%'}"  (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                     <p-calendar *ngSwitchCase="'DATE'" appendTo="body" [inputStyle]="{'width':'65%'}" [showIcon]="true" dateFormat="dd-mm-yy" (onSelect)="dt.filter($event, col.field, 'in')"></p-calendar>
-                    <p-multiSelect *ngSwitchCase="'MULTISELECT'" [options]="col.options" defaultLabel="ALL"  appendTo="body" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'in')"></p-multiSelect>
+                    <p-calendar *ngSwitchCase="'DATETIME'" appendTo="body" [inputStyle]="{'width':'65%'}" [showIcon]="true" dateFormat="dd-mm-yy" (onSelect)="dt.filter($event, col.field, 'in')"></p-calendar>
+                    <p-multiSelect *ngSwitchCase="'MULTISELECT'" [options]="col.options" [optionLabel]="col.optionLabel" defaultLabel="ALL"  appendTo="body" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'in')"></p-multiSelect>
                 </th>
                 <th class="text-align-left">
                     <p-checkbox binary="true" label="SelectAll" [(ngModel)]="isSelectAllChecked" (onChange)="selectAll()"></p-checkbox>
@@ -40,8 +41,10 @@ export const baseTemplate: string = `
             <tr class="hand-cursor tableRowHoverCss" >
                 <td *ngFor="let col of columns" [ngSwitch]="col.dataType" (click)="rowDataClicked(rowData)">
                     <span *ngSwitchCase="'INPUT'">{{rowData[col.field]}}</span>
-                    <span *ngSwitchCase="'DATE'">{{rowData[col.field] | date:'dd-MM-yyyy HH:mm:ss'}}</span>
-                    <span *ngSwitchCase="'MULTISELECT'">{{rowData[col.field]}}</span>
+                    <span *ngSwitchCase="'DATE'">{{rowData[col.field] | date:'dd-MM-yyyy'}}</span>
+                    <span *ngSwitchCase="'DATETIME'">{{rowData[col.field] | date:'dd-MM-yyyy HH:mm:ss'}}</span>
+                    <!--<p-multiSelect *ngSwitchCase="'MULTISELECT'" readonly="true" [options]="col.options" [(ngModel)]="rowData[col.field]" [optionLabel]="col.optionLabel" defaultLabel="ALL"  appendTo="body" [style]="{'width':'100%'}"></p-multiSelect>-->
+                    <p-chips *ngSwitchCase="'MULTISELECT'" disabled="true" [(ngModel)]="rowData[col.field]" [field]="col.optionLabel" ngDefaultControl></p-chips>
                 </td>
                 <td>
                      <p-checkbox *ngIf="recordIdList[rowIndex]" binary="true" [(ngModel)]="recordIdList[rowIndex].selected" (onChange)="checkIfAllSelected();"></p-checkbox>

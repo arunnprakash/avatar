@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import * as _ from "lodash";
-import { UserDTO } from "../services/authorization";
+import { UserDTO } from "../services/authorization/userdto.model";
+import { RoleDTO } from "../services/authorization/roledto.model";
 
 const TOKEN = 'TOKEN';
 const USER_INFO = 'USER_INFO';
@@ -38,7 +39,18 @@ export class AuthService {
       this.localStorage.clear();
   }
   hasRole(roles: string[]): boolean {
-      console.log(this.getUserInfo().roles);
-      return true;
+      let userDTO: UserDTO = this.getUserInfo();
+      let rolesDTO: RoleDTO[] = userDTO.roles;
+      console.log("Roles :: "+rolesDTO);
+      for (var i = 0; i < roles.length; i++) {
+          let role: string = roles[i];
+          for (var j = 0; j < rolesDTO.length; j++) {
+              let roleDTO: RoleDTO = rolesDTO[j];
+              if(roleDTO.roleName == role) {
+                  return true;
+              }
+          }
+      }
+      return false;
   }
 }

@@ -23,7 +23,9 @@ export class UsersComponent extends BaseComponent implements OnInit {
          { field: 'mobileNumber', header: 'MobileNumber', dataType: 'INPUT' },
          { field: 'firstName', header: 'FirstName', dataType: 'INPUT' },
          { field: 'lastName', header: 'LastName', dataType: 'INPUT' },
-         { field: 'dob', header: 'DateOfBirth', dataType: 'DATE' }
+         { field: 'dob', header: 'DateOfBirth', dataType: 'DATE' },
+         { field: 'roles', header: 'Roles', dataType: 'MULTISELECT', options: [{ label: 'DELETED', value: 0 },
+                                                                               { label: 'NON-DELETED', value: 1 }] }
     ];
     constructor( userService: UserService, modalDialogService: ModalDialogService, dialogService: ModalDialogService, 
             router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef ) {

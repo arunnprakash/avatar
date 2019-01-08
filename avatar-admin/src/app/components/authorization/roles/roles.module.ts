@@ -17,6 +17,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { CalendarModule } from 'primeng/calendar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MessageModule } from 'primeng/message';
+import { ChipsModule } from 'primeng/chips';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 import { routes, componentDeclarations, providerDeclarations } from './roles.common';
 
@@ -40,6 +42,8 @@ import { routes, componentDeclarations, providerDeclarations } from './roles.com
             MultiSelectModule,
             ConfirmDialogModule,
             MessageModule,
+            ChipsModule,
+            AutoCompleteModule,
             RouterModule.forChild( routes )
   ],
   providers: providerDeclarations,

@@ -1,4 +1,5 @@
-export const baseDataViewTemplate: string = `<p-dataView #dataView [value]="recordList" [paginator]="true" [rows]="numberOfRowsPerPage" [totalRecords]="totalRecords" 
+export const baseDataViewTemplate: string = `
+<p-dataView #dataView [value]="recordList" [paginator]="true" [rows]="numberOfRowsPerPage" [totalRecords]="totalRecords" 
     [lazy]="true" (onLazyLoad)="lazyLoadRecordList($event)" paginatorPosition="both" filterBy="id"
     [sortField]="sortField" [sortOrder]="sortOrder">
         <p-header>
@@ -23,7 +24,8 @@ export const baseDataViewTemplate: string = `<p-dataView #dataView [value]="reco
                         <span *ngFor="let col of cols" [ngSwitch]="col.dataType">
                             <input *ngSwitchCase="'INPUT'" pInputText type="text" size="{{col.size?col.size:12}}" placeholder="{{col.header}}" appendTo="body" [style]="{'width':'50%'}"  (input)="filter($event.target.value, col.field, col.filterMatchMode)">
                             <p-calendar *ngSwitchCase="'DATE'" appendTo="body" [inputStyle]="{'width':'65%'}" [showIcon]="true" dateFormat="dd-mm-yy" (onSelect)="filter($event, col.field, 'in')"></p-calendar>
-                            <p-multiSelect *ngSwitchCase="'MULTISELECT'" [options]="col.options" defaultLabel="ALL"  appendTo="body" [style]="{'width':'10%'}" (onChange)="filter($event.value, col.field, 'in')"></p-multiSelect>
+                            <p-calendar *ngSwitchCase="'DATETIME'" appendTo="body" [inputStyle]="{'width':'65%'}" [showIcon]="true" dateFormat="dd-mm-yy" (onSelect)="filter($event, col.field, 'in')"></p-calendar>
+                            <p-multiSelect *ngSwitchCase="'MULTISELECT'" [options]="col.options" [optionLabel]="col.optionLabel" defaultLabel="ALL"  appendTo="body" [style]="{'width':'10%'}" (onChange)="filter($event.value, col.field, 'in')"></p-multiSelect>
                         </span>
                         <span>
                             <p-checkbox binary="true" label="SelectAll" [(ngModel)]="isSelectAllChecked" (onChange)="selectAll()"></p-checkbox>
@@ -45,8 +47,10 @@ export const baseDataViewTemplate: string = `<p-dataView #dataView [value]="reco
                      <div class="ui-g" *ngFor="let col of localCols" [ngSwitch]="col.dataType">
                         <div class="ui-g-4 ui-sm-6 text-bold text-align-left">{{col.header}}</div>
                         <div *ngSwitchCase="'INPUT'" class="ui-g-8 ui-sm-6 text-align-left">{{rowData[col.field]}}</div>
-                        <div *ngSwitchCase="'DATE'" class="ui-g-8 ui-sm-6 text-align-left">{{rowData[col.field] | date:'dd-MM-yyyy HH:mm:ss'}}</div>
-                        <div *ngSwitchCase="'MULTISELECT'" class="ui-g-8 ui-sm-6 text-align-left">{{rowData[col.field]}}</div>
+                        <div *ngSwitchCase="'DATE'" class="ui-g-8 ui-sm-6 text-align-left">{{rowData[col.field] | date:'dd-MM-yyyy'}}</div>
+                        <div *ngSwitchCase="'DATETIME'" class="ui-g-8 ui-sm-6 text-align-left">{{rowData[col.field] | date:'dd-MM-yyyy HH:mm:ss'}}</div>
+                        <!--<p-multiSelect *ngSwitchCase="'MULTISELECT'" readonly="true" defaultLabel="ALL" [options]="col.options" [(ngModel)]="rowData[col.field]" [optionLabel]="col.optionLabel" appendTo="body" [style]="{'width':'100%'}"></p-multiSelect>-->
+                        <p-chips *ngSwitchCase="'MULTISELECT'" disabled="true" [(ngModel)]="rowData[col.field]" [field]="col.optionLabel" ngDefaultControl></p-chips>
                     </div>
                 </div>
                 <div class="ui-g-12 ui-md-1">

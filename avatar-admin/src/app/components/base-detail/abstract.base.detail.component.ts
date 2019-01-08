@@ -19,6 +19,9 @@ export abstract class AbstractBaseDetailComponent implements OnInit {
     ngOnInit() {
         console.log("ngOnInit Abstract Base Detail Component.ts");
     }
+    dateChanged(newDate, field) {
+        this.model[field]= new Date(newDate);
+    }
     save() {
         if (this.isModelValid()) {
             if (this.model.id) {

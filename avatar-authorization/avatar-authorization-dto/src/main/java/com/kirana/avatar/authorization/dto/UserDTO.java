@@ -13,6 +13,7 @@
 package com.kirana.avatar.authorization.dto;
 
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 
 import com.kirana.avatar.common.dto.BaseDTO;
@@ -37,7 +38,7 @@ public class UserDTO extends BaseDTO {
 	protected String firstName;
 	protected String lastName;
 	protected String mobileNumber;
-	protected ZonedDateTime dob;
+	protected Date dob;
 	protected Boolean suspended;
 	protected String latitude;
 	protected String longitude;
@@ -45,7 +46,7 @@ public class UserDTO extends BaseDTO {
 	@Builder
 	public UserDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
 			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, String userName, String firstName, 
-			String lastName, String mobileNumber, ZonedDateTime dob, Boolean suspended, String latitude, String longitude, List<RoleDTO> roles) {
+			String lastName, String mobileNumber, Date dob, Boolean suspended, String latitude, String longitude, List<RoleDTO> roles) {
 		super(id, createdBy, createdDate, lastModifiedBy, lastModifiedDate, deleted, version);
 		this.userName = userName;
 		this.firstName = firstName;

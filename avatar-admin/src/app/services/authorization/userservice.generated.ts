@@ -6,13 +6,10 @@ import { map, catchError } from 'rxjs/operators';
 import { PagingAndFilterResponse } from './pagingandfilterresponse.model';
 import { RoleDTO } from './roledto.model';
 import { LoginResponse } from './loginresponse.model';
-import { ZoneId } from './zoneid.model';
-import { ZonedDateTime } from './zoneddatetime.model';
 import { PagingAndFilterRequest } from './pagingandfilterrequest.model';
 import { UserDTO } from './userdto.model';
 import { FilterCriteria } from './filtercriteria.model';
 import { LoginRequest } from './loginrequest.model';
-import { ZoneOffset } from './zoneoffset.model';
 import { ServiceConfig } from './serviceconfig';
 
 /**

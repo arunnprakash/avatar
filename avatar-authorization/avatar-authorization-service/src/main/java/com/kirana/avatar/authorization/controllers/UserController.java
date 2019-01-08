@@ -38,7 +38,6 @@ public class UserController extends BaseController<UserService, UserDTO> impleme
 
 	private AuthenticationManager authenticationManager;
 
-	@SuppressWarnings("unused")
 	private UserService userService;
 
 	private UserDetailsService userDetailsService;

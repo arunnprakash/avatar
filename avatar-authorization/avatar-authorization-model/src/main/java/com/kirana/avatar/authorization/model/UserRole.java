@@ -13,10 +13,13 @@
 package com.kirana.avatar.authorization.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.kirana.avatar.common.jpa.entity.BaseEntity;
 
@@ -40,6 +43,7 @@ import lombok.ToString;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
 @EqualsAndHashCode(callSuper=true)
+@EntityListeners(AuditingEntityListener.class)
 public class UserRole extends BaseEntity<UserRole>{
 	
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)

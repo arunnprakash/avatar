@@ -36,10 +36,10 @@ export abstract class AbstractBaseComponent implements OnInit {
             this.cols.push(col);
         });
         this.cols.push({ field: 'createdBy', header: 'Created By', dataType: 'INPUT' });
-        this.cols.push({ field: 'createdDate', header: 'Created At', dataType: 'DATE' });
+        this.cols.push({ field: 'createdDate', header: 'Created At', dataType: 'DATETIME' });
         this.cols.push({ field: 'lastModifiedBy', header: 'Last Modified By', dataType: 'INPUT' });
-        this.cols.push({ field: 'lastModifiedDate', header: 'Last Modified At', dataType: 'DATE' });
-        this.cols.push({ field: 'deleted', header: 'Deleted', dataType: 'MULTISELECT', options: [
+        this.cols.push({ field: 'lastModifiedDate', header: 'Last Modified At', dataType: 'DATETIME' });
+        this.cols.push({ field: 'deleted', header: 'Deleted', dataType: 'MULTISELECT', optionLabel:"label",  options: [
                                                                                                    { label: 'DELETED', value: 0 },
                                                                                                    { label: 'NON-DELETED', value: 1 }
                                                                                                ] });
@@ -139,7 +139,9 @@ export abstract class AbstractBaseComponent implements OnInit {
         this.initEmptyModel();
         this.showDetailDialog(true);
     }
-
+    dateChanged(newDate, field) {
+        this.model[field]= new Date(newDate);
+    }
     delete() {
         let selectedIds = _.filter(this.recordIdList, function(id) { return id.selected; });
         let idList = _.map(selectedIds, 'id');

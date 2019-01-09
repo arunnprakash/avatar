@@ -55,4 +55,13 @@ export abstract class AbstractBaseDetailComponent implements OnInit {
             
         }
     }
+    
+    filterAutoCompleteSuggestion(fieldName, selectedValues) {
+        let menuItem: any = _.find(this.localCols, { 'field': fieldName });
+        let options: any[] = menuItem.options;
+        let filteredOptions: any[] = _.filter(options, function(option) { 
+            return _.find(selectedValues, option) == undefined; 
+         });
+        menuItem.options = filteredOptions;
+    }
 }

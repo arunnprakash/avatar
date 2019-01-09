@@ -26,6 +26,7 @@ export const baseDataViewTemplate: string = `
                             <p-calendar *ngSwitchCase="'DATE'" appendTo="body" [inputStyle]="{'width':'65%'}" [showIcon]="true" dateFormat="dd-mm-yy" (onSelect)="filter($event, col.field, 'in')"></p-calendar>
                             <p-calendar *ngSwitchCase="'DATETIME'" appendTo="body" [inputStyle]="{'width':'65%'}" [showIcon]="true" dateFormat="dd-mm-yy" (onSelect)="filter($event, col.field, 'in')"></p-calendar>
                             <p-multiSelect *ngSwitchCase="'MULTISELECT'" [options]="col.options" [optionLabel]="col.optionLabel" defaultLabel="ALL"  appendTo="body" [style]="{'width':'10%'}" (onChange)="filter($event.value, col.field, 'in')"></p-multiSelect>
+                            <p-autoComplete *ngSwitchCase="'AUTOCOMPLETE'" immutable="false" (completeMethod)="filterAutoCompleteSuggestion(col.field, model[col.field])" (onSelect)="filter($event, col.field, 'in')" [suggestions]="col.options" forceSelection="true" [field]="col.optionLabel" [dropdown]="true" [multiple]="true" [size]="30" placeholder="{{col.header}}"></p-autoComplete>
                         </span>
                         <span>
                             <p-checkbox binary="true" label="SelectAll" [(ngModel)]="isSelectAllChecked" (onChange)="selectAll()"></p-checkbox>
@@ -49,8 +50,9 @@ export const baseDataViewTemplate: string = `
                         <div *ngSwitchCase="'INPUT'" class="ui-g-8 ui-sm-6 text-align-left">{{rowData[col.field]}}</div>
                         <div *ngSwitchCase="'DATE'" class="ui-g-8 ui-sm-6 text-align-left">{{rowData[col.field] | date:'dd-MM-yyyy'}}</div>
                         <div *ngSwitchCase="'DATETIME'" class="ui-g-8 ui-sm-6 text-align-left">{{rowData[col.field] | date:'dd-MM-yyyy HH:mm:ss'}}</div>
+                        <div *ngSwitchCase="'MULTISELECT'" class="ui-g-8 ui-sm-6 text-align-left">{{rowData[col.field]}}</div>
                         <!--<p-multiSelect *ngSwitchCase="'MULTISELECT'" readonly="true" defaultLabel="ALL" [options]="col.options" [(ngModel)]="rowData[col.field]" [optionLabel]="col.optionLabel" appendTo="body" [style]="{'width':'100%'}"></p-multiSelect>-->
-                        <p-chips *ngSwitchCase="'MULTISELECT'" disabled="true" [(ngModel)]="rowData[col.field]" [field]="col.optionLabel" ngDefaultControl></p-chips>
+                        <p-chips *ngSwitchCase="'AUTOCOMPLETE'" disabled="true" [(ngModel)]="rowData[col.field]" [field]="col.optionLabel" ngDefaultControl></p-chips>
                     </div>
                 </div>
                 <div class="ui-g-12 ui-md-1">

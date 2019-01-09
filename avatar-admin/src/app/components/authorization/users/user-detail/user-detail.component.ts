@@ -26,23 +26,4 @@ export class UserDetailComponent extends BaseDetailComponent implements OnInit {
     protected isModelValid(): boolean {
         return true;
     }
-    filterAutoComplete(field) {
-        console.log("filterAutoComplete");
-        let existingOptions: any = [];
-        this.localCols.forEach( (menuItem: any ) => {
-            if (menuItem.field == field) {
-                existingOptions = menuItem.options;
-                menuItem.options = [];
-            }
-        });
-        this.localCols.forEach( (menuItem: any ) => {
-            if (menuItem.field == field) {
-                existingOptions.forEach( (option: any ) => {
-                    menuItem.options.push(option);
-                });
-                console.log("menu optiona :: " + menuItem.options);
-            }
-        });
-        
-    }
 }

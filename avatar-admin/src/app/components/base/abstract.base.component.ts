@@ -164,4 +164,12 @@ export abstract class AbstractBaseComponent implements OnInit {
         this.model = model;
         this.showDetailDialog(true);
     }
+    filterAutoCompleteSuggestion(fieldName, selectedValues) {
+        let menuItem: any = _.find(this.localCols, { 'field': fieldName });
+        let options: any[] = menuItem.options;
+        let filteredOptions: any[] = _.filter(options, function(option) { 
+            return _.find(selectedValues, option) == undefined; 
+         });
+        menuItem.options = filteredOptions;
+    }
 }

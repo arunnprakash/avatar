@@ -11,6 +11,8 @@ import { UserDTO } from "../../../../services/authorization/userdto.model";
 import { RoleDTO } from "../../../../services/authorization/roledto.model";
 import { UserDetailComponent } from "../user-detail/user-detail.component";
 
+import * as _ from "lodash";
+
 @Component({
   selector: 'users',
   template: baseDataViewTemplate,
@@ -26,7 +28,7 @@ export class UsersComponent extends BaseComponent implements OnInit {
          { field: 'firstName', header: 'FirstName', dataType: 'INPUT' },
          { field: 'lastName', header: 'LastName', dataType: 'INPUT' },
          { field: 'dob', header: 'DateOfBirth', dataType: 'DATE' },
-         { field: 'roles', header: 'Roles', dataType: 'MULTISELECT', options: [] , optionLabel:"roleName"}
+         { field: 'roles', header: 'Roles', dataType: 'AUTOCOMPLETE', options: [] , optionLabel:"roleName"}
     ];
     constructor( userService: UserService, private roleService: RoleService, 
             confirmationService: ConfirmationService, dialogService: DialogService, 
@@ -36,15 +38,13 @@ export class UsersComponent extends BaseComponent implements OnInit {
 
     ngOnInit() {
         super.ngOnInit();
+        this.initRolesList();
+    }
+    initRolesList() {
         this.showLoading(true);
         this.roleService.getAllExceptDeleted().subscribe((roles: RoleDTO[]) => {
-            this.localCols.forEach( (menuItem: any ) => {
-                if (menuItem.field == 'roles') {
-                    roles.forEach( (role: RoleDTO ) => {
-                        menuItem.options.push(role);
-                    });
-                }
-            });
+            let menuItem: any = _.find(this.localCols, { 'field': 'roles' });
+            menuItem.options = roles;
             this.showLoading(false);
         },
         ( error ) => {
@@ -52,7 +52,6 @@ export class UsersComponent extends BaseComponent implements OnInit {
             this.showAlertDialog('Error', 'Error while getting Roles List');
         });
     }
-
     protected initEmptyModel() {
         this.model = new UserDTO();
     }

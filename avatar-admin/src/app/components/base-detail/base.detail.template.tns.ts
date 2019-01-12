@@ -20,7 +20,7 @@ export const baseDetailTemplate: string = `
      </GridLayout>
      <GridLayout *ngIf="displayEditDetail" height="76%" class="all-sides-margin all-sides-padding record-content rounded-corner-border">
          <ScrollView>
-            <StackLayout>
+            <StackLayout class="form">
                 <StackLayout *ngFor="let col of localCols;let i = index;last as isLast" [ngSwitch]="col.dataType" >
                     <GridLayout rows="auto, auto, *" columns="auto, auto, *" width="100%" class="input-field">
                         <TextField *ngSwitchCase="'INPUT'" row="0" col="0" class="input" [hint]="col.header" [(ngModel)]="model[col.field]" [returnKeyType]="isLast?'done':'next'"></TextField>

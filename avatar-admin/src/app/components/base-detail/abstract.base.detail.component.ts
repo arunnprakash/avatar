@@ -1,4 +1,5 @@
 import { OnInit } from '@angular/core';
+import { AuthService } from "../../services/auth.service";
 
 import * as _ from "lodash";
 
@@ -14,8 +15,7 @@ export abstract class AbstractBaseDetailComponent implements OnInit {
     protected abstract showAlertDialog(title: string, message: string);
     protected abstract closeDetailDialog();
     protected abstract isModelValid(): boolean;
-    constructor(private service: any) {
-    }
+    constructor(private service: any, private authService: AuthService) { }
     ngOnInit() {
         console.log("ngOnInit Abstract Base Detail Component.ts");
     }

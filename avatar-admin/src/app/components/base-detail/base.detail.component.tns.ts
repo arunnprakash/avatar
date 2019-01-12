@@ -1,5 +1,7 @@
 import { OnInit, Input } from '@angular/core';
 import { AbstractBaseDetailComponent } from "./abstract.base.detail.component";
+import { AuthService } from "../../services/auth.service";
+
 import { prompt, PromptOptions, PromptResult } from "tns-core-modules/ui/dialogs";
 import { confirm, ConfirmOptions } from "tns-core-modules/ui/dialogs";
 import { alert, AlertOptions } from "tns-core-modules/ui/dialogs";
@@ -14,8 +16,8 @@ export abstract class BaseDetailComponent extends AbstractBaseDetailComponent  i
 
     loadingIndicator: LoadingIndicator;
     loadingIndicatorOptions: any;
-    constructor(service: any, private params?: any, private dialog?: any) {
-        super(service);
+    constructor(service: any, authService: AuthService, private params?: any, private dialog?: any) {
+        super(service, authService);
         this.model = params.context.model;
         this.cols = params.context.cols;
         this.localCols = params.context.localCols;

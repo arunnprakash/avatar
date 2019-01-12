@@ -1,11 +1,21 @@
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgModule, NgModuleFactoryLoader, NO_ERRORS_SCHEMA } from '@angular/core';
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { NativeScriptCommonModule } from 'nativescript-angular/common';
 import { NativeScriptFormsModule } from 'nativescript-angular/forms';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
+
+import { Http } from '@angular/http';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
+//import ngx-translate and the http loader
+import {TranslateService, TranslateLoader, TranslateModule, TranslatePipe} from '@ngx-translate/core';
+//import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {NSNgxTranslateLoader} from './ns.ngx.translate.loader.tns';
+
 /*UI Modules*/
 import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angular";
+import { NativeScriptUIAutoCompleteTextViewModule } from "nativescript-ui-autocomplete/angular";
 import { TNSCheckBoxModule } from 'nativescript-checkbox/angular';
 
 import * as localStorage from 'nativescript-localstorage';
@@ -25,6 +35,16 @@ import { TokenInterceptor } from "./services/token.interceptor";
 import { NeedAuthGuard } from "./services/needauthguard";
 import { APIModule } from "./services/authorization/api.module";
 
+//required for AOT compilation
+/*export function HttpLoaderFactory(http: HttpClient) {
+    return new TranslateHttpLoader(http);
+}*/
+/*export function createTranslateLoader(http: Http) {
+    return new TranslateHttpLoader(<any>http, '/assets/i18n/', '.json');
+}*/
+export function createTranslateLoader() {
+    return new NSNgxTranslateLoader("./assets/i18n/", ".json");
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,26 +56,29 @@ import { APIModule } from "./services/authorization/api.module";
     NativeScriptModule,
     NativeScriptCommonModule,
     NativeScriptFormsModule,
+    NativeScriptHttpClientModule,
+    TranslateModule.forRoot({
+        loader: {
+            provide: TranslateLoader,
+            useFactory: createTranslateLoader
+        }
+    }),
+    APIModule.forRoot({context: ApiUrls.authorizationServiceApiBaseUrl}),
     AppRoutingModule,
     DashboardModule,
     UsersModule,
     RolesModule,
-    APIModule.forRoot({context: ApiUrls.authorizationServiceApiBaseUrl}),
-    NativeScriptHttpClientModule,
     NativeScriptUISideDrawerModule,
+    NativeScriptUIAutoCompleteTextViewModule,
     TNSCheckBoxModule
   ],
-  providers: [    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    },
-    {
-        provide: Storage,
-        useValue: localStorage
-      },
+  providers: [    
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: Storage, useValue: localStorage},
+    /*{ provide: NgModuleFactoryLoader, useClass: NSModuleFactoryLoader },*/
     NeedAuthGuard,
-    AuthService],
+    AuthService,
+    TranslateService],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]
 })

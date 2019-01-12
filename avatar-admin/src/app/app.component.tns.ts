@@ -4,7 +4,7 @@ import { RouterExtensions } from "nativescript-angular/router";
 import { DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransition } from "nativescript-ui-sidedrawer";
 import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
-
+import {TranslateService} from '@ngx-translate/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,8 +14,11 @@ export class AppComponent {
     private _activatedUrl: string;
     private _sideDrawerTransition: DrawerTransitionBase;
 
-    constructor(private router: Router, private routerExtensions: RouterExtensions) {
-        // Use the component constructor to inject services.
+    constructor(translate: TranslateService, private router: Router, private routerExtensions: RouterExtensions) {
+        // this language will be used as a fallback when a translation isn't found in the current language
+        translate.setDefaultLang('en');
+         // the lang to use, if the lang isn't available, it will use the current loader to get them
+        translate.use('en');
     }
     
     ngOnInit(): void {

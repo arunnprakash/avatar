@@ -23,7 +23,7 @@ constructor(private authService: AuthService, private router: Router, private ac
       ];
   }
   ngAfterViewInit() {
-      this.naviagateByMenuIem(this.menuItems[2]);
+      this.naviagateByMenuIem(this.menuItems[1]);
   }
   naviagateByMenuIem(menuItem: any) {
       this.selectedMenuItem = menuItem;

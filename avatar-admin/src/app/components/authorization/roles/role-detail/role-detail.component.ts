@@ -5,7 +5,7 @@ import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/api';
 import { baseDetailTemplate } from '../../../base-detail/base.detail.template';
 import { baseDetailCss } from '../../../base-detail/base.detail.css';
 import { BaseDetailComponent } from '../../../base-detail/base.detail.component';
-
+import { AuthService } from "../../../../services/auth.service";
 import { RoleService } from "../../../../services/authorization/roleservice.generated";
 
 @Component({
@@ -15,8 +15,9 @@ import { RoleService } from "../../../../services/authorization/roleservice.gene
 })
 export class RoleDetailComponent extends BaseDetailComponent implements OnInit {
 
-  constructor(roleService: RoleService, params: DynamicDialogConfig, dialog: DynamicDialogRef ) {
-      super(roleService, params, dialog);
+  constructor(roleService: RoleService, authService: AuthService, 
+          params: DynamicDialogConfig, dialog: DynamicDialogRef ) {
+      super(roleService, authService, params, dialog);
   }
 
   ngOnInit() {

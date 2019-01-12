@@ -1,12 +1,12 @@
-import { OnInit } from '@angular/core';
+import { OnInit, ViewContainerRef } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { AbstractBaseComponent } from "./abstract.base.component";
 
 import { PagingAndFilterRequest } from "../../services/authorization/pagingandfilterrequest.model";
 import { FilterCriteria } from "../../services/authorization/filtercriteria.model";
 import { PagingAndFilterResponse } from "../../services/authorization/pagingandfilterresponse.model";
+import { AuthService } from "../../services/auth.service";
 import * as _ from "lodash";
-import { ViewContainerRef } from "@angular/core";
 
 export abstract class BaseComponent extends AbstractBaseComponent implements OnInit {
     protected displayEditDetail: boolean;
@@ -15,9 +15,10 @@ export abstract class BaseComponent extends AbstractBaseComponent implements OnI
     protected alertDialogTitle: string;
     protected alertDialogMessage: string;
     protected loading: boolean;
-    constructor(service: any, private confirmationService?: any, private dialogService?: any, private detailComponent?: any, private router?: Router, 
-            private activatedRoute?: ActivatedRoute, private vcRef?: ViewContainerRef) {
-        super(service);
+    constructor(service: any, authService: AuthService, 
+            private confirmationService?: any, private dialogService?: any, private detailComponent?: any, 
+            private router?: Router, private activatedRoute?: ActivatedRoute, private vcRef?: ViewContainerRef) {
+        super(service, authService);
     }
 
     ngOnInit() {
@@ -58,5 +59,8 @@ export abstract class BaseComponent extends AbstractBaseComponent implements OnI
                 this.delete();
             }
         });
+    }
+    protected recordListLoaded(): void {
+        
     }
 }

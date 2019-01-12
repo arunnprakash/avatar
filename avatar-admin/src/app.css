@@ -3,6 +3,41 @@
 	background-color: #008000;
 	border-radius: 4px;
 }
+.form {
+  margin-left: 30;
+  margin-right: 30;
+  flex-grow: 2;
+  vertical-align: middle;
+}
+.input-field {
+  margin-bottom: 25;
+}
+.input {
+  font-size: 18;
+  placeholder-color: #A8A8A8;
+}
+.bg-green {
+	background-color: #008000;
+	color: white;
+}
+.bg-red {
+	background-color: #ee3115;
+	color: white;
+}
+.bg-grey {
+	background-color: #c0c0c0;
+	color: white;
+}
+.bg-green-round {
+	background-color: #008000;
+	color: white;
+	border-radius: 12px;
+}
+.bg-red-round {
+	background-color: #ee3115;
+	color: white;
+	border-radius: 12px;
+}
 .fa {
 	font-family: FontAwesome;
 }
@@ -32,11 +67,41 @@
 .zero-margin {
 	margin: 0px;
 }
+.bottom-margin-5 {
+	margin-bottom: 5px;
+}
+.bottom-margin-4 {
+	margin-bottom: 4px;
+}
+.bottom-margin-10 {
+	margin-bottom: 10px;
+}
+.right-margin-10 {
+	margin-right: 10px;
+}
 .all-sides-padding {
     padding: 10px;
 }
 .zero-padding {
 	padding: 0px;
+}
+.bottom-padding-10 {
+	padding-bottom: 10px;
+}
+.right-padding-2 {
+	padding-right: 2px;
+}
+.right-padding-10 {
+	padding-right: 10px;
+}
+.top-padding-5 {
+	padding-top: 5px;
+}
+.left-padding-minus-2 {
+	padding-left: -2px;
+}
+.left-padding-6 {
+	padding-left: 6px;
 }
 .record-content {
 	border-color: #456914;
@@ -46,6 +111,12 @@
 }
 .rounded-corner-border {
     border-radius: 10px;
+}
+.rounded-corner-border-12 {
+	border-radius: 12px;
+}
+.rounded-corner-border-14 {
+	border-radius: 14px;
 }
 .detail-rounded-corner-border {
     border-radius: 10px 30px;

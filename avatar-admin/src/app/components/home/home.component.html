@@ -6,7 +6,7 @@
 				Logo
 			</div>
 			<div class="p-col-8 p-md-8">
-				Welcome {{userDTO.firstName}}
+				{{ 'home.welcome' | translate }} {{userDTO.firstName}}
 			</div>
 			<div class="p-col-2 p-md-2">
 				<a href="javascript:void(0);" (click)="logout()">Logout</a>

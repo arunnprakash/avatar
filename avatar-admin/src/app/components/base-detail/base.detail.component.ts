@@ -1,5 +1,7 @@
 import { OnInit } from '@angular/core';
 import { AbstractBaseDetailComponent } from "./abstract.base.detail.component";
+import { AuthService } from "../../services/auth.service";
+
 import * as _ from "lodash";
 
 export abstract class BaseDetailComponent extends AbstractBaseDetailComponent implements OnInit {
@@ -7,8 +9,8 @@ export abstract class BaseDetailComponent extends AbstractBaseDetailComponent im
     protected displayAlertDialog: boolean;
     protected alertDialogTitle: string;
     protected alertDialogMessage: string;
-    constructor(service: any, private params?: any, private dialog?: any) {
-        super(service);
+    constructor(service: any, authService: AuthService, private params?: any, private dialog?: any) {
+        super(service, authService);
         this.model = params.data.model;
         this.cols = params.data.cols;
         this.localCols = params.data.localCols;

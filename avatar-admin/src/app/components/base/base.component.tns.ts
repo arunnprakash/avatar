@@ -4,21 +4,25 @@ import { AbstractBaseComponent } from "./abstract.base.component";
 import { prompt, PromptOptions, PromptResult } from "tns-core-modules/ui/dialogs";
 import { confirm, ConfirmOptions } from "tns-core-modules/ui/dialogs";
 import { alert, AlertOptions } from "tns-core-modules/ui/dialogs";
+import { ViewContainerRef } from "@angular/core";
 import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/modal-dialog";
 import {LoadingIndicator} from "nativescript-loading-indicator";
 
 import { PagingAndFilterRequest } from "../../services/authorization/pagingandfilterrequest.model";
 import { FilterCriteria } from "../../services/authorization/filtercriteria.model";
 import { PagingAndFilterResponse } from "../../services/authorization/pagingandfilterresponse.model";
+import { AuthService } from "../../services/auth.service";
+
 import * as _ from "lodash";
-import { ViewContainerRef } from "@angular/core";
+
 
 export abstract class BaseComponent extends AbstractBaseComponent implements OnInit {
     loadingIndicator: LoadingIndicator;
     loadingIndicatorOptions: any;
-    constructor(service: any, private modalDialogService?: ModalDialogService, private dialogService?: any, private detailComponent?: any, 
+    constructor(service: any, authService: AuthService, 
+            private modalDialogService?: ModalDialogService, private dialogService?: any, private detailComponent?: any, 
             private router?: Router, private activatedRoute?: ActivatedRoute, private vcRef?: ViewContainerRef) {
-        super(service);
+        super(service, authService);
     }
 
     ngOnInit() {
@@ -83,5 +87,46 @@ export abstract class BaseComponent extends AbstractBaseComponent implements OnI
                     }
         });
     }
-
+    totalNumberOfPages: number;
+    previousPageNumber: number;
+    currentPageNumber: number = 1;
+    nextPageNumber: number;
+    lastPageNumber: number;
+    pageNumbers: number[] = [1,2,3,4];
+    maxSize: number = 4;
+    gotoPage(pageNumber: number) {
+        console.log(pageNumber);
+        this.currentPageNumber = pageNumber;
+        this.lazyLoadRecordList({"first": (pageNumber - 1) * this.numberOfRowsPerPage , "rows": this.numberOfRowsPerPage});
+    }
+    protected recordListLoaded(): void {
+        this.totalNumberOfPages = this.totalRecords / this.numberOfRowsPerPage;
+        this.totalNumberOfPages = Math.ceil(this.totalNumberOfPages);
+        if (this.totalNumberOfPages > 1) {
+            let pageNumbers = [];
+            for (var index = this.currentStartPageNo; index < this.currentStartPageNo + this.maxSize && index <= this.totalNumberOfPages; index++) {
+                pageNumbers.push(index);
+            }
+            this.pageNumbers = pageNumbers;
+        } else {
+            this.pageNumbers = [1];
+        }
+    }
+    
+    get currentStartPageNo():number {
+        if ((this.currentPageNumber - Math.ceil((this.maxSize/2)) <= 0)) {
+            return 1;
+        }
+        else
+        {
+            if (this.totalNumberOfPages >= (this.currentPageNumber + Math.ceil((this.maxSize/2))) + 1) {
+                return (this.currentPageNumber - Math.ceil((this.maxSize/2)) + 1);
+            }
+            else if ((this.currentPageNumber - this.maxSize) <= 0) {
+                return 1;
+            } else {
+                return this.totalNumberOfPages - (this.maxSize - 1);
+            }
+        }
+    }
 }

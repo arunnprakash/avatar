@@ -3,6 +3,8 @@ import { OnInit } from '@angular/core';
 import { PagingAndFilterRequest } from "../../services/authorization/pagingandfilterrequest.model";
 import { FilterCriteria } from "../../services/authorization/filtercriteria.model";
 import { PagingAndFilterResponse } from "../../services/authorization/pagingandfilterresponse.model";
+import { AuthService } from "../../services/auth.service";
+
 import * as _ from "lodash";
 
 export abstract class AbstractBaseComponent implements OnInit {
@@ -14,7 +16,7 @@ export abstract class AbstractBaseComponent implements OnInit {
     protected recordIdList: any[];
     protected recordList: any[];
     protected model: any;
-
+    protected enableDeleteButton: boolean;
     /*Following Abstract Fields and Methods MUST have definition in derived component class*/
     protected abstract title: string;
     protected abstract localCols: any[];
@@ -23,8 +25,8 @@ export abstract class AbstractBaseComponent implements OnInit {
     protected abstract showLoading(value: boolean): void;
     protected abstract showDetailDialog(value: boolean): void;
     protected abstract showAlertDialog(title: string, message: string): void;
-
-    constructor(private service: any) { }
+    protected abstract recordListLoaded(): void;
+    constructor(private service: any, private authService: AuthService) { }
 
     ngOnInit() {
         console.log("ngOnInit abstract.base.component");
@@ -46,6 +48,7 @@ export abstract class AbstractBaseComponent implements OnInit {
         this.recordList = [];
         this.recordIdList = [];
         this.isSelectAllChecked = false;
+        this.enableDeleteButton = false;
     }
     lazyLoadRecordList(event?: any) {
         // in a real application, make a remote request to load data using state metadata from event
@@ -70,8 +73,8 @@ export abstract class AbstractBaseComponent implements OnInit {
             }
         }
         let pageNumber = event && event.first ? event.first / event.rows : 0;
-        let pageSize = event?event.rows:this.numberOfRowsPerPage;
-        let sortBy = event?event.sortField:'id';
+        let pageSize = event && event.rows ? event.rows:this.numberOfRowsPerPage;
+        let sortBy = event && event.sortField ? event.sortField:'id';
         let sortingOrder = event &&  event.sortOrder === 1 ? 'ASC' : 'DESC';
         let pagingAndFilterRequest: PagingAndFilterRequest = new PagingAndFilterRequest();
         pagingAndFilterRequest.filters = filters;
@@ -113,6 +116,7 @@ export abstract class AbstractBaseComponent implements OnInit {
                 this.recordIdList.push({ id: item.id, selected: false });
             });
             this.showLoading(false);
+            this.recordListLoaded();
         },
         ( error ) => {
             this.showLoading(false);
@@ -129,11 +133,13 @@ export abstract class AbstractBaseComponent implements OnInit {
                 item.selected = this.isSelectAllChecked;
             }
         });
+        this.enableDeleteButton = _.find(this.recordIdList, {"selected": true}) ? true : false;
     }
     checkIfAllSelected() {
         this.isSelectAllChecked = this.recordIdList.every( function( item: any ) {
             return item.selected == true;
         });
+        this.enableDeleteButton = _.find(this.recordIdList, {"selected": true}) ? true : false;
     }
     create() {
         this.initEmptyModel();
@@ -163,6 +169,9 @@ export abstract class AbstractBaseComponent implements OnInit {
     rowDataClicked(model: any) {
         this.model = model;
         this.showDetailDialog(true);
+    }
+    hasRole(roles: string[]): boolean {
+        return this.authService.hasRole(roles);
     }
     filterAutoCompleteSuggestion(fieldName, selectedValues) {
         let menuItem: any = _.find(this.localCols, { 'field': fieldName });

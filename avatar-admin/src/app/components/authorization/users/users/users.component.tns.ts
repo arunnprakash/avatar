@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit , ViewContainerRef, ViewChildren, QueryList } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/modal-dialog";
 import { baseDataViewTemplate } from '../../../base/base.dataView.template';
@@ -7,9 +7,14 @@ import { BaseComponent } from '../../../base/base.component';
 
 import { UserService } from '../../../../services/authorization/userservice.generated';
 import { RoleService } from '../../../../services/authorization/roleservice.generated';
+import { AuthService } from "../../../../services/auth.service";
 import { UserDTO } from "../../../../services/authorization/userdto.model";
 import { RoleDTO } from "../../../../services/authorization/roledto.model";
 import { UserDetailComponent } from "../user-detail/user-detail.component";
+
+import { ObservableArray } from "tns-core-modules/data/observable-array";
+import { TokenModel, RadAutoCompleteTextView } from "nativescript-ui-autocomplete";
+import { RadAutoCompleteTextViewComponent  } from "nativescript-ui-autocomplete/angular";
 
 import * as _ from "lodash";
 
@@ -19,8 +24,9 @@ import * as _ from "lodash";
   styles: [baseCss],
   providers: [ModalDialogService]
 })
-export class UsersComponent extends BaseComponent implements OnInit {
+export class UsersComponent extends BaseComponent implements OnInit, AfterViewInit  {
 
+    tags: string[]=["Test"];
     protected title = 'User';
     protected localCols: any[] = [
          { field: 'userName', header: 'UserName', dataType: 'INPUT' },
@@ -28,23 +34,47 @@ export class UsersComponent extends BaseComponent implements OnInit {
          { field: 'firstName', header: 'FirstName', dataType: 'INPUT' },
          { field: 'lastName', header: 'LastName', dataType: 'INPUT' },
          { field: 'dob', header: 'DateOfBirth', dataType: 'DATE' },
-         { field: 'roles', header: 'Roles', dataType: 'AUTOCOMPLETE', options: [], optionLabel:"roleName" }
+         { field: 'roles', header: 'Roles', dataType: 'AUTOCOMPLETE', options: new ObservableArray<TokenModel>(), optionLabel:"roleName" }
     ];
-    constructor( userService: UserService, private roleService: RoleService, 
+    constructor( userService: UserService, authService: AuthService, private roleService: RoleService, 
             modalDialogService: ModalDialogService, dialogService: ModalDialogService, 
             router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef ) {
-        super( userService, modalDialogService, dialogService, UserDetailComponent, router, activatedRoute, vcRef );
+        super( userService, authService, modalDialogService, dialogService, UserDetailComponent, router, activatedRoute, vcRef );
     }
-
+    ngAfterViewInit() {
+        
+    }
     ngOnInit() {
         super.ngOnInit();
+        console.log("ngOnInit user.component.tns");
         this.initRolesList();
     }
+    onLoaded(event) { 
+        let autoComplete: RadAutoCompleteTextView = <RadAutoCompleteTextView>event.object;
+        this.initAutoComplete(autoComplete);
+    }
+    initAutoComplete(autoComplete: RadAutoCompleteTextView) {
+        setTimeout(()=>{
+            autoComplete.readOnly = true;
+            autoComplete.showCloseButton = false;
+            this.recordList.forEach((userDTO: any) => {
+                if (userDTO.id == autoComplete.id) {
+                    userDTO.roles.forEach( (role: RoleDTO ) => {
+                        autoComplete.addToken(new TokenModel(role.roleName, null));
+                    });
+                }
+                
+            });
+       }, 3000)
+    }
+
     initRolesList() {
         this.showLoading(true);
         this.roleService.getAllExceptDeleted().subscribe((roles: RoleDTO[]) => {
             let menuItem: any = _.find(this.localCols, { 'field': 'roles' });
-            menuItem.options = roles;
+            roles.forEach( (role: RoleDTO ) => {
+                menuItem.options.push(new TokenModel(role.roleName, null));
+            });
             this.showLoading(false);
         },
         ( error ) => {
@@ -59,4 +89,5 @@ export class UsersComponent extends BaseComponent implements OnInit {
     protected isModelValid(): boolean {
         return true;
     }
+
 }

@@ -5,6 +5,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
+//import ngx-translate and the http loader
+import {TranslateService, TranslateLoader, TranslateModule, TranslatePipe} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
 import { CalendarModule } from 'primeng/calendar';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
@@ -39,6 +43,11 @@ import { NeedAuthGuard } from "./services/needauthguard";
 import { APIModule } from "./services/authorization/api.module";
 import { HomeComponent } from './components/home/home.component';
 
+//required for AOT compilation
+export function HttpLoaderFactory(http: HttpClient) {
+    return new TranslateHttpLoader(http);
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,12 +60,19 @@ import { HomeComponent } from './components/home/home.component';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+        loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient]
+        }
+    }),
+    APIModule.forRoot({context: ApiUrls.authorizationServiceApiBaseUrl}),
     AppRoutingModule,
     DashboardModule,
     UsersModule,
     RolesModule,
-    APIModule.forRoot({context: ApiUrls.authorizationServiceApiBaseUrl}),
-    HttpClientModule,
     CalendarModule,
     InputTextModule,
     ButtonModule,
@@ -74,17 +90,12 @@ import { HomeComponent } from './components/home/home.component';
     CardModule,
     PasswordModule
   ],
-  providers: [    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    },
-    {
-        provide: Storage,
-        useValue: localStorage
-      },
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: Storage, useValue: localStorage},
     NeedAuthGuard,
-    AuthService],
+    AuthService,
+    TranslateService],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]
 })

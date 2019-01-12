@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { routes, componentDeclarations } from './dashboard.common';
 import { DashboardComponent } from './dashboard.component';
-import {ChartModule} from 'primeng/chart';
+import { ChartModule } from 'primeng/chart';
 
 
 @NgModule({

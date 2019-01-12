@@ -7,6 +7,7 @@ import { BaseComponent } from '../../../base/base.component';
 
 import { UserService } from '../../../../services/authorization/userservice.generated';
 import { RoleService } from '../../../../services/authorization/roleservice.generated';
+import { AuthService } from "../../../../services/auth.service";
 import { UserDTO } from "../../../../services/authorization/userdto.model";
 import { RoleDTO } from "../../../../services/authorization/roledto.model";
 import { UserDetailComponent } from "../user-detail/user-detail.component";
@@ -30,14 +31,15 @@ export class UsersComponent extends BaseComponent implements OnInit {
          { field: 'dob', header: 'DateOfBirth', dataType: 'DATE' },
          { field: 'roles', header: 'Roles', dataType: 'AUTOCOMPLETE', options: [] , optionLabel:"roleName"}
     ];
-    constructor( userService: UserService, private roleService: RoleService, 
+    constructor( userService: UserService, authService: AuthService, private roleService: RoleService, 
             confirmationService: ConfirmationService, dialogService: DialogService, 
             router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef ) {
-        super( userService, confirmationService, dialogService,UserDetailComponent, router, activatedRoute, vcRef );
+        super( userService, authService, confirmationService, dialogService,UserDetailComponent, router, activatedRoute, vcRef );
     }
 
     ngOnInit() {
         super.ngOnInit();
+        console.log("ngOnInit user.component");
         this.initRolesList();
     }
     initRolesList() {

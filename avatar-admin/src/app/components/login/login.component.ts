@@ -5,7 +5,7 @@ import { UserDTO } from "../../services/authorization/userdto.model";
 import { LoginRequest } from "../../services/authorization/loginrequest.model";
 import { LoginResponse } from "../../services/authorization/loginresponse.model";
 import { AuthService } from "../../services/auth.service";
-
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
     loginResponse: LoginResponse;
     loginProgress: boolean;
     loginError: boolean;
-  constructor(private userService: UserService, private authService: AuthService, private router: Router) { }
+  constructor(private userService: UserService, private authService: AuthService, 
+          private translate: TranslateService, private router: Router) { }
 
   ngOnInit() {
       this.username = 'admin';
@@ -32,6 +33,12 @@ export class LoginComponent implements OnInit {
                 }
               });
       }
+  }
+  setPreferredLanguage(languageCode: string) {
+      // this language will be used as a fallback when a translation isn't found in the current language
+      this.translate.setDefaultLang('en');
+       // the lang to use, if the lang isn't available, it will use the current loader to get them
+      this.translate.use(languageCode);
   }
   doLogin() {
       console.log("doLogin!");
@@ -61,4 +68,5 @@ export class LoginComponent implements OnInit {
               console.error(error);
           });
   }
-}
+
+  }

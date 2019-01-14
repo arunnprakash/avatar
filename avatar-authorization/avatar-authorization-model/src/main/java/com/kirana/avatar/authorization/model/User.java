@@ -18,9 +18,11 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -70,8 +72,11 @@ public class User extends BaseEntity<User> {
 	protected String latitude;
 	@Column(nullable = true)
 	protected String longitude;
+	@ManyToOne(optional = false, fetch=FetchType.EAGER)
+	@JoinColumn(name = "language_id", referencedColumnName="id", nullable = false)
+	private Language preferredLanguage;
 
-	@Transient
+    @Transient
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 

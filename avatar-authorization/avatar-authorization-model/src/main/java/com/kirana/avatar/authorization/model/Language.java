@@ -25,7 +25,7 @@ import lombok.ToString;
  */
 
 @Entity
-@Table(name = "language")
+@Table(name = "languages")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
@@ -35,7 +35,7 @@ import lombok.ToString;
 public class Language extends BaseEntity<Language>{
 	
 		@Column(nullable = false)
-		protected int languageCode;
+		protected String languageCode;
 		@Column(nullable = false)
 		protected String languageName;
 		

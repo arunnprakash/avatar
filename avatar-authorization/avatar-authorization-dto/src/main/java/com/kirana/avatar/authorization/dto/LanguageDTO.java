@@ -25,12 +25,12 @@ import lombok.ToString;
 @ToString
 public class LanguageDTO extends BaseDTO{
 	
-	protected int languageCode;
+	protected String languageCode;
 	protected String languageName;
 	
 	@Builder
 	public LanguageDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
-			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, int languageCode, String languageName) {
+			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, String languageCode, String languageName) {
 		super(id, createdBy, createdDate, lastModifiedBy, lastModifiedDate, deleted, version);
 		this.languageCode = languageCode;
 		this.languageName = languageName;

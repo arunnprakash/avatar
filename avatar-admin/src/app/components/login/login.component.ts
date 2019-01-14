@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
       this.username = 'admin';
       this.password = 'admin';
       if (this.authService.isLogged()) {
+          this.setPreferredLanguage(this.authService.getUserInfo().preferredLanguage.languageCode);
           console.info("Already Logged in So Login Navigate to Home");
           this.router.navigate(["/home"]).then( (e) => {
               if (e) {
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit {
                 } else {
                   console.log("Navigation to Home has failed!");
                 }
-              });
+          });
       }
   }
   setPreferredLanguage(languageCode: string) {
@@ -50,6 +51,7 @@ export class LoginComponent implements OnInit {
       this.userService.login(loginRequest).subscribe(( loginResponse: LoginResponse ) => {
           this.loginResponse = loginResponse;
           this.loginProgress = false;
+          this.setPreferredLanguage(this.loginResponse.userDTO.preferredLanguage.languageCode);
           this.authService.setToken(this.loginResponse.accessToken);
           this.authService.setUserInfo(this.loginResponse.userDTO);
           console.info("Login Navigate to Home");

@@ -29,8 +29,7 @@ public class LanguageSpecification extends BaseEntitySpecification<Language> {
 			public Predicate toPredicate(Root<Language> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
 				return builder.like(root.get(Language_.LANGUAGE_NAME), "%"+languageName+"%");
 			}
-
 		};
 	}
-	
+
 }

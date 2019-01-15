@@ -23,6 +23,7 @@ import org.springframework.data.jpa.domain.Specification;
 
 import com.kirana.avatar.common.jpa.entity.BaseEntity;
 import com.kirana.avatar.common.jpa.entity.BaseEntity_;
+import com.kirana.avatar.common.jpa.entity.LocaleEntity_;
 
 /**
  * @author __ArunPrakash__
@@ -38,7 +39,7 @@ public abstract class BaseEntitySpecification<Model extends BaseEntity<Model>> {
 			}
 		};
 	}
-
+	
 	public Specification<Model> hasDeletedNotNull() {
 		return new Specification<Model>() {
 			public Predicate toPredicate(Root<Model> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
@@ -99,6 +100,47 @@ public abstract class BaseEntitySpecification<Model extends BaseEntity<Model>> {
 		return new Specification<Model>() {
 			public Predicate toPredicate(Root<Model> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
 				return builder.equal(root.get(BaseEntity_.LAST_MODIFIED_BY), modifiedBy);
+			}
+		};
+	}
+	
+	public Specification<Model> hasEnglish(final String en) {
+		return new Specification<Model>() {
+			public Predicate toPredicate(Root<Model> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				return builder.like(root.get(LocaleEntity_.EN), "%"+en+"%");
+			}
+
+		};
+	}
+	
+	public Specification<Model> hasTamil(final String ta) {
+		return new Specification<Model>() {
+			public Predicate toPredicate(Root<Model> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				return builder.like(root.get(LocaleEntity_.TA), "%"+ta+"%");
+			}
+		};
+	}
+	
+	public Specification<Model> hasMalayalam(final String ma) {
+		return new Specification<Model>() {
+			public Predicate toPredicate(Root<Model> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				return builder.like(root.get(LocaleEntity_.MA), "%"+ma+"%");
+			}
+		};
+	}
+	
+	public Specification<Model> hasKanadam(final String ka) {
+		return new Specification<Model>() {
+			public Predicate toPredicate(Root<Model> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				return builder.like(root.get(LocaleEntity_.KA), "%"+ka+"%");
+			}
+		};
+	}
+	
+	public Specification<Model> hasTelugu(final String te) {
+		return new Specification<Model>() {
+			public Predicate toPredicate(Root<Model> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				return builder.like(root.get(LocaleEntity_.TE), "%"+te+"%");
 			}
 		};
 	}

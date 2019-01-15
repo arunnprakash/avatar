@@ -4,7 +4,6 @@
 package com.kirana.avatar.authorization.service.impl;
 
 import static com.kirana.avatar.authorization.model.Village_.VILLAGE_CODE;
-import static com.kirana.avatar.authorization.model.Village_.VILLAGE_NAME;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -45,14 +44,7 @@ public class VillageServiceImpl extends BaseServiceImpl<Village, VillageDTO, Vil
 	@Override
 	protected Specification<Village> getSpecification(FilterCriteria filter, Specification<Village> specification) {
 		String itemName = filter.getFilterByItem();
-		if (itemName.equalsIgnoreCase(VILLAGE_NAME)) {
-			Specification<Village> spec = null;
-			for (String itemValue : filter.getFilterByItemValues()) {
-				spec = (spec == null) ? villageSpecification.hasVillageName(itemValue) : spec.or(villageSpecification.hasVillageName(itemValue));
-			}
-			log.debug("Adding specification {} {}", VILLAGE_NAME, spec);
-			specification = specification.and(spec);
-		} else if (itemName.equalsIgnoreCase(VILLAGE_CODE)) {
+		if (itemName.equalsIgnoreCase(VILLAGE_CODE)) {
 			Specification<Village> spec = null;
 			for (String itemValue : filter.getFilterByItemValues()) {
 				spec = (spec == null) ? villageSpecification.hasVillageCode(itemValue) : spec.or(villageSpecification.hasVillageCode(itemValue));

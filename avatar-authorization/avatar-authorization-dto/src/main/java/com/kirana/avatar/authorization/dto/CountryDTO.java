@@ -23,15 +23,15 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @EqualsAndHashCode(callSuper = true)
 @ToString
-public class VillageDTO extends BaseDTO{
+public class CountryDTO extends BaseDTO{
 
-	protected String villageCode;
+	protected String countryCode;
 		
 	@Builder
-	public VillageDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
-			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, String villageCode) {
+	public CountryDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
+			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, String countryCode) {
 		super(id, createdBy, createdDate, lastModifiedBy, lastModifiedDate, deleted, version);
-		this.villageCode = villageCode;
+		this.countryCode = countryCode;
 	}
 	
 }

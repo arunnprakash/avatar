@@ -6,9 +6,6 @@ package com.kirana.avatar.authorization.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -28,20 +25,16 @@ import lombok.ToString;
  */
 
 @Entity
-@Table(name = "villages")
+@Table(name = "countries")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @ToString
 @EqualsAndHashCode(callSuper=true)
 @EntityListeners(AuditingEntityListener.class)
-public class Village extends LocaleEntity<Village>{
-
+public class Country extends LocaleEntity<Country>{
+	
 	@Column(nullable = false)
-	protected String villageCode;
-	
-	@ManyToOne(optional=false, fetch=FetchType.EAGER)
-	@JoinColumn(name="taluk_id", referencedColumnName="id")
-	private Taluk taluk;
-	
+	protected String countryCode;
+
 }

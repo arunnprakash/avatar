@@ -28,20 +28,21 @@ import lombok.ToString;
  */
 
 @Entity
-@Table(name = "villages")
+@Table(name = "taluks")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @ToString
 @EqualsAndHashCode(callSuper=true)
 @EntityListeners(AuditingEntityListener.class)
-public class Village extends LocaleEntity<Village>{
-
+public class Taluk extends LocaleEntity<Taluk>{
+	
 	@Column(nullable = false)
-	protected String villageCode;
+	protected String talukCode;
 	
 	@ManyToOne(optional=false, fetch=FetchType.EAGER)
-	@JoinColumn(name="taluk_id", referencedColumnName="id")
-	private Taluk taluk;
-	
+	@JoinColumn(name="district_id", referencedColumnName="id")
+	private District district;
+
+
 }

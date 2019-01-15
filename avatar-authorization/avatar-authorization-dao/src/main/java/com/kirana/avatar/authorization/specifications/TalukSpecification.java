@@ -11,8 +11,8 @@ import javax.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
-import com.kirana.avatar.authorization.model.Village;
-import com.kirana.avatar.authorization.model.Village_;
+import com.kirana.avatar.authorization.model.Taluk;
+import com.kirana.avatar.authorization.model.Taluk_;
 import com.kirana.avatar.common.jpa.specification.BaseEntitySpecification;
 
 /**
@@ -22,14 +22,15 @@ import com.kirana.avatar.common.jpa.specification.BaseEntitySpecification;
 
 @SuppressWarnings("serial")
 @Component
-public class VillageSpecification extends BaseEntitySpecification<Village> {
+public class TalukSpecification extends BaseEntitySpecification<Taluk>{
 	
-	public Specification<Village> hasVillageCode(final String villageCode) {
-		return new Specification<Village>() {
-			public Predicate toPredicate(Root<Village> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-				return builder.like(root.get(Village_.VILLAGE_CODE), "%"+villageCode+"%");
+	public Specification<Taluk> hasTalukCode(final String talukCode) {
+		return new Specification<Taluk>() {
+			public Predicate toPredicate(Root<Taluk> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				return builder.like(root.get(Taluk_.TALUK_CODE), "%"+talukCode+"%");
 			}
 
 		};
 	}
+
 }

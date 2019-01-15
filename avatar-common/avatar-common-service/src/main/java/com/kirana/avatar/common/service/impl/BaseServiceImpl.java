@@ -36,6 +36,11 @@ import static com.kirana.avatar.common.jpa.entity.BaseEntity_.CREATED_DATE;
 import static com.kirana.avatar.common.jpa.entity.BaseEntity_.LAST_MODIFIED_BY;
 import static com.kirana.avatar.common.jpa.entity.BaseEntity_.LAST_MODIFIED_DATE;
 import static com.kirana.avatar.common.jpa.entity.BaseEntity_.DELETED;
+import static com.kirana.avatar.common.jpa.entity.LocaleEntity_.EN;
+import static com.kirana.avatar.common.jpa.entity.LocaleEntity_.TA;
+import static com.kirana.avatar.common.jpa.entity.LocaleEntity_.MA;
+import static com.kirana.avatar.common.jpa.entity.LocaleEntity_.KA;
+import static com.kirana.avatar.common.jpa.entity.LocaleEntity_.TE;
 import com.kirana.avatar.common.jpa.repository.BaseRepository;
 import com.kirana.avatar.common.jpa.specification.BaseEntitySpecification;
 import com.kirana.avatar.common.mapper.BaseMapper;
@@ -215,6 +220,41 @@ public abstract class BaseServiceImpl<Model extends BaseEntity<Model>,
 						spec = (spec == null) ? entitySpecification.hasDeleted(deletedStatus) : spec.or(entitySpecification.hasDeleted(deletedStatus));
 					}
 					log.debug("Adding specification {} {}", DELETED, spec);
+					specification = specification.and(spec);
+				} else if(itemName.equalsIgnoreCase(EN)){
+					Specification<Model> spec = null;
+					for (String itemValue : filter.getFilterByItemValues()) {
+						spec = (spec == null) ? entitySpecification.hasEnglish(itemValue) : spec.or(entitySpecification.hasEnglish(itemValue));
+					}
+					log.debug("Adding specification {} {}", EN, spec);
+					specification = specification.and(spec);
+				} else if(itemName.equalsIgnoreCase(TA)){
+					Specification<Model> spec = null;
+					for (String itemValue : filter.getFilterByItemValues()) {
+						spec = (spec == null) ? entitySpecification.hasTamil(itemValue) : spec.or(entitySpecification.hasTamil(itemValue));
+					}
+					log.debug("Adding specification {} {}", TA, spec);
+					specification = specification.and(spec);
+				} else if(itemName.equalsIgnoreCase(MA)){
+					Specification<Model> spec = null;
+					for (String itemValue : filter.getFilterByItemValues()) {
+						spec = (spec == null) ? entitySpecification.hasMalayalam(itemValue) : spec.or(entitySpecification.hasMalayalam(itemValue));
+					}
+					log.debug("Adding specification {} {}", MA, spec);
+					specification = specification.and(spec);
+				} else if(itemName.equalsIgnoreCase(KA)){
+					Specification<Model> spec = null;
+					for (String itemValue : filter.getFilterByItemValues()) {
+						spec = (spec == null) ? entitySpecification.hasKanadam(itemValue) : spec.or(entitySpecification.hasKanadam(itemValue));
+					}
+					log.debug("Adding specification {} {}", KA, spec);
+					specification = specification.and(spec);
+				} else if(itemName.equalsIgnoreCase(TE)){
+					Specification<Model> spec = null;
+					for (String itemValue : filter.getFilterByItemValues()) {
+						spec = (spec == null) ? entitySpecification.hasTelugu(itemValue) : spec.or(entitySpecification.hasTelugu(itemValue));
+					}
+					log.debug("Adding specification {} {}", TE, spec);
 					specification = specification.and(spec);
 				} else {
 					specification = getSpecification(filter, specification);

@@ -14,7 +14,10 @@ export const baseDetailDataViewTemplate: string = `
                 <div class="p-col-8" *ngSwitchCase="'DATETIME'">{{model[col.field] | date:'dd-MM-yyyy HH:mm:ss'}}</div>
                 <div class="p-col-8" *ngSwitchCase="'MULTISELECT'">{{model[col.field]}}</div>
                 <!--<p-multiSelect *ngSwitchCase="'MULTISELECT'" readonly="false" [options]="col.options" [optionLabel]="col.optionLabel" defaultLabel="ALL" [(ngModel)]="model[col.field]"  appendTo="body" [style]="{'width':'100%'}"></p-multiSelect>-->
-                <p-chips *ngSwitchCase="'AUTOCOMPLETE'" disabled="true" [(ngModel)]="model[col.field]" [field]="col.optionLabel" ngDefaultControl></p-chips>
+                <span *ngSwitchCase="'AUTOCOMPLETE'">
+                    <p-chips *ngIf="col.multiple" disabled="true" [(ngModel)]="model[col.field]" [field]="col.optionLabel" ngDefaultControl></p-chips>
+                    <div *ngIf="!col.multiple" class="p-col-8">{{model[col.field][col.optionLabel]}}</div>
+                </span>
             </div>
         </div>
         <div *ngIf="displayEditDetail" class="p-grid text-align-left">
@@ -25,7 +28,7 @@ export const baseDetailDataViewTemplate: string = `
                     <p-calendar *ngSwitchCase="'DATE'" [ngModel]="model[col.field] | date:'yyyy-MM-dd'" (ngModelChange)="dateChanged($event, col.field)" [showIcon]="true" dateFormat="yy-mm-dd" appendTo="body" [inputStyle]="{'width':'65%'}"></p-calendar>
                     <p-calendar *ngSwitchCase="'DATETIME'" [ngModel]="model[col.field] | date:'yyyy-MM-dd'" (ngModelChange)="dateChanged($event, col.field)" [showIcon]="true" dateFormat="yy-mm-dd" appendTo="body" [inputStyle]="{'width':'65%'}"></p-calendar>
                     <p-multiSelect *ngSwitchCase="'MULTISELECT'" [options]="col.options" [(ngModel)]="model[col.field]" [optionLabel]="col.optionLabel" appendTo="body" [style]="{'width':'100%'}"></p-multiSelect>
-                    <p-autoComplete *ngSwitchCase="'AUTOCOMPLETE'" immutable="false" (completeMethod)="filterAutoCompleteSuggestion(col.field, model[col.field])" [(ngModel)]="model[col.field]" [suggestions]="col.options" forceSelection="true" [field]="col.optionLabel" [dropdown]="true" [multiple]="true" [size]="30" placeholder="{{col.header}}"></p-autoComplete>
+                    <p-autoComplete *ngSwitchCase="'AUTOCOMPLETE'" immutable="false" (completeMethod)="filterAutoCompleteSuggestion(col.field, model[col.field])" [(ngModel)]="model[col.field]" [suggestions]="col.options" forceSelection="true" [field]="col.optionLabel" [dropdown]="true" [multiple]="col.multiple" [size]="30" placeholder="{{col.header}}"></p-autoComplete>
                 </div>
             </div>
         </div>

@@ -22,6 +22,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kirana.avatar.common.httprequest.interceptors.RequestInterceptor;
 import com.kirana.avatar.common.jwt.TokenProvider;
@@ -91,7 +92,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter implements WebMvcC
 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		System.out.println(bCryptPasswordEncoder.encode("admin"));
 		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
 	}
 
@@ -117,7 +117,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter implements WebMvcC
 
 	@Override
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
-		System.out.println("Converters "+ converters);
+		log.debug("Registering Extend Message Converters");
+		objectMapper.setSerializationInclusion(Include.NON_NULL);
+		objectMapper.setSerializationInclusion(Include.NON_EMPTY);
 		converters.add(new MappingJackson2HttpMessageConverter(objectMapper));
     }
 }

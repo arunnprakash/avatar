@@ -52,7 +52,10 @@ export const baseDataViewTemplate: string = `
                         <div *ngSwitchCase="'DATETIME'" class="ui-g-8 ui-sm-6 text-align-left">{{rowData[col.field] | date:'dd-MM-yyyy HH:mm:ss'}}</div>
                         <div *ngSwitchCase="'MULTISELECT'" class="ui-g-8 ui-sm-6 text-align-left">{{rowData[col.field]}}</div>
                         <!--<p-multiSelect *ngSwitchCase="'MULTISELECT'" readonly="true" defaultLabel="ALL" [options]="col.options" [(ngModel)]="rowData[col.field]" [optionLabel]="col.optionLabel" appendTo="body" [style]="{'width':'100%'}"></p-multiSelect>-->
-                        <p-chips *ngSwitchCase="'AUTOCOMPLETE'" disabled="true" [(ngModel)]="rowData[col.field]" [field]="col.optionLabel" ngDefaultControl></p-chips>
+                        <span *ngSwitchCase="'AUTOCOMPLETE'">
+                            <p-chips *ngIf="col.multiple" disabled="true" [(ngModel)]="rowData[col.field]" [field]="col.optionLabel" ngDefaultControl></p-chips>
+                            <div *ngIf="!col.multiple" class="ui-g-8 ui-sm-6 text-align-left">{{rowData[col.field][col.optionLabel]}}</div>
+                        </span>
                     </div>
                 </div>
                 <div class="ui-g-12 ui-md-1">

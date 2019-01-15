@@ -46,7 +46,10 @@ export const baseTemplate: string = `
                     <span *ngSwitchCase="'DATETIME'">{{rowData[col.field] | date:'dd-MM-yyyy HH:mm:ss'}}</span>
                     <span *ngSwitchCase="'MULTISELECT'">{{rowData[col.field]}}</span>
                     <!--<p-multiSelect *ngSwitchCase="'MULTISELECT'" readonly="true" [options]="col.options" [(ngModel)]="rowData[col.field]" [optionLabel]="col.optionLabel" defaultLabel="ALL"  appendTo="body" [style]="{'width':'100%'}"></p-multiSelect>-->
-                    <p-chips *ngSwitchCase="'AUTOCOMPLETE'" max="1" disabled="true" [(ngModel)]="rowData[col.field]" [field]="col.optionLabel" ngDefaultControl></p-chips>
+                    <span *ngSwitchCase="'AUTOCOMPLETE'">
+                        <p-chips *ngIf="col.multiple" max="1" disabled="true" [(ngModel)]="rowData[col.field]" [field]="col.optionLabel" ngDefaultControl></p-chips>
+                        <div *ngIf="!col.multiple">{{rowData[col.field][col.optionLabel]}}</div>
+                    </span>
                 </td>
                 <td>
                      <p-checkbox *ngIf="recordIdList[rowIndex]" binary="true" [(ngModel)]="recordIdList[rowIndex].selected" (onChange)="checkIfAllSelected();"></p-checkbox>

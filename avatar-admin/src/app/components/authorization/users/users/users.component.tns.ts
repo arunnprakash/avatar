@@ -7,9 +7,13 @@ import { BaseComponent } from '../../../base/base.component';
 
 import { UserService } from '../../../../services/authorization/userservice.generated';
 import { RoleService } from '../../../../services/authorization/roleservice.generated';
+import { LanguageService } from '../../../../services/authorization/languageservice.generated';
+import { VillageService } from '../../../../services/authorization/villageservice.generated';
 import { AuthService } from "../../../../services/auth.service";
 import { UserDTO } from "../../../../services/authorization/userdto.model";
 import { RoleDTO } from "../../../../services/authorization/roledto.model";
+import { LanguageDTO } from "../../../../services/authorization/languagedto.model";
+import { VillageDTO } from "../../../../services/authorization/villagedto.model";
 import { UserDetailComponent } from "../user-detail/user-detail.component";
 
 import { ObservableArray } from "tns-core-modules/data/observable-array";
@@ -28,15 +32,19 @@ export class UsersComponent extends BaseComponent implements OnInit, AfterViewIn
 
     tags: string[]=["Test"];
     protected title = 'User';
+    languageCode: string;
     protected localCols: any[] = [
          { field: 'userName', header: 'UserName', dataType: 'INPUT' },
          { field: 'mobileNumber', header: 'MobileNumber', dataType: 'INPUT' },
          { field: 'firstName', header: 'FirstName', dataType: 'INPUT' },
          { field: 'lastName', header: 'LastName', dataType: 'INPUT' },
          { field: 'dob', header: 'DateOfBirth', dataType: 'DATE' },
-         { field: 'roles', header: 'Roles', dataType: 'AUTOCOMPLETE', options: new ObservableArray<TokenModel>(), optionLabel:"roleName" }
+         { field: 'roles', header: 'Roles', dataType: 'AUTOCOMPLETE', options: new ObservableArray<TokenModel>(), optionLabel:"roleName" },
+         { field: 'preferredLanguage', header: 'PreferredLanguage', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"languageName"},
+         { field: 'village', header: 'Village', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"en"}
     ];
-    constructor( userService: UserService, authService: AuthService, private roleService: RoleService, 
+    constructor( userService: UserService, authService: AuthService, private roleService: RoleService,
+            private languageService: LanguageService, private villageService: VillageService,
             modalDialogService: ModalDialogService, dialogService: ModalDialogService, 
             router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef ) {
         super( userService, authService, modalDialogService, dialogService, UserDetailComponent, router, activatedRoute, vcRef );
@@ -47,7 +55,23 @@ export class UsersComponent extends BaseComponent implements OnInit, AfterViewIn
     ngOnInit() {
         super.ngOnInit();
         console.log("ngOnInit user.component.tns");
+        this.languageCode = "en";//this.authService.getUserInfo().preferredLanguage.languageCode;
         this.initRolesList();
+        this.initVillageList();
+    }
+    initVillageList() {
+        this.showLoading(true);
+        this.villageService.getAllExceptDeleted().subscribe((villages: VillageDTO[]) => {
+            let menuItem: any = _.find(this.localCols, { 'field': 'village' });
+            villages.forEach( (village: VillageDTO ) => {
+                //menuItem.options.push(new TokenModel(village[this.languageCode], null));
+            });
+            this.showLoading(false);
+        },
+        ( error ) => {
+            this.showLoading(false);
+            this.showAlertDialog('Error', 'Error while getting Village List');
+        });
     }
     onLoaded(event) { 
         let autoComplete: RadAutoCompleteTextView = <RadAutoCompleteTextView>event.object;

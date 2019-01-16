@@ -1,22 +1,20 @@
 /*******************************************************************************
  *
- * Copyright (c) 2018 OLAM Limited
+ * Copyright (c) 2019 GranaTech Limited
  *
- * All information contained herein is, and remains the property of OLAM
+ * All information contained herein is, and remains the property of GranaTech
  * Limited. The intellectual and technical concepts contained herein are
- * proprietary to OLAM and are protected by trade secret or copyright law.
+ * proprietary to GranaTech and are protected by trade secret or copyright law.
  * Dissemination of this information or reproduction of this material is
- * strictly forbidden unless prior written permission is obtained from OLAM
+ * strictly forbidden unless prior written permission is obtained from GranaTech
  * Limited
  *
  *******************************************************************************/
 package com.kirana.avatar.common.jpa.entity;
 
 import java.time.ZonedDateTime;
-import java.util.Optional;
 
 import javax.persistence.Column;
-import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +26,6 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -45,7 +42,6 @@ import lombok.Setter;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity<Model> {
 
 	@Id
@@ -79,12 +75,5 @@ public abstract class BaseEntity<Model> {
 	public Model markAsDeleted(){
 		this.deleted = true;
 		return (Model)this;
-	}
-	@SuppressWarnings("unchecked")
-	public Optional<Model> markAsDeleted(Optional<Model> model){
-		if (model.isPresent()) {
-			//()<Model>model.get()).deleted = true;
-		}
-		return model;
 	}
 }

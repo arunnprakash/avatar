@@ -8,10 +8,12 @@ import { BaseComponent } from '../../../base/base.component';
 import { UserService } from '../../../../services/authorization/userservice.generated';
 import { RoleService } from '../../../../services/authorization/roleservice.generated';
 import { LanguageService } from '../../../../services/authorization/languageservice.generated';
+import { VillageService } from '../../../../services/authorization/villageservice.generated';
 import { AuthService } from "../../../../services/auth.service";
 import { UserDTO } from "../../../../services/authorization/userdto.model";
 import { RoleDTO } from "../../../../services/authorization/roledto.model";
 import { LanguageDTO } from "../../../../services/authorization/languagedto.model";
+import { VillageDTO } from "../../../../services/authorization/villagedto.model";
 import { UserDetailComponent } from "../user-detail/user-detail.component";
 
 import * as _ from "lodash";
@@ -32,9 +34,11 @@ export class UsersComponent extends BaseComponent implements OnInit {
          { field: 'lastName', header: 'LastName', dataType: 'INPUT' },
          { field: 'dob', header: 'DateOfBirth', dataType: 'DATE' },
          { field: 'roles', header: 'Roles', dataType: 'AUTOCOMPLETE', multiple: true, options: [] , optionLabel:"roleName"},
-         { field: 'preferredLanguage', header: 'PreferredLanguage', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"languageName"}
+         { field: 'preferredLanguage', header: 'PreferredLanguage', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"languageName"},
+         { field: 'village', header: 'Village', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"en"}
     ];
-    constructor( userService: UserService, authService: AuthService, private roleService: RoleService, private languageService: LanguageService,
+    constructor( userService: UserService, authService: AuthService, private roleService: RoleService, 
+            private languageService: LanguageService, private villageService: VillageService,
             confirmationService: ConfirmationService, dialogService: DialogService, 
             router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef ) {
         super( userService, authService, confirmationService, dialogService,UserDetailComponent, router, activatedRoute, vcRef );
@@ -45,6 +49,19 @@ export class UsersComponent extends BaseComponent implements OnInit {
         console.log("ngOnInit user.component");
         this.initRolesList();
         this.initLanguageList();
+        this.initVillageList();
+    }
+    initVillageList() {
+        this.showLoading(true);
+        this.villageService.getAllExceptDeleted().subscribe((villages: VillageDTO[]) => {
+            let menuItem: any = _.find(this.localCols, { 'field': 'village' });
+            menuItem.options = villages;
+            this.showLoading(false);
+        },
+        ( error ) => {
+            this.showLoading(false);
+            this.showAlertDialog('Error', 'Error while getting Village List');
+        });
     }
     initLanguageList() {
         this.showLoading(true);

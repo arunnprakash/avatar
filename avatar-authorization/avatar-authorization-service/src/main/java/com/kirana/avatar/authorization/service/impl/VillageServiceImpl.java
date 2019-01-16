@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kirana.avatar.authorization.dto.VillageDTO;
 import com.kirana.avatar.authorization.mapper.VillageMapper;
 import com.kirana.avatar.authorization.model.Village;
+import com.kirana.avatar.authorization.repositories.TalukRepository;
 import com.kirana.avatar.authorization.repositories.VillageRepository;
 import com.kirana.avatar.authorization.service.VillageService;
 import com.kirana.avatar.authorization.specifications.VillageSpecification;
@@ -33,14 +34,33 @@ public class VillageServiceImpl extends BaseServiceImpl<Village, VillageDTO, Vil
 	private VillageRepository villageRepository;
 	private VillageMapper villageMapper;
 	private VillageSpecification villageSpecification;
+	private TalukRepository talukRepository;
 	
-	public VillageServiceImpl(VillageRepository villageRepository, VillageMapper villageMapper, VillageSpecification villageSpecification) {
+	public VillageServiceImpl(VillageRepository villageRepository, VillageMapper villageMapper, VillageSpecification villageSpecification,
+			TalukRepository talukRepository) {
 		super(villageRepository, villageMapper, villageSpecification);
 		this.villageRepository = villageRepository;
 		this.villageMapper = villageMapper;
 		this.villageSpecification = villageSpecification;
+		this.talukRepository = talukRepository;
 	}
-	
+
+	@Override
+	protected Village onSave(Village model) {
+		return model;
+	}
+
+	@Override
+	protected Village onUpdate(VillageDTO villageDTO, Village model) {
+		return talukRepository
+				.findById(villageDTO.getTaluk().getId())
+				.map(taluk -> {
+					model.setTaluk(taluk);
+					return model;
+				})
+				.orElseThrow(ApiException::resourceNotFound);
+	}
+
 	@Override
 	protected Specification<Village> getSpecification(FilterCriteria filter, Specification<Village> specification) {
 		String itemName = filter.getFilterByItem();

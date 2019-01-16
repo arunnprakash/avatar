@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kirana.avatar.authorization.dto.TalukDTO;
 import com.kirana.avatar.authorization.mapper.TalukMapper;
 import com.kirana.avatar.authorization.model.Taluk;
+import com.kirana.avatar.authorization.repositories.DistrictRepository;
 import com.kirana.avatar.authorization.repositories.TalukRepository;
 import com.kirana.avatar.authorization.service.TalukService;
 import com.kirana.avatar.authorization.specifications.TalukSpecification;
@@ -33,14 +34,33 @@ public class TalukServiceImpl extends BaseServiceImpl<Taluk, TalukDTO, TalukMapp
 	private TalukRepository talukRepository;
 	private TalukMapper talukMapper;
 	private TalukSpecification talukSpecification;
-	
-	public TalukServiceImpl(TalukRepository talukRepository, TalukMapper talukMapper, TalukSpecification talukSpecification) {
+	private DistrictRepository districtRepository;
+
+	public TalukServiceImpl(TalukRepository talukRepository, TalukMapper talukMapper, TalukSpecification talukSpecification,
+			DistrictRepository districtRepository) {
 		super(talukRepository, talukMapper, talukSpecification);
 		this.talukRepository = talukRepository;
 		this.talukMapper = talukMapper;
 		this.talukSpecification = talukSpecification;
+		this.districtRepository = districtRepository;
 	}
-	
+
+	@Override
+	protected Taluk onSave(Taluk model) {
+		return model;
+	}
+
+	@Override
+	protected Taluk onUpdate(TalukDTO talukDTO, Taluk model) {
+		return districtRepository
+				.findById(talukDTO.getDistrict().getId())
+				.map(district -> {
+					model.setDistrict(district);
+					return model;
+				})
+				.orElseThrow(ApiException::resourceNotFound);
+	}
+
 	@Override
 	protected Specification<Taluk> getSpecification(FilterCriteria filter, Specification<Taluk> specification) {
 		String itemName = filter.getFilterByItem();

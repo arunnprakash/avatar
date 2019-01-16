@@ -1,12 +1,12 @@
 /*******************************************************************************
  *
- * Copyright (c) 2018 OLAM Limited
+ * Copyright (c) 2019 GranaTech Limited
  *
- * All information contained herein is, and remains the property of OLAM
+ * All information contained herein is, and remains the property of GranaTech
  * Limited. The intellectual and technical concepts contained herein are
- * proprietary to OLAM and are protected by trade secret or copyright law.
+ * proprietary to GranaTech and are protected by trade secret or copyright law.
  * Dissemination of this information or reproduction of this material is
- * strictly forbidden unless prior written permission is obtained from OLAM
+ * strictly forbidden unless prior written permission is obtained from GranaTech
  * Limited
  *
  *******************************************************************************/
@@ -80,8 +80,8 @@ public class SwaggerConfig  {//extends WebMvcConfigurationSupport
 
 	private ApiInfo metaData() {
 		return new ApiInfoBuilder().title(appName + " REST API")
-				.description("\""+appName+" REST API for OLAM-Direct App offline mode of working \"").version("1.0.0")
-				.license("Copyright (c) 2018 OLAM Limited")
+				.description("\""+appName+" REST API for GranaTech-Direct App offline mode of working \"").version("1.0.0")
+				.license("Copyright (c) 2019 GranaTech Limited")
 				.contact(new Contact("ArunPrakash", "https://www.olamgroup.com/", "arunprakash.b@olamnet.com")).build();
 	}
 

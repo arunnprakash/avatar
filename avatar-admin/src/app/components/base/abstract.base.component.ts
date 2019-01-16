@@ -26,7 +26,7 @@ export abstract class AbstractBaseComponent implements OnInit {
     protected abstract showDetailDialog(value: boolean): void;
     protected abstract showAlertDialog(title: string, message: string): void;
     protected abstract recordListLoaded(): void;
-    constructor(private service: any, private authService: AuthService) { }
+    constructor(private service: any, public authService: AuthService) { }
 
     ngOnInit() {
         console.log("ngOnInit abstract.base.component");

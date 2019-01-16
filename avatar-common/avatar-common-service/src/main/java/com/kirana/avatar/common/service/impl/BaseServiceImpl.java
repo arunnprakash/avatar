@@ -1,12 +1,12 @@
 /*******************************************************************************
  *
- * Copyright (c) 2018 OLAM Limited
+ * Copyright (c) 2019 GranaTech Limited
  *
- * All information contained herein is, and remains the property of OLAM
+ * All information contained herein is, and remains the property of GranaTech
  * Limited. The intellectual and technical concepts contained herein are
- * proprietary to OLAM and are protected by trade secret or copyright law.
+ * proprietary to GranaTech and are protected by trade secret or copyright law.
  * Dissemination of this information or reproduction of this material is
- * strictly forbidden unless prior written permission is obtained from OLAM
+ * strictly forbidden unless prior written permission is obtained from GranaTech
  * Limited
  *
  *******************************************************************************/
@@ -118,15 +118,21 @@ public abstract class BaseServiceImpl<Model extends BaseEntity<Model>,
 			throw ApiException.resourceAlreadyExist();
 		} else {
 			Model model = mapper.toModel(resource);
+			model = onSave(model);
 			model = repository.save(model);
 			return mapper.toDTO(model);
 		}
 	}
 
+	protected abstract Model onSave(Model model);
+
 	@Override
 	public DTO update(DTO resource) {
 		return repository
 				.findById(resource.getId())
+				.map(model -> {
+					return onUpdate(resource, model);
+				})
 				.map(model -> {
 					return mapper.updateModel(resource, model);
 				})
@@ -134,6 +140,8 @@ public abstract class BaseServiceImpl<Model extends BaseEntity<Model>,
 				.map(mapper::toDTO)
 				.orElseThrow(ApiException::resourceNotFound);
 	}
+
+	protected abstract Model onUpdate(DTO resource, Model model);
 
 	@SuppressWarnings("unchecked")
 	@Override

@@ -23,10 +23,11 @@ export const baseDetailTemplate: string = `
             <StackLayout class="form">
                 <StackLayout *ngFor="let col of localCols;let i = index;last as isLast" [ngSwitch]="col.dataType" >
                     <GridLayout rows="auto, auto, *" columns="auto, auto, *" width="100%" class="input-field">
-                        <TextField *ngSwitchCase="'INPUT'" row="0" col="0" class="input" [hint]="col.header" [(ngModel)]="model[col.field]" [returnKeyType]="isLast?'done':'next'"></TextField>
-                        <DatePicker *ngSwitchCase="'DATE'" row="0" col="0" class="input" [hint]="col.header" [(ngModel)]="model[col.field]" [returnKeyType]="isLast?'done':'next'" ></DatePicker>
-                        <DatePicker *ngSwitchCase="'DATETIME'" row="0" col="0" class="input" [hint]="col.header" [(ngModel)]="model[col.field]" [returnKeyType]="isLast?'done':'next'" ></DatePicker>
-                        <StackLayout row="1" class="hr-light"></StackLayout>
+                        <Label row="0" col="0" width="120" [text]="col.header" class="text-bold text-align-left vertical-align-center"></Label>
+                        <TextField *ngSwitchCase="'INPUT'" row="0" col="1" class="input" [hint]="col.header" [(ngModel)]="model[col.field]" [returnKeyType]="isLast?'done':'next'"></TextField>
+                        <DatePicker *ngSwitchCase="'DATE'" row="0" col="1" class="input" [hint]="col.header" [(ngModel)]="model[col.field]" [returnKeyType]="isLast?'done':'next'" ></DatePicker>
+                        <DatePicker *ngSwitchCase="'DATETIME'" row="0" col="1" class="input" [hint]="col.header" [(ngModel)]="model[col.field]" [returnKeyType]="isLast?'done':'next'" ></DatePicker>
+                        <StackLayout row="1" col="1" class="hr-light"></StackLayout>
                     </GridLayout>
                 </StackLayout>
             </StackLayout>

@@ -40,6 +40,16 @@ public class LanguageServiceImpl extends BaseServiceImpl<Language, LanguageDTO, 
 	}
 
 	@Override
+	protected Language onSave(Language model) {
+		return model;
+	}
+
+	@Override
+	protected Language onUpdate(LanguageDTO languageDTO, Language model) {
+		return model;
+	}
+
+	@Override
 	protected Specification<Language> getSpecification(FilterCriteria filter, Specification<Language> specification) {
 		// TODO Auto-generated method stub
 		return null;

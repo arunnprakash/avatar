@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.kirana.avatar.authorization.dto.CountryDTO;
 import com.kirana.avatar.authorization.mapper.CountryMapper;
 import com.kirana.avatar.authorization.model.Country;
-import com.kirana.avatar.authorization.model.Village;
 import com.kirana.avatar.authorization.repositories.CountryRepository;
 import com.kirana.avatar.authorization.service.CountryService;
 import com.kirana.avatar.authorization.specifications.CountrySpecification;
@@ -41,7 +40,17 @@ public class CountryServiceImpl extends BaseServiceImpl<Country, CountryDTO, Cou
 		this.countryMapper = countryMapper;
 		this.countrySpecification = countrySpecification;
 	}
-	
+
+	@Override
+	protected Country onSave(Country model) {
+		return model;
+	}
+
+	@Override
+	protected Country onUpdate(CountryDTO countryDTO, Country model) {
+		return model;
+	}
+
 	@Override
 	protected Specification<Country> getSpecification(FilterCriteria filter, Specification<Country> specification) {
 		String itemName = filter.getFilterByItem();

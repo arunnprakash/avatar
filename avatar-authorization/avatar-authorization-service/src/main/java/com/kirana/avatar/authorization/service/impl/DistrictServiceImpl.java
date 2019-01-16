@@ -12,6 +12,7 @@ import com.kirana.avatar.authorization.dto.DistrictDTO;
 import com.kirana.avatar.authorization.mapper.DistrictMapper;
 import com.kirana.avatar.authorization.model.District;
 import com.kirana.avatar.authorization.repositories.DistrictRepository;
+import com.kirana.avatar.authorization.repositories.StateRepository;
 import com.kirana.avatar.authorization.service.DistrictService;
 import com.kirana.avatar.authorization.specifications.DistrictSpecification;
 import com.kirana.avatar.common.dto.FilterCriteria;
@@ -33,14 +34,32 @@ public class DistrictServiceImpl extends BaseServiceImpl<District, DistrictDTO, 
 	private DistrictRepository districtRepository;
 	private DistrictMapper districtMapper;
 	private DistrictSpecification districtSpecification;
-	
-	public DistrictServiceImpl(DistrictRepository districtRepository, DistrictMapper districtMapper, DistrictSpecification districtSpecification) {
+	private StateRepository stateRepository;
+	public DistrictServiceImpl(DistrictRepository districtRepository, DistrictMapper districtMapper, DistrictSpecification districtSpecification,
+			StateRepository stateRepository) {
 		super(districtRepository, districtMapper, districtSpecification);
 		this.districtRepository = districtRepository;
 		this.districtMapper = districtMapper;
 		this.districtSpecification = districtSpecification;
+		this.stateRepository = stateRepository;
 	}
-	
+
+	@Override
+	protected District onSave(District model) {
+		return model;
+	}
+
+	@Override
+	protected District onUpdate(DistrictDTO districtDTO, District model) {
+		return stateRepository
+				.findById(districtDTO.getState().getId())
+				.map(state -> {
+					model.setState(state);
+					return model;
+				})
+				.orElseThrow(ApiException::resourceNotFound);
+	}
+
 	@Override
 	protected Specification<District> getSpecification(FilterCriteria filter, Specification<District> specification) {
 		String itemName = filter.getFilterByItem();

@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * Copyright (c) 2018 GranaTech Limited
+ * Copyright (c) 2019 GranaTech Limited
  *
  * All information contained herein is, and remains the property of GranaTech
  * Limited. The intellectual and technical concepts contained herein are

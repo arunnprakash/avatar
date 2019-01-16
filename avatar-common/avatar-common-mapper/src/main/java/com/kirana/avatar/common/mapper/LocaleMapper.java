@@ -10,30 +10,14 @@
  * Limited
  *
  *******************************************************************************/
-package com.kirana.avatar.common.dto;
+package com.kirana.avatar.common.mapper;
 
-import java.util.List;
-
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.kirana.avatar.common.dto.LocaleDTO;
+import com.kirana.avatar.common.jpa.entity.LocaleEntity;
 
 /**
  * @author __ArunPrakash__
  *
  */
-@Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@EqualsAndHashCode
-@ToString
-public class PagingAndFilterRequest {
-	protected Integer pageNumber;
-	protected Integer pageSize;
-	protected List<FilterCriteria> filters;
-	protected String sortBy;
-	protected String sortingOrder;
+public interface LocaleMapper<DTO extends LocaleDTO, Model extends LocaleEntity<Model>> extends BaseMapper<DTO, Model> {
 }

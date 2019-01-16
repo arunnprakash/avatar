@@ -1,12 +1,12 @@
 /*******************************************************************************
  *
- * Copyright (c) 2018 OLAM Limited
+ * Copyright (c) 2019 GranaTech Limited
  *
- * All information contained herein is, and remains the property of OLAM
+ * All information contained herein is, and remains the property of GranaTech
  * Limited. The intellectual and technical concepts contained herein are
- * proprietary to OLAM and are protected by trade secret or copyright law.
+ * proprietary to GranaTech and are protected by trade secret or copyright law.
  * Dissemination of this information or reproduction of this material is
- * strictly forbidden unless prior written permission is obtained from OLAM
+ * strictly forbidden unless prior written permission is obtained from GranaTech
  * Limited
  *
  *******************************************************************************/
@@ -44,11 +44,12 @@ public class UserDTO extends BaseDTO {
 	protected String longitude;
 	protected List<RoleDTO> roles;
 	protected LanguageDTO preferredLanguage;
+	protected VillageDTO village;
 	@Builder
 	public UserDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
 			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, String userName, String firstName, 
 			String lastName, String mobileNumber, Date dob, Boolean suspended, String latitude, String longitude, List<RoleDTO> roles,
-			LanguageDTO preferredLanguage) {
+			LanguageDTO preferredLanguage, VillageDTO village) {
 		super(id, createdBy, createdDate, lastModifiedBy, lastModifiedDate, deleted, version);
 		this.userName = userName;
 		this.firstName = firstName;
@@ -60,5 +61,6 @@ public class UserDTO extends BaseDTO {
 		this.longitude = longitude;
 		this.roles = roles;
 		this.preferredLanguage = preferredLanguage;
+		this.village = village;
 	}
 }

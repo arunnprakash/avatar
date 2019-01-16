@@ -1,12 +1,12 @@
 /*******************************************************************************
  *
- * Copyright (c) 2018 OLAM Limited
+ * Copyright (c) 2019 GranaTech Limited
  *
- * All information contained herein is, and remains the property of OLAM
+ * All information contained herein is, and remains the property of GranaTech
  * Limited. The intellectual and technical concepts contained herein are
- * proprietary to OLAM and are protected by trade secret or copyright law.
+ * proprietary to GranaTech and are protected by trade secret or copyright law.
  * Dissemination of this information or reproduction of this material is
- * strictly forbidden unless prior written permission is obtained from OLAM
+ * strictly forbidden unless prior written permission is obtained from GranaTech
  * Limited
  *
  *******************************************************************************/
@@ -15,6 +15,7 @@ package com.kirana.avatar.authorization.model;
 import java.time.ZonedDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -23,16 +24,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.kirana.avatar.common.jpa.entity.BaseEntity;
-import com.kirana.avatar.common.jwt.config.JwtConfig;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
@@ -40,6 +36,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
 /**
  * @author __ArunPrakash__
  *
@@ -72,31 +69,24 @@ public class User extends BaseEntity<User> {
 	protected String latitude;
 	@Column(nullable = true)
 	protected String longitude;
+
 	@ManyToOne(optional = false, fetch=FetchType.EAGER)
 	@JoinColumn(name = "language_id", referencedColumnName="id", nullable = false)
-	private Language preferredLanguage;
+	protected Language preferredLanguage;
 
-    @Transient
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	@Transient
-	@Autowired
-	private JwtConfig jwtConfig;
+	@ManyToOne(optional = false, fetch=FetchType.EAGER)
+	@JoinColumn(name = "village_id", referencedColumnName="id", nullable = false)
+	protected Village village;
 
-	@ManyToMany
+	@ManyToMany(cascade= {CascadeType.MERGE})
 	@JoinTable(name = "user_roles", joinColumns={@JoinColumn(name="user_id", referencedColumnName="id", unique=false)}, 
 			inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="id", unique=false)})
-	private List<Role> roles;
+	protected List<Role> roles;
 
 	@ManyToMany
 	@JoinTable(name = "user_assets", joinColumns={@JoinColumn(name="user_id", referencedColumnName="id", unique=false)}, 
 			inverseJoinColumns={@JoinColumn(name="asset_id", referencedColumnName="id", unique=false)})
-	private List<Asset> assets;
+	protected List<Asset> assets;
 
-	@PrePersist
-	public void onCreate() {
-		this.password = "admin";
-		this.suspended = false;
-	}
 }

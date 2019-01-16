@@ -1,17 +1,19 @@
 /*******************************************************************************
  *
- * Copyright (c) 2018 OLAM Limited
+ * Copyright (c) 2019 GranaTech Limited
  *
- * All information contained herein is, and remains the property of OLAM
+ * All information contained herein is, and remains the property of GranaTech
  * Limited. The intellectual and technical concepts contained herein are
- * proprietary to OLAM and are protected by trade secret or copyright law.
+ * proprietary to GranaTech and are protected by trade secret or copyright law.
  * Dissemination of this information or reproduction of this material is
- * strictly forbidden unless prior written permission is obtained from OLAM
+ * strictly forbidden unless prior written permission is obtained from GranaTech
  * Limited
  *
  *******************************************************************************/
 package com.kirana.avatar.authorization.service.impl;
 
+
+import static com.kirana.avatar.authorization.model.Role_.ROLE_NAME;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -19,8 +21,6 @@ import org.springframework.stereotype.Service;
 import com.kirana.avatar.authorization.dto.RoleDTO;
 import com.kirana.avatar.authorization.mapper.RoleMapper;
 import com.kirana.avatar.authorization.model.Role;
-import static com.kirana.avatar.authorization.model.Role_.ROLE_NAME;
-import com.kirana.avatar.authorization.model.User_;
 import com.kirana.avatar.authorization.repositories.RoleRepository;
 import com.kirana.avatar.authorization.service.RoleService;
 import com.kirana.avatar.authorization.specifications.RoleSpecification;
@@ -48,6 +48,17 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, RoleDTO, RoleMapper, 
 		this.roleMapper = roleMapper;
 		this.roleSpecification = roleSpecification;
 	}
+
+	@Override
+	protected Role onSave(Role model) {
+		return model;
+	}
+
+	@Override
+	protected Role onUpdate(RoleDTO roleDTO, Role model) {
+		return model;
+	}
+
 	@Override
 	protected Specification<Role> getSpecification(FilterCriteria filter, Specification<Role> specification) {
 		String itemName = filter.getFilterByItem();

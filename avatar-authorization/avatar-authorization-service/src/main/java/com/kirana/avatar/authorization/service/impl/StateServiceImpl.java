@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kirana.avatar.authorization.dto.StateDTO;
 import com.kirana.avatar.authorization.mapper.StateMapper;
 import com.kirana.avatar.authorization.model.State;
+import com.kirana.avatar.authorization.repositories.CountryRepository;
 import com.kirana.avatar.authorization.repositories.StateRepository;
 import com.kirana.avatar.authorization.service.StateService;
 import com.kirana.avatar.authorization.specifications.StateSpecification;
@@ -33,14 +34,33 @@ public class StateServiceImpl extends BaseServiceImpl<State, StateDTO, StateMapp
 	private StateRepository stateRepository;
 	private StateMapper stateMapper;
 	private StateSpecification stateSpecification;
+	private CountryRepository countryRepository;
 	
-	public StateServiceImpl(StateRepository stateRepository, StateMapper stateMapper, StateSpecification stateSpecification) {
+	public StateServiceImpl(StateRepository stateRepository, StateMapper stateMapper, StateSpecification stateSpecification,
+			CountryRepository countryRepository) {
 		super(stateRepository, stateMapper, stateSpecification);
 		this.stateRepository = stateRepository;
 		this.stateMapper = stateMapper;
 		this.stateSpecification = stateSpecification;
+		this.countryRepository = countryRepository;
 	}
-	
+
+	@Override
+	protected State onSave(State model) {
+		return model;
+	}
+
+	@Override
+	protected State onUpdate(StateDTO stateDTO, State model) {
+		return countryRepository
+				.findById(stateDTO.getCountry().getId())
+				.map(country -> {
+					model.setCountry(country);
+					return model;
+				})
+				.orElseThrow(ApiException::resourceNotFound);
+	}
+
 	@Override
 	protected Specification<State> getSpecification(FilterCriteria filter, Specification<State> specification) {
 		String itemName = filter.getFilterByItem();

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.kirana.avatar.authorization.dto.AssetDTO;
 import com.kirana.avatar.authorization.mapper.AssetMapper;
 import com.kirana.avatar.authorization.model.Asset;
+import com.kirana.avatar.authorization.model.AssetType;
 import com.kirana.avatar.authorization.repositories.AssetRepository;
 import com.kirana.avatar.authorization.service.AssetService;
 import com.kirana.avatar.authorization.specifications.AssetSpecification;
@@ -34,6 +35,17 @@ public class AssetServiceImpl extends BaseServiceImpl<Asset, AssetDTO, AssetMapp
 		this.assetMapper = assetMapper;
 		this.assetSpecification = assetSpecification;
 	}
+
+	@Override
+	protected Asset onSave(Asset model) {
+		return model;
+	}
+
+	@Override
+	protected Asset onUpdate(AssetDTO assetDTO, Asset model) {
+		return model;
+	}
+
 	@Override
 	protected Specification<Asset> getSpecification(FilterCriteria filter, Specification<Asset> specification) {
 		String itemName = filter.getFilterByItem();

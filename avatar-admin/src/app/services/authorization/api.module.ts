@@ -1,12 +1,14 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { LanguageService } from './languageservice.generated';
+import { AssertTypeService } from './asserttypeservice.generated';
+import { AssertService } from './assertservice.generated';
 import { RoleService } from './roleservice.generated';
+import { UserService } from './userservice.generated';
+import { StateService } from './stateservice.generated';
+import { TalukService } from './talukservice.generated';
+import { LanguageService } from './languageservice.generated';
+import { VillageService } from './villageservice.generated';
 import { DistrictService } from './districtservice.generated';
 import { CountryService } from './countryservice.generated';
-import { VillageService } from './villageservice.generated';
-import { UserService } from './userservice.generated';
-import { TalukService } from './talukservice.generated';
-import { StateService } from './stateservice.generated';
 import { ServiceConfig } from './serviceconfig';
 
 @NgModule({})
@@ -16,14 +18,16 @@ export class APIModule {
             ngModule: APIModule,
             providers: [
                 {provide: ServiceConfig, useValue: serviceConfig},
-                VillageService,
-                DistrictService,
-                LanguageService,
+                AssertTypeService,
+                AssertService,
                 RoleService,
                 UserService,
+                StateService,
                 TalukService,
-                CountryService,
-                StateService
+                LanguageService,
+                VillageService,
+                DistrictService,
+                CountryService
             ]
         };
     }

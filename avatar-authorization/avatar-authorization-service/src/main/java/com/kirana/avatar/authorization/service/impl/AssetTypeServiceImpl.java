@@ -5,8 +5,10 @@ import static com.kirana.avatar.authorization.model.AssetType_.ASSET_TYPE_NAME;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import com.kirana.avatar.authorization.dto.AssetTypeDTO;
+import com.kirana.avatar.authorization.dto.TalukDTO;
 import com.kirana.avatar.authorization.mapper.AssetTypeMapper;
 import com.kirana.avatar.authorization.model.AssetType;
+import com.kirana.avatar.authorization.model.Taluk;
 import com.kirana.avatar.authorization.repositories.AssetTypeRepository;
 import com.kirana.avatar.authorization.service.AssetTypeService;
 import com.kirana.avatar.authorization.specifications.AssetTypeSpecification;
@@ -34,6 +36,17 @@ public class AssetTypeServiceImpl extends BaseServiceImpl<AssetType, AssetTypeDT
 		this.assetTypeMapper = assetTypeMapper;
 		this.assetTypeSpecification = assetTypeSpecification;
 	}
+	
+	@Override
+	protected AssetType onSave(AssetType model) {
+		return model;
+	}
+
+	@Override
+	protected AssetType onUpdate(AssetTypeDTO assetTypeDTO, AssetType model) {
+		return model;
+	}
+
 	@Override
 	protected Specification<AssetType> getSpecification(FilterCriteria filter, Specification<AssetType> specification) {
 		String itemName = filter.getFilterByItem();

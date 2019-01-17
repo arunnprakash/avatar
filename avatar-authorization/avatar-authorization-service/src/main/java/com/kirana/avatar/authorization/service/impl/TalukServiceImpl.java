@@ -46,12 +46,12 @@ public class TalukServiceImpl extends BaseServiceImpl<Taluk, TalukDTO, TalukMapp
 	}
 
 	@Override
-	protected Taluk onSave(Taluk model) {
+	protected Taluk beforeSave(Taluk model) {
 		return model;
 	}
 
 	@Override
-	protected Taluk onUpdate(TalukDTO talukDTO, Taluk model) {
+	protected Taluk beforeUpdate(TalukDTO talukDTO, Taluk model) {
 		return districtRepository
 				.findById(talukDTO.getDistrict().getId())
 				.map(district -> {
@@ -59,6 +59,16 @@ public class TalukServiceImpl extends BaseServiceImpl<Taluk, TalukDTO, TalukMapp
 					return model;
 				})
 				.orElseThrow(ApiException::resourceNotFound);
+	}
+
+	@Override
+	protected Taluk afterSave(Taluk model) {
+		return model;
+	}
+
+	@Override
+	protected Taluk afterUpdate(TalukDTO talukDTO, Taluk model) {
+		return model;
 	}
 
 	@Override

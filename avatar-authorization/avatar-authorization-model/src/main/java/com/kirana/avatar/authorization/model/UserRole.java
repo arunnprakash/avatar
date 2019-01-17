@@ -13,11 +13,14 @@
 package com.kirana.avatar.authorization.model;
 
 
+import java.time.ZonedDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -40,7 +43,7 @@ import lombok.ToString;
 @Table(name = "user_roles")
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @ToString
 @EqualsAndHashCode(callSuper=true)
@@ -54,5 +57,4 @@ public class UserRole extends BaseEntity<UserRole>{
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	@JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
 	protected Role role;
-
 }

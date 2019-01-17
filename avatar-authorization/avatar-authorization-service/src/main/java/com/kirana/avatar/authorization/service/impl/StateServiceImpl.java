@@ -46,12 +46,12 @@ public class StateServiceImpl extends BaseServiceImpl<State, StateDTO, StateMapp
 	}
 
 	@Override
-	protected State onSave(State model) {
+	protected State beforeSave(State model) {
 		return model;
 	}
 
 	@Override
-	protected State onUpdate(StateDTO stateDTO, State model) {
+	protected State beforeUpdate(StateDTO stateDTO, State model) {
 		return countryRepository
 				.findById(stateDTO.getCountry().getId())
 				.map(country -> {
@@ -59,6 +59,16 @@ public class StateServiceImpl extends BaseServiceImpl<State, StateDTO, StateMapp
 					return model;
 				})
 				.orElseThrow(ApiException::resourceNotFound);
+	}
+
+	@Override
+	protected State afterSave(State model) {
+		return model;
+	}
+
+	@Override
+	protected State afterUpdate(StateDTO stateDTO, State model) {
+		return model;
 	}
 
 	@Override

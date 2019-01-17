@@ -40,12 +40,22 @@ public class LanguageServiceImpl extends BaseServiceImpl<Language, LanguageDTO, 
 	}
 
 	@Override
-	protected Language onSave(Language model) {
+	protected Language beforeSave(Language model) {
 		return model;
 	}
 
 	@Override
-	protected Language onUpdate(LanguageDTO languageDTO, Language model) {
+	protected Language beforeUpdate(LanguageDTO languageDTO, Language model) {
+		return model;
+	}
+
+	@Override
+	protected Language afterSave(Language model) {
+		return model;
+	}
+
+	@Override
+	protected Language afterUpdate(LanguageDTO languageDTO, Language model) {
 		return model;
 	}
 

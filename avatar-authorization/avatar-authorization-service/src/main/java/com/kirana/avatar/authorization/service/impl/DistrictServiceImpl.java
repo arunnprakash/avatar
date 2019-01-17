@@ -45,12 +45,12 @@ public class DistrictServiceImpl extends BaseServiceImpl<District, DistrictDTO, 
 	}
 
 	@Override
-	protected District onSave(District model) {
+	protected District beforeSave(District model) {
 		return model;
 	}
 
 	@Override
-	protected District onUpdate(DistrictDTO districtDTO, District model) {
+	protected District beforeUpdate(DistrictDTO districtDTO, District model) {
 		return stateRepository
 				.findById(districtDTO.getState().getId())
 				.map(state -> {
@@ -58,6 +58,17 @@ public class DistrictServiceImpl extends BaseServiceImpl<District, DistrictDTO, 
 					return model;
 				})
 				.orElseThrow(ApiException::resourceNotFound);
+	}
+
+
+	@Override
+	protected District afterSave(District model) {
+		return model;
+	}
+
+	@Override
+	protected District afterUpdate(DistrictDTO districtDTO, District model) {
+		return model;
 	}
 
 	@Override

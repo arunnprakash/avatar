@@ -46,12 +46,12 @@ public class VillageServiceImpl extends BaseServiceImpl<Village, VillageDTO, Vil
 	}
 
 	@Override
-	protected Village onSave(Village model) {
+	protected Village beforeSave(Village model) {
 		return model;
 	}
 
 	@Override
-	protected Village onUpdate(VillageDTO villageDTO, Village model) {
+	protected Village beforeUpdate(VillageDTO villageDTO, Village model) {
 		return talukRepository
 				.findById(villageDTO.getTaluk().getId())
 				.map(taluk -> {
@@ -59,6 +59,16 @@ public class VillageServiceImpl extends BaseServiceImpl<Village, VillageDTO, Vil
 					return model;
 				})
 				.orElseThrow(ApiException::resourceNotFound);
+	}
+
+	@Override
+	protected Village afterSave(Village model) {
+		return model;
+	}
+
+	@Override
+	protected Village afterUpdate(VillageDTO villageDTO, Village model) {
+		return model;
 	}
 
 	@Override

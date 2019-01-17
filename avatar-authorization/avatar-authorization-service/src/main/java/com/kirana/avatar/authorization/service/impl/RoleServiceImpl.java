@@ -50,12 +50,22 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, RoleDTO, RoleMapper, 
 	}
 
 	@Override
-	protected Role onSave(Role model) {
+	protected Role beforeSave(Role model) {
 		return model;
 	}
 
 	@Override
-	protected Role onUpdate(RoleDTO roleDTO, Role model) {
+	protected Role beforeUpdate(RoleDTO roleDTO, Role model) {
+		return model;
+	}
+
+	@Override
+	protected Role afterSave(Role model) {
+		return model;
+	}
+
+	@Override
+	protected Role afterUpdate(RoleDTO roleDTO, Role model) {
 		return model;
 	}
 

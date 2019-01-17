@@ -37,12 +37,22 @@ public class AssetServiceImpl extends BaseServiceImpl<Asset, AssetDTO, AssetMapp
 	}
 
 	@Override
-	protected Asset onSave(Asset model) {
+	protected Asset beforeSave(Asset model) {
 		return model;
 	}
 
 	@Override
-	protected Asset onUpdate(AssetDTO assetDTO, Asset model) {
+	protected Asset beforeUpdate(AssetDTO assetDTO, Asset model) {
+		return model;
+	}
+
+	@Override
+	protected Asset afterSave(Asset model) {
+		return model;
+	}
+
+	@Override
+	protected Asset afterUpdate(AssetDTO assetDTO, Asset model) {
 		return model;
 	}
 

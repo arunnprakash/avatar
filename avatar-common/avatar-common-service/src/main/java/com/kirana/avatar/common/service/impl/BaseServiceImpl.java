@@ -118,30 +118,36 @@ public abstract class BaseServiceImpl<Model extends BaseEntity<Model>,
 			throw ApiException.resourceAlreadyExist();
 		} else {
 			Model model = mapper.toModel(resource);
-			model = onSave(model);
+			model = beforeSave(model);
 			model = repository.save(model);
+			model = afterSave(model);
 			return mapper.toDTO(model);
 		}
 	}
 
-	protected abstract Model onSave(Model model);
+	protected abstract Model beforeSave(Model model);
+	protected abstract Model afterSave(Model model);
 
 	@Override
 	public DTO update(DTO resource) {
 		return repository
 				.findById(resource.getId())
 				.map(model -> {
-					return onUpdate(resource, model);
+					return beforeUpdate(resource, model);
 				})
 				.map(model -> {
 					return mapper.updateModel(resource, model);
 				})
 				.map(repository::save)
+				.map(model -> {
+					return afterUpdate(resource, model);
+				})
 				.map(mapper::toDTO)
 				.orElseThrow(ApiException::resourceNotFound);
 	}
 
-	protected abstract Model onUpdate(DTO resource, Model model);
+	protected abstract Model beforeUpdate(DTO resource, Model model);
+	protected abstract Model afterUpdate(DTO resource, Model model);
 
 	@SuppressWarnings("unchecked")
 	@Override

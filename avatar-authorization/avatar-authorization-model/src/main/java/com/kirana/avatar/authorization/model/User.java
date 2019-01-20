@@ -88,5 +88,9 @@ public class User extends BaseEntity<User> {
 	@JoinTable(name = "user_assets", joinColumns={@JoinColumn(name="user_id", referencedColumnName="id", unique=false)}, 
 			inverseJoinColumns={@JoinColumn(name="asset_id", referencedColumnName="id", unique=false)})
 	protected List<Asset> assets;
+	
+	@ManyToOne(optional = false, fetch=FetchType.EAGER)
+	@JoinColumn(name = "gender_id", referencedColumnName="id", nullable = false)
+	protected Gender gender;
 
 }

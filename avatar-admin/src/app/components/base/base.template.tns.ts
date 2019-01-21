@@ -1,6 +1,7 @@
 export const baseTemplate: string = `
 <FlexboxLayout flexDirection="column" alignItems="stretch">
-    <FlexboxLayout height="12%" verticalAlignment="bottom" flexDirection="row" alignItems="flex-end" justifyContent="flex-end">
+    <FlexboxLayout height="12%" verticalAlignment="bottom" flexDirection="row" alignItems="flex-end" justifyContent="flex-end" class="form">
+        <SearchBar hint="Search" width="60%" alignSelf="flex-start" class="input input-border" clear="onClear" submit="onSearch"></SearchBar>
         <Label text="&#xf055;" width="24px" height="24px" verticalAlignment="center" class="fa bg-green rounded-corner-border-12 bottom-margin-5 right-margin-10 top-padding-5 left-padding-6" (tap)="create()"></Label>
         <CheckBox width="24px" height="24px" verticalAlignment="bottom" text="" class="zero-padding bottom-margin-4 right-margin-10 right-padding-10" checkPadding="0px" 
             [checked]="isSelectAllChecked" (checkedChange)="selectAll($event.value)"></CheckBox>
@@ -13,7 +14,7 @@ export const baseTemplate: string = `
             <FlexboxLayout verticalAlignment="bottom" flexDirection="row" alignItems="flex-end" justifyContent="flex-end">
                 <CheckBox *ngIf="recordIdList[rowIndex]" class="text-align-right" text="" [checked]="recordIdList[rowIndex].selected" (tap)="checkIfAllSelected()"></CheckBox>
             </FlexboxLayout>
-            <GridLayout *ngFor="let col of localCols" [ngSwitch]="col.dataType" columns="auto, *" (tap)="rowDataClicked(rowData)">
+            <GridLayout *ngFor="let col of localCols | slice:0:5" [ngSwitch]="col.dataType" columns="auto, *" (tap)="rowDataClicked(rowData)">
                 <Label col="0" width="120" [text]="col.header" class="text-bold text-align-left vertical-align-center"></Label>
                 <Label col="1" *ngSwitchCase="'INPUT'" [text]="rowData[col.field]" class="text-align-left vertical-align-center"></Label>
                 <Label col="1" *ngSwitchCase="'DATE'" text="{{rowData[col.field] | date:'dd-MM-yyyy'}}" class="text-align-left vertical-align-center"></Label>

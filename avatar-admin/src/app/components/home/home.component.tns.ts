@@ -21,7 +21,6 @@ export class HomeComponent implements OnInit {
         console.info( "Home Component" );
         this.sideDrawerTransition = new SlideInOnTopTransition();
         this.userDTO = this.authService.getUserInfo();
-        console.log(this.userDTO);
     }
     pageLoaded( args ) {
         var page = args.object;

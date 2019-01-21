@@ -20,7 +20,6 @@ export class AuthService {
   getUserInfo(): UserDTO {
       if (this.localStorage.getItem(USER_INFO)) {
           let jsonString = this.localStorage.getItem(USER_INFO);
-          console.log(jsonString);
           return JSON.parse(jsonString);
       } else {
           return null;
@@ -41,7 +40,6 @@ export class AuthService {
   hasRole(roles: string[]): boolean {
       let userDTO: UserDTO = this.getUserInfo();
       let rolesDTO: RoleDTO[] = userDTO.roles;
-      console.log("Roles :: "+rolesDTO);
       for (var i = 0; i < roles.length; i++) {
           let role: string = roles[i];
           for (var j = 0; j < rolesDTO.length; j++) {

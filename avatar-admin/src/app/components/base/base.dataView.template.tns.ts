@@ -11,10 +11,10 @@ export const baseDataViewTemplate: string = `
         <ng-template let-rowData="item" let-rowIndex="index"> 
         <StackLayout class="all-sides-margin all-sides-padding record-content rounded-corner-border">
             <FlexboxLayout verticalAlignment="bottom" flexDirection="row" alignItems="flex-end" justifyContent="flex-end">
-                <Image class="thumbnail" src="~/assets/images/avatar.png"></Image>
+                <Image class="thumbnail" src="~/assets/images/avatar.png" loadMode="async"></Image>
                 <CheckBox *ngIf="recordIdList[rowIndex]" class="text-align-right" text="" [checked]="recordIdList[rowIndex].selected" (tap)="checkIfAllSelected()"></CheckBox>
             </FlexboxLayout>
-            <GridLayout *ngFor="let col of localCols" [ngSwitch]="col.dataType" columns="auto, *" (tap)="rowDataClicked(rowData)">
+            <GridLayout *ngFor="let col of localCols | slice:0:5" [ngSwitch]="col.dataType" columns="auto, *" (tap)="rowDataClicked(rowData)">
                 <Label col="0" width="120" [text]="col.header" class="text-bold text-align-left vertical-align-center"></Label>
                 <Label col="1" *ngSwitchCase="'INPUT'" [text]="rowData[col.field]" class="text-align-left vertical-align-center"></Label>
                 <Label col="1" *ngSwitchCase="'DATE'" text="{{rowData[col.field] | date:'dd-MM-yyyy'}}" class="text-align-left vertical-align-center"></Label>

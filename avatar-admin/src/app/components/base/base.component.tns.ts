@@ -13,6 +13,9 @@ import { FilterCriteria } from "../../services/authorization/filtercriteria.mode
 import { PagingAndFilterResponse } from "../../services/authorization/pagingandfilterresponse.model";
 import { AuthService } from "../../services/auth.service";
 
+import { Page } from "tns-core-modules/ui/page";
+import { SearchBar } from "tns-core-modules/ui/search-bar";
+
 import * as _ from "lodash";
 
 
@@ -72,6 +75,34 @@ export abstract class BaseComponent extends AbstractBaseComponent implements OnI
         alert(alertOptions).then(() => {
             console.log("Dialog closed!");
         });
+    }
+    protected onSearch(args) {
+        console.log("onSearch");
+        const searchBar: SearchBar = <SearchBar>args.object;
+        const searchValue = searchBar.text.toLowerCase();
+        const arrayItems = [
+                            { name: "United States" },
+                            { name: "Bulgaria" },
+                            { name: "Germany" },
+                            { name: "Denmark" },
+                            { name: "India" },
+                            { name: "Spain" },
+                            { name: "Italy" }
+                        ];
+        const myItems = new ObservableArray();
+        if (searchValue !== "") {
+            for (let i = 0; i < arrayItems.length; i++) {
+                if (arrayItems[i].name.toLowerCase().indexOf(searchValue) !== -1) {
+                    myItems.push(arrayItems[i]);
+                }
+            }
+        }
+        const page: Page = <Page>searchBar.page;
+        const vm = page.bindingContext;
+        vm.set("myItems", myItems);
+    }
+    public onClear(args) {
+        
     }
     protected onDelete() {
         const confirmOptions: ConfirmOptions = {

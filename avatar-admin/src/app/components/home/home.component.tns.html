@@ -9,7 +9,6 @@ http://docs.telerik.com/devtools/nativescript-ui/Controls/NativeScript/SideDrawe
 			<GridLayout columns="auto, *" class="action-bar-title">
 				<Label col="0" class="fa" text="&#xf039;" (tap)="toggleDrawer()"></Label>
 				<Label col="1" text="{{ 'home.welcome' | translate }} {{userDTO.firstName}}" class="p-r-10 text-align-center font-weight-bold"></Label>
-				<Label col="2" text="Logout" class="p-r-10 text-align-right" (tap)="logout();"></Label>
 			</GridLayout>
 		</ActionBar>
 	</Page.actionBar>
@@ -20,7 +19,7 @@ http://docs.telerik.com/devtools/nativescript-ui/Controls/NativeScript/SideDrawe
 	        <StackLayout row="0" class="sidedrawer-header">
 	            <Label col="0" class="sidedrawer-header-image fa" text="&#xf2bd;"></Label>
 	            <!-- <Image class="sidedrawer-header-image img-circle" src="~/my-app-logo.png"></Image> -->
-	            <Label col="1" class="sidedrawer-header-brand" text="User Name"></Label>
+	            <Label col="1" class="sidedrawer-header-brand" text="{{userDTO.firstName}}"></Label>
 	        </StackLayout>
 	        <StackLayout row="1">
 	    		<menu [menuDrawer]="drawer"></menu>

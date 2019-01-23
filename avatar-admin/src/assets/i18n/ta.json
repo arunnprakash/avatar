@@ -2,6 +2,14 @@
 	"home": {
 		"welcome": "வணக்கம்"
 	},
+	"common": {
+		"id": "Id",
+		"createdBy": "Created By",
+		"createdDate": "Created At",
+		"lastModifiedBy": "Last Modified By",
+		"lastModifiedDate": "Last Modified At",
+		"deleted": "Deleted"
+	},
 	"users": {
 		"userName": "பயனர்பெயர்",
 		"mobileNumber": "மொபைல் எண்",

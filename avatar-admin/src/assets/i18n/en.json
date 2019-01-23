@@ -2,6 +2,14 @@
 	"home": {
 		"welcome": "Welcome"
 	},
+	"common": {
+		"id": "Id",
+		"createdBy": "Created By",
+		"createdDate": "Created At",
+		"lastModifiedBy": "Last Modified By",
+		"lastModifiedDate": "Last Modified At",
+		"deleted": "Deleted"
+	},
 	"users": {
 		"userName": "UserName",
 		"mobileNumber": "MobileNumber",

@@ -7,7 +7,7 @@ http://docs.telerik.com/devtools/nativescript-ui/Controls/NativeScript/SideDrawe
 	<Page.actionBar>
 		<ActionBar title="" class="action-bar bg-green">
 			<GridLayout columns="auto, *" class="action-bar-title">
-				<Label col="0" class="fa" text="&#xf039;" (tap)="toggleDrawer()"></Label>
+				<Label col="0" class="fa action-item" text="&#xf039;" (tap)="toggleDrawer()"></Label>
 				<Label col="1" text="{{ 'home.welcome' | translate }} {{userDTO.firstName}}" class="p-r-10 text-align-center font-weight-bold"></Label>
 			</GridLayout>
 		</ActionBar>

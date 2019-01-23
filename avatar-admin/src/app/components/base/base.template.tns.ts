@@ -5,7 +5,7 @@ export const baseTemplate: string = `
         <Label text="&#xf055;" width="24px" height="24px" verticalAlignment="center" class="fa bg-green rounded-corner-border-12 bottom-margin-5 right-margin-10 top-padding-5 left-padding-6" (tap)="create()"></Label>
         <Label text="&#xf014;" width="24px" height="24px" verticalAlignment="center" class="fa rounded-corner-border-12 bottom-margin-5 right-margin-10 top-padding-5 left-padding-6" 
             [class.bg-grey]="!enableDeleteButton" [class.bg-red]="enableDeleteButton" [isEnabled]="enableDeleteButton" (tap)="onDelete()"></Label>
-        <CheckBox width="24px" height="24px" verticalAlignment="bottom" text="" class="zero-padding bottom-margin-4 right-margin-10 right-padding-10" checkPadding="0px" 
+        <CheckBox width="24px" height="24px" verticalAlignment="bottom" text="" class="zero-padding bottom-margin-4 m-r-25 p-r-25" checkPadding="0px" 
             [checked]="isSelectAllChecked" (checkedChange)="selectAll($event.value)"></CheckBox>
     </FlexboxLayout>
 

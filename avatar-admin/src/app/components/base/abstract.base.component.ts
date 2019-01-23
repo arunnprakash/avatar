@@ -183,6 +183,13 @@ export abstract class AbstractBaseComponent implements OnInit {
         menuItem.options = filteredOptions;
     }
     initFieldsLabel(prefix: string) {
+        this.cols.forEach((menuItem) => {
+            this.translate
+            .get("common."+menuItem.field)
+            .subscribe((header: any) => {
+                menuItem.header = header;
+            });
+        });
         this.localCols.forEach((menuItem) => {
             this.translate
             .get(prefix +"."+menuItem.field)

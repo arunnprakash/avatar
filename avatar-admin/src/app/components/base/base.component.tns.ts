@@ -83,28 +83,9 @@ export abstract class BaseComponent extends AbstractBaseComponent implements OnI
         console.log("onSearch");
         const searchBar: SearchBar = <SearchBar>event.object;
         const searchValue = searchBar.text.toLowerCase();
-        const arrayItems = [
-                            { name: "United States" },
-                            { name: "Bulgaria" },
-                            { name: "Germany" },
-                            { name: "Denmark" },
-                            { name: "India" },
-                            { name: "Spain" },
-                            { name: "Italy" }
-                        ];
-        const myItems = new ObservableArray();
-        if (searchValue !== "") {
-            for (let i = 0; i < arrayItems.length; i++) {
-                if (arrayItems[i].name.toLowerCase().indexOf(searchValue) !== -1) {
-                    myItems.push(arrayItems[i]);
-                }
-            }
-        }
-        const page: Page = <Page>searchBar.page;
-        const vm = page.bindingContext;
-        vm.set("myItems", myItems);
+
     }
-    public onClear(args) {
+    protected onClear(args) {
         
     }
     onSearchLayoutLoaded(event) {

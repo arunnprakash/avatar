@@ -1,15 +1,16 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { DistrictService } from './districtservice.generated';
-import { RoleService } from './roleservice.generated';
-import { AssertTypeService } from './asserttypeservice.generated';
-import { StateService } from './stateservice.generated';
-import { AssertService } from './assertservice.generated';
+import { VillageService } from './villageservice.generated';
 import { CountryService } from './countryservice.generated';
 import { GenderService } from './genderservice.generated';
-import { VillageService } from './villageservice.generated';
-import { TalukService } from './talukservice.generated';
-import { UserService } from './userservice.generated';
 import { LanguageService } from './languageservice.generated';
+import { DistrictService } from './districtservice.generated';
+import { AssertService } from './assertservice.generated';
+import { AssertTypeService } from './asserttypeservice.generated';
+import { UserService } from './userservice.generated';
+import { RoleService } from './roleservice.generated';
+import { TalukService } from './talukservice.generated';
+import { UserDeviceService } from './userdeviceservice.generated';
+import { StateService } from './stateservice.generated';
 import { ServiceConfig } from './serviceconfig';
 
 @NgModule({})
@@ -19,17 +20,18 @@ export class APIModule {
             ngModule: APIModule,
             providers: [
                 {provide: ServiceConfig, useValue: serviceConfig},
-                DistrictService,
-                RoleService,
-                AssertTypeService,
-                StateService,
-                AssertService,
+                VillageService,
                 CountryService,
                 GenderService,
-                VillageService,
-                TalukService,
+                LanguageService,
+                DistrictService,
+                AssertService,
+                AssertTypeService,
                 UserService,
-                LanguageService
+                RoleService,
+                TalukService,
+                UserDeviceService,
+                StateService
             ]
         };
     }

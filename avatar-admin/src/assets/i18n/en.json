@@ -18,7 +18,8 @@
 		"dob":"DateOfBirth",
 		"roles":"Roles",
 		"preferredLanguage":"PreferredLanguage",
-		"village":"Village"
+		"village":"Village",
+		"gender": "Gender"
 	}
 }
 

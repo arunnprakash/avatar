@@ -18,6 +18,7 @@ export abstract class AbstractBaseComponent implements OnInit {
     protected recordList: any[];
     protected model: any;
     protected enableDeleteButton: boolean;
+    protected languageCode: string;
     /*Following Abstract Fields and Methods MUST have definition in derived component class*/
     protected abstract title: string;
     protected abstract localCols: any[];
@@ -27,7 +28,8 @@ export abstract class AbstractBaseComponent implements OnInit {
     protected abstract showDetailDialog(value: boolean): void;
     protected abstract showAlertDialog(title: string, message: string): void;
     protected abstract recordListLoaded(): void;
-    constructor(private service: any, private authService: AuthService, private translate: TranslateService) { }
+    constructor(private service: any, protected authService: AuthService, protected translate: TranslateService) {
+    }
 
     ngOnInit() {
         console.log("ngOnInit abstract.base.component");

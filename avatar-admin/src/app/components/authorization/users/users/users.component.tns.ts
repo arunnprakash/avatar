@@ -11,11 +11,13 @@ import { UserService } from '../../../../services/authorization/userservice.gene
 import { RoleService } from '../../../../services/authorization/roleservice.generated';
 import { LanguageService } from '../../../../services/authorization/languageservice.generated';
 import { VillageService } from '../../../../services/authorization/villageservice.generated';
+import { GenderService } from '../../../../services/authorization/genderservice.generated';
 import { AuthService } from "../../../../services/auth.service";
 import { UserDTO } from "../../../../services/authorization/userdto.model";
 import { RoleDTO } from "../../../../services/authorization/roledto.model";
 import { LanguageDTO } from "../../../../services/authorization/languagedto.model";
 import { VillageDTO } from "../../../../services/authorization/villagedto.model";
+import { GenderDTO } from "../../../../services/authorization/genderdto.model";
 import { UserDetailComponent } from "../user-detail/user-detail.component";
 
 import { ObservableArray } from "tns-core-modules/data/observable-array";
@@ -34,7 +36,7 @@ export class UsersComponent extends BaseComponent implements OnInit, AfterViewIn
 
     tags: string[]=["Test"];
     protected title = 'User';
-    languageCode: string;
+    
     protected localCols: any[] = [
          { field: 'userName', header: 'UserName', dataType: 'INPUT' },
          { field: 'mobileNumber', header: 'MobileNumber', dataType: 'INPUT' },
@@ -43,13 +45,16 @@ export class UsersComponent extends BaseComponent implements OnInit, AfterViewIn
          { field: 'dob', header: 'DateOfBirth', dataType: 'DATE' },
          { field: 'roles', header: 'Roles', dataType: 'AUTOCOMPLETE', options: new ObservableArray<TokenModel>(), optionLabel:"roleName" },
          { field: 'preferredLanguage', header: 'PreferredLanguage', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"languageName"},
-         { field: 'village', header: 'Village', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"en"}
+         { field: 'village', header: 'Village', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"en"},
+         { field: 'gender', header: 'Gender', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"en"}
     ];
     constructor( userService: UserService, authService: AuthService, translate: TranslateService, 
-            private roleService: RoleService, private languageService: LanguageService, private villageService: VillageService,
+            private roleService: RoleService, private languageService: LanguageService, 
+            private villageService: VillageService,  private genderService: GenderService,
             modalDialogService: ModalDialogService, dialogService: ModalDialogService, 
             router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef ) {
         super( userService, authService, translate, modalDialogService, dialogService, UserDetailComponent, router, activatedRoute, vcRef );
+        this.languageCode = authService.getUserInfo().preferredLanguage.languageCode;
     }
     ngAfterViewInit() {
         
@@ -57,41 +62,47 @@ export class UsersComponent extends BaseComponent implements OnInit, AfterViewIn
     ngOnInit() {
         super.ngOnInit();
         console.log("ngOnInit user.component.tns");
-        this.languageCode = "en";//this.authService.getUserInfo().preferredLanguage.languageCode;
         this.initFieldsLabel("users");
         this.initRolesList();
         this.initVillageList();
+        this.initGenderList();
+    }
+    initGenderList() {
+        this.genderService.getAllExceptDeleted().subscribe((genders: GenderDTO[]) => {
+            let menuItem: any = _.find(this.localCols, { 'field': 'gender' });
+            menuItem.optionLabel = this.languageCode;
+            genders.forEach( (gender: GenderDTO ) => {
+                menuItem.options.push(new TokenModel(gender[this.languageCode], null));
+            });
+        },
+        ( error ) => {
+            this.showAlertDialog('Error', 'Error while getting Gender List');
+        });
     }
     initVillageList() {
         this.villageService.getAllExceptDeleted().subscribe((villages: VillageDTO[]) => {
             let menuItem: any = _.find(this.localCols, { 'field': 'village' });
+            menuItem.optionLabel = this.languageCode;
             villages.forEach( (village: VillageDTO ) => {
-                //menuItem.options.push(new TokenModel(village[this.languageCode], null));
+                menuItem.options.push(new TokenModel(village[this.languageCode], null));
             });
         },
         ( error ) => {
             this.showAlertDialog('Error', 'Error while getting Village List');
         });
     }
-    onLoaded(event) { 
-        let autoComplete: RadAutoCompleteTextView = <RadAutoCompleteTextView>event.object;
-        this.initAutoComplete(autoComplete);
-    }
-    initAutoComplete(autoComplete: RadAutoCompleteTextView) {
-        setTimeout(()=>{
-            autoComplete.readOnly = true;
-            autoComplete.showCloseButton = false;
-            this.recordList.forEach((userDTO: any) => {
-                if (userDTO.id == autoComplete.id) {
-                    userDTO.roles.forEach( (role: RoleDTO ) => {
-                        autoComplete.addToken(new TokenModel(role.roleName, null));
-                    });
-                }
-                
-            });
-       }, 3000)
-    }
 
+    initLanguageList() {
+        this.languageService.getAllExceptDeleted().subscribe((languages: LanguageDTO[]) => {
+            let menuItem: any = _.find(this.localCols, { 'field': 'preferredLanguage' });
+            languages.forEach( (language: LanguageDTO ) => {
+                menuItem.options.push(new TokenModel(language.languageName, null));
+            });
+        },
+        ( error ) => {
+            this.showAlertDialog('Error', 'Error while getting Language List');
+        });
+    }
     initRolesList() {
         this.roleService.getAllExceptDeleted().subscribe((roles: RoleDTO[]) => {
             let menuItem: any = _.find(this.localCols, { 'field': 'roles' });
@@ -110,5 +121,21 @@ export class UsersComponent extends BaseComponent implements OnInit, AfterViewIn
     protected isModelValid(): boolean {
         return true;
     }
-
+    onLoaded(event) { 
+        let autoComplete: RadAutoCompleteTextView = <RadAutoCompleteTextView>event.object;
+        this.initAutoComplete(autoComplete);
+    }
+    initAutoComplete(autoComplete: RadAutoCompleteTextView) {
+        setTimeout(()=>{
+            autoComplete.readOnly = true;
+            autoComplete.showCloseButton = false;
+            this.recordList.forEach((userDTO: any) => {
+                if (userDTO.id == autoComplete.id) {
+                    userDTO.roles.forEach( (role: RoleDTO ) => {
+                        autoComplete.addToken(new TokenModel(role.roleName, null));
+                    });
+                }
+            });
+       }, 3000)
+    }
 }

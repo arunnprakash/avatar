@@ -1,6 +1,8 @@
 import { Component, OnInit, AfterViewInit , ViewContainerRef, ViewChildren, QueryList } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/modal-dialog";
+import { TranslateService } from "@ngx-translate/core";
+
 import { baseDataViewTemplate } from '../../../base/base.dataView.template';
 import { baseCss } from '../../../base/base.css';
 import { BaseComponent } from '../../../base/base.component';
@@ -43,11 +45,11 @@ export class UsersComponent extends BaseComponent implements OnInit, AfterViewIn
          { field: 'preferredLanguage', header: 'PreferredLanguage', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"languageName"},
          { field: 'village', header: 'Village', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"en"}
     ];
-    constructor( userService: UserService, authService: AuthService, private roleService: RoleService,
-            private languageService: LanguageService, private villageService: VillageService,
+    constructor( userService: UserService, authService: AuthService, translate: TranslateService, 
+            private roleService: RoleService, private languageService: LanguageService, private villageService: VillageService,
             modalDialogService: ModalDialogService, dialogService: ModalDialogService, 
             router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef ) {
-        super( userService, authService, modalDialogService, dialogService, UserDetailComponent, router, activatedRoute, vcRef );
+        super( userService, authService, translate, modalDialogService, dialogService, UserDetailComponent, router, activatedRoute, vcRef );
     }
     ngAfterViewInit() {
         
@@ -56,20 +58,18 @@ export class UsersComponent extends BaseComponent implements OnInit, AfterViewIn
         super.ngOnInit();
         console.log("ngOnInit user.component.tns");
         this.languageCode = "en";//this.authService.getUserInfo().preferredLanguage.languageCode;
+        this.initFieldsLabel("users");
         this.initRolesList();
         this.initVillageList();
     }
     initVillageList() {
-        this.showLoading(true);
         this.villageService.getAllExceptDeleted().subscribe((villages: VillageDTO[]) => {
             let menuItem: any = _.find(this.localCols, { 'field': 'village' });
             villages.forEach( (village: VillageDTO ) => {
                 //menuItem.options.push(new TokenModel(village[this.languageCode], null));
             });
-            this.showLoading(false);
         },
         ( error ) => {
-            this.showLoading(false);
             this.showAlertDialog('Error', 'Error while getting Village List');
         });
     }
@@ -93,16 +93,13 @@ export class UsersComponent extends BaseComponent implements OnInit, AfterViewIn
     }
 
     initRolesList() {
-        this.showLoading(true);
         this.roleService.getAllExceptDeleted().subscribe((roles: RoleDTO[]) => {
             let menuItem: any = _.find(this.localCols, { 'field': 'roles' });
             roles.forEach( (role: RoleDTO ) => {
                 menuItem.options.push(new TokenModel(role.roleName, null));
             });
-            this.showLoading(false);
         },
         ( error ) => {
-            this.showLoading(false);
             this.showAlertDialog('Error', 'Error while getting Roles List');
         });
     }

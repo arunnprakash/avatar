@@ -1,4 +1,5 @@
 import { OnInit } from '@angular/core';
+import { TranslateService } from "@ngx-translate/core";
 
 import { PagingAndFilterRequest } from "../../services/authorization/pagingandfilterrequest.model";
 import { FilterCriteria } from "../../services/authorization/filtercriteria.model";
@@ -26,7 +27,7 @@ export abstract class AbstractBaseComponent implements OnInit {
     protected abstract showDetailDialog(value: boolean): void;
     protected abstract showAlertDialog(title: string, message: string): void;
     protected abstract recordListLoaded(): void;
-    constructor(private service: any, public authService: AuthService) { }
+    constructor(private service: any, private authService: AuthService, private translate: TranslateService) { }
 
     ngOnInit() {
         console.log("ngOnInit abstract.base.component");
@@ -180,5 +181,14 @@ export abstract class AbstractBaseComponent implements OnInit {
             return _.find(selectedValues, option) == undefined; 
          });
         menuItem.options = filteredOptions;
+    }
+    initFieldsLabel(prefix: string) {
+        this.localCols.forEach((menuItem) => {
+            this.translate
+            .get(prefix +"."+menuItem.field)
+            .subscribe((header: any) => {
+                menuItem.header = header;
+            });
+        });
     }
 }

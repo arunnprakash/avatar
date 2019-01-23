@@ -1,5 +1,6 @@
 import { OnInit, ViewContainerRef } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
+import { TranslateService } from "@ngx-translate/core";
 import { AbstractBaseComponent } from "./abstract.base.component";
 
 import { PagingAndFilterRequest } from "../../services/authorization/pagingandfilterrequest.model";
@@ -15,10 +16,10 @@ export abstract class BaseComponent extends AbstractBaseComponent implements OnI
     protected alertDialogTitle: string;
     protected alertDialogMessage: string;
     protected loading: boolean;
-    constructor(service: any, authService: AuthService, 
+    constructor(service: any, authService: AuthService, translate: TranslateService, 
             private confirmationService?: any, private dialogService?: any, private detailComponent?: any, 
             private router?: Router, private activatedRoute?: ActivatedRoute, private vcRef?: ViewContainerRef) {
-        super(service, authService);
+        super(service, authService, translate);
     }
 
     ngOnInit() {

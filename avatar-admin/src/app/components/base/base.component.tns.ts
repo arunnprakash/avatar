@@ -1,6 +1,8 @@
 import { OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
+import { TranslateService } from "@ngx-translate/core";
 import { AbstractBaseComponent } from "./abstract.base.component";
+
 import { prompt, PromptOptions, PromptResult } from "tns-core-modules/ui/dialogs";
 import { confirm, ConfirmOptions } from "tns-core-modules/ui/dialogs";
 import { alert, AlertOptions } from "tns-core-modules/ui/dialogs";
@@ -13,6 +15,7 @@ import { FilterCriteria } from "../../services/authorization/filtercriteria.mode
 import { PagingAndFilterResponse } from "../../services/authorization/pagingandfilterresponse.model";
 import { AuthService } from "../../services/auth.service";
 
+import { ObservableArray } from "tns-core-modules/data/observable-array";
 import { Page } from "tns-core-modules/ui/page";
 import { SearchBar } from "tns-core-modules/ui/search-bar";
 
@@ -22,10 +25,10 @@ import * as _ from "lodash";
 export abstract class BaseComponent extends AbstractBaseComponent implements OnInit {
     loadingIndicator: LoadingIndicator;
     loadingIndicatorOptions: any;
-    constructor(service: any, authService: AuthService, 
+    constructor(service: any, authService: AuthService, translate: TranslateService, 
             private modalDialogService?: ModalDialogService, private dialogService?: any, private detailComponent?: any, 
             private router?: Router, private activatedRoute?: ActivatedRoute, private vcRef?: ViewContainerRef) {
-        super(service, authService);
+        super(service, authService, translate);
     }
 
     ngOnInit() {
@@ -76,9 +79,9 @@ export abstract class BaseComponent extends AbstractBaseComponent implements OnI
             console.log("Dialog closed!");
         });
     }
-    protected onSearch(args) {
+    protected onSearch(event) {
         console.log("onSearch");
-        const searchBar: SearchBar = <SearchBar>args.object;
+        const searchBar: SearchBar = <SearchBar>event.object;
         const searchValue = searchBar.text.toLowerCase();
         const arrayItems = [
                             { name: "United States" },
@@ -104,6 +107,16 @@ export abstract class BaseComponent extends AbstractBaseComponent implements OnI
     public onClear(args) {
         
     }
+    onSearchLayoutLoaded(event) {
+        if (event.object.android) {
+            event.object.android.setFocusableInTouchMode(true);
+        }
+    }
+    onSearchBarLoaded(event) {
+        if (event.object.android) {
+            event.object.android.clearFocus();
+        }
+    }
     protected onDelete() {
         const confirmOptions: ConfirmOptions = {
                 title: "Delete "+this.title+"s",
@@ -126,7 +139,6 @@ export abstract class BaseComponent extends AbstractBaseComponent implements OnI
     pageNumbers: number[] = [1,2,3,4];
     maxSize: number = 4;
     gotoPage(pageNumber: number) {
-        console.log(pageNumber);
         this.currentPageNumber = pageNumber;
         this.lazyLoadRecordList({"first": (pageNumber - 1) * this.numberOfRowsPerPage , "rows": this.numberOfRowsPerPage});
     }

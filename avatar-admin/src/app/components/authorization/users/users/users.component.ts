@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { ConfirmationService, DialogService } from 'primeng/api';
+import { TranslateService } from "@ngx-translate/core";
 import { baseDataViewTemplate } from '../../../base/base.dataView.template';
 import { baseCss } from '../../../base/base.css';
 import { BaseComponent } from '../../../base/base.component';
@@ -37,20 +38,22 @@ export class UsersComponent extends BaseComponent implements OnInit {
          { field: 'preferredLanguage', header: 'PreferredLanguage', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"languageName"},
          { field: 'village', header: 'Village', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"en"}
     ];
-    constructor( userService: UserService, authService: AuthService, private roleService: RoleService, 
-            private languageService: LanguageService, private villageService: VillageService,
-            confirmationService: ConfirmationService, dialogService: DialogService, 
+    constructor( userService: UserService, authService: AuthService, translate: TranslateService, 
+            private roleService: RoleService, private languageService: LanguageService, private villageService: VillageService,
+            confirmationService: ConfirmationService, dialogService: DialogService,
             router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef ) {
-        super( userService, authService, confirmationService, dialogService,UserDetailComponent, router, activatedRoute, vcRef );
+        super( userService, authService, translate, confirmationService, dialogService,UserDetailComponent, router, activatedRoute, vcRef );
     }
 
     ngOnInit() {
         super.ngOnInit();
         console.log("ngOnInit user.component");
+        this.initFieldsLabel("users");
         this.initRolesList();
         this.initLanguageList();
         this.initVillageList();
     }
+
     initVillageList() {
         this.showLoading(true);
         this.villageService.getAllExceptDeleted().subscribe((villages: VillageDTO[]) => {

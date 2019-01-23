@@ -1,6 +1,16 @@
 {
 	"home": {
 		"welcome": "Welcome"
+	},
+	"users": {
+		"userName": "UserName",
+		"mobileNumber": "MobileNumber",
+		"firstName":"FirstName",
+		"lastName":"LastName",
+		"dob":"DateOfBirth",
+		"roles":"Roles",
+		"preferredLanguage":"PreferredLanguage",
+		"village":"Village"
 	}
 }
 

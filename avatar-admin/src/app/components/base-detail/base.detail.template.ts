@@ -18,11 +18,11 @@ export const baseDetailTemplate: string = `
             <div class="p-col-12 p-grid" *ngFor="let col of localCols" [ngSwitch]="col.dataType">
                 <div class="p-col-4 text-bold">{{col.header}}</div>
                 <div class="p-col-8">
-                    <input *ngSwitchCase="'INPUT'" pInputText type="text" [(ngModel)]="model[col.field]" size="23" placeholder="{{col.header}}" appendTo="body" [style]="{'width':'50%'}">
+                    <input *ngSwitchCase="'INPUT'" pInputText type="text" [(ngModel)]="model[col.field]" size="23" [placeholder]="col.header" appendTo="body" [style]="{'width':'50%'}">
                     <p-calendar *ngSwitchCase="'DATE'" [ngModel]="model[col.field] | date:'yyyy-MM-dd'" (ngModelChange)="dateChanged($event, col.field)" [showIcon]="true" dateFormat="dd-MM-yyyy" appendTo="body" [inputStyle]="{'width':'65%'}"></p-calendar>
                     <p-calendar *ngSwitchCase="'DATETIME'" [ngModel]="model[col.field] | date:'yyyy-MM-dd'" (ngModelChange)="dateChanged($event, col.field)" [showIcon]="true" dateFormat="dd-MM-yyyy" appendTo="body" [inputStyle]="{'width':'65%'}"></p-calendar>
                     <p-multiSelect *ngSwitchCase="'MULTISELECT'" [options]="col.options" [(ngModel)]="model[col.field]" appendTo="body" [style]="{'width':'100%'}"></p-multiSelect>
-                    <p-autoComplete *ngSwitchCase="'AUTOCOMPLETE'" immutable="false" (completeMethod)="filterAutoCompleteSuggestion(col.field, model[col.field])" [(ngModel)]="model[col.field]" [suggestions]="col.options" forceSelection="true" [field]="col.optionLabel" [dropdown]="true" [multiple]="col.multiple" [size]="30" placeholder="{{col.header}}"></p-autoComplete>
+                    <p-autoComplete *ngSwitchCase="'AUTOCOMPLETE'" immutable="false" (completeMethod)="filterAutoCompleteSuggestion(col.field, model[col.field])" [(ngModel)]="model[col.field]" [suggestions]="col.options" forceSelection="true" [field]="col.optionLabel" [dropdown]="true" [multiple]="col.multiple" [size]="30" [placeholder]="col.header"></p-autoComplete>
                 </div>
             </div>
         </div>

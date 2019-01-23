@@ -27,11 +27,11 @@ export const baseTemplate: string = `
             </tr>
             <tr>
                 <th *ngFor="let col of columns" [ngSwitch]="col.dataType" class="text-align-left" >
-                    <input *ngSwitchCase="'INPUT'" pInputText type="text" size="{{col.size?col.size:12}}" placeholder="{{col.header}}" appendTo="body" [style]="{'width':'50%'}"  (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                    <input *ngSwitchCase="'INPUT'" pInputText type="text" size="{{col.size?col.size:12}}" [placeholder]="col.header" appendTo="body" [style]="{'width':'50%'}"  (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                     <p-calendar *ngSwitchCase="'DATE'" appendTo="body" [inputStyle]="{'width':'65%'}" [showIcon]="true" dateFormat="dd-mm-yy" (onSelect)="dt.filter($event, col.field, 'in')"></p-calendar>
                     <p-calendar *ngSwitchCase="'DATETIME'" appendTo="body" [inputStyle]="{'width':'65%'}" [showIcon]="true" dateFormat="dd-mm-yy" (onSelect)="dt.filter($event, col.field, 'in')"></p-calendar>
                     <p-multiSelect *ngSwitchCase="'MULTISELECT'" [options]="col.options" [optionLabel]="col.optionLabel" defaultLabel="ALL"  appendTo="body" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'in')"></p-multiSelect>
-                    <p-autoComplete *ngSwitchCase="'AUTOCOMPLETE'" immutable="false" (completeMethod)="filterAutoCompleteSuggestion(col.field, model[col.field])" [suggestions]="col.options" (onSelect)="dt.filter($event, col.field, 'in')" forceSelection="true" [field]="col.optionLabel" [dropdown]="true" [multiple]="true" [size]="30" placeholder="{{col.header}}"></p-autoComplete>
+                    <p-autoComplete *ngSwitchCase="'AUTOCOMPLETE'" immutable="false" (completeMethod)="filterAutoCompleteSuggestion(col.field, model[col.field])" [suggestions]="col.options" (onSelect)="dt.filter($event, col.field, 'in')" forceSelection="true" [field]="col.optionLabel" [dropdown]="true" [multiple]="true" [size]="30" [placeholder]="col.header"></p-autoComplete>
                 </th>
                 <th class="text-align-left">
                     <p-checkbox binary="true" label="SelectAll" [(ngModel)]="isSelectAllChecked" (onChange)="selectAll()"></p-checkbox>

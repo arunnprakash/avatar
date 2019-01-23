@@ -2,6 +2,7 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { SlicePipe } from '@angular/common';
 import { ConfirmationService, DialogService } from 'primeng/api';
+import { TranslateService } from "@ngx-translate/core";
 
 import { baseTemplate } from '../../../base/base.template';
 import { baseCss } from '../../../base/base.css';
@@ -23,10 +24,10 @@ export class RolesComponent extends BaseComponent implements OnInit {
     protected title = 'Role';
     protected localCols: any[] = [{ field: 'roleName', header: 'RoleName', dataType: 'INPUT' }];
 
-    constructor( roleService: RoleService, authService: AuthService, 
+    constructor( roleService: RoleService, authService: AuthService, translate: TranslateService, 
             confirmationService: ConfirmationService, dialogService: DialogService, 
             router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef) {
-        super( roleService, authService, confirmationService, dialogService, RoleDetailComponent, router, activatedRoute, vcRef);
+        super( roleService, authService, translate, confirmationService, dialogService, RoleDetailComponent, router, activatedRoute, vcRef);
     }
     ngOnInit() {
         super.ngOnInit();

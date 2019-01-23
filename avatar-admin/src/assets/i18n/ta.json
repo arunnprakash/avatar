@@ -1,6 +1,16 @@
 {
 	"home": {
 		"welcome": "வணக்கம்"
+	},
+	"users": {
+		"userName": "பயனர்பெயர்",
+		"mobileNumber": "மொபைல் எண்",
+		"firstName":"முதல் பெயர்",
+		"lastName":"கடைசி பெயர்",
+		"dob":"பிறந்த தேதி",
+		"roles":"பாத்திரங்கள்",
+		"preferredLanguage":"விருப்பமானமொழி",
+		"village":"கிராமம்"
 	}
 }
 

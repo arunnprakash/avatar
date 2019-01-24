@@ -31,9 +31,6 @@ export const baseDataViewTemplate: string = `
                         </ng-template>
                     </SuggestionView>
                 </RadAutoCompleteTextView>
-                <!--<TagGroup col="1" *ngSwitchCase="'MULTISELECT'" ntag_editMode="true" value="{{ tags }}" ntag_borderColor="#2095F2" 
-                    ntag_textColor="#2095F2" ntag_bgColor="#ffffff" ntag_checkedBorderColor="#2095F2" ntag_checkedBgColor="#2095F2" 
-                    ntag_checkedTextColor="#ffffff"></TagGroup>-->
             </GridLayout>
         </StackLayout>
         </ng-template>

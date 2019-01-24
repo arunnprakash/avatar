@@ -8,11 +8,21 @@ export const baseDetailDataViewTemplate: string = `
             <StackLayout>
                 <StackLayout *ngFor="let col of cols;let i = index" [ngSwitch]="col.dataType" >
                     <GridLayout rows="auto, auto, *" columns="auto, auto, *" width="100%">
-                    <Label col="0" width="120" [text]="col.header" class="text-bold text-align-left vertical-align-center"></Label>
-                    <Label col="1" *ngSwitchCase="'INPUT'" [text]="model[col.field]" class="text-align-left vertical-align-center"></Label>
-                    <Label col="1" *ngSwitchCase="'DATE'" text="{{model[col.field] | date:'dd-MM-yyyy'}}" class="text-align-left vertical-align-center"></Label>
-                    <Label col="1" *ngSwitchCase="'DATETIME'" text="{{model[col.field] | date:'dd-MM-yyyy HH:mm:ss'}}" class="text-align-left vertical-align-center"></Label>
-                    <Label col="1" *ngSwitchCase="'MULTISELECT'" [text]="model[col.field]" class="text-align-left vertical-align-center"></Label>
+                        <Label col="0" width="120" [text]="col.header" class="text-bold text-align-left vertical-align-center"></Label>
+                        <Label col="1" *ngSwitchCase="'INPUT'" [text]="model[col.field]" class="text-align-left vertical-align-center"></Label>
+                        <Label col="1" *ngSwitchCase="'DATE'" text="{{model[col.field] | date:'dd-MM-yyyy'}}" class="text-align-left vertical-align-center"></Label>
+                        <Label col="1" *ngSwitchCase="'DATETIME'" text="{{model[col.field] | date:'dd-MM-yyyy HH:mm:ss'}}" class="text-align-left vertical-align-center"></Label>
+                        <Label col="1" *ngSwitchCase="'MULTISELECT'" [text]="model[col.field]" class="text-align-left vertical-align-center"></Label>
+                        <RadAutoCompleteTextView *ngSwitchCase="'AUTOCOMPLETE'" col="1" ngDefaultControl [items]="col.options" suggestMode="Suggest" displayMode="Plain" 
+                            completionMode="Contains" showCloseButton="false" (loaded)="onAutoCompleteLoaded($event, true, model[col.field], col.optionLabel)" [returnKeyType]="isLast?'done':'next'">
+                                <SuggestionView tkAutoCompleteSuggestionView suggestionViewHeight="300">
+                                    <ng-template tkSuggestionItemTemplate let-item="item">
+                                        <StackLayout orientation="vertical" padding="10">
+                                            <Label [text]="item.text"></Label>
+                                        </StackLayout>
+                                    </ng-template>
+                                </SuggestionView>
+                         </RadAutoCompleteTextView>
                     </GridLayout>
                 </StackLayout>
             </StackLayout>
@@ -27,6 +37,20 @@ export const baseDetailDataViewTemplate: string = `
                         <TextField *ngSwitchCase="'INPUT'" row="0" col="1" class="input" [hint]="col.header" [(ngModel)]="model[col.field]" [returnKeyType]="isLast?'done':'next'"></TextField>
                         <DatePicker *ngSwitchCase="'DATE'" row="0" col="1" class="input" [hint]="col.header" [(ngModel)]="model[col.field]" [returnKeyType]="isLast?'done':'next'" ></DatePicker>
                         <DatePicker *ngSwitchCase="'DATETIME'" row="0" col="1" class="input" [hint]="col.header" [(ngModel)]="model[col.field]" [returnKeyType]="isLast?'done':'next'" ></DatePicker>
+                        <RadAutoCompleteTextView *ngSwitchCase="'AUTOCOMPLETE'" row="0" col="1" class="input" [hint]="col.header" [(ngModel)]="model[col.field]" ngDefaultControl [items]="col.options" 
+                            suggestMode="Suggest" displayMode="Tokens" completionMode="Contains" showCloseButton="false" 
+                            (loaded)="onAutoCompleteLoaded($event, false, model[col.field], col.optionLabel)" 
+                            (tokenAdded)="onTokenAdded($event, model[col.field], col.optionLabel)" 
+                            (tokenRemoved)="onTokenRemoved($event, model[col.field], col.optionLabel)"
+                            [returnKeyType]="isLast?'done':'next'">
+                            <SuggestionView tkAutoCompleteSuggestionView suggestionViewHeight="300">
+                                <ng-template tkSuggestionItemTemplate let-item="item">
+                                    <StackLayout orientation="vertical" padding="10">
+                                        <Label [text]="item.text"></Label>
+                                    </StackLayout>
+                                </ng-template>
+                            </SuggestionView>
+                        </RadAutoCompleteTextView>
                         <StackLayout row="1" col="1" class="hr-light"></StackLayout>
                     </GridLayout>
                 </StackLayout>

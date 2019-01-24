@@ -43,10 +43,10 @@ export class UsersComponent extends BaseComponent implements OnInit, AfterViewIn
          { field: 'firstName', header: 'FirstName', dataType: 'INPUT' },
          { field: 'lastName', header: 'LastName', dataType: 'INPUT' },
          { field: 'dob', header: 'DateOfBirth', dataType: 'DATE' },
-         { field: 'roles', header: 'Roles', dataType: 'AUTOCOMPLETE', options: new ObservableArray<TokenModel>(), optionLabel:"roleName" },
-         { field: 'preferredLanguage', header: 'PreferredLanguage', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"languageName"},
-         { field: 'village', header: 'Village', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"en"},
-         { field: 'gender', header: 'Gender', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"en"}
+         { field: 'roles', header: 'Roles', dataType: 'AUTOCOMPLETE', multiple: true, options: new ObservableArray<TokenModel>(), optionLabel:"roleName" },
+         { field: 'preferredLanguage', header: 'PreferredLanguage', dataType: 'AUTOCOMPLETE', multiple: false, options: new ObservableArray<TokenModel>() , optionLabel:"languageName"},
+         { field: 'village', header: 'Village', dataType: 'AUTOCOMPLETE', multiple: false, options: new ObservableArray<TokenModel>() , optionLabel:"en"},
+         { field: 'gender', header: 'Gender', dataType: 'AUTOCOMPLETE', multiple: false, options: new ObservableArray<TokenModel>() , optionLabel:"en"}
     ];
     constructor( userService: UserService, authService: AuthService, translate: TranslateService, 
             private roleService: RoleService, private languageService: LanguageService, 
@@ -64,6 +64,7 @@ export class UsersComponent extends BaseComponent implements OnInit, AfterViewIn
         console.log("ngOnInit user.component.tns");
         this.initFieldsLabel("users");
         this.initRolesList();
+        this.initLanguageList();
         this.initVillageList();
         this.initGenderList();
     }
@@ -71,6 +72,7 @@ export class UsersComponent extends BaseComponent implements OnInit, AfterViewIn
         this.genderService.getAllExceptDeleted().subscribe((genders: GenderDTO[]) => {
             let menuItem: any = _.find(this.localCols, { 'field': 'gender' });
             menuItem.optionLabel = this.languageCode;
+            menuItem.originalOptions = genders;
             genders.forEach( (gender: GenderDTO ) => {
                 menuItem.options.push(new TokenModel(gender[this.languageCode], null));
             });
@@ -83,6 +85,7 @@ export class UsersComponent extends BaseComponent implements OnInit, AfterViewIn
         this.villageService.getAllExceptDeleted().subscribe((villages: VillageDTO[]) => {
             let menuItem: any = _.find(this.localCols, { 'field': 'village' });
             menuItem.optionLabel = this.languageCode;
+            menuItem.originalOptions = villages;
             villages.forEach( (village: VillageDTO ) => {
                 menuItem.options.push(new TokenModel(village[this.languageCode], null));
             });
@@ -95,6 +98,7 @@ export class UsersComponent extends BaseComponent implements OnInit, AfterViewIn
     initLanguageList() {
         this.languageService.getAllExceptDeleted().subscribe((languages: LanguageDTO[]) => {
             let menuItem: any = _.find(this.localCols, { 'field': 'preferredLanguage' });
+            menuItem.originalOptions = languages;
             languages.forEach( (language: LanguageDTO ) => {
                 menuItem.options.push(new TokenModel(language.languageName, null));
             });
@@ -106,6 +110,7 @@ export class UsersComponent extends BaseComponent implements OnInit, AfterViewIn
     initRolesList() {
         this.roleService.getAllExceptDeleted().subscribe((roles: RoleDTO[]) => {
             let menuItem: any = _.find(this.localCols, { 'field': 'roles' });
+            menuItem.originalOptions = roles;
             roles.forEach( (role: RoleDTO ) => {
                 menuItem.options.push(new TokenModel(role.roleName, null));
             });
@@ -120,22 +125,5 @@ export class UsersComponent extends BaseComponent implements OnInit, AfterViewIn
 
     protected isModelValid(): boolean {
         return true;
-    }
-    onLoaded(event) { 
-        let autoComplete: RadAutoCompleteTextView = <RadAutoCompleteTextView>event.object;
-        this.initAutoComplete(autoComplete);
-    }
-    initAutoComplete(autoComplete: RadAutoCompleteTextView) {
-        setTimeout(()=>{
-            autoComplete.readOnly = true;
-            autoComplete.showCloseButton = false;
-            this.recordList.forEach((userDTO: any) => {
-                if (userDTO.id == autoComplete.id) {
-                    userDTO.roles.forEach( (role: RoleDTO ) => {
-                        autoComplete.addToken(new TokenModel(role.roleName, null));
-                    });
-                }
-            });
-       }, 3000)
     }
 }

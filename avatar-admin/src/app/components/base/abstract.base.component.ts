@@ -1,4 +1,5 @@
 import { OnInit } from '@angular/core';
+import { TranslateService } from "@ngx-translate/core";
 
 import { PagingAndFilterRequest } from "../../services/authorization/pagingandfilterrequest.model";
 import { FilterCriteria } from "../../services/authorization/filtercriteria.model";
@@ -17,6 +18,7 @@ export abstract class AbstractBaseComponent implements OnInit {
     protected recordList: any[];
     protected model: any;
     protected enableDeleteButton: boolean;
+    protected languageCode: string;
     /*Following Abstract Fields and Methods MUST have definition in derived component class*/
     protected abstract title: string;
     protected abstract localCols: any[];
@@ -26,7 +28,8 @@ export abstract class AbstractBaseComponent implements OnInit {
     protected abstract showDetailDialog(value: boolean): void;
     protected abstract showAlertDialog(title: string, message: string): void;
     protected abstract recordListLoaded(): void;
-    constructor(private service: any, public authService: AuthService) { }
+    constructor(private service: any, protected authService: AuthService, protected translate: TranslateService) {
+    }
 
     ngOnInit() {
         console.log("ngOnInit abstract.base.component");
@@ -180,5 +183,21 @@ export abstract class AbstractBaseComponent implements OnInit {
             return _.find(selectedValues, option) == undefined; 
          });
         menuItem.options = filteredOptions;
+    }
+    initFieldsLabel(prefix: string) {
+        this.cols.forEach((menuItem) => {
+            this.translate
+            .get("common."+menuItem.field)
+            .subscribe((header: any) => {
+                menuItem.header = header;
+            });
+        });
+        this.localCols.forEach((menuItem) => {
+            this.translate
+            .get(prefix +"."+menuItem.field)
+            .subscribe((header: any) => {
+                menuItem.header = header;
+            });
+        });
     }
 }

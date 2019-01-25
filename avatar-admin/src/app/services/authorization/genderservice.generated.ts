@@ -4,63 +4,45 @@ import { Observable, of} from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { PagingAndFilterResponse } from './pagingandfilterresponse.model';
-import { RoleDTO } from './roledto.model';
-import { StateDTO } from './statedto.model';
-import { LoginResponse } from './loginresponse.model';
-import { CountryDTO } from './countrydto.model';
-import { TalukDTO } from './talukdto.model';
-import { UserDTO } from './userdto.model';
-import { FilterCriteria } from './filtercriteria.model';
-import { LoginRequest } from './loginrequest.model';
-import { VillageDTO } from './villagedto.model';
-import { DistrictDTO } from './districtdto.model';
-import { LanguageDTO } from './languagedto.model';
 import { PagingAndFilterRequest } from './pagingandfilterrequest.model';
 import { GenderDTO } from './genderdto.model';
+import { FilterCriteria } from './filtercriteria.model';
 import { ServiceConfig } from './serviceconfig';
 
 /**
- *  @author __ArunPrakash__
+ *  @author __Telmila__
  * 
  * 
  */
 @Injectable()
-export class UserService {
+export class GenderService {
     private get serviceBaseURL(): string {
-        return this.serviceConfig.context + '/api/user';
+        return this.serviceConfig.context + '/api/gender';
     }
 
     constructor(private httpClient: HttpClient, private serviceConfig: ServiceConfig) { }
     /* GET */
-    public getAll(): Observable<UserDTO[]> {
+    public getAll(): Observable<GenderDTO[]> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.get<UserDTO[]>(url, {params: params})
+        return this.httpClient.get<GenderDTO[]>(url, {params: params})
             .pipe(catchError(this.handleError));
     }
 
-    public getAllExceptDeleted(): Observable<UserDTO[]> {
+    public getAllExceptDeleted(): Observable<GenderDTO[]> {
         const url = this.serviceBaseURL + '/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
-        return this.httpClient.get<UserDTO[]>(url, {params: params})
+        return this.httpClient.get<GenderDTO[]>(url, {params: params})
             .pipe(catchError(this.handleError));
     }
 
-    public get(id: number): Observable<UserDTO> {
+    public get(id: number): Observable<GenderDTO> {
         const url = this.serviceBaseURL + '/' + id + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.get<UserDTO>(url, {params: params})
-            .pipe(catchError(this.handleError));
-    }
-
-    public logout(): Observable<boolean> {
-        const url = this.serviceBaseURL + '/logout';
-        const params = this.createHttpParams({});
-
-        return this.httpClient.get<boolean>(url, {params: params})
+        return this.httpClient.get<GenderDTO>(url, {params: params})
             .pipe(catchError(this.handleError));
     }
 
@@ -68,11 +50,11 @@ export class UserService {
     /* HEAD */
 
     /* POST */
-    public save(arg0: UserDTO): Observable<UserDTO> {
+    public save(arg0: GenderDTO): Observable<GenderDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.post<UserDTO>(url, arg0, {params: params})
+        return this.httpClient.post<GenderDTO>(url, arg0, {params: params})
             .pipe(catchError(this.handleError));
     }
 
@@ -92,21 +74,13 @@ export class UserService {
             .pipe(catchError(this.handleError));
     }
 
-    public login(loginRequest: LoginRequest): Observable<LoginResponse> {
-        const url = this.serviceBaseURL + '/login';
-        const params = this.createHttpParams({});
-
-        return this.httpClient.post<LoginResponse>(url, loginRequest, {params: params})
-            .pipe(catchError(this.handleError));
-    }
-
 
     /* PUT */
-    public update(arg0: UserDTO): Observable<UserDTO> {
+    public update(arg0: GenderDTO): Observable<GenderDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.put<UserDTO>(url, arg0, {params: params})
+        return this.httpClient.put<GenderDTO>(url, arg0, {params: params})
             .pipe(catchError(this.handleError));
     }
 

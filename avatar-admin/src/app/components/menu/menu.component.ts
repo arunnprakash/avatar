@@ -41,4 +41,14 @@ constructor(private authService: AuthService, private router: Router, private ac
   isMenuSelected(menuItem: any) {
       return this.selectedMenuItem && this.selectedMenuItem.label == menuItem.label;
   }
+  logout() {
+      this.authService.clearAll();
+      this.router.navigate(['/login'], { relativeTo: this.activatedRoute }).then( (e) => {
+          if (e) {
+              console.log("Navigation to login successful!");
+            } else {
+              console.log("Navigation to login has failed!");
+            }
+      });
+  }
 }

@@ -6,9 +6,12 @@ import { prompt, PromptOptions, PromptResult } from "tns-core-modules/ui/dialogs
 import { confirm, ConfirmOptions } from "tns-core-modules/ui/dialogs";
 import { alert, AlertOptions } from "tns-core-modules/ui/dialogs";
 import { ModalDialogService, ModalDialogOptions, ModalDialogParams } from "nativescript-angular/modal-dialog";
-import { isAndroid } from "platform";
+import { isAndroid, android } from "platform";
 
-import {LoadingIndicator} from "nativescript-loading-indicator";
+import { LoadingIndicator } from "nativescript-loading-indicator";
+import { ObservableArray } from "tns-core-modules/data/observable-array";
+import { TokenModel, RadAutoCompleteTextView } from "nativescript-ui-autocomplete";
+import { RadAutoCompleteTextViewComponent  } from "nativescript-ui-autocomplete/angular";
 
 import * as _ from "lodash";
 
@@ -43,14 +46,47 @@ export abstract class BaseDetailComponent extends AbstractBaseDetailComponent  i
                   secondaryProgress: 1
                 }
               };
-
     }
     onLoaded(event) {
-        if (isAndroid) {
+        if (isAndroid && event.object._dialogFragment) {
             event.object._dialogFragment.getDialog().setCanceledOnTouchOutside(false);
         }
     }
-
+    onAutoCompleteLoaded(event, readOnly, model, optionLabel) {
+        let autoComplete: RadAutoCompleteTextView = <RadAutoCompleteTextView>event.object;
+        autoComplete.readOnly = readOnly;
+        if (model) {
+           if ( _.isArray(model) ) {
+               if (readOnly) {
+                   var tokenText = "";
+                   model.forEach((modelItem:any, index)=>{
+                       tokenText = index == 0 ? tokenText + modelItem[optionLabel] : tokenText + "," + modelItem[optionLabel];
+                   });
+                   autoComplete.addToken(new TokenModel(tokenText, null));
+               } else {
+                   model.forEach((modelItem:any, index)=>{
+                       autoComplete.addToken(new TokenModel(modelItem[optionLabel], null));
+                   });
+               }
+           } else {
+               autoComplete.addToken(new TokenModel(model[optionLabel], null));
+           }
+        }
+        if (readOnly) {
+            if (isAndroid) {
+                var rad = autoComplete.android;
+                var nativeEditText = rad.getTextField();
+                nativeEditText.setTextSize(14);
+                //nativeEditText.setTextColor(32768);//0x00008000
+            }
+        }
+    }
+    onTokenAdded(event, model, optionLabel) {
+        console.log("onTokenAdded");
+    }
+    onTokenRemoved(event, model, optionLabel) {
+        console.log("onTokenRemoved");
+    }
     protected closeDetailDialog() {
         this.params.closeCallback();
     }

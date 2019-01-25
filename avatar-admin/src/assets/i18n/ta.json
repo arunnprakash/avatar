@@ -1,6 +1,25 @@
 {
 	"home": {
 		"welcome": "வணக்கம்"
+	},
+	"common": {
+		"id": "Id",
+		"createdBy": "Created By",
+		"createdDate": "Created At",
+		"lastModifiedBy": "Last Modified By",
+		"lastModifiedDate": "Last Modified At",
+		"deleted": "Deleted"
+	},
+	"users": {
+		"userName": "பயனர்பெயர்",
+		"mobileNumber": "மொபைல் எண்",
+		"firstName":"முதல் பெயர்",
+		"lastName":"கடைசி பெயர்",
+		"dob":"பிறந்த தேதி",
+		"roles":"பாத்திரங்கள்",
+		"preferredLanguage":"விருப்பமானமொழி",
+		"village":"கிராமம்",
+		"gender": "பாலினம்"
 	}
 }
 

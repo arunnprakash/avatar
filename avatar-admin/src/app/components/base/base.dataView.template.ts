@@ -22,11 +22,11 @@ export const baseDataViewTemplate: string = `
                     </div>
                     <div class="ui-col-12 ui-md-12 ui-col-nogutter text-align-left text-align-bottom">
                         <span *ngFor="let col of cols" [ngSwitch]="col.dataType">
-                            <input *ngSwitchCase="'INPUT'" pInputText type="text" size="{{col.size?col.size:12}}" placeholder="{{col.header}}" appendTo="body" [style]="{'width':'50%'}"  (input)="filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input *ngSwitchCase="'INPUT'" pInputText type="text" size="{{col.size?col.size:12}}" [placeholder]="col.header" appendTo="body" [style]="{'width':'50%'}"  (input)="filter($event.target.value, col.field, col.filterMatchMode)">
                             <p-calendar *ngSwitchCase="'DATE'" appendTo="body" [inputStyle]="{'width':'65%'}" [showIcon]="true" dateFormat="dd-mm-yy" (onSelect)="filter($event, col.field, 'in')"></p-calendar>
                             <p-calendar *ngSwitchCase="'DATETIME'" appendTo="body" [inputStyle]="{'width':'65%'}" [showIcon]="true" dateFormat="dd-mm-yy" (onSelect)="filter($event, col.field, 'in')"></p-calendar>
                             <p-multiSelect *ngSwitchCase="'MULTISELECT'" [options]="col.options" [optionLabel]="col.optionLabel" defaultLabel="ALL"  appendTo="body" [style]="{'width':'10%'}" (onChange)="filter($event.value, col.field, 'in')"></p-multiSelect>
-                            <p-autoComplete *ngSwitchCase="'AUTOCOMPLETE'" immutable="false" (completeMethod)="filterAutoCompleteSuggestion(col.field, model[col.field])" (onSelect)="filter($event, col.field, 'in')" [suggestions]="col.options" forceSelection="true" [field]="col.optionLabel" [dropdown]="true" [multiple]="true" [size]="30" placeholder="{{col.header}}"></p-autoComplete>
+                            <p-autoComplete *ngSwitchCase="'AUTOCOMPLETE'" immutable="false" (completeMethod)="filterAutoCompleteSuggestion(col.field, model[col.field])" (onSelect)="filter($event, col.field, 'in')" [suggestions]="col.options" forceSelection="true" [field]="col.optionLabel" [dropdown]="true" [multiple]="true" [size]="30" [placeholder]="col.header"></p-autoComplete>
                         </span>
                         <span>
                             <p-checkbox binary="true" label="SelectAll" [(ngModel)]="isSelectAllChecked" (onChange)="selectAll()"></p-checkbox>

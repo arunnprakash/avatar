@@ -45,11 +45,12 @@ public class UserDTO extends BaseDTO {
 	protected List<RoleDTO> roles;
 	protected LanguageDTO preferredLanguage;
 	protected VillageDTO village;
+	protected GenderDTO gender;
 	@Builder
 	public UserDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
 			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, String userName, String firstName, 
 			String lastName, String mobileNumber, Date dob, Boolean suspended, String latitude, String longitude, List<RoleDTO> roles,
-			LanguageDTO preferredLanguage, VillageDTO village) {
+			LanguageDTO preferredLanguage, VillageDTO village, GenderDTO gender) {
 		super(id, createdBy, createdDate, lastModifiedBy, lastModifiedDate, deleted, version);
 		this.userName = userName;
 		this.firstName = firstName;
@@ -62,5 +63,6 @@ public class UserDTO extends BaseDTO {
 		this.roles = roles;
 		this.preferredLanguage = preferredLanguage;
 		this.village = village;
+		this.gender = gender;
 	}
 }

@@ -14,7 +14,7 @@ export const baseDetailDataViewTemplate: string = `
                         <Label col="1" *ngSwitchCase="'DATETIME'" text="{{model[col.field] | date:'dd-MM-yyyy HH:mm:ss'}}" class="text-align-left vertical-align-center"></Label>
                         <Label col="1" *ngSwitchCase="'MULTISELECT'" [text]="model[col.field]" class="text-align-left vertical-align-center"></Label>
                         <RadAutoCompleteTextView *ngSwitchCase="'AUTOCOMPLETE'" col="1" ngDefaultControl [items]="col.options" suggestMode="Suggest" displayMode="Plain" 
-                            completionMode="Contains" showCloseButton="false" (loaded)="onAutoCompleteLoaded($event, true, model[col.field], col.optionLabel)" [returnKeyType]="isLast?'done':'next'">
+                            completionMode="Contains" showCloseButton="false" (loaded)="onAutoCompleteLoaded($event, true, model[col.field], col)" [returnKeyType]="isLast?'done':'next'">
                                 <SuggestionView tkAutoCompleteSuggestionView suggestionViewHeight="300">
                                     <ng-template tkSuggestionItemTemplate let-item="item">
                                         <StackLayout orientation="vertical" padding="10">
@@ -39,9 +39,9 @@ export const baseDetailDataViewTemplate: string = `
                         <DatePicker *ngSwitchCase="'DATETIME'" row="0" col="1" class="input" [hint]="col.header" [(ngModel)]="model[col.field]" [returnKeyType]="isLast?'done':'next'" ></DatePicker>
                         <RadAutoCompleteTextView *ngSwitchCase="'AUTOCOMPLETE'" row="0" col="1" class="input" [hint]="col.header" [(ngModel)]="model[col.field]" ngDefaultControl [items]="col.options" 
                             suggestMode="Suggest" displayMode="Tokens" completionMode="Contains" showCloseButton="false" 
-                            (loaded)="onAutoCompleteLoaded($event, false, model[col.field], col.optionLabel)" 
-                            (tokenAdded)="onTokenAdded($event, model[col.field], col.optionLabel)" 
-                            (tokenRemoved)="onTokenRemoved($event, model[col.field], col.optionLabel)"
+                            (loaded)="onAutoCompleteLoaded($event, false, model[col.field], col)" 
+                            (tokenAdded)="onTokenAdded($event, col)" 
+                            (tokenRemoved)="onTokenRemoved($event, col.optionLabel)"
                             [returnKeyType]="isLast?'done':'next'">
                             <SuggestionView tkAutoCompleteSuggestionView suggestionViewHeight="300">
                                 <ng-template tkSuggestionItemTemplate let-item="item">

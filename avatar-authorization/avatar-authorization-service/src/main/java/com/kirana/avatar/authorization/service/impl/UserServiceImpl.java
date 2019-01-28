@@ -33,6 +33,7 @@ import com.kirana.avatar.authorization.model.UserRole;
 
 import static com.kirana.avatar.authorization.model.User_.USER_NAME;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,6 +45,7 @@ import static com.kirana.avatar.authorization.model.User_.SUSPENDED;
 import static com.kirana.avatar.authorization.model.User_.MOBILE_NUMBER;
 import static com.kirana.avatar.authorization.model.User_.SUSPENDED;
 
+import com.kirana.avatar.authorization.repositories.GenderRepository;
 import com.kirana.avatar.authorization.repositories.LanguageRepository;
 import com.kirana.avatar.authorization.repositories.RoleRepository;
 import com.kirana.avatar.authorization.repositories.UserRepository;
@@ -72,6 +74,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 	private UserRepository userRepository;
 	private LanguageRepository languageRepository;
 	private VillageRepository villageRepository;
+	private GenderRepository genderRepository;
 	private RoleRepository roleRepository;
 	private UserRoleRepository userRoleRepository;
 	private UserMapper userMapper;
@@ -80,7 +83,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 	private JwtConfig jwtConfig;
 	
 	public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, UserSpecification userSpecification,
-			LanguageRepository languageRepository, VillageRepository villageRepository, 
+			LanguageRepository languageRepository, VillageRepository villageRepository, GenderRepository genderRepository,
 			RoleRepository roleRepository, UserRoleRepository userRoleRepository,
 			BCryptPasswordEncoder bCryptPasswordEncoder, JwtConfig jwtConfig) {
 		super(userRepository, userMapper, userSpecification);
@@ -89,6 +92,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 		this.userSpecification = userSpecification;
 		this.languageRepository = languageRepository;
 		this.villageRepository = villageRepository;
+		this.genderRepository = genderRepository;
 		this.roleRepository = roleRepository;
 		this.userRoleRepository = userRoleRepository;
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
@@ -108,10 +112,19 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 
 	@Override
 	protected User beforeUpdate(UserDTO userDTO, final User model) {
+		roles = model.getRoles();
+		model.setRoles(null);
 		languageRepository
 				.findById(userDTO.getPreferredLanguage().getId())
 				.map(preferredLanguage -> {
 					model.setPreferredLanguage(preferredLanguage);
+					return model;
+				})
+				.orElseThrow(ApiException::resourceNotFound);
+		genderRepository
+				.findById(userDTO.getGender().getId())
+				.map(gender -> {
+					model.setGender(gender);
 					return model;
 				})
 				.orElseThrow(ApiException::resourceNotFound);
@@ -141,7 +154,18 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 	}
 
 	@Override
-	protected User afterUpdate(UserDTO userDTO, final User model) {
+	protected User afterUpdate(UserDTO userDTO, User model) {
+		if (null != roles && !roles.isEmpty()) {
+			for (Role role : roles) {
+				role = roleRepository.findById(role.getId()).get();
+				UserRole userRole = new UserRole();
+				userRole.setUser(model);
+				userRole.setRole(role);
+				userRoleRepository.save(userRole);
+			}
+			model = userRepository.findById(model.getId()).get();
+			roles = null;
+		}
 		return model;
 	}
 

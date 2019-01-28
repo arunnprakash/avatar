@@ -6,7 +6,7 @@ import { prompt, PromptOptions, PromptResult } from "tns-core-modules/ui/dialogs
 import { confirm, ConfirmOptions } from "tns-core-modules/ui/dialogs";
 import { alert, AlertOptions } from "tns-core-modules/ui/dialogs";
 import { ModalDialogService, ModalDialogOptions, ModalDialogParams } from "nativescript-angular/modal-dialog";
-import { isAndroid, android } from "platform";
+import { isAndroid } from "platform";
 
 import { LoadingIndicator } from "nativescript-loading-indicator";
 import { ObservableArray } from "tns-core-modules/data/observable-array";
@@ -52,7 +52,9 @@ export abstract class BaseDetailComponent extends AbstractBaseDetailComponent  i
             event.object._dialogFragment.getDialog().setCanceledOnTouchOutside(false);
         }
     }
-    onAutoCompleteLoaded(event, readOnly, model, optionLabel) {
+    onAutoCompleteLoaded(event, readOnly, model, col) {
+        console.log("col::"+col);
+        var optionLabel = col.optionLabel;
         let autoComplete: RadAutoCompleteTextView = <RadAutoCompleteTextView>event.object;
         autoComplete.readOnly = readOnly;
         if (model) {
@@ -81,10 +83,33 @@ export abstract class BaseDetailComponent extends AbstractBaseDetailComponent  i
             }
         }
     }
-    onTokenAdded(event, model, optionLabel) {
+    onTokenAdded(event, col) {
         console.log("onTokenAdded");
+        var tokenText = event.token.text;
+        var optionLabel = col.optionLabel;
+        console.log("tokenText " + tokenText);
+        console.log("optionLabel " + optionLabel);
+        console.log("originalOptions " , col.originalOptions);
+        var searchOptions = {};
+        searchOptions[optionLabel] = tokenText;
+        console.log("SearchOptions " , searchOptions);
+        var selectedOption = _.find(col.originalOptions, searchOptions);
+        console.log("selectedOption ", selectedOption);
+        if (col.multiple) {
+            var existingOptions = this.model[col.field];
+            if (!existingOptions) {
+                existingOptions = [];
+            }
+            var optionExist = _.find(existingOptions, selectedOption);
+            if (!optionExist) {
+                existingOptions.push(selectedOption);
+            }
+            this.model[col.field] = existingOptions;
+        } else {
+            this.model[col.field] = selectedOption;
+        }
     }
-    onTokenRemoved(event, model, optionLabel) {
+    onTokenRemoved(event, model, col) {
         console.log("onTokenRemoved");
     }
     protected closeDetailDialog() {

@@ -133,10 +133,10 @@ public abstract class BaseServiceImpl<Model extends BaseEntity<Model>,
 		return repository
 				.findById(resource.getId())
 				.map(model -> {
-					return beforeUpdate(resource, model);
+					return mapper.updateModel(resource, model);
 				})
 				.map(model -> {
-					return mapper.updateModel(resource, model);
+					return beforeUpdate(resource, model);
 				})
 				.map(repository::save)
 				.map(model -> {

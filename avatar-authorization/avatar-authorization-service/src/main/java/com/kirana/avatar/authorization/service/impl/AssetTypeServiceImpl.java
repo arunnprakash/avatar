@@ -48,7 +48,7 @@ public class AssetTypeServiceImpl extends BaseServiceImpl<AssetType, AssetTypeDT
 	}
 
 	@Override
-	protected AssetType afterSave(AssetType model) {
+	protected AssetType afterSave(AssetTypeDTO assetTypeDTO, AssetType model) {
 		return model;
 	}
 

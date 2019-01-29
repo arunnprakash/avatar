@@ -50,7 +50,7 @@ public class HolidayServiceImpl extends BaseServiceImpl<Holiday, HolidayDTO, Hol
 		return model;
 	}
 	@Override
-	protected Holiday afterSave(Holiday model) {
+	protected Holiday afterSave(HolidayDTO holidayDTO, Holiday model) {
 		return model;
 	}
 	@Override

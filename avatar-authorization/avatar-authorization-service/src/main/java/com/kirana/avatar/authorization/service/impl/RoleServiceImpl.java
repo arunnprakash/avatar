@@ -60,7 +60,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, RoleDTO, RoleMapper, 
 	}
 
 	@Override
-	protected Role afterSave(Role model) {
+	protected Role afterSave(RoleDTO roleDTO, Role model) {
 		return model;
 	}
 

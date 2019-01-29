@@ -52,7 +52,7 @@ public class CountryServiceImpl extends BaseServiceImpl<Country, CountryDTO, Cou
 	}
 
 	@Override
-	protected Country afterSave(Country model) {
+	protected Country afterSave(CountryDTO countryDTO, Country model) {
 		return model;
 	}
 

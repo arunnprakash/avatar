@@ -62,7 +62,7 @@ public class DistrictServiceImpl extends BaseServiceImpl<District, DistrictDTO, 
 
 
 	@Override
-	protected District afterSave(District model) {
+	protected District afterSave(DistrictDTO districtDTO, District model) {
 		return model;
 	}
 

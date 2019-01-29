@@ -57,7 +57,7 @@ public class UserDeviceServiceImpl extends BaseServiceImpl<UserDevice, UserDevic
 	}
 
 	@Override
-	protected UserDevice afterSave(UserDevice model) {
+	protected UserDevice afterSave(UserDeviceDTO userDeviceDTO, UserDevice model) {
 		return model;
 	}
 

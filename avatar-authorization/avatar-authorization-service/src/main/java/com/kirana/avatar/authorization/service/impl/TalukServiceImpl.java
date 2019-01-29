@@ -62,7 +62,7 @@ public class TalukServiceImpl extends BaseServiceImpl<Taluk, TalukDTO, TalukMapp
 	}
 
 	@Override
-	protected Taluk afterSave(Taluk model) {
+	protected Taluk afterSave(TalukDTO talukDTO, Taluk model) {
 		return model;
 	}
 

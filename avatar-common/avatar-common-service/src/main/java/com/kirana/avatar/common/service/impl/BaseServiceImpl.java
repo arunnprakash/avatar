@@ -120,13 +120,13 @@ public abstract class BaseServiceImpl<Model extends BaseEntity<Model>,
 			Model model = mapper.toModel(resource);
 			model = beforeSave(model);
 			model = repository.save(model);
-			model = afterSave(model);
+			model = afterSave(resource, model);
 			return mapper.toDTO(model);
 		}
 	}
 
 	protected abstract Model beforeSave(Model model);
-	protected abstract Model afterSave(Model model);
+	protected abstract Model afterSave(DTO resource, Model model);
 
 	@Override
 	public DTO update(DTO resource) {

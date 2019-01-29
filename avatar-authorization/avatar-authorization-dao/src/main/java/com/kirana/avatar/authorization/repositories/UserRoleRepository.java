@@ -12,8 +12,12 @@
  *******************************************************************************/
 package com.kirana.avatar.authorization.repositories;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Repository;
 
+import com.kirana.avatar.authorization.model.Role;
+import com.kirana.avatar.authorization.model.User;
 import com.kirana.avatar.authorization.model.UserRole;
 import com.kirana.avatar.common.jpa.repository.BaseRepository;
 
@@ -23,5 +27,5 @@ import com.kirana.avatar.common.jpa.repository.BaseRepository;
  */
 @Repository
 public interface UserRoleRepository extends BaseRepository<UserRole> {
-
+	public Optional<UserRole> findByUserAndRole(User user, Role role);
 }

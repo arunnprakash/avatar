@@ -24,6 +24,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kirana.avatar.authorization.dto.RoleDTO;
 import com.kirana.avatar.authorization.dto.UserDTO;
 import com.kirana.avatar.authorization.mapper.UserMapper;
 import com.kirana.avatar.authorization.model.Language;
@@ -33,8 +34,10 @@ import com.kirana.avatar.authorization.model.UserRole;
 
 import static com.kirana.avatar.authorization.model.User_.USER_NAME;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.persistence.Transient;
@@ -99,20 +102,17 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 		this.jwtConfig = jwtConfig;
 	}
 
-	private List<Role> roles;
 	@Override
 	protected User beforeSave(User model) {
 		String encryptedPassword = bCryptPasswordEncoder.encode(jwtConfig.getDefaultPassword());
 		model.setPassword(encryptedPassword);
 		model.setSuspended(false);
-		roles = model.getRoles();
 		model.setRoles(null);
 		return model;
 	}
 
 	@Override
 	protected User beforeUpdate(UserDTO userDTO, final User model) {
-		roles = model.getRoles();
 		model.setRoles(null);
 		languageRepository
 				.findById(userDTO.getPreferredLanguage().getId())
@@ -138,34 +138,35 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 	}
 
 	@Override
-	protected User afterSave(User model) {
-		if (null != roles && !roles.isEmpty()) {
-			for (Role role : roles) {
-				role = roleRepository.findById(role.getId()).get();
+	protected User afterSave(UserDTO userDTO, User model) {
+		if (null != userDTO.getRoles() && !userDTO.getRoles().isEmpty()) {
+			for (RoleDTO roleDTO : userDTO.getRoles()) {
+				Role role = roleRepository.findById(roleDTO.getId()).get();
 				UserRole userRole = new UserRole();
 				userRole.setUser(model);
 				userRole.setRole(role);
 				userRoleRepository.save(userRole);
 			}
 			model = userRepository.findById(model.getId()).get();
-			roles = null;
 		}
 		return model;
 	}
 
 	@Override
 	protected User afterUpdate(UserDTO userDTO, User model) {
-		if (null != roles && !roles.isEmpty()) {
-			for (Role role : roles) {
-				role = roleRepository.findById(role.getId()).get();
-				UserRole userRole = new UserRole();
-				userRole.setUser(model);
-				userRole.setRole(role);
-				userRoleRepository.save(userRole);
+		if (null != userDTO.getRoles() && !userDTO.getRoles().isEmpty()) {
+			for (RoleDTO roleDTO : userDTO.getRoles()) {
+				Role role = roleRepository.findById(roleDTO.getId()).get();
+				Optional<UserRole> userRoleO = userRoleRepository.findByUserAndRole(model, role);
+				if (!userRoleO.isPresent()) {
+					UserRole userRole = new UserRole();
+					userRole.setUser(model);
+					userRole.setRole(role);
+					userRoleRepository.save(userRole);
+				}
 			}
-			model = userRepository.findById(model.getId()).get();
-			roles = null;
 		}
+		model = userRepository.findById(model.getId()).get();
 		return model;
 	}
 

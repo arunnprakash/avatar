@@ -45,7 +45,7 @@ public class PriceHistoryServiceImpl extends BaseServiceImpl<PriceHistory, Price
 		return model;
 	}
 	@Override
-	protected PriceHistory afterSave(PriceHistory model) {
+	protected PriceHistory afterSave(PriceHistoryDTO priceHistoryDTO, PriceHistory model) {
 		return model;
 	}
 	@Override

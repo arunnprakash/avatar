@@ -62,7 +62,7 @@ public class VillageServiceImpl extends BaseServiceImpl<Village, VillageDTO, Vil
 	}
 
 	@Override
-	protected Village afterSave(Village model) {
+	protected Village afterSave(VillageDTO villageDTO, Village model) {
 		return model;
 	}
 

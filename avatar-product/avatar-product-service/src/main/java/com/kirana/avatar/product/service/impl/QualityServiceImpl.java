@@ -45,7 +45,7 @@ public class QualityServiceImpl extends BaseServiceImpl<Quality, QualityDTO, Qua
 		return model;
 	}
 	@Override
-	protected Quality afterSave(Quality model) {
+	protected Quality afterSave(QualityDTO qualityDTO, Quality model) {
 		return model;
 	}
 	@Override

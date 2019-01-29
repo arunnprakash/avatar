@@ -53,7 +53,7 @@ public class ProductAssetServiceImpl extends BaseServiceImpl<ProductAsset, Produ
 		return model;
 	}
 	@Override
-	protected ProductAsset afterSave(ProductAsset model) {
+	protected ProductAsset afterSave(ProductAssetDTO productAssetDTO, ProductAsset model) {
 		return model;
 	}
 	@Override

@@ -15,7 +15,7 @@ spring:
         default_schema: authorization
   datasource:
     platform: postgres
-    url: jdbc:mysql://localhost:3306/avatar?useUnicode=yes
+    url: jdbc:mysql://localhost:3306/avatar?useUnicode=yes&characterEncoding=UTF-8
     username: root
     password: admin
     driverClassName: com.mysql.cj.jdbc.Driver

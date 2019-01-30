@@ -84,23 +84,17 @@ export abstract class BaseDetailComponent extends AbstractBaseDetailComponent  i
         }
     }
     onTokenAdded(event, col) {
-        console.log("onTokenAdded");
         var tokenText = event.token.text;
         var optionLabel = col.optionLabel;
-        console.log("tokenText " + tokenText);
-        console.log("optionLabel " + optionLabel);
-        console.log("originalOptions " , col.originalOptions);
         var searchOptions = {};
         searchOptions[optionLabel] = tokenText;
-        console.log("SearchOptions " , searchOptions);
         var selectedOption = _.find(col.originalOptions, searchOptions);
-        console.log("selectedOption ", selectedOption);
         if (col.multiple) {
             var existingOptions = this.model[col.field];
             if (!existingOptions) {
                 existingOptions = [];
             }
-            var optionExist = _.find(existingOptions, selectedOption);
+            var optionExist = _.find(existingOptions, {'id': selectedOption.id});
             if (!optionExist) {
                 existingOptions.push(selectedOption);
             }
@@ -109,8 +103,25 @@ export abstract class BaseDetailComponent extends AbstractBaseDetailComponent  i
             this.model[col.field] = selectedOption;
         }
     }
-    onTokenRemoved(event, model, col) {
-        console.log("onTokenRemoved");
+    onTokenRemoved(event, col) {
+        var tokenText = event.token.text;
+        var optionLabel = col.optionLabel;
+        var searchOptions = {};
+        searchOptions[optionLabel] = tokenText;
+        if (col.multiple) {
+            var deletedOption = _.find(col.originalOptions, searchOptions);
+            var existingOptions = this.model[col.field];
+            if (!existingOptions) {
+                existingOptions = [];
+            }
+            var option = _.find(existingOptions, {'id': deletedOption.id});
+            if (option) {
+                existingOptions = _.remove(existingOptions, {'id': option.id});
+            }
+            this.model[col.field] = existingOptions;
+        } else {
+            this.model[col.field] = null;
+        }
     }
     protected closeDetailDialog() {
         this.params.closeCallback();

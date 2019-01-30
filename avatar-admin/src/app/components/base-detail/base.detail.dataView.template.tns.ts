@@ -41,7 +41,7 @@ export const baseDetailDataViewTemplate: string = `
                             suggestMode="Suggest" displayMode="Tokens" completionMode="Contains" showCloseButton="false" 
                             (loaded)="onAutoCompleteLoaded($event, false, model[col.field], col)" 
                             (tokenAdded)="onTokenAdded($event, col)" 
-                            (tokenRemoved)="onTokenRemoved($event, col.optionLabel)"
+                            (tokenRemoved)="onTokenRemoved($event, col)"
                             [returnKeyType]="isLast?'done':'next'">
                             <SuggestionView tkAutoCompleteSuggestionView suggestionViewHeight="300">
                                 <ng-template tkSuggestionItemTemplate let-item="item">

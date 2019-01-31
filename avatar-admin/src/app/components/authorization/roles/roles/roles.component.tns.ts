@@ -22,7 +22,7 @@ import { RoleDetailComponent } from "../role-detail/role-detail.component";
 export class RolesComponent extends BaseComponent implements OnInit {
 
     protected title = 'Role';
-    protected localCols: any[] = [{ field: 'roleName', header: 'RoleName', dataType: 'INPUT' }];
+    protected localCols: any[] = [{ field: 'roleName', header: 'RoleName', dataType: 'INPUT', autocapitalizationType:'allcharacters', keyboardType: 'email' }];
 
     constructor( roleService: RoleService, authService: AuthService, translate: TranslateService, 
             modalDialogService: ModalDialogService, dialogService: ModalDialogService, 

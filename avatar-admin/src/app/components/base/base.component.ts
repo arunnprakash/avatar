@@ -1,5 +1,6 @@
 import { OnInit, ViewContainerRef } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
+import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from "@ngx-translate/core";
 import { AbstractBaseComponent } from "./abstract.base.component";
 
@@ -16,7 +17,7 @@ export abstract class BaseComponent extends AbstractBaseComponent implements OnI
     protected alertDialogTitle: string;
     protected alertDialogMessage: string;
     protected loading: boolean;
-    constructor(service: any, authService: AuthService, translate: TranslateService, 
+    constructor(service: any, authService: AuthService, translate: TranslateService, public domSanitizer?: DomSanitizer,
             private confirmationService?: any, private dialogService?: any, private detailComponent?: any, 
             private router?: Router, private activatedRoute?: ActivatedRoute, private vcRef?: ViewContainerRef) {
         super(service, authService, translate);
@@ -34,11 +35,6 @@ export abstract class BaseComponent extends AbstractBaseComponent implements OnI
         this.loading = value;
     }
     protected showDetailDialog(value: boolean) {
-        /*this.displayDetailDialog = value;
-        this.displayEditDetail=false;
-        if(!this.model.id) {
-            this.displayEditDetail = true;
-        }*/
         this.dialogService.open(this.detailComponent, {
             data: {
                 model: this.model, cols: this.cols, localCols: this.localCols, title: this.title, displayEditDetail: this.model.id?false:true
@@ -63,5 +59,9 @@ export abstract class BaseComponent extends AbstractBaseComponent implements OnI
     }
     protected recordListLoaded(): void {
         
+    }
+    getPhoto(assets: any[]){
+        var assetValue = "data:image/png;base64," + _.find(assets, function(asset) { return asset.assetType.assetTypeName == "PHOTO"; }).assetValue;
+        return this.domSanitizer.bypassSecurityTrustUrl(assetValue);
     }
 }

@@ -8,7 +8,8 @@ import { confirm, ConfirmOptions } from "tns-core-modules/ui/dialogs";
 import { alert, AlertOptions } from "tns-core-modules/ui/dialogs";
 import { ViewContainerRef } from "@angular/core";
 import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/modal-dialog";
-import {LoadingIndicator} from "nativescript-loading-indicator";
+import { LoadingIndicator } from "nativescript-loading-indicator";
+import { fromBase64, fromResource }  from "tns-core-modules/image-source";
 
 import { PagingAndFilterRequest } from "../../services/authorization/pagingandfilterrequest.model";
 import { FilterCriteria } from "../../services/authorization/filtercriteria.model";
@@ -152,5 +153,9 @@ export abstract class BaseComponent extends AbstractBaseComponent implements OnI
                 return this.totalNumberOfPages - (this.maxSize - 1);
             }
         }
+    }
+    getPhoto(assets: any[]){
+        var imageAsBase64String = _.find(assets, function(asset) { return asset.assetType.assetTypeName == "PHOTO"; }).assetValue;
+        return fromBase64(imageAsBase64String);
     }
 }

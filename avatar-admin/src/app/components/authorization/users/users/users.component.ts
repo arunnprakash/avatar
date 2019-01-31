@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
+import { DomSanitizer } from '@angular/platform-browser';
 import { ConfirmationService, DialogService } from 'primeng/api';
 import { TranslateService } from "@ngx-translate/core";
 import { baseDataViewTemplate } from '../../../base/base.dataView.template';
@@ -41,12 +42,12 @@ export class UsersComponent extends BaseComponent implements OnInit {
          { field: 'village', header: 'Village', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"en"},
          { field: 'gender', header: 'Gender', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"en"}
     ];
-    constructor( userService: UserService, authService: AuthService, translate: TranslateService, 
+    constructor( userService: UserService, authService: AuthService, translate: TranslateService, domSanitizer: DomSanitizer,
             private roleService: RoleService, private languageService: LanguageService, 
             private villageService: VillageService, private genderService: GenderService,
             confirmationService: ConfirmationService, dialogService: DialogService,
             router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef ) {
-        super( userService, authService, translate, confirmationService, dialogService,UserDetailComponent, router, activatedRoute, vcRef );
+        super( userService, authService, translate, domSanitizer, confirmationService, dialogService, UserDetailComponent, router, activatedRoute, vcRef );
         this.languageCode = authService.getUserInfo().preferredLanguage.languageCode;
     }
 

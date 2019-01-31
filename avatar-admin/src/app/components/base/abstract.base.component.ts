@@ -200,4 +200,9 @@ export abstract class AbstractBaseComponent implements OnInit {
             });
         });
     }
+    hasPhoto(assets: any[]){
+        let asset: any = _.find(assets, function(asset) { return asset.assetType.assetTypeName == "PHOTO"; });
+        return asset? true: false;
+    }
+
 }

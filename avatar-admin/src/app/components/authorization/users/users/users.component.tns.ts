@@ -38,10 +38,10 @@ export class UsersComponent extends BaseComponent implements OnInit, AfterViewIn
     protected title = 'User';
     
     protected localCols: any[] = [
-         { field: 'userName', header: 'UserName', dataType: 'INPUT' },
-         { field: 'mobileNumber', header: 'MobileNumber', dataType: 'INPUT' },
-         { field: 'firstName', header: 'FirstName', dataType: 'INPUT' },
-         { field: 'lastName', header: 'LastName', dataType: 'INPUT' },
+         { field: 'userName', header: 'UserName', dataType: 'INPUT', autocapitalizationType: 'none', keyboardType: 'email' },
+         { field: 'mobileNumber', header: 'MobileNumber', dataType: 'INPUT', autocapitalizationType:'none', keyboardType: 'phone' },
+         { field: 'firstName', header: 'FirstName', dataType: 'INPUT', autocapitalizationType:'none', keyboardType: 'email' },
+         { field: 'lastName', header: 'LastName', dataType: 'INPUT', autocapitalizationType:'none', keyboardType: 'email' },
          { field: 'dob', header: 'DateOfBirth', dataType: 'DATE' },
          { field: 'roles', header: 'Roles', dataType: 'AUTOCOMPLETE', multiple: true, options: new ObservableArray<TokenModel>(), optionLabel:"roleName" },
          { field: 'preferredLanguage', header: 'PreferredLanguage', dataType: 'AUTOCOMPLETE', multiple: false, options: new ObservableArray<TokenModel>() , optionLabel:"languageName"},

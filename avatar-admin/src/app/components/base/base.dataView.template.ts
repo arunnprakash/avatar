@@ -32,16 +32,15 @@ export const baseDataViewTemplate: string = `
                             <p-checkbox binary="true" label="SelectAll" [(ngModel)]="isSelectAllChecked" (onChange)="selectAll()"></p-checkbox>
                         </span>
                     </div>
-
                 </div>
             </div>
         </p-header>
         <ng-template let-rowData let-rowIndex="rowIndex" let-columns="columns" pTemplate="listItem">
             <div class="ui-g hand-cursor tableRowHoverCss" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
                 <div class="ui-g-12 ui-md-3" style="text-align:center" (click)="displayDetailDialog(rowData)">
-                        <img *ngIf="rowData.photo" class="card-img-top" src="data:image/png;base64,{{rowData.image}}" alt="image"
+                        <img *ngIf="hasPhoto(rowData.assets)" class="card-img-top" [src]="getPhoto(rowData.assets)" alt="image"
                             style="width: 100%">
-                        <img *ngIf="!rowData.photo" class="card-img-top" src="/assets/images/avatar.png" alt="image"
+                        <img *ngIf="!hasPhoto(rowData.assets)" class="card-img-top" src="/assets/images/avatar.png" alt="image"
                             style="width: 100%">
                 </div>
                 <div class="ui-g-12 ui-md-8" (click)="rowDataClicked(rowData)">
@@ -66,9 +65,9 @@ export const baseDataViewTemplate: string = `
         <ng-template let-rowData let-rowIndex="rowIndex" let-columns="columns" pTemplate="gridItem">
             <div style="padding:.5em" class="ui-g-12 ui-md-3 hand-cursor tableRowHoverCss" (click)="displayDetailDialog(rowData)">
                 <p-panel [header]="rowData[localCols[0].field]" [style]="{'text-align':'center'}">
-                        <img *ngIf="rowData.photo" class="card-img-top" src="data:image/png;base64,{{rowData.image}}" alt="image"
+                        <img *ngIf="hasPhoto(rowData.assets)" class="card-img-top" [src]="getPhoto(rowData.assets)" alt="image"
                             style="width: 100%" width="60">
-                        <img *ngIf="!rowData.photo" class="card-img-top" src="/assets/images/avatar.png" alt="image"
+                        <img *ngIf="!hasPhoto(rowData.assets)" class="card-img-top" src="/assets/images/avatar.png" alt="image"
                             style="width: 100%" width="60">
                     <div>{{rowData[localCols[0].field]}} - {{rowData[localCols[1].field]}}</div>
                     <hr class="ui-widget-content" style="border-top:0">

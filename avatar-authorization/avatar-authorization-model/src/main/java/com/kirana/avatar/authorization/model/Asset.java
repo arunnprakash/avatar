@@ -44,7 +44,7 @@ import lombok.ToString;
 public class Asset extends BaseEntity<Asset> {
 	@ManyToOne
 	protected AssetType assetType;
-	@Column(nullable = false)
+	@Column(nullable = false, columnDefinition="LONGTEXT")
 	protected String assetValue;
 
 }

@@ -1,9 +1,13 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransition } from "nativescript-ui-sidedrawer";
 import { RadSideDrawerComponent, SideDrawerType } from "nativescript-ui-sidedrawer/angular";
+import { fromBase64, fromResource }  from "tns-core-modules/image-source";
 import { Router, ActivatedRoute } from "@angular/router";
+
 import { AuthService } from "../../services/auth.service";
 import { UserDTO } from "../../services/authorization/userdto.model";
+
+import * as _ from "lodash";
 
 @Component( {
     selector: 'home',
@@ -37,5 +41,14 @@ export class HomeComponent implements OnInit {
     }
     onNavItemTap( componentPath: string ) {
     }
-
+    hasPhoto(){
+        let assets: any[] = this.userDTO.assets;
+        let asset: any = _.find(assets, function(asset) { return asset.assetType.assetTypeName == "PHOTO"; });
+        return asset? true: false;
+    }
+    getPhoto(){
+        let assets: any[] = this.userDTO.assets;
+        var imageAsBase64String = _.find(assets, function(asset) { return asset.assetType.assetTypeName == "PHOTO"; }).assetValue;
+        return fromBase64(imageAsBase64String);
+    }
 }

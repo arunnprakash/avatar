@@ -24,12 +24,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kirana.avatar.authorization.dto.AssetDTO;
 import com.kirana.avatar.authorization.dto.RoleDTO;
 import com.kirana.avatar.authorization.dto.UserDTO;
+import com.kirana.avatar.authorization.mapper.AssetMapper;
 import com.kirana.avatar.authorization.mapper.UserMapper;
+import com.kirana.avatar.authorization.model.Asset;
+import com.kirana.avatar.authorization.model.AssetType;
 import com.kirana.avatar.authorization.model.Language;
 import com.kirana.avatar.authorization.model.Role;
 import com.kirana.avatar.authorization.model.User;
+import com.kirana.avatar.authorization.model.UserAsset;
 import com.kirana.avatar.authorization.model.UserRole;
 
 import static com.kirana.avatar.authorization.model.User_.USER_NAME;
@@ -48,9 +53,12 @@ import static com.kirana.avatar.authorization.model.User_.SUSPENDED;
 import static com.kirana.avatar.authorization.model.User_.MOBILE_NUMBER;
 import static com.kirana.avatar.authorization.model.User_.SUSPENDED;
 
+import com.kirana.avatar.authorization.repositories.AssetRepository;
+import com.kirana.avatar.authorization.repositories.AssetTypeRepository;
 import com.kirana.avatar.authorization.repositories.GenderRepository;
 import com.kirana.avatar.authorization.repositories.LanguageRepository;
 import com.kirana.avatar.authorization.repositories.RoleRepository;
+import com.kirana.avatar.authorization.repositories.UserAssetRepository;
 import com.kirana.avatar.authorization.repositories.UserRepository;
 import com.kirana.avatar.authorization.repositories.VillageRepository;
 import com.kirana.avatar.authorization.service.UserService;
@@ -80,7 +88,11 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 	private GenderRepository genderRepository;
 	private RoleRepository roleRepository;
 	private UserRoleRepository userRoleRepository;
+	private AssetRepository assetRepository;
+	private UserAssetRepository userAssetRepository;
+	private AssetTypeRepository assetTypeRepository;
 	private UserMapper userMapper;
+	private AssetMapper assetMapper;
 	private UserSpecification userSpecification;
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	private JwtConfig jwtConfig;
@@ -88,6 +100,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 	public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, UserSpecification userSpecification,
 			LanguageRepository languageRepository, VillageRepository villageRepository, GenderRepository genderRepository,
 			RoleRepository roleRepository, UserRoleRepository userRoleRepository,
+			AssetRepository assetRepository, UserAssetRepository userAssetRepository, AssetMapper assetMapper,
+			AssetTypeRepository assetTypeRepository,
 			BCryptPasswordEncoder bCryptPasswordEncoder, JwtConfig jwtConfig) {
 		super(userRepository, userMapper, userSpecification);
 		this.userRepository = userRepository;
@@ -98,6 +112,10 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 		this.genderRepository = genderRepository;
 		this.roleRepository = roleRepository;
 		this.userRoleRepository = userRoleRepository;
+		this.assetRepository = assetRepository;
+		this.userAssetRepository = userAssetRepository;
+		this.assetTypeRepository = assetTypeRepository;
+		this.assetMapper = assetMapper;
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 		this.jwtConfig = jwtConfig;
 	}
@@ -108,12 +126,14 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 		model.setPassword(encryptedPassword);
 		model.setSuspended(false);
 		model.setRoles(null);
+		model.setAssets(null);
 		return model;
 	}
 
 	@Override
 	protected User beforeUpdate(UserDTO userDTO, final User model) {
 		model.setRoles(null);
+		model.setAssets(null);
 		languageRepository
 				.findById(userDTO.getPreferredLanguage().getId())
 				.map(preferredLanguage -> {
@@ -147,9 +167,20 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 				userRole.setRole(role);
 				userRoleRepository.save(userRole);
 			}
-			model = userRepository.findById(model.getId()).get();
 		}
-		return model;
+		if (null != userDTO.getAssets() && !userDTO.getAssets().isEmpty()) {
+			for (AssetDTO assetDTO : userDTO.getAssets()) {
+				Asset asset = assetMapper.toModel(assetDTO);
+				AssetType assetType = assetTypeRepository.getOne(asset.getAssetType().getId());
+				asset.setAssetType(assetType);
+				asset = assetRepository.save(asset);
+				UserAsset userAsset = new UserAsset();
+				userAsset.setUser(model);
+				userAsset.setAsset(asset);
+				userAssetRepository.save(userAsset);
+			}
+		}
+		return userRepository.findById(model.getId()).get();
 	}
 
 	@Override
@@ -164,6 +195,18 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 					userRole.setRole(role);
 					userRoleRepository.save(userRole);
 				}
+			}
+		}
+		if (null != userDTO.getAssets() && !userDTO.getAssets().isEmpty()) {
+			for (AssetDTO assetDTO : userDTO.getAssets()) {
+				Asset asset = assetMapper.toModel(assetDTO);
+				AssetType assetType = assetTypeRepository.getOne(asset.getAssetType().getId());
+				asset.setAssetType(assetType);
+				asset = assetRepository.save(asset);
+				UserAsset userAsset = new UserAsset();
+				userAsset.setUser(model);
+				userAsset.setAsset(asset);
+				userAssetRepository.save(userAsset);
 			}
 		}
 		model = userRepository.findById(model.getId()).get();

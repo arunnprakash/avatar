@@ -35,9 +35,10 @@ export abstract class BaseComponent extends AbstractBaseComponent implements OnI
         this.loading = value;
     }
     protected showDetailDialog(value: boolean) {
+        var model = _.cloneDeep(this.model);
         this.dialogService.open(this.detailComponent, {
             data: {
-                model: this.model, cols: this.cols, localCols: this.localCols, title: this.title, displayEditDetail: this.model.id?false:true
+                model: model, cols: this.cols, localCols: this.localCols, title: this.title, displayEditDetail: model.id?false:true
             },
             header: this.title+' Detail',
             width: '50%',

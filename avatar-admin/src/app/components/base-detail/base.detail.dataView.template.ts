@@ -29,6 +29,9 @@ export const baseDetailDataViewTemplate: string = `
                     <p-calendar *ngSwitchCase="'DATETIME'" [ngModel]="model[col.field] | date:'yyyy-MM-dd'" (ngModelChange)="dateChanged($event, col.field)" [showIcon]="true" dateFormat="yy-mm-dd" appendTo="body" [inputStyle]="{'width':'65%'}"></p-calendar>
                     <p-multiSelect *ngSwitchCase="'MULTISELECT'" [options]="col.options" [(ngModel)]="model[col.field]" [optionLabel]="col.optionLabel" appendTo="body" [style]="{'width':'100%'}"></p-multiSelect>
                     <p-autoComplete *ngSwitchCase="'AUTOCOMPLETE'" immutable="false" (completeMethod)="filterAutoCompleteSuggestion(col.field, model[col.field])" [(ngModel)]="model[col.field]" [suggestions]="col.options" forceSelection="true" [field]="col.optionLabel" [dropdown]="true" [multiple]="col.multiple" [size]="30" [placeholder]="col.header"></p-autoComplete>
+                    <div *ngSwitchCase="'FILE'">
+                        <p-fileUpload *ngFor="let assetType of col.options" accept="image/*" maxFileSize="1000000" auto="auto" mode="basic" [chooseLabel]="assetType.assetTypeName" customUpload="true" (uploadHandler)="fileSelectedEventHandler($event, assetType)"></p-fileUpload>
+                    </div>
                 </div>
             </div>
         </div>

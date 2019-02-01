@@ -54,9 +54,10 @@ export abstract class BaseComponent extends AbstractBaseComponent implements OnI
         this.lazyLoadRecordList();
     }
     protected showDetailDialog(value: boolean) {
+        var model = _.cloneDeep(this.model);
         const options: any = {
                 viewContainerRef: this.vcRef,
-                context: {model: this.model, cols: this.cols, localCols: this.localCols, title: this.title, displayEditDetail: this.model.id?false:true },
+                context: {model: model, cols: this.cols, localCols: this.localCols, title: this.title, displayEditDetail: model.id?false:true },
                 fullscreen: false,
         };
         this.modalDialogService.showModal(this.detailComponent, options);

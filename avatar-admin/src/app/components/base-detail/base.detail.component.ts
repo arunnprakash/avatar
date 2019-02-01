@@ -35,4 +35,12 @@ export abstract class BaseDetailComponent extends AbstractBaseDetailComponent im
     protected closeDetailDialog() {
         this.dialog.close();
     }
+    fileSelectedEventHandler(event, asset) {
+        var file = event.files[0];
+        let fileReader = new FileReader();
+        fileReader.onload = (e) => {
+            asset.assetValue = fileReader.result;
+        }
+        fileReader.readAsText(file);
+    }
 }

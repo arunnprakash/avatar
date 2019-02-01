@@ -21,6 +21,7 @@ import { DataViewModule } from 'primeng/dataview';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { ChipsModule } from 'primeng/chips';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { FileUploadModule } from 'primeng/fileupload';
 
 import { routes, componentDeclarations, providerDeclarations } from './users.common';
 import { UserDetailComponent } from './user-detail/user-detail.component';
@@ -49,6 +50,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
         ScrollPanelModule,
         ChipsModule,
         AutoCompleteModule,
+        FileUploadModule,
         RouterModule.forChild( routes )
     ],
     exports: [

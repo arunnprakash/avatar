@@ -17,6 +17,7 @@
 		"lastName":"LastName",
 		"dob":"DateOfBirth",
 		"roles":"Roles",
+		"assets": "Assets",
 		"preferredLanguage":"PreferredLanguage",
 		"village":"Village",
 		"gender": "Gender"

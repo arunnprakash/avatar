@@ -12,12 +12,15 @@ import { RoleService } from '../../../../services/authorization/roleservice.gene
 import { LanguageService } from '../../../../services/authorization/languageservice.generated';
 import { VillageService } from '../../../../services/authorization/villageservice.generated';
 import { GenderService } from '../../../../services/authorization/genderservice.generated';
+import { AssetTypeService } from "../../../../services/authorization/assettypeservice.generated";
 import { AuthService } from "../../../../services/auth.service";
+
 import { UserDTO } from "../../../../services/authorization/userdto.model";
 import { RoleDTO } from "../../../../services/authorization/roledto.model";
 import { LanguageDTO } from "../../../../services/authorization/languagedto.model";
 import { VillageDTO } from "../../../../services/authorization/villagedto.model";
 import { GenderDTO } from "../../../../services/authorization/genderdto.model";
+import { AssetTypeDTO } from "../../../../services/authorization/assettypedto.model";
 import { UserDetailComponent } from "../user-detail/user-detail.component";
 
 import * as _ from "lodash";
@@ -40,11 +43,13 @@ export class UsersComponent extends BaseComponent implements OnInit {
          { field: 'roles', header: 'Roles', dataType: 'AUTOCOMPLETE', multiple: true, options: [] , optionLabel:"roleName"},
          { field: 'preferredLanguage', header: 'PreferredLanguage', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"languageName"},
          { field: 'village', header: 'Village', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"en"},
-         { field: 'gender', header: 'Gender', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"en"}
+         { field: 'gender', header: 'Gender', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"en"},
+         { field: 'assets', header: 'Assets', dataType: 'FILE', multiple: true, options: [] , optionLabel:"assetValue"}
     ];
     constructor( userService: UserService, authService: AuthService, translate: TranslateService, domSanitizer: DomSanitizer,
             private roleService: RoleService, private languageService: LanguageService, 
             private villageService: VillageService, private genderService: GenderService,
+            private assetTypeService: AssetTypeService,
             confirmationService: ConfirmationService, dialogService: DialogService,
             router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef ) {
         super( userService, authService, translate, domSanitizer, confirmationService, dialogService, UserDetailComponent, router, activatedRoute, vcRef );
@@ -56,9 +61,19 @@ export class UsersComponent extends BaseComponent implements OnInit {
         console.log("ngOnInit user.component");
         this.initFieldsLabel("users");
         this.initRolesList();
+        this.initAssetTypeList();
         this.initLanguageList();
         this.initVillageList();
         this.initGenderList();
+    }
+    initAssetTypeList() {
+        this.assetTypeService.getAllExceptDeleted().subscribe((assetTypes: AssetTypeDTO[]) => {
+            let menuItem: any = _.find(this.localCols, { 'field': 'assets' });
+            menuItem.options = assetTypes;
+        },
+        ( error ) => {
+            this.showAlertDialog('Error', 'Error while getting Asset Type List');
+        });
     }
     initGenderList() {
         this.genderService.getAllExceptDeleted().subscribe((genders: GenderDTO[]) => {

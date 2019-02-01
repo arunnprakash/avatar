@@ -4,6 +4,7 @@ import { Observable, of} from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { PagingAndFilterResponse } from './pagingandfilterresponse.model';
+import { AssetDTO } from './assetdto.model';
 import { PagingAndFilterRequest } from './pagingandfilterrequest.model';
 import { AssetTypeDTO } from './assettypedto.model';
 import { FilterCriteria } from './filtercriteria.model';
@@ -15,34 +16,34 @@ import { ServiceConfig } from './serviceconfig';
  * 
  */
 @Injectable()
-export class AssertTypeService {
+export class AssetService {
     private get serviceBaseURL(): string {
-        return this.serviceConfig.context + '/api/assertType';
+        return this.serviceConfig.context + '/api/asset';
     }
 
     constructor(private httpClient: HttpClient, private serviceConfig: ServiceConfig) { }
     /* GET */
-    public getAll(): Observable<AssetTypeDTO[]> {
+    public getAll(): Observable<AssetDTO[]> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.get<AssetTypeDTO[]>(url, {params: params})
+        return this.httpClient.get<AssetDTO[]>(url, {params: params})
             .pipe(catchError(this.handleError));
     }
 
-    public getAllExceptDeleted(): Observable<AssetTypeDTO[]> {
+    public getAllExceptDeleted(): Observable<AssetDTO[]> {
         const url = this.serviceBaseURL + '/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
-        return this.httpClient.get<AssetTypeDTO[]>(url, {params: params})
+        return this.httpClient.get<AssetDTO[]>(url, {params: params})
             .pipe(catchError(this.handleError));
     }
 
-    public get(id: number): Observable<AssetTypeDTO> {
+    public get(id: number): Observable<AssetDTO> {
         const url = this.serviceBaseURL + '/' + id + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.get<AssetTypeDTO>(url, {params: params})
+        return this.httpClient.get<AssetDTO>(url, {params: params})
             .pipe(catchError(this.handleError));
     }
 
@@ -50,11 +51,11 @@ export class AssertTypeService {
     /* HEAD */
 
     /* POST */
-    public save(arg0: AssetTypeDTO): Observable<AssetTypeDTO> {
+    public save(arg0: AssetDTO): Observable<AssetDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.post<AssetTypeDTO>(url, arg0, {params: params})
+        return this.httpClient.post<AssetDTO>(url, arg0, {params: params})
             .pipe(catchError(this.handleError));
     }
 
@@ -76,11 +77,11 @@ export class AssertTypeService {
 
 
     /* PUT */
-    public update(arg0: AssetTypeDTO): Observable<AssetTypeDTO> {
+    public update(arg0: AssetDTO): Observable<AssetDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.put<AssetTypeDTO>(url, arg0, {params: params})
+        return this.httpClient.put<AssetDTO>(url, arg0, {params: params})
             .pipe(catchError(this.handleError));
     }
 

@@ -12,8 +12,8 @@ import com.kirana.avatar.common.resource.BaseResource;
  * @author __Telmila__
  *
  */
-@TypeScriptEndpoint("AssertService")
-@RequestMapping(value= {"/api/assert"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+@TypeScriptEndpoint("AssetService")
+@RequestMapping(value= {"/api/asset"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 public interface AssetResource extends BaseResource<AssetDTO> {
 
 }

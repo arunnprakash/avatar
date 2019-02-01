@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 /*@import '~primeng/resources/themes/luna-green/theme.css'; */
 @import '~primeng/resources/themes/nova-light/theme.css'; 
+@import 'assets/themes/nova-light/theme.css'; 
 /* @import '~primeng/resources/themes/south-street/theme.css'; */
 /*@import '~primeng/resources/themes/flick/theme.css';*/
 @import '~primeng/resources/primeng.min.css';

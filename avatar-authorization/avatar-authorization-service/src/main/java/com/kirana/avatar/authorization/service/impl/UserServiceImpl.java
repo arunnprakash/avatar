@@ -199,7 +199,12 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 		}
 		if (null != userDTO.getAssets() && !userDTO.getAssets().isEmpty()) {
 			for (AssetDTO assetDTO : userDTO.getAssets()) {
-				Asset asset = assetMapper.toModel(assetDTO);
+				Asset asset = null;
+				if (null != assetDTO.getId()) {
+					asset = assetRepository.getOne(assetDTO.getId());
+				} else {
+					asset = assetMapper.toModel(assetDTO);
+				}
 				AssetType assetType = assetTypeRepository.getOne(asset.getAssetType().getId());
 				asset.setAssetType(assetType);
 				asset = assetRepository.save(asset);

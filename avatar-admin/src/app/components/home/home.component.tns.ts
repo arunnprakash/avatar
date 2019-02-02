@@ -49,6 +49,7 @@ export class HomeComponent implements OnInit {
     getPhoto(){
         let assets: any[] = this.userDTO.assets;
         var imageAsBase64String = _.find(assets, function(asset) { return asset.assetType.assetTypeName == "PHOTO"; }).assetValue;
+        imageAsBase64String = imageAsBase64String.replace(/^data:image\/[a-z]+;base64,/, "");
         return fromBase64(imageAsBase64String);
     }
 }

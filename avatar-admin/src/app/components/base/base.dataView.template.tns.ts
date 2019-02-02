@@ -13,7 +13,7 @@ export const baseDataViewTemplate: string = `
         <ng-template let-rowData="item" let-rowIndex="index"> 
         <StackLayout class="all-sides-margin all-sides-padding record-content rounded-corner-border">
             <FlexboxLayout verticalAlignment="bottom" flexDirection="row" alignItems="flex-end" justifyContent="flex-end">
-                <Image *ngIf="hasPhoto(rowData.assets)" class="thumbnail" [src]="getPhoto(rowData.assets)" loadMode="async"></Image>
+                <Image *ngIf="hasPhoto(rowData.assets)" class="thumbnail" [src]="getPhoto(rowData.assets)" loadMode="async" stretch="fill"></Image>
                 <Image *ngIf="!hasPhoto(rowData.assets)" class="thumbnail" src="~/assets/images/avatar.png" loadMode="async"></Image>
                 <CheckBox *ngIf="recordIdList[rowIndex]" class="text-align-right" text="" [checked]="recordIdList[rowIndex].selected" (tap)="checkIfAllSelected()"></CheckBox>
             </FlexboxLayout>

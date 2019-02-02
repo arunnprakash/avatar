@@ -62,7 +62,7 @@ export abstract class BaseComponent extends AbstractBaseComponent implements OnI
         
     }
     getPhoto(assets: any[]){
-        var assetValue = "data:image/png;base64," + _.find(assets, function(asset) { return asset.assetType.assetTypeName == "PHOTO"; }).assetValue;
+        var assetValue = _.find(assets, function(asset) { return asset.assetType.assetTypeName == "PHOTO"; }).assetValue;
         return this.domSanitizer.bypassSecurityTrustUrl(assetValue);
     }
 }

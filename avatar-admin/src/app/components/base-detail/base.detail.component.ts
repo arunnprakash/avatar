@@ -35,12 +35,23 @@ export abstract class BaseDetailComponent extends AbstractBaseDetailComponent im
     protected closeDetailDialog() {
         this.dialog.close();
     }
-    fileSelectedEventHandler(event, asset) {
+    fileSelectedEventHandler(event, field, assetType) {
+        console.log("assetType {}", assetType);
         var file = event.files[0];
         let fileReader = new FileReader();
         fileReader.onload = (e) => {
-            asset.assetValue = fileReader.result;
+            if (!this.model[field]) {
+                this.model[field] = [];
+            }
+            var assets = this.model[field];
+            var asset = _.find(assets, function(asset) { return asset.assetType.assetTypeName == assetType.assetTypeName; });
+            if (!asset) {
+                asset = {};
+                this.model[field].push(asset);
+            }
+            asset['assetValue'] = fileReader.result;
+            asset['assetType'] = assetType;
         }
-        fileReader.readAsText(file);
+        fileReader.readAsDataURL(file);
     }
 }

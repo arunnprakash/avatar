@@ -157,6 +157,7 @@ export abstract class BaseComponent extends AbstractBaseComponent implements OnI
     }
     getPhoto(assets: any[]){
         var imageAsBase64String = _.find(assets, function(asset) { return asset.assetType.assetTypeName == "PHOTO"; }).assetValue;
+        imageAsBase64String = imageAsBase64String.replace(/^data:image\/[a-z]+;base64,/, "");
         return fromBase64(imageAsBase64String);
     }
 }

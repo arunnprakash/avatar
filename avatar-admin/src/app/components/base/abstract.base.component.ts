@@ -127,14 +127,10 @@ export abstract class AbstractBaseComponent implements OnInit {
         });
     }
     
-    selectAll(isSelectAllChecked?: boolean) {
-        console.log("isSelectAllChecked :: "+ isSelectAllChecked);
+    selectAll() {
+        this.isSelectAllChecked = !this.isSelectAllChecked;
         this.recordIdList.forEach( (item: any ) => {
-            if (isSelectAllChecked) {
-                item.selected = !this.isSelectAllChecked;
-            } else {
-                item.selected = this.isSelectAllChecked;
-            }
+            item.selected = this.isSelectAllChecked;
         });
         this.enableDeleteButton = _.find(this.recordIdList, {"selected": true}) ? true : false;
     }

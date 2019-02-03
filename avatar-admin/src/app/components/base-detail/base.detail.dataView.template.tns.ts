@@ -51,6 +51,14 @@ export const baseDetailDataViewTemplate: string = `
                                 </ng-template>
                             </SuggestionView>
                         </RadAutoCompleteTextView>
+                        <StackLayout *ngSwitchCase="'FILE'" row="0" col="1">
+                            <StackLayout *ngFor="let assetType of col.options">
+                                <GridLayout rows="auto, auto, *" columns="auto, auto, *" verticalAlignment="center">
+                                    <Button col="0" [text]="assetType.assetTypeName" (tap)="fileSelectedEventHandler(col.field, assetType)" class="btn btn-primary btn-rounded-sm button"></Button>
+                                    <Label *ngIf="assetExist(col.field, assetType) == true" col="1" text="&#xf00c;" class="fa"></Label>
+                                </GridLayout>
+                            </StackLayout>
+                        </StackLayout>
                         <StackLayout row="1" col="1" class="hr-light"></StackLayout>
                     </GridLayout>
                 </StackLayout>

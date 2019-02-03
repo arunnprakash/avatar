@@ -9,7 +9,7 @@ import { alert, AlertOptions } from "tns-core-modules/ui/dialogs";
 import { ViewContainerRef } from "@angular/core";
 import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/modal-dialog";
 import { LoadingIndicator } from "nativescript-loading-indicator";
-import { fromBase64, fromResource }  from "tns-core-modules/image-source";
+import { fromBase64 }  from "tns-core-modules/image-source";
 
 import { PagingAndFilterRequest } from "../../services/authorization/pagingandfilterrequest.model";
 import { FilterCriteria } from "../../services/authorization/filtercriteria.model";

@@ -6,12 +6,14 @@ import { prompt, PromptOptions, PromptResult } from "tns-core-modules/ui/dialogs
 import { confirm, ConfirmOptions } from "tns-core-modules/ui/dialogs";
 import { alert, AlertOptions } from "tns-core-modules/ui/dialogs";
 import { ModalDialogService, ModalDialogOptions, ModalDialogParams } from "nativescript-angular/modal-dialog";
-import { isAndroid } from "platform";
+import { isAndroid } from "tns-core-modules/platform";
 
+import * as imagepicker from "nativescript-imagepicker";
 import { LoadingIndicator } from "nativescript-loading-indicator";
 import { ObservableArray } from "tns-core-modules/data/observable-array";
 import { TokenModel, RadAutoCompleteTextView } from "nativescript-ui-autocomplete";
 import { RadAutoCompleteTextViewComponent  } from "nativescript-ui-autocomplete/angular";
+import { ImageSource, fromFile } from "tns-core-modules/image-source";
 
 import * as _ from "lodash";
 
@@ -143,6 +145,45 @@ export abstract class BaseDetailComponent extends AbstractBaseDetailComponent  i
 
         alert(alertOptions).then(() => {
             console.log("Dialog closed!");
+        });
+    }
+    assetExist(field, assetType) {
+        if (this.model[field]) {
+            var assets = this.model[field];
+            var asset = _.find(assets, function(asset) { return asset.assetType.assetTypeName == assetType.assetTypeName; });
+            return asset?true:false;
+        }
+        return false;
+    }
+    fileSelectedEventHandler(field, assetType) {
+        console.log("assetType {}", assetType);
+        let context = imagepicker.create({
+            mode: "single" // use "multiple" for multiple selection
+        });
+        context
+        .authorize()
+        .then(function() {
+            return context.present();
+        })
+        .then( (selected: any[]) => {
+                // process the selected image
+                let selectedImage: any = selected[0];
+                const img: ImageSource = <ImageSource>fromFile(selectedImage._android);
+                const base64String = img.toBase64String("jpg");
+                if (!this.model[field]) {
+                    this.model[field] = [];
+                }
+                var assets = this.model[field];
+                var asset = _.find(assets, function(asset) { return asset.assetType.assetTypeName == assetType.assetTypeName; });
+                if (!asset) {
+                    asset = {};
+                    this.model[field].push(asset);
+                }
+                asset['assetValue'] = "data:image/jpeg;base64," + base64String;
+                asset['assetType'] = assetType;
+        }).catch(function (e) {
+            // process error
+            console.log("Error while processing image", e);
         });
     }
 }

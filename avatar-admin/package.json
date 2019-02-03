@@ -34,6 +34,7 @@
     "core-js": "^2.5.4",
     "nativescript-angular": "~7.0.0",
     "nativescript-checkbox": "^3.0.3",
+    "nativescript-imagepicker": "^6.0.6",
     "nativescript-loading-indicator": "^2.4.0",
     "nativescript-localstorage": "^2.0.0",
     "nativescript-pager": "^9.3.12",

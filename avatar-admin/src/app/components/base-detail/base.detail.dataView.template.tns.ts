@@ -55,7 +55,7 @@ export const baseDetailDataViewTemplate: string = `
                             <StackLayout *ngFor="let assetType of col.options">
                                 <GridLayout rows="auto, auto, *" columns="auto, auto, *" verticalAlignment="center">
                                     <Button col="0" [text]="assetType.assetTypeName" (tap)="fileSelectedEventHandler(col.field, assetType)" class="btn btn-primary btn-rounded-sm button"></Button>
-                                    <Label *ngIf="assetExist(col.field, assetType) == true" col="1" text="&#xf00c;" class="fa"></Label>
+                                    <Label *ngIf="assetExist(col.field, assetType) == true" col="1" text="&#xf560;" class="fa"></Label><!--&#xf00c;-->
                                 </GridLayout>
                             </StackLayout>
                         </StackLayout>

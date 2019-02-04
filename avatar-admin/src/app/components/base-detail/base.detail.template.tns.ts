@@ -1,8 +1,9 @@
 export const baseDetailTemplate: string = `
 <FlexboxLayout flexDirection="column" alignItems="stretch">
-    <FlexboxLayout height="12%" verticalAlignment="bottom" flexDirection="row" alignItems="stretch" justifyContent="center">
-        <Label text="{{title}} Detail" verticalAlignment="center" class="text-bold text-align-center vertical-align-center"></Label>
-    </FlexboxLayout>
+    <GridLayout height="12%" rows="auto, auto, *" columns="auto, auto, *" class="bg-green">
+      <Label text="{{title}} Detail" col="0" width="95%" horizontalAlignment="center" verticalAlignment="center" class="text-bold text-align-center vertical-align-center"></Label>
+      <Label text="&#xf410;" (tap)="closeDetailDialog();" col="1" width="5%" verticalAlignment="top" horizontalAlignment="right" class="fa"></Label>
+    </GridLayout>
      <GridLayout *ngIf="!displayEditDetail" height="76%" class="all-sides-margin all-sides-padding record-content rounded-corner-border">
          <ScrollView>
             <StackLayout>

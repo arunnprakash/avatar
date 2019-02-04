@@ -55,7 +55,6 @@ export abstract class BaseDetailComponent extends AbstractBaseDetailComponent  i
         }
     }
     onAutoCompleteLoaded(event, readOnly, model, col) {
-        console.log("col::"+col);
         var optionLabel = col.optionLabel;
         let autoComplete: RadAutoCompleteTextView = <RadAutoCompleteTextView>event.object;
         autoComplete.readOnly = readOnly;

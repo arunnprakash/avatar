@@ -34,10 +34,10 @@ public class UserDeviceSpecification extends BaseEntitySpecification<UserDevice>
 			}
 		};
 	}
-	public Specification<UserDevice> hasImeiNumber(final String imeiNumber) {
+	public Specification<UserDevice> hasUuid(final String uuid) {
 		return new Specification<UserDevice>() {
 			public Predicate toPredicate(Root<UserDevice> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-				return builder.like(root.get(UserDevice_.IMEI_NUMBER), "%"+imeiNumber+"%");
+				return builder.like(root.get(UserDevice_.UUID), "%"+uuid+"%");
 			}
 		};
 	}

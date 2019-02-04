@@ -5,7 +5,7 @@ package com.kirana.avatar.authorization.service.impl;
 
 import static com.kirana.avatar.authorization.model.UserDevice_.MODEL_NAME;
 import static com.kirana.avatar.authorization.model.UserDevice_.MANUFACTURER;
-import static com.kirana.avatar.authorization.model.UserDevice_.IMEI_NUMBER;
+import static com.kirana.avatar.authorization.model.UserDevice_.UUID;
 import static com.kirana.avatar.authorization.model.UserDevice_.LOGGED_IN;
 
 import org.springframework.data.jpa.domain.Specification;
@@ -52,7 +52,6 @@ public class UserDeviceServiceImpl extends BaseServiceImpl<UserDevice, UserDevic
 
 	@Override
 	protected UserDevice beforeSave(UserDevice model) {
-		model.setLoggedIn(false);
 		return model;
 	}
 
@@ -88,12 +87,12 @@ public class UserDeviceServiceImpl extends BaseServiceImpl<UserDevice, UserDevic
 			}
 			log.debug("Adding specification {} {}", MANUFACTURER, spec);
 			specification = specification.and(spec);
-		} else if (itemName.equalsIgnoreCase(IMEI_NUMBER)) {
+		} else if (itemName.equalsIgnoreCase(UUID)) {
 			Specification<UserDevice> spec = null;
 			for (String itemValue : filter.getFilterByItemValues()) {
-				spec = (spec == null) ? userDeviceSpecification.hasImeiNumber(itemValue) : spec.or(userDeviceSpecification.hasImeiNumber(itemValue));
+				spec = (spec == null) ? userDeviceSpecification.hasUuid(itemValue) : spec.or(userDeviceSpecification.hasUuid(itemValue));
 			}
-			log.debug("Adding specification {} {}", IMEI_NUMBER, spec);
+			log.debug("Adding specification {} {}", UUID, spec);
 			specification = specification.and(spec);
 		} else if (itemName.equalsIgnoreCase(LOGGED_IN)) {
 			Specification<UserDevice> spec = null;

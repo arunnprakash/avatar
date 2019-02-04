@@ -4,9 +4,20 @@ import { Observable, of} from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { PagingAndFilterResponse } from './pagingandfilterresponse.model';
-import { UserDeviceDTO } from './userdevicedto.model';
-import { PagingAndFilterRequest } from './pagingandfilterrequest.model';
+import { RoleDTO } from './roledto.model';
+import { StateDTO } from './statedto.model';
+import { CountryDTO } from './countrydto.model';
+import { TalukDTO } from './talukdto.model';
+import { UserDTO } from './userdto.model';
+import { AssetTypeDTO } from './assettypedto.model';
 import { FilterCriteria } from './filtercriteria.model';
+import { VillageDTO } from './villagedto.model';
+import { DistrictDTO } from './districtdto.model';
+import { UserDeviceDTO } from './userdevicedto.model';
+import { AssetDTO } from './assetdto.model';
+import { LanguageDTO } from './languagedto.model';
+import { PagingAndFilterRequest } from './pagingandfilterrequest.model';
+import { GenderDTO } from './genderdto.model';
 import { ServiceConfig } from './serviceconfig';
 
 /**

@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 
 import { routes, componentDeclarations } from './dashboard.common';
 import { DashboardComponent } from './dashboard.component';
+
+import {PanelModule} from 'primeng/panel';
 import { ChartModule } from 'primeng/chart';
 
 
@@ -13,6 +15,7 @@ import { ChartModule } from 'primeng/chart';
   declarations: componentDeclarations,
   imports: [
     CommonModule,
+    PanelModule,
     ChartModule,
     RouterModule.forChild(routes)
   ],

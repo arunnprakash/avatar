@@ -35,11 +35,9 @@ export class HomeComponent implements OnInit {
         var page = args.object;
         page.actionBarHidden = true;
         this.drawer = page.getViewById( "sideDrawer" );
-        console.log( "pageLoaded drawer initialized" );
     }
     toggleDrawer() {
         this.drawer.toggleDrawerState();
-        console.log( "toggleDrawerState" );
     }
     isComponentSelected( componentPath: string ) {
         return false;

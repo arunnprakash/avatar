@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { MenuItem } from 'primeng/api';
 import { AuthService } from "../../services/auth.service";
 
+import * as _ from "lodash";
+
 @Component({
   selector: 'menu',
   templateUrl: './menu.component.html',
@@ -17,13 +19,14 @@ constructor(private authService: AuthService, private router: Router, private ac
 
   ngOnInit() {
       this.menuItems = [
-          {label: 'Dashboard', visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['dashboard'] } }] },
-          {label: 'Users',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['users']     } }] },
+          {label: 'Dashboard', visible: this.authService.hasRole(['ADMIN', 'SELLER_AGENT','BUYER_AGENT']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['dashboard'] } }] },
+          {label: 'Users',     visible: this.authService.hasRole(['ADMIN', 'SELLER_AGENT','BUYER_AGENT']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['users']     } }] },
           {label: 'Roles',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['roles']     } }] }
       ];
   }
   ngAfterViewInit() {
-      this.naviagateByMenuIem(this.menuItems[1]);
+      let menuItem: any  = _.find(this.menuItems, { 'visible': true });
+      this.naviagateByMenuIem(menuItem);
   }
   naviagateByMenuIem(menuItem: any) {
       this.selectedMenuItem = menuItem;

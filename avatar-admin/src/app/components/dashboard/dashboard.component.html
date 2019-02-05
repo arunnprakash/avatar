@@ -1,1 +1,7 @@
-<!-- <p-chart type="bar" [data]="data"></p-chart> -->
+<div class="p-grid">
+	<div class="p-col" *ngIf="hasRole(['ADMIN', 'SELLER_AGENT','BUYER_AGENT'])">
+		<p-panel header="Users" [toggleable]="false">
+		    <p-chart type="bar" [data]="sellerAndBuyersChartData"></p-chart>
+		</p-panel>
+	</div>
+</div>

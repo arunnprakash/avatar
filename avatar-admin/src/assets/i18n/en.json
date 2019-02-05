@@ -2,6 +2,20 @@
 	"home": {
 		"welcome": "Welcome"
 	},
+	"monthNames": {
+		"january" : "January",
+		"february":"February", 
+		"march":"March", 
+		"april":"April", 
+		"may":"May", 
+		"june":"June",
+		"july":"July", 
+		"august":"August", 
+		"september":"September", 
+		"october":"October", 
+		"november":"November", 
+		"december":"December"
+	},
 	"common": {
 		"id": "Id",
 		"createdBy": "Created By",
@@ -10,6 +24,7 @@
 		"lastModifiedDate": "Last Modified At",
 		"deleted": "Deleted"
 	},
+	"userTitle":"Users",
 	"users": {
 		"userName": "UserName",
 		"mobileNumber": "MobileNumber",

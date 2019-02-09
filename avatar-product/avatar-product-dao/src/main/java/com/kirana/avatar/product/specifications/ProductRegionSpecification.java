@@ -11,9 +11,6 @@ import javax.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
-import com.kirana.avatar.authorization.model.District;
-import com.kirana.avatar.authorization.model.State;
-import com.kirana.avatar.authorization.model.Taluk;
 import com.kirana.avatar.common.jpa.specification.BaseEntitySpecification;
 import com.kirana.avatar.product.model.Product;
 import com.kirana.avatar.product.model.ProductRegion;
@@ -35,7 +32,7 @@ public class ProductRegionSpecification extends BaseEntitySpecification<ProductR
 		};
 	}
 	
-	public Specification<ProductRegion> hasStateId(final State stateId) {
+	public Specification<ProductRegion> hasStateId(final Long stateId) {
 		return new Specification<ProductRegion>() {
 			public Predicate toPredicate(Root<ProductRegion> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
 				return builder.like(root.get(ProductRegion_.STATE), "%"+stateId+"%");
@@ -43,7 +40,7 @@ public class ProductRegionSpecification extends BaseEntitySpecification<ProductR
 		};
 	}
 	
-	public Specification<ProductRegion> hasDistrictId(final District districtId) {
+	public Specification<ProductRegion> hasDistrictId(final Long districtId) {
 		return new Specification<ProductRegion>() {
 			public Predicate toPredicate(Root<ProductRegion> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
 				return builder.like(root.get(ProductRegion_.DISTRICT), "%"+districtId+"%");
@@ -51,7 +48,7 @@ public class ProductRegionSpecification extends BaseEntitySpecification<ProductR
 		};
 	}
 	
-	public Specification<ProductRegion> hasTalukId(final Taluk talukId) {
+	public Specification<ProductRegion> hasTalukId(final Long talukId) {
 		return new Specification<ProductRegion>() {
 			public Predicate toPredicate(Root<ProductRegion> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
 				return builder.like(root.get(ProductRegion_.TALUK), "%"+talukId+"%");

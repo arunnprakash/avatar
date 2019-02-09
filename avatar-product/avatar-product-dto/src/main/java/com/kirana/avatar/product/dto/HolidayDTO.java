@@ -5,9 +5,6 @@ package com.kirana.avatar.product.dto;
 
 import java.time.ZonedDateTime;
 
-import com.kirana.avatar.authorization.dto.DistrictDTO;
-import com.kirana.avatar.authorization.dto.StateDTO;
-import com.kirana.avatar.authorization.dto.TalukDTO;
 import com.kirana.avatar.common.dto.BaseDTO;
 
 import lombok.AccessLevel;
@@ -30,12 +27,12 @@ public class HolidayDTO extends BaseDTO{
 	protected ZonedDateTime startDate;
 	protected ZonedDateTime endDate;
 	protected String description;
-	protected StateDTO state;
-	protected DistrictDTO district;
-	protected TalukDTO taluk;
+	protected Long state;
+	protected Long district;
+	protected Long taluk;
 	@Builder
 	public HolidayDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy, ZonedDateTime lastModifiedDate, Boolean deleted, Long version, 
-			ZonedDateTime startDate, ZonedDateTime endDate, String description, StateDTO state, DistrictDTO district, TalukDTO taluk) {
+			ZonedDateTime startDate, ZonedDateTime endDate, String description, Long state, Long district, Long taluk) {
 		super(id, createdBy, createdDate, lastModifiedBy, lastModifiedDate, deleted, version);
 		this.startDate = startDate;
 		this.endDate = endDate;

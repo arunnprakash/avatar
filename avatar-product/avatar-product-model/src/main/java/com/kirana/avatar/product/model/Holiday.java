@@ -8,16 +8,10 @@ import java.time.ZonedDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.kirana.avatar.authorization.model.District;
-import com.kirana.avatar.authorization.model.State;
-import com.kirana.avatar.authorization.model.Taluk;
 import com.kirana.avatar.common.jpa.entity.BaseEntity;
 
 import lombok.AccessLevel;
@@ -48,14 +42,11 @@ public class Holiday extends BaseEntity<Holiday>{
 	protected ZonedDateTime endDate;
 	@Column(nullable = false)
 	protected String description;
-	@ManyToOne(optional = false, fetch=FetchType.EAGER)
-	@JoinColumn(name = "state_id", referencedColumnName="id", nullable = true)
-	protected State state;
-	@ManyToOne(optional = false, fetch=FetchType.EAGER)
-	@JoinColumn(name = "district_id", referencedColumnName="id", nullable = true)
-	protected District district;
-	@ManyToOne(optional = false, fetch=FetchType.EAGER)
-	@JoinColumn(name = "taluk_id", referencedColumnName="id", nullable = true)
-	protected Taluk taluk;
+	@Column(name="state_id" ,nullable = false)
+	protected Long state;
+	@Column(name="district_id",nullable = false)
+	protected Long district;
+	@Column(name="taluk_id", nullable = false)
+	protected Long taluk;
 		
 }

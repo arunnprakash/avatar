@@ -5,9 +5,6 @@ package com.kirana.avatar.product.dto;
 
 import java.time.ZonedDateTime;
 
-import com.kirana.avatar.authorization.dto.DistrictDTO;
-import com.kirana.avatar.authorization.dto.StateDTO;
-import com.kirana.avatar.authorization.dto.TalukDTO;
 import com.kirana.avatar.common.dto.BaseDTO;
 
 import lombok.AccessLevel;
@@ -28,12 +25,12 @@ import lombok.ToString;
 public class ProductRegionDTO extends BaseDTO{
 	
 	protected ProductDTO productId;
-	protected StateDTO state;
-	protected DistrictDTO district;
-	protected TalukDTO taluk;
+	protected Long state;
+	protected Long district;
+	protected Long taluk;
 	@Builder
 	public ProductRegionDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy, ZonedDateTime lastModifiedDate, 
-			Boolean deleted, Long version, ProductDTO productId, StateDTO state, DistrictDTO district, TalukDTO taluk) {
+			Boolean deleted, Long version, ProductDTO productId, Long state, Long district, Long taluk) {
 		super(id, createdBy, createdDate, lastModifiedBy, lastModifiedDate, deleted, version);
 		this.productId = productId;
 		this.state = state;

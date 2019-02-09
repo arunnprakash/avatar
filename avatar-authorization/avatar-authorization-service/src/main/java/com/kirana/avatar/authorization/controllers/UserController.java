@@ -12,6 +12,8 @@
  *******************************************************************************/
 package com.kirana.avatar.authorization.controllers;
 
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -77,4 +79,38 @@ public class UserController extends BaseController<UserService, UserDTO> impleme
 		SecurityContextHolder.clearContext();
 		return ResponseEntity.ok(Boolean.TRUE);
 	}
+
+	@Override
+	public ResponseEntity<Map<String, Long>> sellersDailyGrowthRate(Integer depth) {
+		return ResponseEntity.ok(userService.sellersDailyGrowthRate(depth));
+	}
+
+	@Override
+	public ResponseEntity<Map<String, Long>> sellersMonthlyGrowthRate(Integer depth) {
+		return ResponseEntity.ok(userService.sellersMonthlyGrowthRate(depth));
+	}
+
+
+	@Override
+	public ResponseEntity<Map<String, Long>> sellersYearlyGrowthRate(Integer depth) {
+		return ResponseEntity.ok(userService.sellersYearlyGrowthRate(depth));
+	}
+
+	@Override
+	public ResponseEntity<Map<String, Long>> buyersDailyGrowthRate(Integer depth) {
+		return ResponseEntity.ok(userService.buyersDailyGrowthRate(depth));
+	}
+
+
+	@Override
+	public ResponseEntity<Map<String, Long>> buyersMonthlyGrowthRate(Integer depth) {
+		return ResponseEntity.ok(userService.buyersMonthlyGrowthRate(depth));
+	}
+
+
+	@Override
+	public ResponseEntity<Map<String, Long>> buyersYearlyGrowthRate(Integer depth) {
+		return ResponseEntity.ok(userService.buyersYearlyGrowthRate(depth));
+	}
+
 }

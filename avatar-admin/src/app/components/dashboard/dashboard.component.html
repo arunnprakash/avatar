@@ -1,7 +1,10 @@
 <div class="p-grid">
 	<div class="p-col" *ngIf="hasRole(['ADMIN', 'SELLER_AGENT','BUYER_AGENT'])">
 		<p-panel header="Users" [toggleable]="false">
-		    <p-chart type="bar" [data]="sellerAndBuyersChartData"></p-chart>
+		    <p-chart *ngIf="sellerAndBuyersChartData" type="bar" [data]="sellerAndBuyersChartData"></p-chart>
+		    <button pButton type="button" label="Daily" class="ui-button-rounded ui-button-success" (click)="setSellerAndBuyerDailyGrowthRate($event);"></button>
+		    <button pButton type="button" label="Month" class="ui-button-rounded ui-button-success" (click)="setSellerAndBuyerMonthlyGrowthRate($event);"></button>
+		    <button pButton type="button" label="Year" class="ui-button-rounded ui-button-success" (click)="setSellerAndBuyerYearlyGrowthRate($event);"></button>
 		</p-panel>
 	</div>
 </div>

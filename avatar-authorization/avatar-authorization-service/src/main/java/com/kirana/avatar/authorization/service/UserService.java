@@ -12,6 +12,11 @@
  *******************************************************************************/
 package com.kirana.avatar.authorization.service;
 
+
+import java.util.Map;
+
+import org.springframework.web.bind.annotation.PathVariable;
+
 import com.kirana.avatar.authorization.dto.UserDTO;
 import com.kirana.avatar.common.service.BaseService;
 
@@ -23,4 +28,15 @@ public interface UserService extends BaseService<UserDTO>{
 
 	UserDTO findByUserNameOrMobileNumber(String userNameOrMobileNumber);
 
+	public Map<String, Long> sellersDailyGrowthRate(@PathVariable("depth") Integer depth);
+	
+	public Map<String, Long> sellersMonthlyGrowthRate(@PathVariable("depth") Integer depth);
+	
+	public Map<String, Long> sellersYearlyGrowthRate(@PathVariable("depth") Integer depth);
+
+	public Map<String, Long> buyersDailyGrowthRate(@PathVariable("depth") Integer depth);
+	
+	public Map<String, Long> buyersMonthlyGrowthRate(@PathVariable("depth") Integer depth);
+	
+	public Map<String, Long> buyersYearlyGrowthRate(@PathVariable("depth") Integer depth);
 }

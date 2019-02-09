@@ -14,12 +14,16 @@ package com.kirana.avatar.authorization.resource;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+import java.util.Collection;
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.leandreck.endpoints.annotations.TypeScriptEndpoint;
 import org.leandreck.endpoints.annotations.TypeScriptTemplatesConfiguration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,4 +47,23 @@ public interface UserResource extends BaseResource<UserDTO> {
 
 	@GetMapping(value= {"/logout"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<Boolean> logout();
+
+	@GetMapping(value= {"/sellers/daily/growth-rate/{depth}"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+	public ResponseEntity<Map<String, Long>> sellersDailyGrowthRate(@PathVariable("depth") Integer depth);
+	
+	@GetMapping(value= {"/sellers/monthly/growth-rate/{depth}"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+	public ResponseEntity<Map<String, Long>> sellersMonthlyGrowthRate(@PathVariable("depth") Integer depth);
+	
+	@GetMapping(value= {"/sellers/yearly/growth-rate/{depth}"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+	public ResponseEntity<Map<String, Long>> sellersYearlyGrowthRate(@PathVariable("depth") Integer depth);
+
+	@GetMapping(value= {"/buyers/daily/growth-rate/{depth}"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+	public ResponseEntity<Map<String, Long>> buyersDailyGrowthRate(@PathVariable("depth") Integer depth);
+	
+	@GetMapping(value= {"/buyers/monthly/growth-rate/{depth}"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+	public ResponseEntity<Map<String, Long>> buyersMonthlyGrowthRate(@PathVariable("depth") Integer depth);
+	
+	@GetMapping(value= {"/buyers/yearly/growth-rate/{depth}"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+	public ResponseEntity<Map<String, Long>> buyersYearlyGrowthRate(@PathVariable("depth") Integer depth);
+
 }

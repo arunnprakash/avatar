@@ -14,12 +14,15 @@ package com.kirana.avatar.authorization.specifications;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
+import com.kirana.avatar.authorization.model.Role;
+import com.kirana.avatar.authorization.model.Role_;
 import com.kirana.avatar.authorization.model.User;
 import com.kirana.avatar.authorization.model.User_;
 import com.kirana.avatar.common.jpa.specification.BaseEntitySpecification;
@@ -64,6 +67,14 @@ public class UserSpecification extends BaseEntitySpecification<User> {
 		return new Specification<User>() {
 			public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
 				return builder.equal(root.get(User_.SUSPENDED), suspended);
+			}
+		};
+	}
+	public Specification<User> hasRoleName(final String roleName) {
+		return new Specification<User>() {
+			public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				Join<User, Role> join = root.join(User_.roles);
+				return builder.equal(join.get(Role_.ROLE_NAME), roleName);
 			}
 		};
 	}

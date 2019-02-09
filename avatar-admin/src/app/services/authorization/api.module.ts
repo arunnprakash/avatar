@@ -1,15 +1,15 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { LanguageService } from './languageservice.generated';
-import { DistrictService } from './districtservice.generated';
-import { VillageService } from './villageservice.generated';
-import { UserDeviceService } from './userdeviceservice.generated';
-import { AssetService } from './assetservice.generated';
-import { GenderService } from './genderservice.generated';
 import { TalukService } from './talukservice.generated';
-import { AssetTypeService } from './assettypeservice.generated';
+import { AssetService } from './assetservice.generated';
 import { CountryService } from './countryservice.generated';
-import { StateService } from './stateservice.generated';
+import { VillageService } from './villageservice.generated';
+import { AssetTypeService } from './assettypeservice.generated';
+import { LanguageService } from './languageservice.generated';
 import { RoleService } from './roleservice.generated';
+import { GenderService } from './genderservice.generated';
+import { StateService } from './stateservice.generated';
+import { DistrictService } from './districtservice.generated';
+import { UserDeviceService } from './userdeviceservice.generated';
 import { UserService } from './userservice.generated';
 import { ServiceConfig } from './serviceconfig';
 
@@ -20,17 +20,17 @@ export class APIModule {
             ngModule: APIModule,
             providers: [
                 {provide: ServiceConfig, useValue: serviceConfig},
-                LanguageService,
-                DistrictService,
-                VillageService,
-                UserDeviceService,
-                AssetService,
-                GenderService,
                 TalukService,
-                AssetTypeService,
+                AssetService,
                 CountryService,
-                StateService,
+                VillageService,
+                AssetTypeService,
+                LanguageService,
                 RoleService,
+                GenderService,
+                StateService,
+                DistrictService,
+                UserDeviceService,
                 UserService
             ]
         };

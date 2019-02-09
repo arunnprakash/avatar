@@ -13,7 +13,23 @@
 package com.kirana.avatar.authorization.service.impl;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import static com.kirana.avatar.authorization.model.User_.FIRST_NAME;
+import static com.kirana.avatar.authorization.model.User_.LAST_NAME;
+import static com.kirana.avatar.authorization.model.User_.MOBILE_NUMBER;
+import static com.kirana.avatar.authorization.model.User_.SUSPENDED;
+import static com.kirana.avatar.authorization.model.User_.USER_NAME;
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.joining;
+
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -31,28 +47,10 @@ import com.kirana.avatar.authorization.mapper.AssetMapper;
 import com.kirana.avatar.authorization.mapper.UserMapper;
 import com.kirana.avatar.authorization.model.Asset;
 import com.kirana.avatar.authorization.model.AssetType;
-import com.kirana.avatar.authorization.model.Language;
 import com.kirana.avatar.authorization.model.Role;
 import com.kirana.avatar.authorization.model.User;
 import com.kirana.avatar.authorization.model.UserAsset;
 import com.kirana.avatar.authorization.model.UserRole;
-
-import static com.kirana.avatar.authorization.model.User_.USER_NAME;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import javax.persistence.Transient;
-
-import static com.kirana.avatar.authorization.model.User_.FIRST_NAME;
-import static com.kirana.avatar.authorization.model.User_.LAST_NAME;
-import static com.kirana.avatar.authorization.model.User_.SUSPENDED;
-import static com.kirana.avatar.authorization.model.User_.MOBILE_NUMBER;
-import static com.kirana.avatar.authorization.model.User_.SUSPENDED;
-
 import com.kirana.avatar.authorization.repositories.AssetRepository;
 import com.kirana.avatar.authorization.repositories.AssetTypeRepository;
 import com.kirana.avatar.authorization.repositories.GenderRepository;
@@ -60,14 +58,13 @@ import com.kirana.avatar.authorization.repositories.LanguageRepository;
 import com.kirana.avatar.authorization.repositories.RoleRepository;
 import com.kirana.avatar.authorization.repositories.UserAssetRepository;
 import com.kirana.avatar.authorization.repositories.UserRepository;
+import com.kirana.avatar.authorization.repositories.UserRoleRepository;
 import com.kirana.avatar.authorization.repositories.VillageRepository;
 import com.kirana.avatar.authorization.service.UserService;
 import com.kirana.avatar.authorization.specifications.UserSpecification;
-import com.kirana.avatar.authorization.repositories.UserRoleRepository;
 import com.kirana.avatar.common.dto.FilterCriteria;
 import com.kirana.avatar.common.dto.UserInfo;
 import com.kirana.avatar.common.exception.ApiException;
-import com.kirana.avatar.common.jpa.entity.BaseEntity_;
 import com.kirana.avatar.common.jwt.config.JwtConfig;
 import com.kirana.avatar.common.service.impl.BaseServiceImpl;
 
@@ -284,7 +281,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 		log.debug("User Found with username or mobilenumber {}", userNameOrMobileNumber);
 		// Remember that Spring needs roles to be in this format: "ROLE_" + userRole (i.e. "ROLE_ADMIN")
 		// So, we need to set it to that format, so we can verify and compare roles (i.e. hasRole("ADMIN")).
-		String roles = user.getRoles().stream().map(Role::getRoleName).collect(Collectors.joining(","));
+		String roles = user.getRoles().stream().map(Role::getRoleName).collect(joining(","));
 		List<GrantedAuthority> grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
 		
 		// The "UserInfo" class is provided by common and represents a model class for user to be returned by UserDetailsService
@@ -296,5 +293,121 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 				.authorities(grantedAuthorities)
 				.build();
 		
+	}
+
+	@Override
+	public Map<String, Long> sellersDailyGrowthRate(Integer depth) {
+		return getDailyGrowthRate(depth, "SELLER");
+	}
+
+	@Override
+	public Map<String, Long> sellersMonthlyGrowthRate(Integer depth) {
+		return getMonthlyGrowthRate(depth, "SELLER");
+	}
+
+	@Override
+	public Map<String, Long> sellersYearlyGrowthRate(Integer depth) {
+		return getYearlyGrowthRate(depth, "SELLER");
+	}
+
+	@Override
+	public Map<String, Long> buyersDailyGrowthRate(Integer depth) {
+		return getDailyGrowthRate(depth, "BUYER");
+	}
+
+	@Override
+	public Map<String, Long> buyersMonthlyGrowthRate(Integer depth) {
+		return getMonthlyGrowthRate(depth, "BUYER");
+	}
+
+	@Override
+	public Map<String, Long> buyersYearlyGrowthRate(Integer depth) {
+		return getYearlyGrowthRate(depth, "BUYER");
+	}
+
+	private Map<String, Long> getYearlyGrowthRate(Integer depth, String roleName) {
+		ZonedDateTime todayDate = ZonedDateTime.now();
+		ZonedDateTime startDate = stripOutTime(todayDate);
+		startDate = startDate.withDayOfYear(1);
+		startDate = startDate.minusYears(depth - 1);
+		Specification<User> specification = Specification.where(userSpecification.hasDeleted(false));
+		specification = specification.and(userSpecification.hasRoleName(roleName));
+		specification = specification.and(userSpecification.hasCreatedDateBetween(startDate , todayDate));
+		List<User> users = userRepository.findAll(specification);
+		Map<String, Long> actualResult = users.stream().collect(groupingBy(
+				user -> {return String.valueOf(user.getCreatedDate().getYear());},
+				counting()
+				));
+		Map<String, Long> formerResult = new LinkedHashMap<String, Long>();
+		for (int i = 0; i < depth; i++) {
+			String year = String.valueOf(startDate.getYear());
+			if (actualResult.containsKey(year)) {
+				formerResult.put(year, actualResult.get(year));
+			} else {
+				formerResult.put(year, 0L);
+			}
+			startDate = startDate.plusYears(1);
+		}
+		return formerResult;
+	}
+
+	private Map<String, Long> getMonthlyGrowthRate(Integer depth, String roleName) {
+		ZonedDateTime todayDate = ZonedDateTime.now();
+		ZonedDateTime startDate = stripOutTime(todayDate);
+		startDate = startDate.withDayOfMonth(1);
+		startDate = startDate.minusMonths(depth - 1);
+		Specification<User> specification = Specification.where(userSpecification.hasDeleted(false));
+		specification = specification.and(userSpecification.hasRoleName(roleName));
+		specification = specification.and(userSpecification.hasCreatedDateBetween(startDate , todayDate));
+		List<User> users = userRepository.findAll(specification);
+		Map<String, Long> actualResult = users.stream().collect(groupingBy(
+				user -> {return user.getCreatedDate().getMonth().name();},
+				counting()
+				));
+		Map<String, Long> formerResult = new LinkedHashMap<String, Long>();
+		for (int i = 0; i < depth; i++) {
+			String monthName = startDate.getMonth().name();
+			if (actualResult.containsKey(monthName)) {
+				formerResult.put(monthName, actualResult.get(monthName));
+			} else {
+				formerResult.put(monthName, 0L);
+			}
+			startDate = startDate.plusMonths(1);
+		}
+		return formerResult;
+	}
+
+	private Map<String, Long> getDailyGrowthRate(Integer depth, String roleName) {
+		final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		ZonedDateTime todayDate = ZonedDateTime.now();
+		ZonedDateTime startDate = stripOutTime(todayDate);
+		startDate = startDate.minusDays(depth - 1);
+		Specification<User> specification = Specification.where(userSpecification.hasDeleted(false));
+		specification = specification.and(userSpecification.hasRoleName(roleName));
+		specification = specification.and(userSpecification.hasCreatedDateBetween(startDate , todayDate));
+		List<User> users = userRepository.findAll(specification);
+		Map<String, Long> actualResult = users.stream().collect(groupingBy(
+				user -> {return formatter.format(user.getCreatedDate());},
+				counting()
+				));
+		Map<String, Long> formerResult = new LinkedHashMap<String, Long>();
+		for (int i = 0; i < depth; i++) {
+			String date = formatter.format(startDate);
+			if (actualResult.containsKey(date)) {
+				formerResult.put(date, actualResult.get(date));
+			} else {
+				formerResult.put(date, 0L);
+			}
+			startDate = startDate.plusDays(1);
+		}
+		return formerResult;
+	}
+
+	private ZonedDateTime stripOutTime(ZonedDateTime date) {
+		date = date.minusHours(date.getHour());
+		date = date.minusMinutes(date.getMinute());
+		date = date.minusSeconds(date.getSecond());
+		date = date.minusNanos(date.getNano());
+		return date;
 	}
 }

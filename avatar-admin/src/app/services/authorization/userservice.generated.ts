@@ -66,6 +66,54 @@ export class UserService {
             .pipe(catchError(this.handleError));
     }
 
+    public sellersDailyGrowthRate(depth: number): Observable<{ [index: string]: number }> {
+        const url = this.serviceBaseURL + '/sellers/daily/growth-rate/' + depth + '';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.get<{ [index: string]: number }>(url, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
+    public sellersMonthlyGrowthRate(depth: number): Observable<{ [index: string]: number }> {
+        const url = this.serviceBaseURL + '/sellers/monthly/growth-rate/' + depth + '';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.get<{ [index: string]: number }>(url, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
+    public sellersYearlyGrowthRate(depth: number): Observable<{ [index: string]: number }> {
+        const url = this.serviceBaseURL + '/sellers/yearly/growth-rate/' + depth + '';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.get<{ [index: string]: number }>(url, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
+    public buyersDailyGrowthRate(depth: number): Observable<{ [index: string]: number }> {
+        const url = this.serviceBaseURL + '/buyers/daily/growth-rate/' + depth + '';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.get<{ [index: string]: number }>(url, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
+    public buyersMonthlyGrowthRate(depth: number): Observable<{ [index: string]: number }> {
+        const url = this.serviceBaseURL + '/buyers/monthly/growth-rate/' + depth + '';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.get<{ [index: string]: number }>(url, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
+    public buyersYearlyGrowthRate(depth: number): Observable<{ [index: string]: number }> {
+        const url = this.serviceBaseURL + '/buyers/yearly/growth-rate/' + depth + '';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.get<{ [index: string]: number }>(url, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
 
     /* HEAD */
 

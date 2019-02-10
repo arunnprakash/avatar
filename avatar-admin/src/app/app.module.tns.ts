@@ -33,7 +33,8 @@ import { ApiUrls } from './api-settings/api-urls';
 import { AuthService } from "./services/auth.service";
 import { TokenInterceptor } from "./services/token.interceptor";
 import { NeedAuthGuard } from "./services/needauthguard";
-import { APIModule } from "./services/authorization/api.module";
+import { AuthorizationAPIModule } from "./services/authorization/api.module";
+import { ProductAPIModule } from "./services/product/api.module";
 
 //required for AOT compilation
 /*export function HttpLoaderFactory(http: HttpClient) {
@@ -63,7 +64,8 @@ export function createTranslateLoader() {
             useFactory: createTranslateLoader
         }
     }),
-    APIModule.forRoot({context: ApiUrls.authorizationServiceApiBaseUrl}),
+    AuthorizationAPIModule.forRoot({context: ApiUrls.authorizationServiceApiBaseUrl}),
+    ProductAPIModule.forRoot({context: ApiUrls.authorizationServiceApiBaseUrl}),
     AppRoutingModule,
     DashboardModule,
     UsersModule,

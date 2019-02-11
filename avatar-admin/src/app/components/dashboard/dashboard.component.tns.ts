@@ -3,6 +3,9 @@ import { TranslateService } from "@ngx-translate/core";
 import { ObservableArray } from "tns-core-modules/data/observable-array";
 
 import { AuthService } from "../../services/auth.service";
+import { UserService } from "../../services/authorization/userservice.generated";
+
+import * as _ from "lodash";
 
 @Component({
   selector: 'dashboard',
@@ -10,9 +13,14 @@ import { AuthService } from "../../services/auth.service";
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
-  private sellers: ObservableArray<any>;
-  private buyers: ObservableArray<any>;
+    private sellersChartData: ObservableArray<any>;
+    private sellersDailyGrowthRate: ObservableArray<any>;
+    private sellersMonthlyGrowthRate: ObservableArray<any>;
+    private sellersYearlyGrowthRate: ObservableArray<any>;
+    private buyersChartData: ObservableArray<any>;
+    private buyersDailyGrowthRate: ObservableArray<any>;
+    private buyersMonthlyGrowthRate: ObservableArray<any>;
+    private buyersYearlyGrowthRate: ObservableArray<any>;
   private userTitle: string;
   private monthNames: any[] = [
       {"i18nMonthName":"monthNames.january", "monthNameValue": ""}, 
@@ -28,7 +36,8 @@ export class DashboardComponent implements OnInit {
       {"i18nMonthName":"monthNames.november", "monthNameValue": ""}, 
       {"i18nMonthName":"monthNames.december", "monthNameValue": ""}
   ];
-  constructor(private authService: AuthService, private translate: TranslateService) { }
+  constructor(private authService: AuthService, private translate: TranslateService,
+          private userService: UserService) { }
 
   ngOnInit() {
       console.info( "Init DashboardComponent tns" );
@@ -44,39 +53,86 @@ export class DashboardComponent implements OnInit {
       });
       if (this.hasRole(['ADMIN', 'SELLER_AGENT','BUYER_AGENT'])) {
           if (this.hasRole(['ADMIN', 'SELLER_AGENT'])) {
-              this.sellers = new ObservableArray<any>();
+              this.sellersChartData = new ObservableArray<any>();
+              this.sellersDailyGrowthRate = new ObservableArray<any>();
+              this.sellersMonthlyGrowthRate = new ObservableArray<any>();
+              this.sellersYearlyGrowthRate = new ObservableArray<any>();
               this.initSellerChartData();
           }
           if (this.hasRole(['ADMIN', 'BUYER_AGENT'])) {
-              this.buyers = new ObservableArray<any>();
+              this.buyersChartData = new ObservableArray<any>();
+              this.buyersDailyGrowthRate = new ObservableArray<any>();
+              this.buyersMonthlyGrowthRate = new ObservableArray<any>();
+              this.buyersYearlyGrowthRate = new ObservableArray<any>();
               this.initBuyerChartData();
           }
       }
   }
-
+  setSellerAndBuyerDailyGrowthRate() {
+      this.sellersChartData = this.sellersDailyGrowthRate;
+      this.buyersChartData = this.buyersDailyGrowthRate;
+  }
+  setSellerAndBuyerMonthlyGrowthRate() {
+      this.sellersChartData = this.sellersMonthlyGrowthRate;
+      this.buyersChartData = this.buyersMonthlyGrowthRate;
+  }
+  setSellerAndBuyerYearlyGrowthRate() {
+      this.sellersChartData = this.sellersYearlyGrowthRate;
+      this.buyersChartData = this.buyersYearlyGrowthRate;
+  }
   initSellerChartData() {
-      let noOfSellers: any[] = [10, 30, 40, 60, 75, 90];
-      let monthIndex: number = this.getMonthIndex(noOfSellers);
-      for (var i = 0; i < noOfSellers.length; i++) {
-          var monthName = this.monthNames[monthIndex].monthNameValue;
-          this.sellers.push({label:monthName, labelValue: noOfSellers[i]});
-          monthIndex = monthIndex + 1;
-          if (monthIndex == 12) {
-              monthIndex = 0;
-          }
-      }
+      this.userService.sellersDailyGrowthRate(6).subscribe((result: any) => {
+          _.forOwn(result, (value, key) => {
+              this.sellersDailyGrowthRate.push({label: key, labelValue: value});
+          } );
+          this.sellersChartData = this.sellersDailyGrowthRate;
+      },
+      ( error ) => {
+          console.log('Error', error);
+      });
+      this.userService.sellersMonthlyGrowthRate(6).subscribe((result: any) => {
+          _.forOwn(result, (value, key) => {
+              this.sellersMonthlyGrowthRate.push({label: key, labelValue: value});
+          } );
+      },
+      ( error ) => {
+          console.log('Error', error);
+      });
+      this.userService.sellersYearlyGrowthRate(6).subscribe((result: any) => {
+          _.forOwn(result, (value, key) => {
+              this.sellersYearlyGrowthRate.push({label: key, labelValue: value});
+          } );
+      },
+      ( error ) => {
+          console.log('Error', error);
+      });
   }
   initBuyerChartData() {
-      let noOfBuyers: any[] = [15, 35, 45, 65, 80, 95];
-      let monthIndex: number = this.getMonthIndex(noOfBuyers);
-      for (var i = 0; i < noOfBuyers.length; i++) {
-          var monthName = this.monthNames[monthIndex].monthNameValue;
-          this.buyers.push({label:monthName, labelValue: noOfBuyers[i]});
-          monthIndex = monthIndex + 1;
-          if (monthIndex == 12) {
-              monthIndex = 0;
-          }
-      }
+      this.userService.buyersDailyGrowthRate(6).subscribe((result: any) => {
+          _.forOwn(result, (value, key) => {
+              this.buyersDailyGrowthRate.push({label: key, labelValue: value});
+          } );
+          this.buyersChartData = this.buyersDailyGrowthRate;
+      },
+      ( error ) => {
+          console.log('Error', error);
+      });
+      this.userService.buyersMonthlyGrowthRate(6).subscribe((result: any) => {
+          _.forOwn(result, (value, key) => {
+              this.buyersMonthlyGrowthRate.push({label: key, labelValue: value});
+          } );
+      },
+      ( error ) => {
+          console.log('Error', error);
+      });
+      this.userService.buyersYearlyGrowthRate(6).subscribe((result: any) => {
+          _.forOwn(result, (value, key) => {
+              this.buyersYearlyGrowthRate.push({label: key, labelValue: value});
+          } );
+      },
+      ( error ) => {
+          console.log('Error', error);
+      });
   }
   getMonthIndex(monthlyData: any[]) {
       let currentMonthIndex = new Date().getMonth();

@@ -3,6 +3,9 @@ import { TranslateService } from "@ngx-translate/core";
 
 import { AuthService } from "../../services/auth.service";
 import { UserService } from "../../services/authorization/userservice.generated";
+
+import * as _ from "lodash";
+
 @Component({
   selector: 'dashboard',
   templateUrl: './dashboard.component.html',
@@ -37,10 +40,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       .subscribe((userTitle: any) => {
            this.userTitle = userTitle;
        });
-      /*this.sellerAndBuyersChartData = {
-              labels: [],
-              datasets: []
-           };*/
       this.monthNames.forEach( (monthName: any ) => {
            this.translate.get(monthName.i18nMonthName)
            .subscribe((monthNameValue: any) => {
@@ -92,10 +91,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.userService.sellersDailyGrowthRate(6).subscribe((result: any) => {
               let sellersGrowthData: any[] = [];
               let sellersGrowthDataLabels: any[] = [];
-              for (let [key, value] of Object.entries(result)) {
+              _.forOwn(result, (value, key) => {
                   sellersGrowthData.push(value);
                   sellersGrowthDataLabels.push(key);
-              }
+              });
               var sellers = {
                   label: 'Sellers',
                   backgroundColor: '#33cc33',
@@ -111,10 +110,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.userService.sellersMonthlyGrowthRate(6).subscribe((result: any) => {
               let sellersGrowthData: any[] = [];
               let sellersGrowthDataLabels: any[] = [];
-              for (let [key, value] of Object.entries(result)) {
+              _.forOwn(result, (value, key) => {
                   sellersGrowthData.push(value);
                   sellersGrowthDataLabels.push(key);
-              }
+              });
               var sellers = {
                   label: 'Sellers',
                   backgroundColor: '#33cc33',
@@ -140,10 +139,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.userService.sellersYearlyGrowthRate(6).subscribe((result: any) => {
               let sellersGrowthData: any[] = [];
               let sellersGrowthDataLabels: any[] = [];
-              for (let [key, value] of Object.entries(result)) {
+              _.forOwn(result, (value, key) => {
                   sellersGrowthData.push(value);
                   sellersGrowthDataLabels.push(key);
-              }
+              });
               var sellers = {
                   label: 'Sellers',
                   backgroundColor: '#33cc33',
@@ -161,10 +160,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.userService.buyersDailyGrowthRate(6).subscribe((result: any) => {
           let buyersGrowthData: any[] = [];
           let buyersGrowthDataLabels: any[] = [];
-          for (let [key, value] of Object.entries(result)) {
+          _.forOwn(result, (value, key) => {
               buyersGrowthData.push(value);
               buyersGrowthDataLabels.push(key);
-          }
+          });
           var buyers = {
                   label: 'Buyers',
                   backgroundColor: '#ffff00',
@@ -173,9 +172,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           };
           this.sellerAndBuyersDailyGrowthRate.labels = buyersGrowthDataLabels;
           this.sellerAndBuyersDailyGrowthRate.datasets.push(buyers);
-          /*if (!this.sellerAndBuyersChartData) {
-              this.sellerAndBuyersChartData = this.sellerAndBuyersDailyGrowthRate;
-          }*/
       },
       ( error ) => {
           console.log('Error', error);
@@ -183,10 +179,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.userService.buyersMonthlyGrowthRate(6).subscribe((result: any) => {
           let buyersGrowthData: any[] = [];
           let buyersGrowthDataLabels: any[] = [];
-          for (let [key, value] of Object.entries(result)) {
+          _.forOwn(result, (value, key) => {
               buyersGrowthData.push(value);
               buyersGrowthDataLabels.push(key);
-          }
+          });
           var buyers = {
                   label: 'Buyers',
                   backgroundColor: '#ffff00',
@@ -212,10 +208,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.userService.buyersYearlyGrowthRate(6).subscribe((result: any) => {
           let buyersGrowthData: any[] = [];
           let buyersGrowthDataLabels: any[] = [];
-          for (let [key, value] of Object.entries(result)) {
+          _.forOwn(result, (value, key) => {
               buyersGrowthData.push(value);
               buyersGrowthDataLabels.push(key);
-          }
+          });
           var buyers = {
                   label: 'Buyers',
                   backgroundColor: '#ffff00',

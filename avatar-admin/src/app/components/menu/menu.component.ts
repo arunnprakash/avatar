@@ -26,7 +26,9 @@ constructor(private authService: AuthService, private router: Router, private ac
   }
   ngAfterViewInit() {
       let menuItem: any  = _.find(this.menuItems, { 'visible': true });
-      this.naviagateByMenuIem(menuItem);
+      if (menuItem) {
+          this.naviagateByMenuIem(menuItem);
+      }
   }
   naviagateByMenuIem(menuItem: any) {
       this.selectedMenuItem = menuItem;

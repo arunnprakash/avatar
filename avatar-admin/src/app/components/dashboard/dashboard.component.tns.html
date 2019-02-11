@@ -6,8 +6,8 @@
 			<RadCartesianChart col="0" row="0" tkExampleTitle tkToggleNavButton>
 				<CategoricalAxis tkCartesianHorizontalAxis labelRotationAngle="45" labelFitMode="Rotate"></CategoricalAxis>
 				<LinearAxis tkCartesianVerticalAxis></LinearAxis>
-				<BarSeries *ngIf="hasRole(['ADMIN', 'SELLER_AGENT'])" tkCartesianSeries seriesName="sellersChartData" [items]="sellersChartData" categoryProperty="label" valueProperty="labelValue" showLabels="true"></BarSeries>
-				<BarSeries *ngIf="hasRole(['ADMIN', 'BUYER_AGENT'])" tkCartesianSeries seriesName="buyersChartData" [items]="buyersChartData" categoryProperty="label" valueProperty="labelValue" showLabels="true"></BarSeries>
+				<BarSeries *ngIf="hasRole(['ADMIN', 'SELLER_AGENT'])" tkCartesianSeries seriesName="sellers" [items]="sellersChartData" categoryProperty="label" valueProperty="labelValue" showLabels="true"></BarSeries>
+				<BarSeries *ngIf="hasRole(['ADMIN', 'BUYER_AGENT'])" tkCartesianSeries seriesName="buyers" [items]="buyersChartData" categoryProperty="label" valueProperty="labelValue" showLabels="true"></BarSeries>
 			
 				<Palette *ngIf="hasRole(['ADMIN', 'SELLER_AGENT'])" tkCartesianPalette seriesName="sellers">
 					<PaletteEntry tkCartesianPaletteEntry fillColor="#33cc33" strokeColor="#33cc33" strokeWidth="1"></PaletteEntry>

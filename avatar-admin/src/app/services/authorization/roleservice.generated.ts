@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams, HttpRequest, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of} from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { PagingAndFilterResponse } from './pagingandfilterresponse.model';
@@ -103,9 +103,9 @@ export class RoleService {
     private handleError(error: HttpErrorResponse) {
         // in a real world app, we may send the error to some remote logging infrastructure
         // instead of just logging it to the console
-        this.log('error', error);
+        //this.log('error', error);
 
-        return Observable.throw(error);
+        return throwError(error);
     }
 
     private log(level: string, message: any): void {

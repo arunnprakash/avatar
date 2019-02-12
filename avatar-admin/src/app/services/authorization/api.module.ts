@@ -1,16 +1,16 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { GenderService } from './genderservice.generated';
-import { AssetTypeService } from './assettypeservice.generated';
-import { VillageService } from './villageservice.generated';
 import { LanguageService } from './languageservice.generated';
-import { AssetService } from './assetservice.generated';
-import { TalukService } from './talukservice.generated';
-import { CountryService } from './countryservice.generated';
-import { UserService } from './userservice.generated';
-import { UserDeviceService } from './userdeviceservice.generated';
+import { VillageService } from './villageservice.generated';
 import { StateService } from './stateservice.generated';
+import { CountryService } from './countryservice.generated';
+import { AssetTypeService } from './assettypeservice.generated';
 import { DistrictService } from './districtservice.generated';
+import { AssetService } from './assetservice.generated';
+import { UserService } from './userservice.generated';
+import { TalukService } from './talukservice.generated';
 import { RoleService } from './roleservice.generated';
+import { GenderService } from './genderservice.generated';
+import { UserDeviceService } from './userdeviceservice.generated';
 import { ServiceConfig } from './serviceconfig';
 
 @NgModule({})
@@ -20,18 +20,18 @@ export class AuthorizationAPIModule {
             ngModule: AuthorizationAPIModule,
             providers: [
                 {provide: ServiceConfig, useValue: serviceConfig},
-                GenderService,
-                AssetTypeService,
-                VillageService,
                 LanguageService,
-                AssetService,
-                TalukService,
-                CountryService,
-                UserService,
-                UserDeviceService,
+                VillageService,
                 StateService,
+                CountryService,
+                AssetTypeService,
                 DistrictService,
-                RoleService
+                AssetService,
+                UserService,
+                TalukService,
+                RoleService,
+                GenderService,
+                UserDeviceService
             ]
         };
     }

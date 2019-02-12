@@ -26,9 +26,17 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { HomeComponent } from './components/home/home.component';
+
 import { DashboardModule } from './components/dashboard/dashboard.module';
 import { UsersModule } from './components/authorization/users/users.module';
 import { RolesModule } from './components/authorization/roles/roles.module';
+import { VillagesModule } from './components/authorization/villages/villages.module';
+import { TaluksModule } from './components/authorization/taluks/taluks.module';
+import { DistrictsModule } from './components/authorization/districts/districts.module';
+import { StatesModule } from './components/authorization/states/states.module';
+import { LanguagesModule } from './components/authorization/languages/languages.module';
+import { AssetTypesModule } from './components/authorization/assetTypes/assetTypes.module';
+
 import { ApiUrls } from './api-settings/api-urls';
 import { AuthService } from "./services/auth.service";
 import { TokenInterceptor } from "./services/token.interceptor";
@@ -67,9 +75,17 @@ export function createTranslateLoader() {
     AuthorizationAPIModule.forRoot({context: ApiUrls.authorizationServiceApiBaseUrl}),
     ProductAPIModule.forRoot({context: ApiUrls.authorizationServiceApiBaseUrl}),
     AppRoutingModule,
+    
     DashboardModule,
     UsersModule,
     RolesModule,
+    LanguagesModule,
+    VillagesModule,
+    TaluksModule,
+    DistrictsModule,
+    StatesModule,
+    AssetTypesModule,
+    
     NativeScriptUISideDrawerModule,
     NativeScriptUIAutoCompleteTextViewModule,
     TNSCheckBoxModule

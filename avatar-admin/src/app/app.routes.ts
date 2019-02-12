@@ -8,6 +8,18 @@ import { UsersComponent } from "./components/authorization/users/users/users.com
 import { UserDetailComponent } from "./components/authorization/users/user-detail/user-detail.component";
 import { RolesComponent } from "./components/authorization/roles/roles/roles.component";
 import { RoleDetailComponent } from "./components/authorization/roles/role-detail/role-detail.component";
+import { VillagesComponent } from "./components/authorization/villages/villages/villages.component";
+import { VillageDetailComponent } from "./components/authorization/villages/village-detail/village-detail.component";
+import { TaluksComponent } from "./components/authorization/taluks/taluks/taluks.component";
+import { TalukDetailComponent } from "./components/authorization/taluks/taluk-detail/taluk-detail.component";
+import { DistrictsComponent } from "./components/authorization/districts/districts/districts.component";
+import { DistrictDetailComponent } from "./components/authorization/districts/district-detail/district-detail.component";
+import { StatesComponent } from "./components/authorization/states/states/states.component";
+import { StateDetailComponent } from "./components/authorization/states/state-detail/state-detail.component";
+import { LanguagesComponent } from "./components/authorization/languages/languages/languages.component";
+import { LanguageDetailComponent } from "./components/authorization/languages/language-detail/language-detail.component";
+import { AssetTypesComponent } from "./components/authorization/assetTypes/assetTypes/assetTypes.component";
+import { AssetTypeDetailComponent } from "./components/authorization/assetTypes/assetType-detail/assetType-detail.component";
 
 export const routes: Routes = [
     {
@@ -42,6 +54,66 @@ export const routes: Routes = [
                    {
                        path: 'role',
                        component: RoleDetailComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'villages',
+                       component: VillagesComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'village',
+                       component: VillageDetailComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'taluks',
+                       component: TaluksComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'taluk',
+                       component: TalukDetailComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'districts',
+                       component: DistrictsComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'district',
+                       component: DistrictDetailComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'states',
+                       component: StatesComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'state',
+                       component: StateDetailComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'languages',
+                       component: LanguagesComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'language',
+                       component: LanguageDetailComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'assetTypes',
+                       component: AssetTypesComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'assetType',
+                       component: AssetTypeDetailComponent,
                        outlet: 'menuRouterOutlet'
                    },
                    {

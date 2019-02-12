@@ -7,4 +7,7 @@
 			<button pButton type="button" label="Yearly" class="ui-button-rounded ui-button-success" (click)="setSellerAndBuyerYearlyGrowthRate($event);"></button>
 		</p-panel>
 	</div>
+	<div class="p-col" *ngIf="hasRole(['SELLER'])">
+		<seller></seller>
+	</div>
 </div>

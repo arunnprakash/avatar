@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 import { DatePipe, SlicePipe } from '@angular/common';
 
-import { RolesComponent } from './roles/roles.component';
-import { RoleDetailComponent } from './role-detail/role-detail.component';
+import { VillagesComponent } from './villages/villages.component';
+import { VillageDetailComponent } from './village-detail/village-detail.component';
 
-export const componentDeclarations: any[] = [RolesComponent, RoleDetailComponent];
+export const componentDeclarations: any[] = [VillagesComponent, VillageDetailComponent];
 
 export const providerDeclarations: any[] = [
     DatePipe, SlicePipe
@@ -12,13 +12,13 @@ export const providerDeclarations: any[] = [
 
 export const routes: Routes = [
                                {
-                                   path: 'roles',
-                                   component: RolesComponent,
+                                   path: 'villages',
+                                   component: VillagesComponent,
                                    outlet: 'menuRouterOutlet'
                                },
                                {
-                                   path: 'role',
-                                   component: RoleDetailComponent,
+                                   path: 'village',
+                                   component: VillageDetailComponent,
                                    outlet: 'menuRouterOutlet'
                                }
                            ];

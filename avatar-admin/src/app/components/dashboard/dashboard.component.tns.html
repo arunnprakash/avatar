@@ -23,5 +23,8 @@
 				<Button text="Yearly" (tap)="setSellerAndBuyerYearlyGrowthRate();" class="btn btn-primary btn-rounded-sm all-sides-margin button"></Button>
 			</FlexboxLayout>
 		</StackLayout>
+		<StackLayout orientation="vertical" *ngIf="hasRole(['SELLER'])">
+			<seller></seller>
+		</StackLayout>
 	</ScrollView>
 </FlexboxLayout>

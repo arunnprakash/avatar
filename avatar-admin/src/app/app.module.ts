@@ -32,17 +32,26 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { DashboardModule } from './components/dashboard/dashboard.module';
 import { MenuComponent } from './components/menu/menu.component';
+import { HomeComponent } from './components/home/home.component';
+
+import { DashboardModule } from './components/dashboard/dashboard.module';
 import { UsersModule } from './components/authorization/users/users.module';
 import { RolesModule } from './components/authorization/roles/roles.module';
+import { LanguagesModule } from './components/authorization/languages/languages.module';
+import { VillagesModule } from './components/authorization/villages/villages.module';
+import { TaluksModule } from './components/authorization/taluks/taluks.module';
+import { DistrictsModule } from './components/authorization/districts/districts.module';
+import { StatesModule } from './components/authorization/states/states.module';
+import { AssetTypesModule } from './components/authorization/assetTypes/assetTypes.module';
+
 import { ApiUrls } from './api-settings/api-urls';
 import { AuthService } from "./services/auth.service";
 import { TokenInterceptor } from "./services/token.interceptor";
 import { NeedAuthGuard } from "./services/needauthguard";
 import { AuthorizationAPIModule } from "./services/authorization/api.module";
 import { ProductAPIModule } from "./services/product/api.module";
-import { HomeComponent } from './components/home/home.component';
+
 
 //required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -72,9 +81,17 @@ export function HttpLoaderFactory(http: HttpClient) {
     AuthorizationAPIModule.forRoot({context: ApiUrls.authorizationServiceApiBaseUrl}),
     ProductAPIModule.forRoot({context: ApiUrls.authorizationServiceApiBaseUrl}),
     AppRoutingModule,
+    
     DashboardModule,
     UsersModule,
     RolesModule,
+    LanguagesModule,
+    VillagesModule,
+    TaluksModule,
+    DistrictsModule,
+    StatesModule,
+    AssetTypesModule,
+    
     CalendarModule,
     InputTextModule,
     ButtonModule,

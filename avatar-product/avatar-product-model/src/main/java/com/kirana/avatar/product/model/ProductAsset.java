@@ -12,7 +12,6 @@ import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.kirana.avatar.authorization.model.Asset;
 import com.kirana.avatar.common.jpa.entity.BaseEntity;
 
 import lombok.AccessLevel;
@@ -28,7 +27,7 @@ import lombok.ToString;
  */
 
 @Entity
-@Table(name = "productAssets")
+@Table(name = "product_assets")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)

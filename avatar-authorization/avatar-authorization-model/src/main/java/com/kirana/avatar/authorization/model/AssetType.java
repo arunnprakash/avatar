@@ -35,7 +35,7 @@ import lombok.ToString;
  *
  */
 @Entity
-@Table(name = "asset_types")
+@Table(name = "users_asset_types")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)

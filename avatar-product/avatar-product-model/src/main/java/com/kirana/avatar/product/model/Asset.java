@@ -10,7 +10,7 @@
  * Limited
  *
  *******************************************************************************/
-package com.kirana.avatar.authorization.model;
+package com.kirana.avatar.product.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,7 +34,7 @@ import lombok.ToString;
  */
 
 @Entity
-@Table(name = "users_assets")
+@Table(name = "products_assets")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)

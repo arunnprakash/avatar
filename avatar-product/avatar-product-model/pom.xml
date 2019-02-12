@@ -23,12 +23,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.kirana.avatar</groupId>
-			<artifactId>avatar-common-feign</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.kirana.avatar</groupId>
-			<artifactId>avatar-authorization-model</artifactId>
+			<artifactId>avatar-common-model</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<!-- Getter Setter -->

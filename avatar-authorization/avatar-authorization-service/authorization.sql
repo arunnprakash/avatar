@@ -36,11 +36,11 @@ VALUES ('admin', NOW(), b'000000', 'admin', NOW(), '0', NOW(),
 INSERT INTO `user_roles` (`created_by`, `created_date`, `deleted`, `last_modified_by`, `last_modified_date`, `version`, `role_id`, `user_id`) 
 VALUES ('admin', NOW(), b'000000', 'admin', NOW(), '0', '1', '1'); 
 
-INSERT INTO `asset_types` (`created_by`, `created_date`, `deleted`, `last_modified_by`, `last_modified_date`, `version`, `asset_type_name`) 
+INSERT INTO `users_asset_types` (`created_by`, `created_date`, `deleted`, `last_modified_by`, `last_modified_date`, `version`, `asset_type_name`) 
 VALUES ('admin', NOW(), b'000000', 'admin', NOW(), '0', 'PHOTO'); 
 
-INSERT INTO `asset_types` (`created_by`, `created_date`, `deleted`, `last_modified_by`, `last_modified_date`, `version`, `asset_type_name`) 
+INSERT INTO `users_asset_types` (`created_by`, `created_date`, `deleted`, `last_modified_by`, `last_modified_date`, `version`, `asset_type_name`) 
 VALUES ('admin', NOW(), b'000000', 'admin', NOW(), '0', 'VOTER_ID');
 
-INSERT INTO `asset_types` (`created_by`, `created_date`, `deleted`, `last_modified_by`, `last_modified_date`, `version`, `asset_type_name`) 
+INSERT INTO `users_asset_types` (`created_by`, `created_date`, `deleted`, `last_modified_by`, `last_modified_date`, `version`, `asset_type_name`) 
 VALUES ('admin', NOW(), b'000000', 'admin', NOW(), '0', 'BANK_BOOK'); 

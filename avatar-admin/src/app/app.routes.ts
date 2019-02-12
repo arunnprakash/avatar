@@ -107,12 +107,12 @@ export const routes: Routes = [
                        outlet: 'menuRouterOutlet'
                    },
                    {
-                       path: 'assetTypes',
+                       path: 'usersAssetTypes',
                        component: AssetTypesComponent,
                        outlet: 'menuRouterOutlet'
                    },
                    {
-                       path: 'assetType',
+                       path: 'usersAssetType',
                        component: AssetTypeDetailComponent,
                        outlet: 'menuRouterOutlet'
                    },

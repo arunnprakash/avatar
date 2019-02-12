@@ -13,9 +13,6 @@ import javax.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
-import com.kirana.avatar.authorization.model.District;
-import com.kirana.avatar.authorization.model.State;
-import com.kirana.avatar.authorization.model.Taluk;
 import com.kirana.avatar.common.jpa.specification.BaseEntitySpecification;
 import com.kirana.avatar.product.model.Holiday;
 import com.kirana.avatar.product.model.Holiday_;
@@ -52,7 +49,7 @@ public class HolidaySpecification extends BaseEntitySpecification<Holiday>{
 		};
 	}
 	
-	public Specification<Holiday> hasStateId(final State state) {
+	public Specification<Holiday> hasStateId(final Long state) {
 		return new Specification<Holiday>() {
 			public Predicate toPredicate(Root<Holiday> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
 				return builder.like(root.get(Holiday_.STATE), "%"+state+"%");
@@ -60,7 +57,7 @@ public class HolidaySpecification extends BaseEntitySpecification<Holiday>{
 		};
 	}
 	
-	public Specification<Holiday> hasDistrictId(final District district) {
+	public Specification<Holiday> hasDistrictId(final Long district) {
 		return new Specification<Holiday>() {
 			public Predicate toPredicate(Root<Holiday> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
 				return builder.like(root.get(Holiday_.DISTRICT), "%"+district+"%");
@@ -68,7 +65,7 @@ public class HolidaySpecification extends BaseEntitySpecification<Holiday>{
 		};
 	}
 	
-	public Specification<Holiday> hasTalukId(final Taluk taluk) {
+	public Specification<Holiday> hasTalukId(final Long taluk) {
 		return new Specification<Holiday>() {
 			public Predicate toPredicate(Root<Holiday> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
 				return builder.like(root.get(Holiday_.TALUK), "%"+taluk+"%");

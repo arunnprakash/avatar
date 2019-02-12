@@ -1,7 +1,7 @@
 # Config Server
 spring:
   application:
-    name: authorization-service
+    name: product-service
   profiles: 
     active: @spring.profiles.active@
     default: dev

@@ -11,8 +11,8 @@ import javax.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
-import com.kirana.avatar.authorization.model.Asset;
 import com.kirana.avatar.common.jpa.specification.BaseEntitySpecification;
+import com.kirana.avatar.product.model.Asset;
 import com.kirana.avatar.product.model.Product;
 import com.kirana.avatar.product.model.ProductAsset;
 import com.kirana.avatar.product.model.ProductAsset_;

@@ -5,7 +5,6 @@ package com.kirana.avatar.product.dto;
 
 import java.time.ZonedDateTime;
 
-import com.kirana.avatar.authorization.dto.AssetDTO;
 import com.kirana.avatar.common.dto.BaseDTO;
 
 import lombok.AccessLevel;

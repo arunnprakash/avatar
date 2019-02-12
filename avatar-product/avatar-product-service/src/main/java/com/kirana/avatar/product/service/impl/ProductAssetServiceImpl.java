@@ -25,6 +25,7 @@ import com.kirana.avatar.product.mapper.ProductAssetMapper;
 import com.kirana.avatar.product.model.ProductAsset;
 import com.kirana.avatar.product.repositories.ProductAssetRepository;
 import com.kirana.avatar.product.resource.ProductAssetResource;
+import com.kirana.avatar.product.service.ProductAssetService;
 import com.kirana.avatar.product.specifications.ProductAssetSpecification;
 
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +38,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @SuppressWarnings("unused")
 @Transactional
-public class ProductAssetServiceImpl extends BaseServiceImpl<ProductAsset, ProductAssetDTO, ProductAssetMapper, ProductAssetRepository, ProductAssetSpecification> implements ProductAssetResource{
+public class ProductAssetServiceImpl extends BaseServiceImpl<ProductAsset, ProductAssetDTO, ProductAssetMapper, ProductAssetRepository, ProductAssetSpecification> implements ProductAssetService{
 	
 	private ProductAssetRepository productAssetRepository;
 	private ProductAssetMapper productAssetMapper;
@@ -84,26 +85,5 @@ public class ProductAssetServiceImpl extends BaseServiceImpl<ProductAsset, Produ
 		 */
 		return specification;
 	}
-	@Override
-	public Collection<ProductAssetDTO> getAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public Collection<ProductAssetDTO> getAllExceptDeleted() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public PagingAndFilterResponse<ProductAssetDTO> getResourceByFilterAndPaging(
-			@Valid PagingAndFilterRequest pagingAndFilterRequest) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public PagingAndFilterResponse<ProductAssetDTO> getResourceByFilterAndPagingExceptDeleted(
-			@Valid PagingAndFilterRequest pagingAndFilterRequest) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 }

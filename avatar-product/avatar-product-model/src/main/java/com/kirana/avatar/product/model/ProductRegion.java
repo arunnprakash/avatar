@@ -28,7 +28,7 @@ import lombok.ToString;
  */
 
 @Entity
-@Table(name = "productRegions")
+@Table(name = "product_regions")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)

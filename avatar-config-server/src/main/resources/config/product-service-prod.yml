@@ -1,9 +1,25 @@
 spring:
   profiles: 
     default: dev
-  basic:
-    enabled: false
-
+  security:
+    user:
+      name: "avatar"
+      password: "eureka"
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        default_schema: product
+  datasource:
+    platform: postgres
+    url: jdbc:mysql://localhost:3306/avatar?useUnicode=yes&characterEncoding=UTF-8
+    username: root
+    password: admin
+    driverClassName: com.mysql.cj.jdbc.Driver
+    validationQuery: SELECT 1
   # Send distributed traces to zipkin server (using Eureka to find the server)
   sleuth:
     sampler:
@@ -41,18 +57,7 @@ management:
 
 # HTTP (Tomcat) port
 server:
-  port: 9090
-
-# zuul config
-zuul:
-  sensitiveHeaders: Cookie,Set-Cookie
-  routes:
-      authorization-service:
-        path: /api/**
-        serviceId: authorization-service
-      product-service:
-        path: /api/**
-        serviceId: product-service
+  port: 1120
 
 # logging
 logging:
@@ -64,4 +69,19 @@ logging:
     org.springframework.web: DEBUG
     org.hibernate: WARN
     com.kirana: DEBUG
-
+#Feign Config
+feign:
+  client:
+    config:
+      feignName:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: full
+#        errorDecoder: com.example.SimpleErrorDecoder
+#        retryer: com.example.SimpleRetryer
+        requestInterceptors:
+          - com.kirana.avatar.common.feign.interceptor.FeignRequestInterceptor
+        decode404: false
+#        encoder: com.example.SimpleEncoder
+#        decoder: com.example.SimpleDecoder
+#        contract: com.example.SimpleContract

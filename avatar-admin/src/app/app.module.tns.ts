@@ -37,6 +37,8 @@ import { StatesModule } from './components/authorization/states/states.module';
 import { LanguagesModule } from './components/authorization/languages/languages.module';
 import { UsersAssetTypesModule } from './components/authorization/assetTypes/assetTypes.module';
 
+import { ProductsAssetTypesModule } from './components/product/assetTypes/assetTypes.module';
+
 import { ApiUrls } from './api-settings/api-urls';
 import { AuthService } from "./services/auth.service";
 import { TokenInterceptor } from "./services/token.interceptor";
@@ -85,6 +87,8 @@ export function createTranslateLoader() {
     DistrictsModule,
     StatesModule,
     UsersAssetTypesModule,
+    
+    ProductsAssetTypesModule,
     
     NativeScriptUISideDrawerModule,
     NativeScriptUIAutoCompleteTextViewModule,

@@ -20,6 +20,8 @@ import { LanguagesComponent } from "./components/authorization/languages/languag
 import { LanguageDetailComponent } from "./components/authorization/languages/language-detail/language-detail.component";
 import { UsersAssetTypesComponent } from "./components/authorization/assetTypes/assetTypes/assetTypes.component";
 import { UsersAssetTypeDetailComponent } from "./components/authorization/assetTypes/assetType-detail/assetType-detail.component";
+import { ProductsAssetTypesComponent } from "./components/product/assetTypes/assetTypes/assetTypes.component";
+import { ProductsAssetTypeDetailComponent } from "./components/product/assetTypes/assetType-detail/assetType-detail.component";
 
 export const routes: Routes = [
     {
@@ -114,6 +116,16 @@ export const routes: Routes = [
                    {
                        path: 'usersAssetType',
                        component: UsersAssetTypeDetailComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'productsAssetTypes',
+                       component: ProductsAssetTypesComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'productsAssetType',
+                       component: ProductsAssetTypeDetailComponent,
                        outlet: 'menuRouterOutlet'
                    },
                    {

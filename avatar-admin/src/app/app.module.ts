@@ -45,6 +45,8 @@ import { DistrictsModule } from './components/authorization/districts/districts.
 import { StatesModule } from './components/authorization/states/states.module';
 import { UsersAssetTypesModule } from './components/authorization/assetTypes/assetTypes.module';
 
+import { ProductsAssetTypesModule } from './components/product/assetTypes/assetTypes.module';
+
 import { ApiUrls } from './api-settings/api-urls';
 import { AuthService } from "./services/auth.service";
 import { TokenInterceptor } from "./services/token.interceptor";
@@ -91,6 +93,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     DistrictsModule,
     StatesModule,
     UsersAssetTypesModule,
+    
+    ProductsAssetTypesModule,
     
     CalendarModule,
     InputTextModule,

@@ -22,7 +22,7 @@ import * as _ from "lodash";
     styles: [baseCss],
     providers: [ConfirmationService, DialogService]
 } )
-export class AssetTypesComponent extends BaseComponent implements OnInit {
+export class UsersAssetTypesComponent extends BaseComponent implements OnInit {
 
     protected title = 'AssetType';
     protected localCols: any[] = [{ field: 'assetTypeName', header: 'AssetTypeName', dataType: 'INPUT' }];

@@ -18,8 +18,8 @@ import { StatesComponent } from "./components/authorization/states/states/states
 import { StateDetailComponent } from "./components/authorization/states/state-detail/state-detail.component";
 import { LanguagesComponent } from "./components/authorization/languages/languages/languages.component";
 import { LanguageDetailComponent } from "./components/authorization/languages/language-detail/language-detail.component";
-import { AssetTypesComponent } from "./components/authorization/assetTypes/assetTypes/assetTypes.component";
-import { AssetTypeDetailComponent } from "./components/authorization/assetTypes/assetType-detail/assetType-detail.component";
+import { UsersAssetTypesComponent } from "./components/authorization/assetTypes/assetTypes/assetTypes.component";
+import { UsersAssetTypeDetailComponent } from "./components/authorization/assetTypes/assetType-detail/assetType-detail.component";
 
 export const routes: Routes = [
     {
@@ -108,12 +108,12 @@ export const routes: Routes = [
                    },
                    {
                        path: 'usersAssetTypes',
-                       component: AssetTypesComponent,
+                       component: UsersAssetTypesComponent,
                        outlet: 'menuRouterOutlet'
                    },
                    {
                        path: 'usersAssetType',
-                       component: AssetTypeDetailComponent,
+                       component: UsersAssetTypeDetailComponent,
                        outlet: 'menuRouterOutlet'
                    },
                    {

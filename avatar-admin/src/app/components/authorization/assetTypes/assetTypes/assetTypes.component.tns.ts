@@ -11,7 +11,7 @@ import { BaseComponent } from '../../../base/base.component';
 import { AssetTypeService } from "../../../../services/authorization/assettypeservice.generated";
 import { AuthService } from "../../../../services/auth.service";
 import { AssetTypeDTO } from "../../../../services/authorization/assetTypedto.model";
-import { AssetTypeDetailComponent } from "../assetType-detail/assetType-detail.component";
+import { UsersAssetTypeDetailComponent } from "../assetType-detail/assetType-detail.component";
 
 @Component( {
     selector: 'assetTypes',
@@ -19,7 +19,7 @@ import { AssetTypeDetailComponent } from "../assetType-detail/assetType-detail.c
     styles: [baseCss],
     providers: [ModalDialogService]
 } )
-export class AssetTypesComponent extends BaseComponent implements OnInit {
+export class UsersAssetTypesComponent extends BaseComponent implements OnInit {
 
     protected title = 'AssetType';
     protected localCols: any[] = [{ field: 'assetTypeName', header: 'AssetTypeName', dataType: 'INPUT', autocapitalizationType:'allcharacters', keyboardType: 'email' }];
@@ -27,7 +27,7 @@ export class AssetTypesComponent extends BaseComponent implements OnInit {
     constructor( assetTypeService: AssetTypeService, authService: AuthService, translate: TranslateService, 
             modalDialogService: ModalDialogService, dialogService: ModalDialogService, 
             router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef) {
-        super( assetTypeService, authService, translate, modalDialogService, dialogService, AssetTypeDetailComponent, router, activatedRoute, vcRef);
+        super( assetTypeService, authService, translate, modalDialogService, dialogService, UsersAssetTypeDetailComponent, router, activatedRoute, vcRef);
     }
     ngOnInit() {
         super.ngOnInit();

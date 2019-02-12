@@ -43,7 +43,7 @@ import { VillagesModule } from './components/authorization/villages/villages.mod
 import { TaluksModule } from './components/authorization/taluks/taluks.module';
 import { DistrictsModule } from './components/authorization/districts/districts.module';
 import { StatesModule } from './components/authorization/states/states.module';
-import { AssetTypesModule } from './components/authorization/assetTypes/assetTypes.module';
+import { UsersAssetTypesModule } from './components/authorization/assetTypes/assetTypes.module';
 
 import { ApiUrls } from './api-settings/api-urls';
 import { AuthService } from "./services/auth.service";
@@ -90,7 +90,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TaluksModule,
     DistrictsModule,
     StatesModule,
-    AssetTypesModule,
+    UsersAssetTypesModule,
     
     CalendarModule,
     InputTextModule,

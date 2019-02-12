@@ -13,7 +13,7 @@ import { AssetTypeService } from "../../../../services/authorization/assettypese
   template: baseDetailTemplate,
   styles: [baseDetailCss]
 })
-export class AssetTypeDetailComponent extends BaseDetailComponent implements OnInit {
+export class UsersAssetTypeDetailComponent extends BaseDetailComponent implements OnInit {
 
   constructor(assetTypeService: AssetTypeService, authService: AuthService, 
           params: ModalDialogParams, dialog: ModalDialogParams) {

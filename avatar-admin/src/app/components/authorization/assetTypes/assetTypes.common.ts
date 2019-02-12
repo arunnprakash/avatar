@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 import { DatePipe, SlicePipe } from '@angular/common';
 
-import { AssetTypesComponent } from './assetTypes/assetTypes.component';
-import { AssetTypeDetailComponent } from './assetType-detail/assetType-detail.component';
+import { UsersAssetTypesComponent } from './assetTypes/assetTypes.component';
+import { UsersAssetTypeDetailComponent } from './assetType-detail/assetType-detail.component';
 
-export const componentDeclarations: any[] = [AssetTypesComponent, AssetTypeDetailComponent];
+export const componentDeclarations: any[] = [UsersAssetTypesComponent, UsersAssetTypeDetailComponent];
 
 export const providerDeclarations: any[] = [
     DatePipe, SlicePipe
@@ -12,13 +12,13 @@ export const providerDeclarations: any[] = [
 
 export const routes: Routes = [
                                {
-                                   path: 'assetTypes',
-                                   component: AssetTypesComponent,
+                                   path: 'usersAssetTypes',
+                                   component: UsersAssetTypesComponent,
                                    outlet: 'menuRouterOutlet'
                                },
                                {
-                                   path: 'assetType',
-                                   component: AssetTypeDetailComponent,
+                                   path: 'usersAssetType',
+                                   component: UsersAssetTypeDetailComponent,
                                    outlet: 'menuRouterOutlet'
                                }
                            ];

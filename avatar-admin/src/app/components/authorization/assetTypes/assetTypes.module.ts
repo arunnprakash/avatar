@@ -49,4 +49,4 @@ import { routes, componentDeclarations, providerDeclarations } from './assetType
   providers: providerDeclarations,
   schemas: [NO_ERRORS_SCHEMA]
 })
-export class AssetTypesModule { }
+export class UsersAssetTypesModule { }

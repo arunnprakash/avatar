@@ -35,7 +35,7 @@ import { TaluksModule } from './components/authorization/taluks/taluks.module';
 import { DistrictsModule } from './components/authorization/districts/districts.module';
 import { StatesModule } from './components/authorization/states/states.module';
 import { LanguagesModule } from './components/authorization/languages/languages.module';
-import { AssetTypesModule } from './components/authorization/assetTypes/assetTypes.module';
+import { UsersAssetTypesModule } from './components/authorization/assetTypes/assetTypes.module';
 
 import { ApiUrls } from './api-settings/api-urls';
 import { AuthService } from "./services/auth.service";
@@ -84,7 +84,7 @@ export function createTranslateLoader() {
     TaluksModule,
     DistrictsModule,
     StatesModule,
-    AssetTypesModule,
+    UsersAssetTypesModule,
     
     NativeScriptUISideDrawerModule,
     NativeScriptUIAutoCompleteTextViewModule,

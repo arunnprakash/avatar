@@ -8,15 +8,10 @@
 			<Label class="header" text="APP NAME"></Label>
 	
 			<StackLayout class="input-field">
-				<TextField class="input" hint="UserName" keyboardType="email" autocorrect="false" autocapitalizationType="none" [(ngModel)]="username" returnKeyType="next"></TextField>
+				<TextField class="input" hint="PhoneNumber" keyboardType="email" autocorrect="false" autocapitalizationType="none" [(ngModel)]="username" returnKeyType="next"></TextField>
 				<StackLayout class="hr-light"></StackLayout>
 			</StackLayout>
-	
-			<StackLayout class="input-field">
-				<TextField class="input" hint="Password" secure="true" [(ngModel)]="password" [returnKeyType]="'done'"></TextField>
-				<StackLayout class="hr-light"></StackLayout>
-			</StackLayout>
-			
+
 			<Button text="LOG IN" (tap)="doLogin()" class="btn btn-primary m-t-20"></Button>
 		</StackLayout>
 	

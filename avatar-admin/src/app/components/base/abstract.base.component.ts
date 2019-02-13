@@ -114,10 +114,12 @@ export abstract class AbstractBaseComponent implements OnInit {
         this.service.getResourceByFilterAndPaging(pagingAndFilterRequest)
             .subscribe((pagingAndFilterResponse: PagingAndFilterResponse) => {
             this.totalRecords = pagingAndFilterResponse.totalRecords;
-            this.recordList = pagingAndFilterResponse.results;
-            this.recordList.forEach( (item: any ) => {
-                this.recordIdList.push({ id: item.id, selected: false });
-            });
+            if (pagingAndFilterResponse.results) {
+                this.recordList = pagingAndFilterResponse.results;
+                this.recordList.forEach( (item: any ) => {
+                    this.recordIdList.push({ id: item.id, selected: false });
+                });
+            }
             this.showLoading(false);
             this.recordListLoaded();
         },

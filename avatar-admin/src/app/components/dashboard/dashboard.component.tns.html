@@ -2,6 +2,7 @@
 <ActionBar title="" isCollapsed="true"></ActionBar>
 	<FlexboxLayout horizontalAlignment="center" verticalAlignment="bottom" flexDirection="column" alignItems="stretch" justifyContent="center">
 		<ScrollView>
+			<!-- Sellers and Buyers growth rate -->
 			<StackLayout orientation="vertical" *ngIf="hasRole(['ADMIN', 'SELLER_AGENT','BUYER_AGENT'])">
 				<Label [text]="userTitle" class="text-bold" horizontalAlignment="center"></Label>
 				<GridLayout rows="*" height="300px">
@@ -24,9 +25,11 @@
 					<Button text="Monthly" (tap)="setSellerAndBuyerMonthlyGrowthRate();" class="btn btn-primary btn-rounded-sm all-sides-margin button"></Button>
 					<Button text="Yearly" (tap)="setSellerAndBuyerYearlyGrowthRate();" class="btn btn-primary btn-rounded-sm all-sides-margin button"></Button>
 				</FlexboxLayout>
+				<StackLayout class="hr-light"></StackLayout>
 			</StackLayout>
 			<StackLayout orientation="vertical" *ngIf="hasRole(['SELLER'])">
 				<seller></seller>
+				<StackLayout class="hr-light"></StackLayout>
 			</StackLayout>
 		</ScrollView>
 	</FlexboxLayout>

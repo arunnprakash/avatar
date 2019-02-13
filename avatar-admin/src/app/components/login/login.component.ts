@@ -21,8 +21,6 @@ export class LoginComponent implements OnInit {
           private translate: TranslateService, private router: Router) { }
 
   ngOnInit() {
-      this.username = 'admin';
-      this.password = 'admin';
       if (this.authService.isLogged()) {
           this.setPreferredLanguage(this.authService.getUserInfo().preferredLanguage.languageCode);
           console.info("Already Logged in So Login Navigate to Home");

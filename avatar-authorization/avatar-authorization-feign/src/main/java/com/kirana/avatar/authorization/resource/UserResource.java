@@ -14,7 +14,6 @@ package com.kirana.avatar.authorization.resource;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-import java.util.Collection;
 import java.util.Map;
 
 import javax.validation.Valid;

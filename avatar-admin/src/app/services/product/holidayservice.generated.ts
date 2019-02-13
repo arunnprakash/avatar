@@ -22,7 +22,7 @@ export class HolidayService {
 
     constructor(private httpClient: HttpClient, private serviceConfig: ServiceConfig) { }
     /* GET */
-    public getAllGet(): Observable<HolidayDTO[]> {
+    public getAll(): Observable<HolidayDTO[]> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -30,7 +30,7 @@ export class HolidayService {
             .pipe(catchError(this.handleError));
     }
 
-    public getAllExceptDeletedGet(): Observable<HolidayDTO[]> {
+    public getAllExceptDeleted(): Observable<HolidayDTO[]> {
         const url = this.serviceBaseURL + '/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
@@ -38,7 +38,7 @@ export class HolidayService {
             .pipe(catchError(this.handleError));
     }
 
-    public getGet(id: number): Observable<HolidayDTO> {
+    public get(id: number): Observable<HolidayDTO> {
         const url = this.serviceBaseURL + '/' + id + '';
         const params = this.createHttpParams({});
 
@@ -50,7 +50,7 @@ export class HolidayService {
     /* HEAD */
 
     /* POST */
-    public savePost(arg0: HolidayDTO): Observable<HolidayDTO> {
+    public save(arg0: HolidayDTO): Observable<HolidayDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -58,7 +58,7 @@ export class HolidayService {
             .pipe(catchError(this.handleError));
     }
 
-    public getResourceByFilterAndPagingPost(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
+    public getResourceByFilterAndPaging(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
         const url = this.serviceBaseURL + '/with-filter-and-paging';
         const params = this.createHttpParams({});
 
@@ -66,7 +66,7 @@ export class HolidayService {
             .pipe(catchError(this.handleError));
     }
 
-    public getResourceByFilterAndPagingExceptDeletedPost(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
+    public getResourceByFilterAndPagingExceptDeleted(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
         const url = this.serviceBaseURL + '/with-filter-and-paging/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
@@ -76,7 +76,7 @@ export class HolidayService {
 
 
     /* PUT */
-    public updatePut(arg0: HolidayDTO): Observable<HolidayDTO> {
+    public update(arg0: HolidayDTO): Observable<HolidayDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -88,7 +88,7 @@ export class HolidayService {
     /* PATCH */
 
     /* DELETE */
-    public deleteDelete(ids: number[]): Observable<boolean> {
+    public delete(ids: number[]): Observable<boolean> {
         const url = this.serviceBaseURL + '/' + ids + '';
         const params = this.createHttpParams({});
 

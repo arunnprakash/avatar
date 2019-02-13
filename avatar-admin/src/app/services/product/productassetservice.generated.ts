@@ -25,7 +25,7 @@ export class ProductAssetService {
 
     constructor(private httpClient: HttpClient, private serviceConfig: ServiceConfig) { }
     /* GET */
-    public getAllGet(): Observable<ProductAssetDTO[]> {
+    public getAll(): Observable<ProductAssetDTO[]> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -33,7 +33,7 @@ export class ProductAssetService {
             .pipe(catchError(this.handleError));
     }
 
-    public getAllExceptDeletedGet(): Observable<ProductAssetDTO[]> {
+    public getAllExceptDeleted(): Observable<ProductAssetDTO[]> {
         const url = this.serviceBaseURL + '/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
@@ -41,7 +41,7 @@ export class ProductAssetService {
             .pipe(catchError(this.handleError));
     }
 
-    public getGet(id: number): Observable<ProductAssetDTO> {
+    public get(id: number): Observable<ProductAssetDTO> {
         const url = this.serviceBaseURL + '/' + id + '';
         const params = this.createHttpParams({});
 
@@ -53,7 +53,7 @@ export class ProductAssetService {
     /* HEAD */
 
     /* POST */
-    public savePost(arg0: ProductAssetDTO): Observable<ProductAssetDTO> {
+    public save(arg0: ProductAssetDTO): Observable<ProductAssetDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -61,7 +61,7 @@ export class ProductAssetService {
             .pipe(catchError(this.handleError));
     }
 
-    public getResourceByFilterAndPagingPost(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
+    public getResourceByFilterAndPaging(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
         const url = this.serviceBaseURL + '/with-filter-and-paging';
         const params = this.createHttpParams({});
 
@@ -69,7 +69,7 @@ export class ProductAssetService {
             .pipe(catchError(this.handleError));
     }
 
-    public getResourceByFilterAndPagingExceptDeletedPost(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
+    public getResourceByFilterAndPagingExceptDeleted(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
         const url = this.serviceBaseURL + '/with-filter-and-paging/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
@@ -79,7 +79,7 @@ export class ProductAssetService {
 
 
     /* PUT */
-    public updatePut(arg0: ProductAssetDTO): Observable<ProductAssetDTO> {
+    public update(arg0: ProductAssetDTO): Observable<ProductAssetDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -91,7 +91,7 @@ export class ProductAssetService {
     /* PATCH */
 
     /* DELETE */
-    public deleteDelete(ids: number[]): Observable<boolean> {
+    public delete(ids: number[]): Observable<boolean> {
         const url = this.serviceBaseURL + '/' + ids + '';
         const params = this.createHttpParams({});
 

@@ -5,4 +5,5 @@ import {environment} from '../../environments/environment';
 export class ApiUrls {
     private static readonly avatarServiceApiBaseUrl = environment.avatarServiceApiBaseUrl;
     public static readonly authorizationServiceApiBaseUrl = ApiUrls.avatarServiceApiBaseUrl + environment.authorizationServiceApiBaseUrl;
+    public static readonly productServiceApiBaseUrl = ApiUrls.avatarServiceApiBaseUrl + environment.productServiceApiBaseUrl;
 }

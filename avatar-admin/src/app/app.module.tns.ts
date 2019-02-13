@@ -75,7 +75,7 @@ export function createTranslateLoader() {
         }
     }),
     AuthorizationAPIModule.forRoot({context: ApiUrls.authorizationServiceApiBaseUrl}),
-    ProductAPIModule.forRoot({context: ApiUrls.authorizationServiceApiBaseUrl}),
+    ProductAPIModule.forRoot({context: ApiUrls.productServiceApiBaseUrl}),
     AppRoutingModule,
     
     DashboardModule,

@@ -81,7 +81,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         }
     }),
     AuthorizationAPIModule.forRoot({context: ApiUrls.authorizationServiceApiBaseUrl}),
-    ProductAPIModule.forRoot({context: ApiUrls.authorizationServiceApiBaseUrl}),
+    ProductAPIModule.forRoot({context: ApiUrls.productServiceApiBaseUrl}),
     AppRoutingModule,
     
     DashboardModule,

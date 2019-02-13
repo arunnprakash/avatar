@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit , ViewContainerRef, ViewChildren, QueryList } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
+import { Page } from "tns-core-modules/ui/page";
 import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/modal-dialog";
 import { TranslateService } from "@ngx-translate/core";
 
@@ -57,8 +58,8 @@ export class UsersComponent extends BaseComponent implements OnInit, AfterViewIn
             private villageService: VillageService,  private genderService: GenderService,
             private assetTypeService: AssetTypeService,
             modalDialogService: ModalDialogService, dialogService: ModalDialogService, 
-            router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef ) {
-        super( userService, authService, translate, modalDialogService, dialogService, UserDetailComponent, router, activatedRoute, vcRef );
+            router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef, private page: Page) {
+        super( userService, authService, translate, modalDialogService, dialogService, UserDetailComponent, router, activatedRoute, vcRef);
         this.languageCode = authService.getUserInfo().preferredLanguage.languageCode;
     }
     ngAfterViewInit() {
@@ -66,6 +67,7 @@ export class UsersComponent extends BaseComponent implements OnInit, AfterViewIn
     }
     ngOnInit() {
         super.ngOnInit();
+        this.page.actionBarHidden = true;
         console.log("ngOnInit user.component.tns");
         this.initFieldsLabel("users");
         this.initRolesList();

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
+import { Page } from "tns-core-modules/ui/page";
 import { SlicePipe } from '@angular/common';
 import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/modal-dialog";
 import { TranslateService } from "@ngx-translate/core";
@@ -26,11 +27,13 @@ export class LanguagesComponent extends BaseComponent implements OnInit {
 
     constructor( languageService: LanguageService, authService: AuthService, translate: TranslateService, 
             modalDialogService: ModalDialogService, dialogService: ModalDialogService, 
-            router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef) {
+            router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef, private page: Page) {
         super( languageService, authService, translate, modalDialogService, dialogService, LanguageDetailComponent, router, activatedRoute, vcRef);
     }
     ngOnInit() {
         super.ngOnInit();
+        this.page.actionBarHidden = true;
+        console.log("ngOnInit language.component.tns");
     }
 
     protected initEmptyModel() {

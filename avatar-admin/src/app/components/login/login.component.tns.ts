@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Page } from "tns-core-modules/ui/page";
 import { device, screen, isAndroid, isIOS } from "tns-core-modules/platform";
 import { Telephony } from 'nativescript-telephony';
 
@@ -21,9 +22,11 @@ export class LoginComponent implements OnInit {
     loginProgress: boolean;
     loginError: boolean;
   constructor(private userService: UserService, private authService: AuthService, 
-          private translate: TranslateService, private router: Router) { }
+          private translate: TranslateService, private router: Router, private page: Page) { }
 
   ngOnInit() {
+      this.page.actionBarHidden = true;
+      this.page.actionBar.isCollapsed = true;
       Telephony().then((resolved) => {
           console.log('resolved >', resolved)
           console.dir(resolved);
@@ -44,6 +47,10 @@ export class LoginComponent implements OnInit {
                 }
           });
       }
+  }
+  pageLoaded( args ) {
+      var page = args.object;
+      page.actionBarHidden = true;
   }
   setPreferredLanguage(languageCode: string) {
       // this language will be used as a fallback when a translation isn't found in the current language

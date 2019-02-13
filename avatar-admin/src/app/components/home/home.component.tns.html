@@ -3,37 +3,43 @@ RadSideDrawer is a UI component part of the Progress NativeScript UI set of comp
 Learn more about the RadSideDrawer UI component and how it can be customized in this documentation article:
 http://docs.telerik.com/devtools/nativescript-ui/Controls/NativeScript/SideDrawer/getting-started
 -->
-<Page actionBarHidden="true" loaded="pageLoaded">
-	<ActionBar title="" class="action-bar bg-green">
+<Page hasActionBar="true" actionBarHidden="true" loaded="pageLoaded">
+	<ActionBar title="" isCollapsed="true" class="action-bar bg-green">
 		<GridLayout columns="auto, *" class="action-bar-title">
 			<Label col="0" class="fa action-item" text="&#xf039;" (tap)="toggleDrawer()"></Label>
 			<Label col="1" text="{{ 'home.welcome' | translate }} {{userDTO.firstName}}" class="p-r-10 text-align-center font-weight-bold"></Label>
 		</GridLayout>
 	</ActionBar>
+	<StackLayout class="action-bar bg-green">
+		<GridLayout columns="auto, *" class="action-bar-title">
+			<Label col="0" class="fa action-item" text="&#xf039;" (tap)="toggleDrawer()"></Label>
+			<Label col="1" text="{{ 'home.welcome' | translate }} {{userDTO.firstName}}" class="p-r-10 text-align-center font-weight-bold"></Label>
+		</GridLayout>
+	</StackLayout>
 	<RadSideDrawer [drawerTransition]="sideDrawerTransition" id="sideDrawer" (loaded)="pageLoaded($event)">
 	
 		<!-- side drawer content -->
-	    <GridLayout tkDrawerContent rows="auto, *" class="sidedrawer sidedrawer-left">
-	        <StackLayout row="0" class="sidedrawer-header">
-	        	<GridLayout columns="auto, *">
-		            <Image *ngIf="hasPhoto()" row="0" col="0" class="sidedrawer-header-image img-circle" stretch="fill" [src]="getPhoto()"></Image>
-		            <Image *ngIf="!hasPhoto()" row="0" col="0" class="sidedrawer-header-image img-circle" src="~/assets/images/avatar.png"></Image>
-		            <StackLayout row="0" col="1" class="sidedrawer-header">
-		            	<Label class="sidedrawer-header-brand font-weight-bold" text="{{userDTO.firstName}}"></Label>
-		            	<Label class="sidedrawer-header-brand" text="{{userDTO.lastName}}"></Label>
-		            	<Label class="sidedrawer-header-brand font-weight-bold" text="{{userDTO.village[userDTO.preferredLanguage.languageCode]}}"></Label>
-		            </StackLayout>
-	            </GridLayout>
-	        </StackLayout>
-	        <StackLayout row="1">
-	    		<menu [menuDrawer]="drawer"></menu>
-	    	</StackLayout>
-	    </GridLayout>
+		<GridLayout tkDrawerContent rows="auto, *" class="sidedrawer sidedrawer-left">
+			<StackLayout row="0" class="sidedrawer-header">
+				<GridLayout columns="auto, *">
+					<Image *ngIf="hasPhoto()" row="0" col="0" class="sidedrawer-header-image img-circle" stretch="fill" [src]="getPhoto()"></Image>
+					<Image *ngIf="!hasPhoto()" row="0" col="0" class="sidedrawer-header-image img-circle" src="~/assets/images/avatar.png"></Image>
+					<StackLayout row="0" col="1" class="sidedrawer-header">
+						<Label class="sidedrawer-header-brand font-weight-bold" text="{{userDTO.firstName}}"></Label>
+						<Label class="sidedrawer-header-brand" text="{{userDTO.lastName}}"></Label>
+						<Label class="sidedrawer-header-brand font-weight-bold" text="{{userDTO.village[userDTO.preferredLanguage.languageCode]}}"></Label>
+					</StackLayout>
+				</GridLayout>
+			</StackLayout>
+			<StackLayout row="1">
+				<menu [menuDrawer]="drawer"></menu>
+			</StackLayout>
+		</GridLayout>
 	
-	    <!-- The main content -->
-	    <StackLayout tkMainContent>
+		<!-- The main content -->
+		<StackLayout tkMainContent>
 			<page-router-outlet tkMainContent class="page page-content" name="menuRouterOutlet"></page-router-outlet>
-	    </StackLayout>
+		</StackLayout>
 	
 	</RadSideDrawer>
 </Page>

@@ -61,8 +61,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter implements WebMvcC
 					"/**/*.jpg",
 					"/**/*.html",
 					"/**/*.css",
-					"/**/*.js",
-					"/**/person")
+					"/**/*.js")
 				.permitAll();
 	}
 
@@ -81,10 +80,10 @@ public class WebSecurity extends WebSecurityConfigurerAdapter implements WebMvcC
 	}
 
 	@Override
-    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
 		log.debug("Registering Extend Message Converters");
 		objectMapper.setSerializationInclusion(Include.NON_NULL);
 		objectMapper.setSerializationInclusion(Include.NON_EMPTY);
 		converters.add(new MappingJackson2HttpMessageConverter(objectMapper));
-    }
+	}
 }

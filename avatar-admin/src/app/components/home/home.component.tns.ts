@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Page } from "tns-core-modules/ui/page";
 import { DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransition } from "nativescript-ui-sidedrawer";
 import { RadSideDrawerComponent, SideDrawerType } from "nativescript-ui-sidedrawer/angular";
 import { fromBase64, fromResource }  from "tns-core-modules/image-source";
@@ -23,10 +24,12 @@ export class HomeComponent implements OnInit {
     private drawer: RadSideDrawer;
     userDTO: UserDTO;
     constructor(private authService: AuthService, private userDeviceService: UserDeviceService, 
-            private router: Router, private activatedRoute: ActivatedRoute) { }
+            private router: Router, private activatedRoute: ActivatedRoute, private page: Page) { }
 
     ngOnInit() {
-        console.info( "Home Component" );
+        console.info( "ngOnInit HomeComponent tns" );
+        //this.page.actionBarHidden = true;
+        this.page.actionBar.isCollapsed = true;
         this.sideDrawerTransition = new SlideInOnTopTransition();
         this.userDTO = this.authService.getUserInfo();
         this.updateDeviceInfo();

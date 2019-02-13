@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Page } from "tns-core-modules/ui/page";
 import { TranslateService } from "@ngx-translate/core";
 import { ObservableArray } from "tns-core-modules/data/observable-array";
 
@@ -37,10 +38,11 @@ export class DashboardComponent implements OnInit {
       {"i18nMonthName":"monthNames.december", "monthNameValue": ""}
   ];
   constructor(private authService: AuthService, private translate: TranslateService,
-          private userService: UserService) { }
+          private userService: UserService, private page: Page) { }
 
   ngOnInit() {
       console.info( "Init DashboardComponent tns" );
+      this.page.actionBarHidden = true;
       this.translate.get("userTitle")
          .subscribe((userTitle: any) => {
               this.userTitle = userTitle;

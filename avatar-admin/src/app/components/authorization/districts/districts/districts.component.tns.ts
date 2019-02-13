@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
+import { Page } from "tns-core-modules/ui/page";
 import { SlicePipe } from '@angular/common';
 import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/modal-dialog";
 import { TranslateService } from "@ngx-translate/core";
@@ -28,12 +29,14 @@ export class DistrictsComponent extends BaseComponent implements OnInit {
 
     constructor( districtService: DistrictService, authService: AuthService, translate: TranslateService, 
             modalDialogService: ModalDialogService, dialogService: ModalDialogService, 
-            router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef) {
+            router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef, private page: Page) {
         super( districtService, authService, translate, modalDialogService, dialogService, DistrictDetailComponent, router, activatedRoute, vcRef);
         this.languageCode = authService.getUserInfo().preferredLanguage.languageCode;
     }
     ngOnInit() {
         super.ngOnInit();
+        this.page.actionBarHidden = true;
+        console.log("ngOnInit district.component.tns");
         this.initDistrictField();
     }
     initDistrictField() {

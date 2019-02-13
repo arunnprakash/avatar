@@ -1,4 +1,6 @@
 export const baseDataViewTemplate: string = `
+<Page hasActionBar="true" actionBarHidden="true">
+<ActionBar title="" isCollapsed="true"></ActionBar>
 <FlexboxLayout flexDirection="column" alignItems="stretch">
     <FlexboxLayout height="12%" verticalAlignment="bottom" flexDirection="row" alignItems="flex-end" justifyContent="flex-end" class="form" (loaded)="onSearchLayoutLoaded($event)">
         <SearchBar hint="Search" width="60%" alignSelf="flex-start" class="input input-border" (clear)="onClear($event)" (submit)="onSearch($event)" (loaded)="onSearchBarLoaded($event)"></SearchBar>
@@ -44,4 +46,5 @@ export const baseDataViewTemplate: string = `
         <Label text="&#xf050;" class="fa all-sides-padding" [isEnabled]="currentPageNumber!=totalNumberOfPages" (tap)="gotoPage(totalNumberOfPages)"></Label>
     </FlexboxLayout>
 </FlexboxLayout>
+</Page>
 `;

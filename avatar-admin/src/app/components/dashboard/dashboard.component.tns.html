@@ -1,30 +1,33 @@
-<FlexboxLayout horizontalAlignment="center" verticalAlignment="bottom" flexDirection="column" alignItems="stretch" justifyContent="center">
-	<ScrollView>
-		<StackLayout orientation="vertical" *ngIf="hasRole(['ADMIN', 'SELLER_AGENT','BUYER_AGENT'])">
-			<Label [text]="userTitle" class="text-bold" horizontalAlignment="center"></Label>
-			<GridLayout rows="*" height="300px">
-			<RadCartesianChart col="0" row="0" tkExampleTitle tkToggleNavButton>
-				<CategoricalAxis tkCartesianHorizontalAxis labelRotationAngle="45" labelFitMode="Rotate"></CategoricalAxis>
-				<LinearAxis tkCartesianVerticalAxis></LinearAxis>
-				<BarSeries *ngIf="hasRole(['ADMIN', 'SELLER_AGENT'])" tkCartesianSeries seriesName="sellers" [items]="sellersChartData" categoryProperty="label" valueProperty="labelValue" showLabels="true"></BarSeries>
-				<BarSeries *ngIf="hasRole(['ADMIN', 'BUYER_AGENT'])" tkCartesianSeries seriesName="buyers" [items]="buyersChartData" categoryProperty="label" valueProperty="labelValue" showLabels="true"></BarSeries>
-			
-				<Palette *ngIf="hasRole(['ADMIN', 'SELLER_AGENT'])" tkCartesianPalette seriesName="sellers">
-					<PaletteEntry tkCartesianPaletteEntry fillColor="#33cc33" strokeColor="#33cc33" strokeWidth="1"></PaletteEntry>
-				</Palette>
-				<Palette *ngIf="hasRole(['ADMIN', 'BUYER_AGENT'])" tkCartesianPalette seriesName="buyers">
-					<PaletteEntry tkCartesianPaletteEntry fillColor="#ffff00" strokeColor="#ffff00" strokeWidth="1"></PaletteEntry>
-				</Palette>
-			</RadCartesianChart>
-			</GridLayout>
-			<FlexboxLayout horizontalAlignment="center" verticalAlignment="bottom" flexDirection="row" alignItems="stretch" justifyContent="center">
-				<Button text="Daily" (tap)="setSellerAndBuyerDailyGrowthRate();" class="btn btn-primary btn-rounded-sm all-sides-margin button"></Button>
-				<Button text="Monthly" (tap)="setSellerAndBuyerMonthlyGrowthRate();" class="btn btn-primary btn-rounded-sm all-sides-margin button"></Button>
-				<Button text="Yearly" (tap)="setSellerAndBuyerYearlyGrowthRate();" class="btn btn-primary btn-rounded-sm all-sides-margin button"></Button>
-			</FlexboxLayout>
-		</StackLayout>
-		<StackLayout orientation="vertical" *ngIf="hasRole(['SELLER'])">
-			<seller></seller>
-		</StackLayout>
-	</ScrollView>
-</FlexboxLayout>
+<Page hasActionBar="true" actionBarHidden="true">
+<ActionBar title="" isCollapsed="true"></ActionBar>
+	<FlexboxLayout horizontalAlignment="center" verticalAlignment="bottom" flexDirection="column" alignItems="stretch" justifyContent="center">
+		<ScrollView>
+			<StackLayout orientation="vertical" *ngIf="hasRole(['ADMIN', 'SELLER_AGENT','BUYER_AGENT'])">
+				<Label [text]="userTitle" class="text-bold" horizontalAlignment="center"></Label>
+				<GridLayout rows="*" height="300px">
+				<RadCartesianChart col="0" row="0" tkExampleTitle tkToggleNavButton>
+					<CategoricalAxis tkCartesianHorizontalAxis labelRotationAngle="45" labelFitMode="Rotate"></CategoricalAxis>
+					<LinearAxis tkCartesianVerticalAxis></LinearAxis>
+					<BarSeries *ngIf="hasRole(['ADMIN', 'SELLER_AGENT'])" tkCartesianSeries seriesName="sellers" [items]="sellersChartData" categoryProperty="label" valueProperty="labelValue" showLabels="true"></BarSeries>
+					<BarSeries *ngIf="hasRole(['ADMIN', 'BUYER_AGENT'])" tkCartesianSeries seriesName="buyers" [items]="buyersChartData" categoryProperty="label" valueProperty="labelValue" showLabels="true"></BarSeries>
+				
+					<Palette *ngIf="hasRole(['ADMIN', 'SELLER_AGENT'])" tkCartesianPalette seriesName="sellers">
+						<PaletteEntry tkCartesianPaletteEntry fillColor="#33cc33" strokeColor="#33cc33" strokeWidth="1"></PaletteEntry>
+					</Palette>
+					<Palette *ngIf="hasRole(['ADMIN', 'BUYER_AGENT'])" tkCartesianPalette seriesName="buyers">
+						<PaletteEntry tkCartesianPaletteEntry fillColor="#ffff00" strokeColor="#ffff00" strokeWidth="1"></PaletteEntry>
+					</Palette>
+				</RadCartesianChart>
+				</GridLayout>
+				<FlexboxLayout horizontalAlignment="center" verticalAlignment="bottom" flexDirection="row" alignItems="stretch" justifyContent="center">
+					<Button text="Daily" (tap)="setSellerAndBuyerDailyGrowthRate();" class="btn btn-primary btn-rounded-sm all-sides-margin button"></Button>
+					<Button text="Monthly" (tap)="setSellerAndBuyerMonthlyGrowthRate();" class="btn btn-primary btn-rounded-sm all-sides-margin button"></Button>
+					<Button text="Yearly" (tap)="setSellerAndBuyerYearlyGrowthRate();" class="btn btn-primary btn-rounded-sm all-sides-margin button"></Button>
+				</FlexboxLayout>
+			</StackLayout>
+			<StackLayout orientation="vertical" *ngIf="hasRole(['SELLER'])">
+				<seller></seller>
+			</StackLayout>
+		</ScrollView>
+	</FlexboxLayout>
+</Page>

@@ -19,21 +19,16 @@ export const baseDataViewTemplate: string = `
                 <Image *ngIf="!hasPhoto(rowData.assets)" class="thumbnail" src="~/assets/images/avatar.png" loadMode="async"></Image>
                 <CheckBox *ngIf="recordIdList[rowIndex]" class="text-align-right" text="" [checked]="recordIdList[rowIndex].selected" (tap)="checkIfAllSelected()"></CheckBox>
             </FlexboxLayout>
-            <GridLayout *ngFor="let col of localCols | slice:0:5" [ngSwitch]="col.dataType" columns="auto, *" (tap)="rowDataClicked(rowData)">
+            <GridLayout *ngFor="let col of localCols | slice:0:10" [ngSwitch]="col.dataType" columns="auto, *" (tap)="rowDataClicked(rowData)">
                 <Label col="0" width="120" [text]="col.header" class="text-bold text-align-left vertical-align-center"></Label>
                 <Label col="1" *ngSwitchCase="'INPUT'" [text]="rowData[col.field]" class="text-align-left vertical-align-center"></Label>
                 <Label col="1" *ngSwitchCase="'DATE'" text="{{rowData[col.field] | date:'dd-MM-yyyy'}}" class="text-align-left vertical-align-center"></Label>
                 <Label col="1" *ngSwitchCase="'DATETIME'" text="{{rowData[col.field] | date:'dd-MM-yyyy HH:mm:ss'}}" class="text-align-left vertical-align-center"></Label>
                 <Label col="1" *ngSwitchCase="'MULTISELECT'" [text]="rowData[col.field]" class="text-align-left vertical-align-center"></Label>
-                <RadAutoCompleteTextView col="1" *ngSwitchCase="'AUTOCOMPLETE'" id="{{rowData['id']}}" [(ngModel)]="rowData[col.field]" ngDefaultControl [items]="col.options" suggestMode="Suggest" displayMode="Tokens" showCloseButton="false" (loaded)="onLoaded($event)">
-                    <SuggestionView tkAutoCompleteSuggestionView suggestionViewHeight="300">
-                        <ng-template tkSuggestionItemTemplate let-item="item">
-                            <StackLayout orientation="vertical" padding="10">
-                                <Label [text]="item.text"></Label>
-                            </StackLayout>
-                        </ng-template>
-                    </SuggestionView>
-                </RadAutoCompleteTextView>
+                <StackLayout col="1" *ngSwitchCase="'AUTOCOMPLETE'">
+                    <chips *ngIf="rowData[col.field] && col.multiple" [dataItems]="rowData[col.field]" [field]="col.optionLabel"></chips>
+                    <Label *ngIf="rowData[col.field] && !col.multiple" [text]="rowData[col.field][col.optionLabel]"></Label>
+                </StackLayout>
             </GridLayout>
         </StackLayout>
         </ng-template>

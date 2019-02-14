@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit , ViewContainerRef, ViewChildren, QueryList } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Page } from "tns-core-modules/ui/page";
+import { fromBase64 }  from "tns-core-modules/image-source";
 import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/modal-dialog";
 import { TranslateService } from "@ngx-translate/core";
 
@@ -36,7 +37,7 @@ export class ProductsComponent extends BaseComponent implements OnInit, AfterVie
     protected localCols: any[] = [
          { field: 'productName', header: 'ProductName', dataType: 'INPUT', autocapitalizationType: 'allCharacters', keyboardType: 'email' },
          { field: 'productCode', header: 'ProductCode', dataType: 'INPUT', autocapitalizationType: 'allCharacters', keyboardType: 'email'  },
-         { field: 'assetTypes', header: 'AssetType', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"assetTypeName", "onSelect": this.assetTypeSelected},
+         { field: 'assetTypes', header: 'AssetType', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"assetTypeName"},
          { field: 'assets', header: 'Assets', dataType: 'FILE', multiple: true, options: [] , optionLabel:"assetValue"}
     ];
     constructor( productService: ProductService, authService: AuthService, translate: TranslateService, 
@@ -76,7 +77,14 @@ export class ProductsComponent extends BaseComponent implements OnInit, AfterVie
     protected initEmptyModel() {
         this.model = new ProductDTO();
     }
-
+    hasPhoto(assets: any[]){
+        return assets && assets.length > 0;
+    }
+    getPhoto(assets: any[]){
+        var imageAsBase64String = assets[0]['assetValue'];
+        imageAsBase64String = imageAsBase64String.replace(/^data:image\/[a-z]+;base64,/, "");
+        return fromBase64(imageAsBase64String);
+    }
     protected isModelValid(): boolean {
         return true;
     }

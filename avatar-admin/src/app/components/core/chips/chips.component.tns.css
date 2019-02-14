@@ -1,0 +1,24 @@
+/* Add mobile styles for the component here.  */
+.chip-box {
+	background-color: white;
+	border-color: #c0c0c0;
+	border-width: 1px;
+	border-radius: 4px;
+}
+.chip-stack {
+	padding-top: 3px;
+	padding-left: 5px;
+	padding-bottom: 3px;
+	padding-right: 5px;
+}
+.chip-label {
+	color: white;
+	background-color: green;
+	border-color: white;
+	border-width: 1px;
+	border-radius: 4px;
+	padding: 6px;
+}
+.p-r-0 {
+	padding-right: 0px;
+}

@@ -14,6 +14,10 @@ export const baseDetailTemplate: string = `
                     <Label col="1" *ngSwitchCase="'DATE'" text="{{model[col.field] | date:'dd-MM-yyyy'}}" class="text-align-left vertical-align-center"></Label>
                     <Label col="1" *ngSwitchCase="'DATETIME'" text="{{model[col.field] | date:'dd-MM-yyyy HH:mm:ss'}}" class="text-align-left vertical-align-center"></Label>
                     <Label col="1" *ngSwitchCase="'MULTISELECT'" [text]="model[col.field]" class="text-align-left vertical-align-center"></Label>
+                    <StackLayout col="1" *ngSwitchCase="'AUTOCOMPLETE'">
+                        <chips *ngIf="model[col.field] && col.multiple" [dataItems]="model[col.field]" [field]="col.optionLabel"></chips>
+                        <Label *ngIf="model[col.field] && !col.multiple" [text]="model[col.field][col.optionLabel]"></Label>
+                     </StackLayout>
                     </GridLayout>
                 </StackLayout>
             </StackLayout>

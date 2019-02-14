@@ -1,0 +1,5 @@
+<FlexboxLayout horizontalAlignment="left" verticalAlignment="bottom" flexDirection="row" flexWrap="wrap" alignItems="stretch" justifyContent="flex-start" class="chip-box">
+	<StackLayout *ngFor="let element of dataItems; first as isFirst; last as isLast" class="chip-stack" [class.p-r-0]="isFirst && !isLast">
+		<Label [text]="element[field]" class="chip-label"></Label>
+	</StackLayout>
+</FlexboxLayout>

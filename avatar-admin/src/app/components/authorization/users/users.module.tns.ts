@@ -5,6 +5,7 @@ import { NativeScriptFormsModule } from 'nativescript-angular/forms';
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { NativeScriptUIAutoCompleteTextViewModule } from "nativescript-ui-autocomplete/angular";
 import { routes, componentDeclarations, providerDeclarations } from './users.common';
+import { CoreModule } from '../../core/core.module';
 
 @NgModule({
   declarations: [componentDeclarations],
@@ -13,6 +14,7 @@ import { routes, componentDeclarations, providerDeclarations } from './users.com
     NativeScriptCommonModule,
     NativeScriptFormsModule,
     NativeScriptUIAutoCompleteTextViewModule,
+    CoreModule,
     NativeScriptRouterModule.forChild(routes)
   ],
   exports: [

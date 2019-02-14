@@ -27,6 +27,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { HomeComponent } from './components/home/home.component';
 
+import { CoreModule } from './components/core/core.module';
 import { DashboardModule } from './components/dashboard/dashboard.module';
 import { UsersModule } from './components/authorization/users/users.module';
 import { RolesModule } from './components/authorization/roles/roles.module';
@@ -78,6 +79,8 @@ export function createTranslateLoader() {
     AuthorizationAPIModule.forRoot({context: ApiUrls.authorizationServiceApiBaseUrl}),
     ProductAPIModule.forRoot({context: ApiUrls.productServiceApiBaseUrl}),
     AppRoutingModule,
+    
+    CoreModule,
     
     DashboardModule,
     UsersModule,

@@ -125,7 +125,7 @@ export abstract class BaseDetailComponent extends AbstractBaseDetailComponent  i
         }
     }
     protected closeDetailDialog() {
-        this.params.closeCallback();
+        this.params.closeCallback(this.saved);
     }
     protected showLoading(value: boolean) {
         if (value) {

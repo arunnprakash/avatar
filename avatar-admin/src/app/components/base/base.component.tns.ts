@@ -60,7 +60,12 @@ export abstract class BaseComponent extends AbstractBaseComponent implements OnI
                 context: {model: model, cols: this.cols, localCols: this.localCols, title: this.title, displayEditDetail: model.id?false:true },
                 fullscreen: false,
         };
-        this.modalDialogService.showModal(this.detailComponent, options);
+        let ref: Promise<any> = this.modalDialogService.showModal(this.detailComponent, options);
+        ref.then(result => {
+            if (result) {
+                this.lazyLoadRecordList();
+            }
+        }).catch(error => {console.log(error);});
     }
     protected showLoading(value: boolean) {
         if (value) {

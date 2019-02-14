@@ -36,6 +36,12 @@
 		"preferredLanguage":"PreferredLanguage",
 		"village":"Village",
 		"gender": "Gender"
+	},
+	"products": {
+		"productName":"ProductName",
+		"productCode":"ProductCode",
+		"assets": "Assets",
+		"assetTypes": "AssetType"
 	}
 }
 

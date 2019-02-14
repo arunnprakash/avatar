@@ -15,8 +15,8 @@ export const baseDetailDataViewTemplate: string = `
                 <div class="p-col-8" *ngSwitchCase="'MULTISELECT'">{{model[col.field]}}</div>
                 <!--<p-multiSelect *ngSwitchCase="'MULTISELECT'" readonly="false" [options]="col.options" [optionLabel]="col.optionLabel" defaultLabel="ALL" [(ngModel)]="model[col.field]"  appendTo="body" [style]="{'width':'100%'}"></p-multiSelect>-->
                 <span *ngSwitchCase="'AUTOCOMPLETE'">
-                    <p-chips *ngIf="col.multiple" disabled="true" [(ngModel)]="model[col.field]" [field]="col.optionLabel" ngDefaultControl></p-chips>
-                    <div *ngIf="!col.multiple" class="p-col-8">{{model[col.field][col.optionLabel]}}</div>
+                    <p-chips *ngIf="model[col.field] && col.multiple" disabled="true" [(ngModel)]="model[col.field]" [field]="col.optionLabel" ngDefaultControl></p-chips>
+                    <div *ngIf="model[col.field] && !col.multiple" class="p-col-8">{{model[col.field][col.optionLabel]}}</div>
                 </span>
             </div>
         </div>
@@ -28,7 +28,7 @@ export const baseDetailDataViewTemplate: string = `
                     <p-calendar *ngSwitchCase="'DATE'" [ngModel]="model[col.field] | date:'yyyy-MM-dd'" (ngModelChange)="dateChanged($event, col.field)" [showIcon]="true" dateFormat="yy-mm-dd" appendTo="body" [inputStyle]="{'width':'65%'}"></p-calendar>
                     <p-calendar *ngSwitchCase="'DATETIME'" [ngModel]="model[col.field] | date:'yyyy-MM-dd'" (ngModelChange)="dateChanged($event, col.field)" [showIcon]="true" dateFormat="yy-mm-dd" appendTo="body" [inputStyle]="{'width':'65%'}"></p-calendar>
                     <p-multiSelect *ngSwitchCase="'MULTISELECT'" [options]="col.options" [(ngModel)]="model[col.field]" [optionLabel]="col.optionLabel" appendTo="body" [style]="{'width':'100%'}"></p-multiSelect>
-                    <p-autoComplete *ngSwitchCase="'AUTOCOMPLETE'" immutable="false" (completeMethod)="filterAutoCompleteSuggestion(col.field, model[col.field])" [(ngModel)]="model[col.field]" [suggestions]="col.options" forceSelection="true" [field]="col.optionLabel" [dropdown]="true" [multiple]="col.multiple" [size]="30" [placeholder]="col.header"></p-autoComplete>
+                    <p-autoComplete *ngSwitchCase="'AUTOCOMPLETE'" immutable="false" (onSelect)="onSelectAutoComplete(col.field)" (completeMethod)="filterAutoCompleteSuggestion(col.field, model[col.field])" [(ngModel)]="model[col.field]" [suggestions]="col.options" forceSelection="true" [field]="col.optionLabel" [dropdown]="true" [multiple]="col.multiple" [size]="30" [placeholder]="col.header"></p-autoComplete>
                     <div *ngSwitchCase="'FILE'">
                         <span *ngFor="let assetType of col.options">
                             <p-fileUpload accept="image/*" maxFileSize="1000000" auto="auto" mode="basic" [chooseLabel]="assetType.assetTypeName" customUpload="true" (uploadHandler)="fileSelectedEventHandler($event, col.field, assetType)"></p-fileUpload>
@@ -44,17 +44,17 @@ export const baseDetailDataViewTemplate: string = `
             <button type="button" *ngIf="!displayEditDetail" pButton icon="pi pi-close" (click)="closeDetailDialog()" label="Ok" class="ui-button-success ui-button-raised ui-button-rounded"></button>
         </p-footer>
     </p-scrollPanel>
-<p-dialog [(visible)]="displayAlertDialog" 
-    [style]="{'width': '300px !important', 'height': '200px !important','min-width': '300px !important', 'min-height': '200px !important'}" 
-    [minY]="70" [maximizable]="false">
-    <p-header>
-        <p-message *ngIf="alertDialogTitle == 'Error'" severity="error" text="Error" [closable]="false"></p-message>
-        <p-message *ngIf="alertDialogTitle == 'Success'" severity="success" text="Success" [closable]="false"></p-message>
-    </p-header>
-        {{alertDialogMessage}}
-    <p-footer>
-        <button type="button" pButton icon="pi pi-close" (click)="displayAlertDialog=false" label="Ok" class="ui-button-success ui-button-raised ui-button-rounded"></button>
-    </p-footer>
-</p-dialog>
+    <p-dialog [(visible)]="displayAlertDialog" 
+        [style]="{'width': '300px !important', 'height': '200px !important','min-width': '300px !important', 'min-height': '200px !important'}" 
+        [minY]="70" [maximizable]="false">
+        <p-header>
+            <p-message *ngIf="alertDialogTitle == 'Error'" severity="error" text="Error" [closable]="false"></p-message>
+            <p-message *ngIf="alertDialogTitle == 'Success'" severity="success" text="Success" [closable]="false"></p-message>
+        </p-header>
+            {{alertDialogMessage}}
+        <p-footer>
+            <button type="button" pButton icon="pi pi-close" (click)="displayAlertDialog=false" label="Ok" class="ui-button-success ui-button-raised ui-button-rounded"></button>
+        </p-footer>
+    </p-dialog>
         <!--<p-blockUI [blocked]="loading" [target]="detail"></p-blockUI>-->
 `;

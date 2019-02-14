@@ -33,7 +33,7 @@ export abstract class BaseDetailComponent extends AbstractBaseDetailComponent im
         this.alertDialogMessage = message;
     }
     protected closeDetailDialog() {
-        this.dialog.close();
+        this.dialog.close(this.saved);
     }
     fileSelectedEventHandler(event, field, assetType) {
         console.log("assetType {}", assetType);
@@ -53,5 +53,8 @@ export abstract class BaseDetailComponent extends AbstractBaseDetailComponent im
             asset['assetType'] = assetType;
         }
         fileReader.readAsDataURL(file);
+    }
+    protected onSelectAutoComplete(field) {
+        //Do nothing default implementation
     }
 }

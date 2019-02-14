@@ -36,6 +36,12 @@
 		"preferredLanguage":"விருப்பமானமொழி",
 		"village":"கிராமம்",
 		"gender": "பாலினம்"
+	},
+	"products": {
+		"productName":"ProductName",
+		"productCode":"ProductCode",
+		"assets": "Assets",
+		"assetTypes": "AssetType"
 	}
 }
 

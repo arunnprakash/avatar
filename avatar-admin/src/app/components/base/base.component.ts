@@ -1,5 +1,6 @@
 import { OnInit, ViewContainerRef } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
+import { DynamicDialogRef } from 'primeng/api';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from "@ngx-translate/core";
 import { AbstractBaseComponent } from "./abstract.base.component";
@@ -36,13 +37,19 @@ export abstract class BaseComponent extends AbstractBaseComponent implements OnI
     }
     protected showDetailDialog(value: boolean) {
         var model = _.cloneDeep(this.model);
-        this.dialogService.open(this.detailComponent, {
+        let ref: DynamicDialogRef = this.dialogService.open(this.detailComponent, {
             data: {
                 model: model, cols: this.cols, localCols: this.localCols, title: this.title, displayEditDetail: model.id?false:true
             },
             header: this.title+' Detail',
             width: '50%',
             height: '70%'
+        });
+        ref.onClose.subscribe((saved: boolean) => {
+            if (saved) {
+                this.showAlertDialog('Success', 'Successfully Saved '+this.title);
+                this.lazyLoadRecordList();
+            }
         });
     }
     protected showAlertDialog(title: string, message: string) {

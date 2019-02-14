@@ -9,7 +9,7 @@ export abstract class AbstractBaseDetailComponent implements OnInit {
     protected localCols: any[];
     protected title: string;
     protected displayEditDetail: boolean;
-
+    protected saved: boolean;
     /*Following Abstract Fields and Methods MUST have definition in derived component class*/
     protected abstract showLoading(value: boolean);
     protected abstract showAlertDialog(title: string, message: string);
@@ -18,6 +18,7 @@ export abstract class AbstractBaseDetailComponent implements OnInit {
     constructor(private service: any, private authService: AuthService) { }
     ngOnInit() {
         console.log("ngOnInit Abstract Base Detail Component.ts");
+        this.saved = false;
     }
     dateChanged(newDate, field) {
         this.model[field]= new Date(newDate);
@@ -30,6 +31,7 @@ export abstract class AbstractBaseDetailComponent implements OnInit {
                 .subscribe((model: any) => {
                     _.merge(this.model, model);
                     this.showLoading(false);
+                    this.saved = true;
                     this.closeDetailDialog();
                     this.showAlertDialog('Success', 'Successfully Updated '+this.title);
                 },
@@ -43,6 +45,7 @@ export abstract class AbstractBaseDetailComponent implements OnInit {
                 .subscribe((model: any) => {
                     this.model = model;
                     this.showLoading(false);
+                    this.saved = true;
                     this.closeDetailDialog();
                     this.showAlertDialog('Success', 'Successfully Saved '+this.title);
                 },

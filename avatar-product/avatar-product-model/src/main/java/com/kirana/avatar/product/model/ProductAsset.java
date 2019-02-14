@@ -38,9 +38,9 @@ public class ProductAsset extends BaseEntity<ProductAsset>{
 	
 	@ManyToOne(optional = false, fetch=FetchType.EAGER)
 	@JoinColumn(name = "product_id", referencedColumnName="id", nullable = false)
-	protected Product productId;
+	protected Product product;
 	@ManyToOne(optional = false, fetch=FetchType.EAGER)
 	@JoinColumn(name = "asset_id", referencedColumnName="id", nullable = false)
-	protected Asset assetId;
+	protected Asset asset;
 
 }

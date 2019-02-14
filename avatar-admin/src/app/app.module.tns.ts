@@ -38,6 +38,7 @@ import { LanguagesModule } from './components/authorization/languages/languages.
 import { UsersAssetTypesModule } from './components/authorization/assetTypes/assetTypes.module';
 
 import { ProductsAssetTypesModule } from './components/product/assetTypes/assetTypes.module';
+import { ProductsModule } from './components/product/products/products.module';
 
 import { ApiUrls } from './api-settings/api-urls';
 import { AuthService } from "./services/auth.service";
@@ -89,6 +90,7 @@ export function createTranslateLoader() {
     UsersAssetTypesModule,
     
     ProductsAssetTypesModule,
+    ProductsModule,
     
     NativeScriptUISideDrawerModule,
     NativeScriptUIAutoCompleteTextViewModule,

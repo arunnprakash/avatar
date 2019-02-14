@@ -28,7 +28,7 @@ public class ProductAssetSpecification extends BaseEntitySpecification<ProductAs
 	public Specification<ProductAsset> hasProductId(final Product productId) {
 		return new Specification<ProductAsset>() {
 			public Predicate toPredicate(Root<ProductAsset> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-				return builder.like(root.get(ProductAsset_.PRODUCT_ID), "%"+productId+"%");
+				return builder.like(root.get(ProductAsset_.PRODUCT), "%"+productId+"%");
 			}
 		};
 	}
@@ -36,7 +36,7 @@ public class ProductAssetSpecification extends BaseEntitySpecification<ProductAs
 	public Specification<ProductAsset> hasAssetId(final Asset AssetId) {
 		return new Specification<ProductAsset>() {
 			public Predicate toPredicate(Root<ProductAsset> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-				return builder.like(root.get(ProductAsset_.ASSET_ID), "%"+AssetId+"%");
+				return builder.like(root.get(ProductAsset_.ASSET), "%"+AssetId+"%");
 			}
 		};
 	}

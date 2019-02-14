@@ -5,7 +5,9 @@ import { map, catchError } from 'rxjs/operators';
 
 import { PagingAndFilterResponse } from './pagingandfilterresponse.model';
 import { ProductRegionDTO } from './productregiondto.model';
+import { AssetDTO } from './assetdto.model';
 import { PagingAndFilterRequest } from './pagingandfilterrequest.model';
+import { AssetTypeDTO } from './assettypedto.model';
 import { FilterCriteria } from './filtercriteria.model';
 import { ProductDTO } from './productdto.model';
 import { ServiceConfig } from './serviceconfig';

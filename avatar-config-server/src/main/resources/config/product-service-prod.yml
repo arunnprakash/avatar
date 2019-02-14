@@ -85,3 +85,12 @@ feign:
 #        encoder: com.example.SimpleEncoder
 #        decoder: com.example.SimpleDecoder
 #        contract: com.example.SimpleContract
+#JWT Config
+security:
+  jwt:
+    loginUri: /api/login
+    headerName: Authorization
+    tokenPrefix: Bearer 
+    expiration: 864000000 #10 days
+    secretKey: TelmilaArunPrakashAvatar2019MobileReChargeAndFarmerApplicationSecretKey
+    defaultPassword: avatar

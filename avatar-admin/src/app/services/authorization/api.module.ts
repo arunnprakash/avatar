@@ -1,15 +1,15 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { TalukService } from './talukservice.generated';
-import { AssetService } from './assetservice.generated';
-import { CountryService } from './countryservice.generated';
-import { VillageService } from './villageservice.generated';
-import { AssetTypeService } from './assettypeservice.generated';
 import { LanguageService } from './languageservice.generated';
+import { UserDeviceService } from './userdeviceservice.generated';
 import { RoleService } from './roleservice.generated';
-import { GenderService } from './genderservice.generated';
+import { VillageService } from './villageservice.generated';
+import { AssetService } from './assetservice.generated';
 import { StateService } from './stateservice.generated';
 import { DistrictService } from './districtservice.generated';
-import { UserDeviceService } from './userdeviceservice.generated';
+import { AssetTypeService } from './assettypeservice.generated';
+import { CountryService } from './countryservice.generated';
+import { GenderService } from './genderservice.generated';
 import { UserService } from './userservice.generated';
 import { ServiceConfig } from './serviceconfig';
 
@@ -21,16 +21,16 @@ export class AuthorizationAPIModule {
             providers: [
                 {provide: ServiceConfig, useValue: serviceConfig},
                 TalukService,
-                AssetService,
-                CountryService,
-                VillageService,
-                AssetTypeService,
                 LanguageService,
+                UserDeviceService,
                 RoleService,
-                GenderService,
+                VillageService,
+                AssetService,
                 StateService,
                 DistrictService,
-                UserDeviceService,
+                AssetTypeService,
+                CountryService,
+                GenderService,
                 UserService
             ]
         };

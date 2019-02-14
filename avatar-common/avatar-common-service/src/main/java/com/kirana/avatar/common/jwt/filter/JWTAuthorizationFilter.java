@@ -2,6 +2,7 @@ package com.kirana.avatar.common.jwt.filter;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.crypto.SecretKey;
@@ -11,12 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.kirana.avatar.common.dto.UserInfo;
+import com.kirana.avatar.common.dto.UserInfo.UserInfoBuilder;
+import com.kirana.avatar.common.jwt.TokenProvider;
 import com.kirana.avatar.common.jwt.config.JwtConfig;
 
 import io.jsonwebtoken.Claims;
@@ -28,11 +31,11 @@ import lombok.extern.slf4j.Slf4j;
 public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
 	private JwtConfig jwtConfig;
-	private UserDetailsService userDetailsService;
-	public JWTAuthorizationFilter(JwtConfig jwtConfig, UserDetailsService userDetailsService) {
+	private TokenProvider tokenProvider;
+	public JWTAuthorizationFilter(JwtConfig jwtConfig, TokenProvider tokenProvider) {
 		super();
 		this.jwtConfig = jwtConfig;
-		this.userDetailsService = userDetailsService;
+		this.tokenProvider = tokenProvider;
 	}
 
 	@Override
@@ -70,13 +73,25 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 			if (userName != null) {
 				@SuppressWarnings("unchecked")
 				List<String> authorities = (List<String>) claims.get("authorities");
-				UserInfo userInfo = (UserInfo)userDetailsService.loadUserByUsername(userName);
-				userInfo = UserInfo.create(userInfo).userToken(token).build();
+				@SuppressWarnings("unchecked")
+				Map<String, Object> userInfoMap = (Map)claims.get("userInfo");
+				List<GrantedAuthority> grantedAuthorities = authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+				UserInfo userInfo = UserInfo.create()
+						.password(userInfoMap.get("password").toString())
+						.mobileNumber(userInfoMap.get("mobileNumber").toString())
+						.username(userInfoMap.get("username").toString())
+						.userToken(token)
+						.authorities(grantedAuthorities)
+						.accountExpired(false)
+						.accountLocked(false)
+						.credentialsExpired(false)
+						.disabled(false)
+						.build();
 				log.debug("UserInfo {}", userInfo);
 				// Create auth object
 				// UsernamePasswordAuthenticationToken: A built-in object, used by spring to represent the current authenticated / being authenticated user.
 				// It needs a list of authorities, which has type of GrantedAuthority interface, where SimpleGrantedAuthority is an implementation of that interface
-				return new UsernamePasswordAuthenticationToken(userInfo, null, authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
+				return new UsernamePasswordAuthenticationToken(userInfo, null, grantedAuthorities);
 			}
 			log.debug("UserName not found in token {}", token);
 			return null;

@@ -86,7 +86,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter implements WebMvcC
 				.authenticated()
 			.and()
 		.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtConfig, tokenProvider))
-		.addFilterAfter(new JWTAuthorizationFilter(jwtConfig, userDetailsService), JWTAuthenticationFilter.class);
+		.addFilterAfter(new JWTAuthorizationFilter(jwtConfig, tokenProvider), JWTAuthenticationFilter.class);
 	}
 
 	@Override

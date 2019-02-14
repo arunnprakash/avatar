@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -19,6 +20,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kirana.avatar.common.httprequest.interceptors.RequestInterceptor;
+import com.kirana.avatar.common.jwt.TokenProvider;
+import com.kirana.avatar.common.jwt.config.JwtConfig;
+import com.kirana.avatar.common.jwt.filter.JWTAuthorizationFilter;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,7 +39,10 @@ public class WebSecurity extends WebSecurityConfigurerAdapter implements WebMvcC
 	private final long MAX_AGE_SECS = 3600;
 	@Autowired
 	private ObjectMapper objectMapper;
-
+	@Autowired
+	private JwtConfig jwtConfig;
+	@Autowired
+	private TokenProvider tokenProvider;
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -62,7 +69,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter implements WebMvcC
 					"/**/*.html",
 					"/**/*.css",
 					"/**/*.js")
-				.permitAll();
+				.permitAll()
+				.anyRequest()
+				.authenticated()
+				.and()
+				.addFilterBefore(new JWTAuthorizationFilter(jwtConfig, tokenProvider), BasicAuthenticationFilter.class);
 	}
 
 	@Override

@@ -24,6 +24,7 @@ import org.springframework.stereotype.Component;
 import com.kirana.avatar.common.dto.UserInfo;
 import com.kirana.avatar.common.jwt.config.JwtConfig;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -48,6 +49,7 @@ public class TokenProvider {
 		SecretKey secretKey = Keys.hmacShaKeyFor(jwtConfig.getSecretKey().getBytes());
 		return Jwts.builder()
 				.setSubject(userInfo.getUsername())
+				.claim("userInfo", userInfo)
 				// Convert to list of strings. 
 				// This is important because it affects the way we get them back in the Gateway.
 				.claim("authorities", userInfo.getAuthorities().stream()
@@ -56,6 +58,12 @@ public class TokenProvider {
 				.setExpiration(new Date(now + jwtConfig.getExpiration()))
 				.signWith(secretKey, SignatureAlgorithm.HS512)
 				.compact();
+	}
+
+	public UserInfo getUserInfo(String token) {
+		Claims claims = (Claims)Jwts.parser().parse(token).getBody();
+		UserInfo userInfo = (UserInfo)claims.get("userInfo");
+		return userInfo;
 	}
 
 }

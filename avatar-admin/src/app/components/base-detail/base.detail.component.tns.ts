@@ -185,4 +185,7 @@ export abstract class BaseDetailComponent extends AbstractBaseDetailComponent  i
             console.log("Error while processing image", e);
         });
     }
+    protected onSelectAutoComplete(field) {
+        //Do nothing default implementation
+    }
 }

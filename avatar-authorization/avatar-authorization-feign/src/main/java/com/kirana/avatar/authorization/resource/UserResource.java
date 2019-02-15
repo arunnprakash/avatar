@@ -37,7 +37,7 @@ import com.kirana.avatar.common.resource.BaseResource;
  *
  */
 @TypeScriptEndpoint("UserService")
-@TypeScriptTemplatesConfiguration(useSuffixes = false)
+@TypeScriptTemplatesConfiguration()
 @RequestMapping(value= {"/api/user"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 public interface UserResource extends BaseResource<UserDTO> {
 

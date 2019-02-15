@@ -39,7 +39,7 @@ public class ProductRegion extends BaseEntity<ProductRegion>{
 	
 	@ManyToOne(optional = false, fetch=FetchType.EAGER)
 	@JoinColumn(name = "product_id", referencedColumnName="id", nullable = false)
-	protected Product productId;
+	protected Product product;
 	@Column(name="state_id" ,nullable = false)
 	protected Long state;
 	@Column(name="district_id",nullable = false)

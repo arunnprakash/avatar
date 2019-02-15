@@ -35,7 +35,7 @@ export const baseDetailDataViewTemplate: string = `
                         <RadAutoCompleteTextView *ngSwitchCase="'AUTOCOMPLETE'" row="0" col="1" class="input" [hint]="col.header" [(ngModel)]="model[col.field]" ngDefaultControl [items]="col.options" 
                             suggestMode="Suggest" displayMode="Tokens" completionMode="Contains" showCloseButton="false" 
                             (loaded)="onAutoCompleteLoaded($event, false, model[col.field], col)" 
-                            (tokenAdded)="onTokenAdded($event, col)" 
+                            (tokenAdded)="onTokenAdded($event, col);onSelectAutoComplete(col.field);" 
                             (tokenRemoved)="onTokenRemoved($event, col)"
                             [returnKeyType]="isLast?'done':'next'">
                             <SuggestionView tkAutoCompleteSuggestionView suggestionViewHeight="300">

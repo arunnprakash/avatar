@@ -3,7 +3,7 @@ import { AssetTypeDTO } from './assettypedto.model';
 import { ProductDTO } from './productdto.model';
 
 export class ProductRegionDTO {
-    productId: ProductDTO;
+    product: ProductDTO;
     state: number;
     district: number;
     taluk: number;

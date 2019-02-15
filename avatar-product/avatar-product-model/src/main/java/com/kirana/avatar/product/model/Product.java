@@ -11,6 +11,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -46,4 +47,7 @@ public class Product extends LocaleEntity<Product>{
 	@JoinTable(name = "product_assets", joinColumns={@JoinColumn(name="product_id", referencedColumnName="id", unique=false)}, 
 			inverseJoinColumns={@JoinColumn(name="asset_id", referencedColumnName="id", unique=false)})
 	protected List<Asset> assets;
+
+	@OneToMany(targetEntity=ProductRegion.class, mappedBy="product")
+    private List<ProductRegion> regions;
 }

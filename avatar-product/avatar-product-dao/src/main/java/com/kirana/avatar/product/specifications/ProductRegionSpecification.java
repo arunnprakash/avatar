@@ -27,7 +27,7 @@ public class ProductRegionSpecification extends BaseEntitySpecification<ProductR
 	public Specification<ProductRegion> hasProductId(final Product productId) {
 		return new Specification<ProductRegion>() {
 			public Predicate toPredicate(Root<ProductRegion> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-				return builder.like(root.get(ProductRegion_.PRODUCT_ID), "%"+productId+"%");
+				return builder.like(root.get(ProductRegion_.PRODUCT), "%"+productId+"%");
 			}
 		};
 	}

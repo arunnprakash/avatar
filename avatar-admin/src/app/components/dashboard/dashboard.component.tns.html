@@ -20,16 +20,22 @@
 					</Palette>
 				</RadCartesianChart>
 				</GridLayout>
-				<FlexboxLayout horizontalAlignment="center" verticalAlignment="bottom" flexDirection="row" alignItems="stretch" justifyContent="center">
+				<FlexboxLayout marginBottom="2px" horizontalAlignment="center" verticalAlignment="bottom" flexDirection="row" alignItems="stretch" justifyContent="center">
+					<Label *ngIf="hasRole(['ADMIN', 'SELLER_AGENT'])" text="      " backgroundColor="#33cc33"></Label>
+					<Label *ngIf="hasRole(['ADMIN', 'SELLER_AGENT'])" text="Sellers" marginLeft="2px"></Label>
+					<Label *ngIf="hasRole(['ADMIN', 'BUYER_AGENT'])" text="      " backgroundColor="#ffff00" marginLeft="5px"></Label>
+					<Label *ngIf="hasRole(['ADMIN', 'BUYER_AGENT'])" text="Buyers" marginLeft="2px"></Label>
+				</FlexboxLayout>
+				<FlexboxLayout marginBottom="2px" horizontalAlignment="center" verticalAlignment="bottom" flexDirection="row" alignItems="stretch" justifyContent="center">
 					<Button text="Daily" (tap)="setSellerAndBuyerDailyGrowthRate();" class="btn btn-primary btn-rounded-sm all-sides-margin button"></Button>
 					<Button text="Monthly" (tap)="setSellerAndBuyerMonthlyGrowthRate();" class="btn btn-primary btn-rounded-sm all-sides-margin button"></Button>
 					<Button text="Yearly" (tap)="setSellerAndBuyerYearlyGrowthRate();" class="btn btn-primary btn-rounded-sm all-sides-margin button"></Button>
 				</FlexboxLayout>
-				<StackLayout class="hr-light"></StackLayout>
+				<StackLayout marginBottom="2px" class="hr-light"></StackLayout>
 			</StackLayout>
 			<StackLayout orientation="vertical" *ngIf="hasRole(['SELLER'])">
 				<seller></seller>
-				<StackLayout class="hr-light"></StackLayout>
+				<StackLayout marginBottom="2px" class="hr-light"></StackLayout>
 			</StackLayout>
 		</ScrollView>
 	</FlexboxLayout>

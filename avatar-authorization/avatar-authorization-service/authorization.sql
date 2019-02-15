@@ -31,7 +31,7 @@ VALUES ('admin', NOW(), b'000000', 'admin', NOW(), '0', 'Female', 'பெண்'
 INSERT INTO `users` (`created_by`, `created_date`, `deleted`, `last_modified_by`, `last_modified_date`, `version`, `dob`, 
 `first_name`, `last_name`, `mobile_number`, `password`, `suspended`, `user_name`, `gender_id`, `language_id`, `village_id`) 
 VALUES ('admin', NOW(), b'000000', 'admin', NOW(), '0', NOW(), 
-'ArunPrakash', 'Balasundaram', '9566122460', '$2a$10$iVzLhHutaH8UhXXuv3E.S.vUFIxN0vA50pj2D8OC.r9nWKgtH7LsG', b'000000', 'admin', '1', '1', '1');
+'ArunPrakash', 'Balasundaram', '9566122460', '$2a$10$M9G0NVMMldzdi/66vKpdBuPSvR7d3RByF8o1ZL4ivY8lhMRY7H4Ly', b'000000', 'admin', '1', '1', '1');
 
 INSERT INTO `user_roles` (`created_by`, `created_date`, `deleted`, `last_modified_by`, `last_modified_date`, `version`, `role_id`, `user_id`) 
 VALUES ('admin', NOW(), b'000000', 'admin', NOW(), '0', '1', '1'); 

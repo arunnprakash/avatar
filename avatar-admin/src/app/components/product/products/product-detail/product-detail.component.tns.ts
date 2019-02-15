@@ -24,6 +24,10 @@ export class ProductDetailComponent extends BaseDetailComponent implements OnIni
         super.ngOnInit();
         console.log("ngOnInit Product Detail Component.ts");
     }
+    protected onSelectAutoComplete(field) {
+        let menuItem: any = _.find(this.localCols, { 'field': 'assets' });
+        menuItem.options = [this.model[field]];
+    }
     protected isModelValid(): boolean {
         return true;
     }

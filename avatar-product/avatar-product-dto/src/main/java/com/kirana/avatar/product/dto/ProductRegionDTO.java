@@ -24,15 +24,15 @@ import lombok.ToString;
 @ToString
 public class ProductRegionDTO extends BaseDTO{
 	
-	protected ProductDTO productId;
+	protected ProductDTO product;
 	protected Long state;
 	protected Long district;
 	protected Long taluk;
 	@Builder
 	public ProductRegionDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy, ZonedDateTime lastModifiedDate, 
-			Boolean deleted, Long version, ProductDTO productId, Long state, Long district, Long taluk) {
+			Boolean deleted, Long version, ProductDTO product, Long state, Long district, Long taluk) {
 		super(id, createdBy, createdDate, lastModifiedBy, lastModifiedDate, deleted, version);
-		this.productId = productId;
+		this.product = product;
 		this.state = state;
 		this.district = district;
 		this.taluk = taluk;

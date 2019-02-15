@@ -37,7 +37,7 @@ export class ProductsComponent extends BaseComponent implements OnInit, AfterVie
     protected localCols: any[] = [
          { field: 'productName', header: 'ProductName', dataType: 'INPUT', autocapitalizationType: 'allCharacters', keyboardType: 'email' },
          { field: 'productCode', header: 'ProductCode', dataType: 'INPUT', autocapitalizationType: 'allCharacters', keyboardType: 'email'  },
-         { field: 'assetTypes', header: 'AssetType', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"assetTypeName"},
+         { field: 'assetTypes', header: 'AssetType', dataType: 'AUTOCOMPLETE', multiple: false, options: new ObservableArray<TokenModel>() , optionLabel:"assetTypeName"},
          { field: 'assets', header: 'Assets', dataType: 'FILE', multiple: true, options: [] , optionLabel:"assetValue"}
     ];
     constructor( productService: ProductService, authService: AuthService, translate: TranslateService, 
@@ -64,8 +64,12 @@ export class ProductsComponent extends BaseComponent implements OnInit, AfterVie
     }
     initAssetTypeList() {
         this.assetTypeService.getAllExceptDeleted().subscribe((assetTypes: AssetTypeDTO[]) => {
-            let menuItem: any = _.find(this.localCols, { 'field': 'assets' });
-            menuItem.options = assetTypes;
+            let menuItem: any = _.find(this.localCols, { 'field': 'assetTypes' });
+            menuItem.originalOptions = assetTypes;
+            assetTypes.forEach( (assetType: AssetTypeDTO ) => {
+                console.log(assetType.assetTypeName);
+                menuItem.options.push(new TokenModel(assetType.assetTypeName, null));
+            });
         },
         ( error ) => {
             this.showAlertDialog('Error', 'Error while getting Asset Type List');

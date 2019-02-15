@@ -12,6 +12,10 @@ export const baseDetailTemplate: string = `
                     <p-chips *ngIf="col.multiple" disabled="true" [(ngModel)]="model[col.field]" [field]="col.optionLabel" ngDefaultControl></p-chips>
                     <div *ngIf="!col.multiple" class="p-col-8">{{model[col.field][col.optionLabel]}}</div>
                 </span>
+                <span *ngSwitchCase="'FILE'">
+                    <p-chips *ngIf="col.multiple" disabled="true" [(ngModel)]="model[col.field]" field="assetType.assetTypeName" ngDefaultControl></p-chips>
+                    <div *ngIf="!col.multiple" class="p-col-8">{{model[col.field]['assetType']['assetTypeName']}}</div>
+                </span>
             </div>
         </div>
         <div *ngIf="displayEditDetail" class="p-grid text-align-left">

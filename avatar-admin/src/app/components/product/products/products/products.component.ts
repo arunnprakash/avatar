@@ -29,7 +29,7 @@ export class ProductsComponent extends BaseComponent implements OnInit {
     protected localCols: any[] = [
          { field: 'productName', header: 'ProductName', dataType: 'INPUT' },
          { field: 'productCode', header: 'ProductCode', dataType: 'INPUT' },
-         { field: 'assetTypes', header: 'AssetType', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"assetTypeName"},
+         { field: 'assetTypes', header: 'AssetType', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"assetTypeName", postInit: true, initFrom: 'assets'},
          { field: 'assets', header: 'Assets', dataType: 'FILE', multiple: true, options: [] , optionLabel:"assetValue"}
     ];
     constructor( productService: ProductService, authService: AuthService, translate: TranslateService, domSanitizer: DomSanitizer,

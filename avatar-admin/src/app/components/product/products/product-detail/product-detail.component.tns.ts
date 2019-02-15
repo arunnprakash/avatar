@@ -8,6 +8,8 @@ import { BaseDetailComponent } from '../../../base-detail/base.detail.component'
 import { AuthService } from "../../../../services/auth.service";
 import { ProductService } from "../../../../services/product/productservice.generated";
 
+import * as _ from "lodash";
+
 @Component({
   selector: 'product-detail',
   template: baseDetailDataViewTemplate,

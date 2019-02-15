@@ -15,8 +15,12 @@ export const baseDetailDataViewTemplate: string = `
                 <div class="p-col-8" *ngSwitchCase="'MULTISELECT'">{{model[col.field]}}</div>
                 <!--<p-multiSelect *ngSwitchCase="'MULTISELECT'" readonly="false" [options]="col.options" [optionLabel]="col.optionLabel" defaultLabel="ALL" [(ngModel)]="model[col.field]"  appendTo="body" [style]="{'width':'100%'}"></p-multiSelect>-->
                 <span *ngSwitchCase="'AUTOCOMPLETE'">
-                    <p-chips *ngIf="model[col.field] && col.multiple" disabled="true" [(ngModel)]="model[col.field]" [field]="col.optionLabel" ngDefaultControl></p-chips>
-                    <div *ngIf="model[col.field] && !col.multiple" class="p-col-8">{{model[col.field][col.optionLabel]}}</div>
+                    <p-chips *ngIf="col.multiple" disabled="true" [(ngModel)]="model[col.field]" [field]="col.optionLabel" ngDefaultControl></p-chips>
+                    <div *ngIf="!col.multiple" class="p-col-8">{{model[col.field][col.optionLabel]}}</div>
+                </span>
+                <span *ngSwitchCase="'FILE'">
+                    <p-chips *ngIf="col.multiple" disabled="true" [(ngModel)]="model[col.field]" field="assetType.assetTypeName" ngDefaultControl></p-chips>
+                    <div *ngIf="!col.multiple" class="p-col-8">{{model[col.field]['assetType']['assetTypeName']}}</div>
                 </span>
             </div>
         </div>

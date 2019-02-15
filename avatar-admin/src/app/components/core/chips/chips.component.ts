@@ -15,7 +15,13 @@ export class ChipsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-      console.log("ngOnInit ChipsComponent");
   }
-
+  getText(item: any) {
+      let text: string = '';
+      let splittedFileds: string[] = this.field.split('.');
+      splittedFileds.forEach( (splittedFiled: any ) => {
+          item = item?item[splittedFiled]:null;
+      });
+      return item;
+  }
 }

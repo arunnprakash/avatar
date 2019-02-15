@@ -26,8 +26,12 @@ export const baseDataViewTemplate: string = `
                 <Label col="1" *ngSwitchCase="'DATETIME'" text="{{rowData[col.field] | date:'dd-MM-yyyy HH:mm:ss'}}" class="text-align-left vertical-align-center"></Label>
                 <Label col="1" *ngSwitchCase="'MULTISELECT'" [text]="rowData[col.field]" class="text-align-left vertical-align-center"></Label>
                 <StackLayout col="1" *ngSwitchCase="'AUTOCOMPLETE'">
-                    <chips *ngIf="rowData[col.field] && col.multiple" [dataItems]="rowData[col.field]" [field]="col.optionLabel"></chips>
-                    <Label *ngIf="rowData[col.field] && !col.multiple" [text]="rowData[col.field][col.optionLabel]"></Label>
+                    <chips *ngIf="col.multiple" [dataItems]="rowData[col.field]" [field]="col.optionLabel"></chips>
+                    <Label *ngIf="!col.multiple" [text]="rowData[col.field][col.optionLabel]"></Label>
+                </StackLayout>
+                <StackLayout col="1" *ngSwitchCase="'FILE'">
+                    <chips *ngIf="col.multiple" [dataItems]="rowData[col.field]" field="assetType.assetTypeName"></chips>
+                    <Label *ngIf="!col.multiple" [text]="rowData['assetType']['assetTypeName']"></Label>
                 </StackLayout>
             </GridLayout>
         </StackLayout>

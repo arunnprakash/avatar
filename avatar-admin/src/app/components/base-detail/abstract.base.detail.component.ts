@@ -19,6 +19,7 @@ export abstract class AbstractBaseDetailComponent implements OnInit {
     ngOnInit() {
         console.log("ngOnInit Abstract Base Detail Component.ts");
         this.saved = false;
+        this.postInit();
     }
     dateChanged(newDate, field) {
         this.model[field]= new Date(newDate);
@@ -66,5 +67,32 @@ export abstract class AbstractBaseDetailComponent implements OnInit {
             return _.find(selectedValues, option) == undefined; 
          });
         menuItem.options = filteredOptions;
+    }
+    protected postInit() {
+        //console.log('start postInit');
+        if (this.model.id) {
+            //console.log('model.id found');
+            this.localCols.forEach((menuItem: any ) => {
+                //console.log(menuItem.field, menuItem.postInit);
+                if (menuItem.postInit) {
+                    //console.log('postInit required for', menuItem.field);
+                    if (this.model[menuItem.initFrom]) {
+                        //console.log('init From model '+ menuItem.initFrom, this.model[menuItem.initFrom]);
+                        this.model[menuItem.initFrom].forEach( (item: any ) => {
+                            if (menuItem.multiple) {
+                                if (this.model[menuItem.field]) {
+                                    this.model[menuItem.field].push(item.assetType);
+                                } else {
+                                    this.model[menuItem.field] = [item.assetType];
+                                }
+                            } else {
+                                this.model[menuItem.field] = item.assetType;
+                            }
+                        });
+                    }
+                }
+            });
+        }
+        //console.log('end postInit');
     }
 }

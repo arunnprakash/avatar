@@ -118,6 +118,7 @@ export abstract class AbstractBaseComponent implements OnInit {
                 this.recordList = pagingAndFilterResponse.results;
                 this.recordList.forEach( (item: any ) => {
                     this.recordIdList.push({ id: item.id, selected: false });
+                    this.postInit(item);
                 });
             }
             this.showLoading(false);
@@ -202,5 +203,27 @@ export abstract class AbstractBaseComponent implements OnInit {
         let asset: any = _.find(assets, function(asset) { return asset.assetType.assetTypeName == "PHOTO"; });
         return asset? true: false;
     }
-
+    protected postInit(model) {
+        //console.log('start postInit');
+        this.localCols.forEach((menuItem: any ) => {
+            //console.log(menuItem.field, menuItem.postInit);
+            if (menuItem.postInit) {
+                //console.log('postInit required for', menuItem.field);
+                if (model[menuItem.initFrom]) {
+                    //console.log('init From model '+ menuItem.initFrom, model[menuItem.initFrom]);
+                    model[menuItem.initFrom].forEach( (item: any ) => {
+                        if (menuItem.multiple) {
+                            if (model[menuItem.field]) {
+                                model[menuItem.field].push(item.assetType);
+                            } else {
+                                model[menuItem.field] = [item.assetType];
+                            }
+                        } else {
+                            model[menuItem.field] = item.assetType;
+                        }
+                    });
+                }
+            }
+        });
+    }
 }

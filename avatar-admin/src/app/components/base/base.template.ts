@@ -50,6 +50,10 @@ export const baseTemplate: string = `
                         <p-chips *ngIf="col.multiple" max="1" disabled="true" [(ngModel)]="rowData[col.field]" [field]="col.optionLabel" ngDefaultControl></p-chips>
                         <div *ngIf="!col.multiple">{{rowData[col.field][col.optionLabel]}}</div>
                     </span>
+                    <span *ngSwitchCase="'FILE'">
+                        <p-chips *ngIf="col.multiple" disabled="true" [(ngModel)]="rowData[col.field]" field="assetType.assetTypeName" ngDefaultControl></p-chips>
+                        <div *ngIf="!col.multiple" class="ui-g-8 ui-sm-6 text-align-left">{{rowData[col.field]['assetType']['assetTypeName']}}</div>
+                    </span>
                 </td>
                 <td>
                      <p-checkbox *ngIf="recordIdList[rowIndex]" binary="true" [(ngModel)]="recordIdList[rowIndex].selected" (onChange)="checkIfAllSelected();"></p-checkbox>

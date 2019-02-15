@@ -29,7 +29,8 @@ constructor(private authService: AuthService, private router: Router, private ac
           {label: 'Districts',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['districts']     } }] },
           {label: 'States',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['states']     } }] },
           {label: 'Products',     visible: this.authService.hasRole(['ADMIN', 'SELLER_AGENT','BUYER_AGENT']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['products']     } }] },
-          {label: 'Products AssetTypes',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['productsAssetTypes']     } }] }
+          {label: 'Products AssetTypes',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['productsAssetTypes']     } }] },
+          {label: 'Prices',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['prices']     } }] }
       ];
   }
   ngAfterViewInit() {

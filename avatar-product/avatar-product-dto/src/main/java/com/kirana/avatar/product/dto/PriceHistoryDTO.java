@@ -24,17 +24,18 @@ import lombok.ToString;
 @ToString
 public class PriceHistoryDTO extends BaseDTO{
 	
-	protected ProductDTO productId;
+	protected ProductDTO product;
 	protected Double price;
-	protected QualityDTO qualityId;
+	protected QualityDTO quality;
 	
 	@Builder
 	public PriceHistoryDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
-			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, ProductDTO productId,Double price,QualityDTO qualityId) {
+			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, 
+			ProductDTO product, Double price, QualityDTO quality) {
 		super(id, createdBy, createdDate, lastModifiedBy, lastModifiedDate, deleted, version);
-		this.productId = productId;
+		this.product = product;
 		this.price = price;
-		this.qualityId = qualityId;
+		this.quality = quality;
 	}
 
 }

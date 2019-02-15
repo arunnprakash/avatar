@@ -42,6 +42,11 @@
 		"productCode":"ProductCode",
 		"assets": "Assets",
 		"assetTypes": "AssetType"
+	},
+	"prices": {
+		"product":"Product",
+		"quality":"Quality",
+		"price": "Price"
 	}
 }
 

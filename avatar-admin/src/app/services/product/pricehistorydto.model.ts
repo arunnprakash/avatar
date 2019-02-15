@@ -4,7 +4,7 @@ import { ProductDTO } from './productdto.model';
 import { QualityDTO } from './qualitydto.model';
 
 export class PriceHistoryDTO {
-    productId: ProductDTO;
+    product: ProductDTO;
     price: number;
-    qualityId: QualityDTO;
+    quality: QualityDTO;
 }

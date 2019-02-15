@@ -24,6 +24,8 @@ import { ProductsComponent } from "./components/product/products/products/produc
 import { ProductDetailComponent } from "./components/product/products/product-detail/product-detail.component";
 import { ProductsAssetTypesComponent } from "./components/product/assetTypes/assetTypes/assetTypes.component";
 import { ProductsAssetTypeDetailComponent } from "./components/product/assetTypes/assetType-detail/assetType-detail.component";
+import { PricesComponent } from "./components/product/prices/prices/prices.component";
+import { PriceDetailComponent } from "./components/product/prices/price-detail/price-detail.component";
 
 export const routes: Routes = [
     {
@@ -143,6 +145,16 @@ export const routes: Routes = [
                    {
                        path: 'dashboard',
                        component: DashboardComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'prices',
+                       component: PricesComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'price',
+                       component: PriceDetailComponent,
                        outlet: 'menuRouterOutlet'
                    }
        ]

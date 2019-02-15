@@ -28,7 +28,7 @@ import lombok.ToString;
  */
 
 @Entity
-@Table(name = "priceHistories")
+@Table(name = "price_histories")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
@@ -39,11 +39,11 @@ public class PriceHistory extends BaseEntity<PriceHistory>{
 	
 	@ManyToOne(optional = false, fetch=FetchType.EAGER)
 	@JoinColumn(name = "product_id", referencedColumnName="id", nullable = false)
-	protected Product productId;
+	protected Product product;
 	@Column(nullable = false)
 	protected Double price;
 	@ManyToOne(optional = false, fetch=FetchType.EAGER)
 	@JoinColumn(name = "quality_id", referencedColumnName="id", nullable = false)
-	protected Quality qualityId;
+	protected Quality quality;
 
 }

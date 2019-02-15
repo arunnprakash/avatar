@@ -1,0 +1,3 @@
+INSERT INTO `qualities` (`created_by`, `created_date`, `deleted`, `last_modified_by`, `last_modified_date`, `version`, `quality_type`) VALUES ('admin', now(), b'000000', 'admin', now(), '0', '1'); 
+INSERT INTO `qualities` (`created_by`, `created_date`, `deleted`, `last_modified_by`, `last_modified_date`, `version`, `quality_type`) VALUES ('admin', now(), b'000000', 'admin', now(), '0', '2');
+INSERT INTO `qualities` (`created_by`, `created_date`, `deleted`, `last_modified_by`, `last_modified_date`, `version`, `quality_type`) VALUES ('admin', now(), b'000000', 'admin', now(), '0', '3');

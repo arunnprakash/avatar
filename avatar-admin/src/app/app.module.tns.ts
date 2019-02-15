@@ -40,6 +40,7 @@ import { UsersAssetTypesModule } from './components/authorization/assetTypes/ass
 
 import { ProductsAssetTypesModule } from './components/product/assetTypes/assetTypes.module';
 import { ProductsModule } from './components/product/products/products.module';
+import { PricesModule } from './components/product/prices/prices.module';
 
 import { ApiUrls } from './api-settings/api-urls';
 import { AuthService } from "./services/auth.service";
@@ -94,6 +95,7 @@ export function createTranslateLoader() {
     
     ProductsAssetTypesModule,
     ProductsModule,
+    PricesModule,
     
     NativeScriptUISideDrawerModule,
     NativeScriptUIAutoCompleteTextViewModule,

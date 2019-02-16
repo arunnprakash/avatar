@@ -66,7 +66,7 @@ export abstract class BaseComponent extends AbstractBaseComponent implements OnI
         });
     }
     protected recordListLoaded(): void {
-        
+        //Do Nothing but default implementation
     }
     getPhoto(assets: any[]){
         var assetValue = _.find(assets, function(asset) { return asset.assetType.assetTypeName == "PHOTO"; }).assetValue;

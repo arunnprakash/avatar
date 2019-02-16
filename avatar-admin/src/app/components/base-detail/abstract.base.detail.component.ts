@@ -10,6 +10,7 @@ export abstract class AbstractBaseDetailComponent implements OnInit {
     protected title: string;
     protected displayEditDetail: boolean;
     protected saved: boolean;
+    protected languageCode: string;
     /*Following Abstract Fields and Methods MUST have definition in derived component class*/
     protected abstract showLoading(value: boolean);
     protected abstract showAlertDialog(title: string, message: string);
@@ -26,6 +27,7 @@ export abstract class AbstractBaseDetailComponent implements OnInit {
     }
     save() {
         if (this.isModelValid()) {
+            this.beforeSave();
             if (this.model.id) {
                 this.showLoading(true);
                 this.service.update(this.model)
@@ -94,5 +96,8 @@ export abstract class AbstractBaseDetailComponent implements OnInit {
             });
         }
         //console.log('end postInit');
+    }
+    protected beforeSave() {
+        //Do nothing but default implementation
     }
 }

@@ -26,7 +26,8 @@ import { ProductsAssetTypesComponent } from "./components/product/assetTypes/ass
 import { ProductsAssetTypeDetailComponent } from "./components/product/assetTypes/assetType-detail/assetType-detail.component";
 import { PricesComponent } from "./components/product/prices/prices/prices.component";
 import { PriceDetailComponent } from "./components/product/prices/price-detail/price-detail.component";
-
+import { HolidaysComponent } from "./components/product/holidays/holidays/holidays.component";
+import { HolidayDetailComponent } from "./components/product/holidays/holiday-detail/holiday-detail.component";
 export const routes: Routes = [
     {
         path: '',
@@ -155,6 +156,16 @@ export const routes: Routes = [
                    {
                        path: 'price',
                        component: PriceDetailComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'holidays',
+                       component: HolidaysComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'holiday',
+                       component: HolidayDetailComponent,
                        outlet: 'menuRouterOutlet'
                    }
        ]

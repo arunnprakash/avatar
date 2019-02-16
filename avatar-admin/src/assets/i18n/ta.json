@@ -47,6 +47,14 @@
 		"product":"Product",
 		"quality":"Quality",
 		"price": "Price"
+	},
+	"holidays": {
+		"startDate":"StartDate",
+		"endDate":"EndDate",
+		"description": "Description",
+		"state": "State",
+		"district": "District",
+		"taluk": "Taluk"
 	}
 }
 

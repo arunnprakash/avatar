@@ -28,6 +28,9 @@ import { PricesComponent } from "./components/product/prices/prices/prices.compo
 import { PriceDetailComponent } from "./components/product/prices/price-detail/price-detail.component";
 import { HolidaysComponent } from "./components/product/holidays/holidays/holidays.component";
 import { HolidayDetailComponent } from "./components/product/holidays/holiday-detail/holiday-detail.component";
+import { ProductRegionsComponent } from "./components/product/productregions/productregions/productregions.component";
+import { ProductRegionDetailComponent } from "./components/product/productregions/productregion-detail/productregion-detail.component";
+
 export const routes: Routes = [
     {
         path: '',
@@ -166,6 +169,16 @@ export const routes: Routes = [
                    {
                        path: 'holiday',
                        component: HolidayDetailComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'productregions',
+                       component: ProductRegionsComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'productregion',
+                       component: ProductRegionDetailComponent,
                        outlet: 'menuRouterOutlet'
                    }
        ]

@@ -50,6 +50,7 @@ import { ProductsAssetTypesModule } from './components/product/assetTypes/assetT
 import { ProductsModule } from './components/product/products/products.module';
 import { PricesModule } from './components/product/prices/prices.module';
 import { HolidaysModule } from './components/product/holidays/holidays.module';
+import { ProductRegionsModule } from './components/product/productregions/productregions.module';
 
 import { ApiUrls } from './api-settings/api-urls';
 import { AuthService } from "./services/auth.service";
@@ -104,6 +105,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProductsModule,
     PricesModule,
     HolidaysModule,
+    ProductRegionsModule,
     
     CalendarModule,
     InputTextModule,

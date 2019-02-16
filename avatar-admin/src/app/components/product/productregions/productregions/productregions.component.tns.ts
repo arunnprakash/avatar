@@ -9,16 +9,18 @@ import { baseTemplate } from '../../../base/base.template';
 import { baseCss } from '../../../base/base.css';
 import { BaseComponent } from '../../../base/base.component';
 
-import { HolidayService } from "../../../../services/product/holidayservice.generated";
+import { ProductRegionService } from "../../../../services/product/productregionservice.generated";
+import { ProductService } from '../../../../services/product/productservice.generated';
 import { StateService } from '../../../../services/authorization/stateservice.generated';
 import { AuthService } from "../../../../services/auth.service";
 import { StateDTO } from "../../../../services/authorization/statedto.model";
-import { HolidayDTO } from "../../../../services/product/holidaydto.model";
-import { HolidayDetailComponent } from "../holiday-detail/holiday-detail.component";
+import { ProductDTO } from "../../../../services/product/productdto.model";
+import { ProductRegionDTO } from "../../../../services/product/productregiondto.model";
 import { DistrictDTO } from "../../../../services/authorization/districtdto.model";
 import { DistrictService } from '../../../../services/authorization/districtservice.generated';
 import { TalukDTO } from "../../../../services/authorization/talukdto.model";
 import { TalukService } from '../../../../services/authorization/talukservice.generated';
+import { ProductRegionDetailComponent } from "../productregion-detail/productregion-detail.component";
 
 import { ObservableArray } from "tns-core-modules/data/observable-array";
 import { TokenModel, RadAutoCompleteTextView } from "nativescript-ui-autocomplete";
@@ -27,43 +29,56 @@ import { RadAutoCompleteTextViewComponent  } from "nativescript-ui-autocomplete/
 import * as _ from "lodash";
 
 @Component( {
-    selector: 'holidays',
+    selector: 'productregions',
     template: baseTemplate,
     styles: [baseCss],
     providers: [ModalDialogService]
 } )
-export class HolidaysComponent extends BaseComponent implements OnInit {
+export class ProductRegionsComponent extends BaseComponent implements OnInit {
 
-    protected title = 'Holiday';
+    protected title = 'ProductRegion';
     protected localCols: any[] = [
-               { field: 'startDate', header: 'StartDate', dataType: 'DATE'},
-               { field: 'endDate', header: 'StartDate', dataType: 'DATE'},
-               { field: 'description', header: 'Description', dataType: 'INPUT'},
-               { field: 'state', header: 'State', dataType: 'AUTOCOMPLETE', multiple: false, options: new ObservableArray<TokenModel>() , optionLabel:"en"},
-               { field: 'district', header: 'District', dataType: 'AUTOCOMPLETE', multiple: false, options: new ObservableArray<TokenModel>() , optionLabel:"en"},
-               { field: 'taluk', header: 'Taluk', dataType: 'AUTOCOMPLETE', multiple: false, options: new ObservableArray<TokenModel>() , optionLabel:"en"}
+          { field: 'product', header: 'Product', dataType: 'AUTOCOMPLETE', multiple: false, options: new ObservableArray<TokenModel>() , optionLabel:"en"},
+          { field: 'state', header: 'State', dataType: 'AUTOCOMPLETE', multiple: false, options: new ObservableArray<TokenModel>() , optionLabel:"en"},
+          { field: 'district', header: 'District', dataType: 'AUTOCOMPLETE', multiple: false, options: new ObservableArray<TokenModel>() , optionLabel:"en"},
+          { field: 'taluk', header: 'Taluk', dataType: 'AUTOCOMPLETE', multiple: false, options: new ObservableArray<TokenModel>() , optionLabel:"en"}
     ];
-    constructor( holidayService: HolidayService, authService: AuthService, translate: TranslateService, 
-            private stateService: StateService, private districtService: DistrictService, private talukService: TalukService,
+    constructor( productregionService: ProductRegionService, authService: AuthService, translate: TranslateService, 
+            private productService: ProductService, private stateService: StateService, private districtService: DistrictService, private talukService: TalukService,
             modalDialogService: ModalDialogService, dialogService: ModalDialogService, 
             router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef, private page: Page) {
-        super( holidayService, authService, translate, modalDialogService, dialogService, HolidayDetailComponent, router, activatedRoute, vcRef);
+        super( productregionService, authService, translate, modalDialogService, dialogService, ProductRegionDetailComponent, router, activatedRoute, vcRef);
         this.languageCode = authService.getUserInfo().preferredLanguage.languageCode;
     }
     ngOnInit() {
         super.ngOnInit();
         this.page.actionBarHidden = true;
-        this.initFieldsLabel("holidays");
-        this.initLocaleFields();
+        this.initFieldsLabel("productregions");
+        this.initProductList();
         this.initStateList();
+        this.initLocaleFields();
     }
     initLocaleFields() {
-        let menuItem: any = _.find(this.localCols, { 'field': 'state' });
+        let menuItem: any = _.find(this.localCols, { 'field': 'product' });
+        menuItem.optionLabel = this.languageCode;
+        menuItem = _.find(this.localCols, { 'field': 'state' });
         menuItem.optionLabel = this.languageCode;
         menuItem = _.find(this.localCols, { 'field': 'district' });
         menuItem.optionLabel = this.languageCode;
         menuItem = _.find(this.localCols, { 'field': 'taluk' });
         menuItem.optionLabel = this.languageCode;
+    }
+    initProductList() {
+        this.productService.getAllExceptDeleted().subscribe((products: ProductDTO[]) => {
+            let menuItem: any = _.find(this.localCols, { 'field': 'product' });
+            menuItem.originalOptions = products;
+            products.forEach( (product: ProductDTO ) => {
+                menuItem.options.push(new TokenModel(product[this.languageCode], null));
+            });
+        },
+        ( error ) => {
+            this.showAlertDialog('Error', 'Error while getting Product List');
+        });
     }
     initStateList() {
         this.stateService.getAllExceptDeleted().subscribe((states: StateDTO[]) => {
@@ -79,21 +94,21 @@ export class HolidaysComponent extends BaseComponent implements OnInit {
     }
     protected recordListLoaded(): void {
         super.recordListLoaded();
-        this.recordList.forEach( (holidayDTO: any ) => {
-            this.stateService.get(holidayDTO.state).subscribe((state: StateDTO) => {
-                holidayDTO.state = state;
+        this.recordList.forEach( (productRegionDTO: any ) => {
+            this.stateService.get(productRegionDTO.state).subscribe((state: StateDTO) => {
+                productRegionDTO.state = state;
             },
             ( error ) => {
                 this.showAlertDialog('Error', 'Error while getting State');
             });
-            this.districtService.get(holidayDTO.district).subscribe((district: DistrictDTO) => {
-                holidayDTO.district = district;
+            this.districtService.get(productRegionDTO.district).subscribe((district: DistrictDTO) => {
+                productRegionDTO.district = district;
             },
             ( error ) => {
                 this.showAlertDialog('Error', 'Error while getting District');
             });
-            this.talukService.get(holidayDTO.taluk).subscribe((taluk: TalukDTO) => {
-                holidayDTO.taluk = taluk;
+            this.talukService.get(productRegionDTO.taluk).subscribe((taluk: TalukDTO) => {
+                productRegionDTO.taluk = taluk;
             },
             ( error ) => {
                 this.showAlertDialog('Error', 'Error while getting Taluk');
@@ -101,6 +116,6 @@ export class HolidaysComponent extends BaseComponent implements OnInit {
         });
     }
     protected initEmptyModel() {
-        this.model = new HolidayDTO();
+        this.model = new ProductRegionDTO();
     }
 }

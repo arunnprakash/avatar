@@ -47,8 +47,8 @@ export const baseTemplate: string = `
                     <span *ngSwitchCase="'MULTISELECT'">{{rowData[col.field]}}</span>
                     <!--<p-multiSelect *ngSwitchCase="'MULTISELECT'" readonly="true" [options]="col.options" [(ngModel)]="rowData[col.field]" [optionLabel]="col.optionLabel" defaultLabel="ALL"  appendTo="body" [style]="{'width':'100%'}"></p-multiSelect>-->
                     <span *ngSwitchCase="'AUTOCOMPLETE'">
-                        <p-chips *ngIf="col.multiple" max="1" disabled="true" [(ngModel)]="rowData[col.field]" [field]="col.optionLabel" ngDefaultControl></p-chips>
-                        <div *ngIf="!col.multiple">{{rowData[col.field][col.optionLabel]}}</div>
+                        <p-chips *ngIf="rowData[col.field] && col.multiple" max="1" disabled="true" [(ngModel)]="rowData[col.field]" [field]="col.optionLabel" ngDefaultControl></p-chips>
+                        <div *ngIf="rowData[col.field] && !col.multiple">{{rowData[col.field][col.optionLabel]}}</div>
                     </span>
                     <span *ngSwitchCase="'FILE'">
                         <p-chips *ngIf="col.multiple" disabled="true" [(ngModel)]="rowData[col.field]" field="assetType.assetTypeName" ngDefaultControl></p-chips>

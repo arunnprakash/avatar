@@ -55,6 +55,12 @@
 		"state": "State",
 		"district": "District",
 		"taluk": "Taluk"
+	},
+	"productregions": {
+		"product":"Product",
+		"state": "State",
+		"district": "District",
+		"taluk": "Taluk"
 	}
 }
 

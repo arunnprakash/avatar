@@ -43,6 +43,7 @@ export class PricesComponent extends BaseComponent implements OnInit {
             modalDialogService: ModalDialogService, dialogService: ModalDialogService, 
             router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef, private page: Page) {
         super( priceHistoryService, authService, translate, modalDialogService, dialogService, PriceDetailComponent, router, activatedRoute, vcRef);
+        this.languageCode = authService.getUserInfo().preferredLanguage.languageCode;
     }
     ngOnInit() {
         super.ngOnInit();

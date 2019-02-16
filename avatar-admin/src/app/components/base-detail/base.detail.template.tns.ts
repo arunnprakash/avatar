@@ -36,6 +36,28 @@ export const baseDetailTemplate: string = `
                         <TextField *ngSwitchCase="'INPUT'" row="0" col="1" class="input" [hint]="col.header" [(ngModel)]="model[col.field]" [autocapitalizationType]="col.autocapitalizationType" [keyboardType]="col.keyboardType" [returnKeyType]="isLast?'done':'next'"></TextField>
                         <DatePicker *ngSwitchCase="'DATE'" row="0" col="1" class="input" [hint]="col.header" [(ngModel)]="model[col.field]" [returnKeyType]="isLast?'done':'next'" ></DatePicker>
                         <DatePicker *ngSwitchCase="'DATETIME'" row="0" col="1" class="input" [hint]="col.header" [(ngModel)]="model[col.field]" [returnKeyType]="isLast?'done':'next'" ></DatePicker>
+                        <RadAutoCompleteTextView *ngSwitchCase="'AUTOCOMPLETE'" row="0" col="1" class="input" [hint]="col.header" [(ngModel)]="model[col.field]" ngDefaultControl [items]="col.options" 
+                            suggestMode="Suggest" displayMode="Tokens" completionMode="Contains" showCloseButton="false" 
+                            (loaded)="onAutoCompleteLoaded($event, false, model[col.field], col)" 
+                            (tokenAdded)="onTokenAdded($event, col);onSelectAutoComplete(col.field);" 
+                            (tokenRemoved)="onTokenRemoved($event, col)"
+                            [returnKeyType]="isLast?'done':'next'">
+                            <SuggestionView tkAutoCompleteSuggestionView suggestionViewHeight="300">
+                                <ng-template tkSuggestionItemTemplate let-item="item">
+                                    <StackLayout orientation="vertical" padding="10">
+                                        <Label [text]="item.text"></Label>
+                                    </StackLayout>
+                                </ng-template>
+                            </SuggestionView>
+                        </RadAutoCompleteTextView>
+                        <StackLayout *ngSwitchCase="'FILE'" row="0" col="1">
+                            <StackLayout *ngFor="let assetType of col.options">
+                                <GridLayout rows="auto, auto, *" columns="auto, auto, *" verticalAlignment="center">
+                                    <Button col="0" [text]="assetType.assetTypeName" (tap)="fileSelectedEventHandler(col.field, assetType)" class="btn btn-primary btn-rounded-sm button"></Button>
+                                    <Label *ngIf="assetExist(col.field, assetType) == true" col="1" text="&#xf560;" class="fa"></Label><!--&#xf00c;-->
+                                </GridLayout>
+                            </StackLayout>
+                        </StackLayout>
                         <StackLayout row="1" col="1" class="hr-light"></StackLayout>
                     </GridLayout>
                 </StackLayout>

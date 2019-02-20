@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.kirana.avatar</groupId>
+		<artifactId>avatar</artifactId>
+		<version>1.0.0</version>
+	</parent>
+	<artifactId>avatar-transaction</artifactId>
+	<packaging>pom</packaging>
+
+	<name>avatar-transaction</name>
+	<description>transaction Service</description>
+
+	<modules>
+		<module>avatar-transaction-dto</module>
+		<module>avatar-transaction-feign</module>
+		<module>avatar-transaction-model</module>
+		<module>avatar-transaction-mapper</module>
+		<module>avatar-transaction-dao</module>
+		<module>avatar-transaction-service</module>
+	</modules>
+</project>

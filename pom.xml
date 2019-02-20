@@ -38,6 +38,7 @@
 		<module>avatar-common</module>
 		<module>avatar-authorization</module>
 		<module>avatar-product</module>
+		<module>avatar-transaction</module>
 		<module>avatar-service-discovery</module>
 		<module>avatar-gateway</module>
 		<module>avatar-app-monitor</module>

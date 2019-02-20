@@ -10,7 +10,7 @@ import { DashboardComponent } from './dashboard.component';
 import { PanelModule } from 'primeng/panel';
 import { ChartModule } from 'primeng/chart';
 import { ButtonModule } from 'primeng/button';
-
+import { DataViewModule } from 'primeng/dataview';
 
 @NgModule({
   declarations: componentDeclarations,
@@ -19,6 +19,7 @@ import { ButtonModule } from 'primeng/button';
     ButtonModule,
     PanelModule,
     ChartModule,
+    DataViewModule,
     RouterModule.forChild(routes)
   ],
   exports: [

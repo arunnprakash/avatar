@@ -13,6 +13,7 @@ import static com.kirana.avatar.product.model.PriceHistory_.PRICE;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -107,7 +108,12 @@ public class PriceHistoryServiceImpl extends BaseServiceImpl<PriceHistory, Price
 		products.addAll(getProductsMappedToDistrict(districtId));
 		products.addAll(getProductsMappedToState(stateId));
 		Long totalRecords = Long.valueOf(products.size());
-		Collection<BaseDTO> results = products.stream().map(this::getLatestPrice).collect(Collectors.toList());
+		Collection<BaseDTO> results = products.stream()
+				.map(this::getLatestPrice)
+				.filter(Optional::isPresent)
+				.map(Optional::get)
+				.map(priceHistoryMapper::toDTO)
+				.collect(Collectors.toList());
 		PagingAndFilterResponse<BaseDTO> response = PagingAndFilterResponse
 				.builder()
 				.totalRecords(totalRecords)
@@ -115,13 +121,13 @@ public class PriceHistoryServiceImpl extends BaseServiceImpl<PriceHistory, Price
 				.build();
 		return response;
 	}
-	private PriceHistoryDTO getLatestPrice(Product product) {
+	private Optional<PriceHistory> getLatestPrice(Product product) {
 		List<PriceHistory> priceHistories = priceHistoryRepository.getLatestPrice(product.getId());
 		if (null != priceHistories && !priceHistories.isEmpty()) {
 			PriceHistory priceHistory = priceHistories.get(0);
-			return priceHistoryMapper.toDTO(priceHistory);
+			return Optional.of(priceHistory);
 		} else {
-			return null;
+			return Optional.ofNullable(null);
 		}
 	}
 	private List<Product> getProductsMappedToState(Long stateId) {

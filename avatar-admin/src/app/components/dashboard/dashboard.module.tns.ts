@@ -6,6 +6,7 @@ import { NativeScriptUIChartModule } from "nativescript-ui-chart/angular";
 
 import { routes, componentDeclarations } from './dashboard.common';
 import { DashboardComponent } from './dashboard.component';
+import { SellProductComponent } from './seller/sell-product/sell-product.component';
 
 @NgModule({
   declarations: componentDeclarations,
@@ -15,9 +16,12 @@ import { DashboardComponent } from './dashboard.component';
     NativeScriptRouterModule.forChild(routes)
   ],
   exports: [
-            NativeScriptRouterModule,
-            DashboardComponent
-          ],
+    NativeScriptRouterModule,
+    DashboardComponent
+  ],
+  entryComponents: [
+    SellProductComponent
+  ],
   schemas: [NO_ERRORS_SCHEMA]
 })
 export class DashboardModule { }

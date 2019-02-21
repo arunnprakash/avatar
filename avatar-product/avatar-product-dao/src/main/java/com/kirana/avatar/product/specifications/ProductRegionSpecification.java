@@ -27,7 +27,7 @@ public class ProductRegionSpecification extends BaseEntitySpecification<ProductR
 	public Specification<ProductRegion> hasProductId(final Product productId) {
 		return new Specification<ProductRegion>() {
 			public Predicate toPredicate(Root<ProductRegion> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-				return builder.like(root.get(ProductRegion_.PRODUCT), "%"+productId+"%");
+				return builder.equal(root.get(ProductRegion_.PRODUCT), "%"+productId+"%");
 			}
 		};
 	}
@@ -35,7 +35,7 @@ public class ProductRegionSpecification extends BaseEntitySpecification<ProductR
 	public Specification<ProductRegion> hasStateId(final Long stateId) {
 		return new Specification<ProductRegion>() {
 			public Predicate toPredicate(Root<ProductRegion> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-				return builder.like(root.get(ProductRegion_.STATE), "%"+stateId+"%");
+				return builder.equal(root.get(ProductRegion_.STATE), stateId);
 			}
 		};
 	}
@@ -43,7 +43,7 @@ public class ProductRegionSpecification extends BaseEntitySpecification<ProductR
 	public Specification<ProductRegion> hasDistrictId(final Long districtId) {
 		return new Specification<ProductRegion>() {
 			public Predicate toPredicate(Root<ProductRegion> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-				return builder.like(root.get(ProductRegion_.DISTRICT), "%"+districtId+"%");
+				return builder.equal(root.get(ProductRegion_.DISTRICT), districtId);
 			}
 		};
 	}
@@ -51,7 +51,7 @@ public class ProductRegionSpecification extends BaseEntitySpecification<ProductR
 	public Specification<ProductRegion> hasTalukId(final Long talukId) {
 		return new Specification<ProductRegion>() {
 			public Predicate toPredicate(Root<ProductRegion> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-				return builder.like(root.get(ProductRegion_.TALUK), "%"+talukId+"%");
+				return builder.equal(root.get(ProductRegion_.TALUK), talukId);
 			}
 		};
 	}

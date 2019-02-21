@@ -7,6 +7,7 @@ import { PagingAndFilterResponse } from './pagingandfilterresponse.model';
 import { AssetDTO } from './assetdto.model';
 import { PagingAndFilterRequest } from './pagingandfilterrequest.model';
 import { AssetTypeDTO } from './assettypedto.model';
+import { BaseDTO } from './basedto.model';
 import { FilterCriteria } from './filtercriteria.model';
 import { ProductDTO } from './productdto.model';
 import { QualityDTO } from './qualitydto.model';
@@ -75,6 +76,14 @@ export class PriceHistoryService {
         const params = this.createHttpParams({});
 
         return this.httpClient.post<PagingAndFilterResponse>(url, arg0, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
+    public getProductsForUser(userId: number, talukId: number, districtId: number, stateId: number, pagingAndFilterRequest: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
+        const url = this.serviceBaseURL + '/' + userId + '/' + talukId + '/' + districtId + '/' + stateId + '';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.post<PagingAndFilterResponse>(url, pagingAndFilterRequest, {params: params})
             .pipe(catchError(this.handleError));
     }
 

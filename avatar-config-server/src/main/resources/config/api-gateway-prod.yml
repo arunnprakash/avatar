@@ -50,7 +50,12 @@ zuul:
       authorization-service:
         path: /api/**
         serviceId: authorization-service
-        
+      product-service:
+        path: /api/**
+        serviceId: product-service
+      transaction-service:
+        path: /api/**
+        serviceId: transaction-service
 
 # logging
 logging:

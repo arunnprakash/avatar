@@ -1,5 +1,5 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { AssetService } from './assetservice.generated';
+import { SellerTransactionService } from './sellertransactionservice.generated';
 import { ServiceConfig } from './serviceconfig';
 
 @NgModule({})
@@ -9,7 +9,7 @@ export class TransactionAPIModule {
             ngModule: TransactionAPIModule,
             providers: [
                 {provide: ServiceConfig, useValue: serviceConfig},
-                AssetService
+                SellerTransactionService
             ]
         };
     }

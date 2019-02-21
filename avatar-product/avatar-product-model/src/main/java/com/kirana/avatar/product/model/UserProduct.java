@@ -28,22 +28,19 @@ import lombok.ToString;
  */
 
 @Entity
-@Table(name = "price_histories")
+@Table(name = "user_products")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @ToString
 @EqualsAndHashCode(callSuper=true)
 @EntityListeners(AuditingEntityListener.class)
-public class PriceHistory extends BaseEntity<PriceHistory> {
+public class UserProduct extends BaseEntity<UserProduct>{
 	
 	@ManyToOne(optional = false, fetch=FetchType.EAGER)
 	@JoinColumn(name = "product_id", referencedColumnName="id", nullable = false)
 	protected Product product;
-	@Column(nullable = false)
-	protected Double price;
-	@ManyToOne(optional = false, fetch=FetchType.EAGER)
-	@JoinColumn(name = "quality_id", referencedColumnName="id", nullable = false)
-	protected Quality quality;
 
+	@Column(name="user_id" ,nullable = false)
+	protected Long user;
 }

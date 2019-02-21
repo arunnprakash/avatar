@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   avatarServiceApiBaseUrl: 'http://10.0.2.2:9090',
   authorizationServiceApiBaseUrl: '/authorization-service',
-  productServiceApiBaseUrl: '/product-service'
+  productServiceApiBaseUrl: '/product-service',
+  transactionServiceApiBaseUrl: '/transaction-service'
 };
 
 /*

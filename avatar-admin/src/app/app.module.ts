@@ -58,7 +58,7 @@ import { TokenInterceptor } from "./services/token.interceptor";
 import { NeedAuthGuard } from "./services/needauthguard";
 import { AuthorizationAPIModule } from "./services/authorization/api.module";
 import { ProductAPIModule } from "./services/product/api.module";
-
+import { TransactionAPIModule } from "./services/transaction/api.module";
 
 //required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -87,6 +87,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     AuthorizationAPIModule.forRoot({context: ApiUrls.authorizationServiceApiBaseUrl}),
     ProductAPIModule.forRoot({context: ApiUrls.productServiceApiBaseUrl}),
+    TransactionAPIModule.forRoot({context: ApiUrls.transactionServiceApiBaseUrl}),
     AppRoutingModule,
     
     CoreModule,

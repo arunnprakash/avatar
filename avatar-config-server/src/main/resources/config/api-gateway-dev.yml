@@ -53,6 +53,9 @@ zuul:
       product-service:
         path: /api/**
         serviceId: product-service
+      transaction-service:
+        path: /api/**
+        serviceId: transaction-service
 
 # logging
 logging:

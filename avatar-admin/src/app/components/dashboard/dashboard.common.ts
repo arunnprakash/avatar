@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { SellerComponent } from './seller/seller.component';
+import { SellProductComponent } from './seller/sell-product/sell-product.component';
 
 export const componentDeclarations: any[] = [
     DashboardComponent,
-    SellerComponent
+    SellerComponent,
+    SellProductComponent
 ];
 
 export const providerDeclarations: any[] = [

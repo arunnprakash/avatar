@@ -16,9 +16,9 @@ import { ServiceConfig } from './serviceconfig';
  * 
  */
 @Injectable()
-export class AssetService {
+export class SellerTransactionService {
     private get serviceBaseURL(): string {
-        return this.serviceConfig.context + '/api/asset';
+        return this.serviceConfig.context + '/api/seller-transaction';
     }
 
     constructor(private httpClient: HttpClient, private serviceConfig: ServiceConfig) { }

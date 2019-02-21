@@ -13,9 +13,9 @@ import com.kirana.avatar.common.resource.BaseResource;
  * @author __Telmila__
  *
  */
-@TypeScriptEndpoint("AssetService")
+@TypeScriptEndpoint("SellerTransactionService")
 @TypeScriptTemplatesConfiguration(useSuffixes = false)
-@RequestMapping(value= {"/api/asset"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+@RequestMapping(value= {"/api/seller-transaction"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 public interface SellerTransactionResource extends BaseResource<SellerTransactionDTO> {
 
 }

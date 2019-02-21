@@ -7,12 +7,16 @@ import { TranslateService } from "@ngx-translate/core";
 
 import { AuthService } from "../../../services/auth.service";
 import { UserDTO } from "../../../services/authorization/userdto.model";
+import { QualityDTO } from "../../../services/product/qualitydto.model";
+import { QualityService } from '../../../services/product/qualityservice.generated';
 import { PagingAndFilterRequest } from "../../../services/product/pagingandfilterrequest.model";
 import { FilterCriteria } from "../../../services/product/filtercriteria.model";
 import { PagingAndFilterResponse } from "../../../services/product/pagingandfilterresponse.model";
-import { ProductService } from '../../../services/product/productservice.generated';
+import { PriceHistoryService } from '../../../services/product/pricehistoryservice.generated';
 
+import { SellProductComponent } from "./sell-product/sell-product.component";
 import * as _ from "lodash";
+
 
 @Component({
   selector: 'seller',
@@ -22,24 +26,37 @@ import * as _ from "lodash";
 })
 export class SellerComponent implements OnInit {
     protected numberOfRowsPerPage = 8;
-    protected productList: any[];
+    protected priceList: any[];
     protected totalRecords: number;
     protected languageCode: string;
     protected displayAlertDialog: boolean;
     protected alertDialogTitle: string;
     protected alertDialogMessage: string;
     protected loading: boolean;
-    constructor(private authService: AuthService, private productService: ProductService,
+    protected userDTO: UserDTO;
+    protected qualities: QualityDTO[];
+    constructor(private authService: AuthService, private priceHistoryService: PriceHistoryService,
+            private qualityService: QualityService,
             private dialogService: DialogService, private translate: TranslateService, private domSanitizer: DomSanitizer,
             private router: Router, private activatedRoute: ActivatedRoute) { 
-        this.languageCode = authService.getUserInfo().preferredLanguage.languageCode;
+        this.userDTO = authService.getUserInfo();
+        this.languageCode = this.userDTO.preferredLanguage.languageCode;
     }
 
     ngOnInit() {
         console.info( "OnInit Seller Component tns" );
-        this.productList = [];
+        this.priceList = [];
         this.displayAlertDialog = false;
         this.loading = false;
+        this.initQualityList();
+    }
+    initQualityList() {
+        this.qualityService.getAllExceptDeleted().subscribe((qualities: QualityDTO[]) => {
+            this.qualities = qualities;
+        },
+        ( error ) => {
+            this.showAlertDialog('Error', 'Error while getting Quality List');
+        });
     }
     lazyLoadRecordList(event?: any) {
         // in a real application, make a remote request to load data using state metadata from event
@@ -97,11 +114,12 @@ export class SellerComponent implements OnInit {
     }
     loadRecordList(pagingAndFilterRequest: PagingAndFilterRequest) {
         this.showLoading(true);
-        this.productService.getResourceByFilterAndPaging(pagingAndFilterRequest)
+        this.priceHistoryService.getProductsForUser( this.userDTO['id'], 
+                this.userDTO.village.taluk['id'], this.userDTO.village.taluk.district['id'], this.userDTO.village.taluk.district.state['id'], pagingAndFilterRequest)
             .subscribe((pagingAndFilterResponse: PagingAndFilterResponse) => {
             this.totalRecords = pagingAndFilterResponse.totalRecords;
             if (pagingAndFilterResponse.results) {
-                this.productList = pagingAndFilterResponse.results;
+                this.priceList = pagingAndFilterResponse.results;
             }
             this.showLoading(false);
         },
@@ -113,32 +131,31 @@ export class SellerComponent implements OnInit {
     protected showLoading(value: boolean) {
         this.loading = value;
     }
-    protected showDetailDialog(value: boolean) {
-        /*var model = _.cloneDeep("");
-        let ref: DynamicDialogRef = this.dialogService.open("", {
+    protected showDetailDialog(price: any) {
+        let ref: DynamicDialogRef = this.dialogService.open(SellProductComponent, {
             data: {
-                
+                price: price, qualities: this.qualities
             },
-            header: 'Product Price Detail',
+            header: price.product[this.languageCode],
             width: '50%',
             height: '70%'
         });
         ref.onClose.subscribe((saved: boolean) => {
             if (saved) {
-                this.showAlertDialog('Success', 'Successfully Saved ');
+                this.showAlertDialog('Success', 'Successfully Saved');
                 this.lazyLoadRecordList();
             }
-        });*/
+        });
     }
     protected showAlertDialog(title: string, message: string) {
         this.displayAlertDialog = true;
         this.alertDialogTitle = title;
         this.alertDialogMessage = message;
     }
-    hasPhoto(assets: any[]){
+    hasPhoto(assets: any[]) {
         return assets && assets.length > 0;
     }
-    getPhoto(assets: any[]){
+    getPhoto(assets: any[]) {
         var assetValue = assets[0]['assetValue'];
         return this.domSanitizer.bypassSecurityTrustUrl(assetValue);
     }

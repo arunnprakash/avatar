@@ -15,7 +15,7 @@ import com.kirana.avatar.product.service.ProductService;
  *
  */
 @RestController
-public class ProductController extends BaseController<ProductService, ProductDTO> implements ProductResource{
+public class ProductController extends BaseController<ProductService, ProductDTO> implements ProductResource {
 
 		
 	private ProductService productService;

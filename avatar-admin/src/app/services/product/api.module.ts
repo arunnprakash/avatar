@@ -1,12 +1,12 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { AssetService } from './assetservice.generated';
-import { QualityService } from './qualityservice.generated';
-import { HolidayService } from './holidayservice.generated';
+import { ProductAssetService } from './productassetservice.generated';
+import { AssetTypeService } from './assettypeservice.generated';
 import { ProductService } from './productservice.generated';
 import { ProductRegionService } from './productregionservice.generated';
-import { AssetTypeService } from './assettypeservice.generated';
-import { ProductAssetService } from './productassetservice.generated';
+import { QualityService } from './qualityservice.generated';
+import { AssetService } from './assetservice.generated';
 import { PriceHistoryService } from './pricehistoryservice.generated';
+import { HolidayService } from './holidayservice.generated';
 import { ServiceConfig } from './serviceconfig';
 
 @NgModule({})
@@ -16,14 +16,14 @@ export class ProductAPIModule {
             ngModule: ProductAPIModule,
             providers: [
                 {provide: ServiceConfig, useValue: serviceConfig},
-                AssetService,
-                QualityService,
-                HolidayService,
+                ProductAssetService,
+                AssetTypeService,
                 ProductService,
                 ProductRegionService,
-                AssetTypeService,
-                ProductAssetService,
-                PriceHistoryService
+                QualityService,
+                AssetService,
+                PriceHistoryService,
+                HolidayService
             ]
         };
     }

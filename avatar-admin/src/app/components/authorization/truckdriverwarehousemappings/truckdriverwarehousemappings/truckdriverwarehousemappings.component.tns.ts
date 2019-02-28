@@ -13,6 +13,14 @@ import { TruckDriverWareHouseMappingService } from "../../../../services/authori
 import { AuthService } from "../../../../services/auth.service";
 import { TruckDriverWareHouseMappingDTO } from "../../../../services/authorization/truckdriverwarehousemappingdto.model";
 import { TruckDriverWareHouseMappingDetailComponent } from "../truckdriverwarehousemapping-detail/truckdriverwarehousemapping-detail.component";
+import { UserDTO } from "../../../../services/authorization/userdto.model";
+import { WareHouseDTO } from "../../../../services/authorization/warehousedto.model";
+import { UserService } from '../../../../services/authorization/userservice.generated';
+import { WareHouseService } from "../../../../services/authorization/warehouseservice.generated";
+
+import { ObservableArray } from "tns-core-modules/data/observable-array";
+import { TokenModel, RadAutoCompleteTextView } from "nativescript-ui-autocomplete";
+import { RadAutoCompleteTextViewComponent  } from "nativescript-ui-autocomplete/angular";
 
 import * as _ from "lodash";
 
@@ -25,10 +33,14 @@ import * as _ from "lodash";
 export class TruckDriverWareHouseMappingsComponent extends BaseComponent implements OnInit {
 
     protected title = 'TruckDriverWareHouseMapping';
-    protected localCols: any[] = [{ field: 'truckdriverwarehousemappingName', header: 'TruckDriverWareHouseMappingName', dataType: 'INPUT', autocapitalizationType:'allcharacters', keyboardType: 'email' }];
+    protected localCols: any[] = [
+           { field: 'truckDriver', header: 'TruckDriver', dataType: 'AUTOCOMPLETE', multiple: false, options: new ObservableArray<TokenModel>() , optionLabel:"firstName"},
+           { field: 'wareHouse', header: 'WareHouse', dataType: 'AUTOCOMPLETE', multiple: false, options: new ObservableArray<TokenModel>() , optionLabel:"name"}
+    ];
 
     constructor( truckdriverwarehousemappingService: TruckDriverWareHouseMappingService, authService: AuthService, translate: TranslateService, 
             modalDialogService: ModalDialogService, dialogService: ModalDialogService, 
+            private userService: UserService, private warehouseService: WareHouseService,
             router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef, private page: Page) {
         super( truckdriverwarehousemappingService, authService, translate, modalDialogService, dialogService, TruckDriverWareHouseMappingDetailComponent, router, activatedRoute, vcRef);
         this.languageCode = authService.getUserInfo().preferredLanguage.languageCode;
@@ -37,11 +49,32 @@ export class TruckDriverWareHouseMappingsComponent extends BaseComponent impleme
         super.ngOnInit();
         this.page.actionBarHidden = true;
         console.log("ngOnInit truckdriverwarehousemapping.component.tns");
-        this.initTruckDriverWareHouseMappingField();
+        this.initTruckDriverList();
+        this.initWareHouseList();
     }
-    initTruckDriverWareHouseMappingField() {
-        let menuItem: any = _.find(this.localCols, { 'field': 'truckdriverwarehousemappingName' });
-        menuItem.field = this.languageCode;
+    initWareHouseList() {
+        this.warehouseService.getAllExceptDeleted().subscribe((wareHouses: WareHouseDTO[]) => {
+            let menuItem: any = _.find(this.localCols, { 'field': 'wareHouse' });
+            menuItem.originalOptions = wareHouses;
+            wareHouses.forEach( (wareHouse: WareHouseDTO ) => {
+                menuItem.options.push(new TokenModel(wareHouse['name'], null));
+            });
+        },
+        ( error ) => {
+            this.showAlertDialog('Error', 'Error while getting WareHouse List');
+        });
+    }
+    initTruckDriverList() {
+        this.userService.getAllExceptDeleted().subscribe((users: UserDTO[]) => {
+            let menuItem: any = _.find(this.localCols, { 'field': 'truckDriver' });
+            menuItem.originalOptions = users;
+            users.forEach( (user: UserDTO ) => {
+                menuItem.options.push(new TokenModel(user['firstName'], null));
+            });
+        },
+        ( error ) => {
+            this.showAlertDialog('Error', 'Error while getting TruckDriver List');
+        });
     }
     protected initEmptyModel() {
         this.model = new TruckDriverWareHouseMappingDTO();

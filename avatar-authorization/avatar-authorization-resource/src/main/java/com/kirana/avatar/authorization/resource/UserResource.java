@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.kirana.avatar.authorization.dto.LoginRequest;
 import com.kirana.avatar.authorization.dto.LoginResponse;
 import com.kirana.avatar.authorization.dto.UserDTO;
+import com.kirana.avatar.authorization.dto.WareHouseDTO;
 import com.kirana.avatar.common.resource.BaseResource;
 
 /**
@@ -37,7 +38,7 @@ import com.kirana.avatar.common.resource.BaseResource;
  *
  */
 @TypeScriptEndpoint("UserService")
-@TypeScriptTemplatesConfiguration()
+@TypeScriptTemplatesConfiguration(useSuffixes=false)
 @RequestMapping(value= {"/api/user"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 public interface UserResource extends BaseResource<UserDTO> {
 
@@ -64,5 +65,16 @@ public interface UserResource extends BaseResource<UserDTO> {
 	
 	@GetMapping(value= {"/buyers/yearly/growth-rate/{depth}"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<Map<String, Long>> buyersYearlyGrowthRate(@PathVariable("depth") Integer depth);
+	
+	@GetMapping(value= {"/seller/{sellerId}"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+	public UserDTO getSellerAgentForSeller(@PathVariable("sellerId") Long sellerId);
+	
+	@GetMapping(value= {"/buyer/{buyerId}"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+	public UserDTO getBuyerAgentForBuyer(@PathVariable("buyerId") Long buyerId);
 
+	@GetMapping(value= {"/seller-agent/{sellerAgentId}/truck-driver"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+	public UserDTO getTruckDriverForSellerAgent(@PathVariable("sellerAgentId") Long sellerAgentId);
+	
+	@GetMapping(value= {"/truck-driver/{truckDriverId}/warehouse"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+	public WareHouseDTO getWareHouseForTruckDriver(@PathVariable("truckDriverId") Long truckDriverId);
 }

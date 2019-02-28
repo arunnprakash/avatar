@@ -15,6 +15,7 @@ import { FilterCriteria } from './filtercriteria.model';
 import { LoginRequest } from './loginrequest.model';
 import { VillageDTO } from './villagedto.model';
 import { DistrictDTO } from './districtdto.model';
+import { WareHouseDTO } from './warehousedto.model';
 import { AssetDTO } from './assetdto.model';
 import { LanguageDTO } from './languagedto.model';
 import { PagingAndFilterRequest } from './pagingandfilterrequest.model';
@@ -111,6 +112,38 @@ export class UserService {
         const params = this.createHttpParams({});
 
         return this.httpClient.get<{ [index: string]: number }>(url, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
+    public getSellerAgentForSeller(sellerId: number): Observable<UserDTO> {
+        const url = this.serviceBaseURL + '/seller/' + sellerId + '';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.get<UserDTO>(url, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
+    public getBuyerAgentForBuyer(buyerId: number): Observable<UserDTO> {
+        const url = this.serviceBaseURL + '/buyer/' + buyerId + '';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.get<UserDTO>(url, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
+    public getTruckDriverForSellerAgent(sellerAgentId: number): Observable<UserDTO> {
+        const url = this.serviceBaseURL + '/seller-agent/' + sellerAgentId + '/truck-driver';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.get<UserDTO>(url, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
+    public getWareHouseForTruckDriver(truckDriverId: number): Observable<WareHouseDTO> {
+        const url = this.serviceBaseURL + '/truck-driver/' + truckDriverId + '/warehouse';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.get<WareHouseDTO>(url, {params: params})
             .pipe(catchError(this.handleError));
     }
 

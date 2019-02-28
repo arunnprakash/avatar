@@ -16,6 +16,10 @@ import { DistrictsComponent } from "./components/authorization/districts/distric
 import { DistrictDetailComponent } from "./components/authorization/districts/district-detail/district-detail.component";
 import { StatesComponent } from "./components/authorization/states/states/states.component";
 import { StateDetailComponent } from "./components/authorization/states/state-detail/state-detail.component";
+import { WareHousesComponent } from './components/authorization/warehouses/warehouses/warehouses.component';
+import { WareHouseDetailComponent } from './components/authorization/warehouses/warehouse-detail/warehouse-detail.component';
+import { TruckDriverWareHouseMappingsComponent } from './components/authorization/truckdriverwarehousemappings/truckdriverwarehousemappings/truckdriverwarehousemappings.component';
+import { TruckDriverWareHouseMappingDetailComponent } from './components/authorization/truckdriverwarehousemappings/truckdriverwarehousemapping-detail/truckdriverwarehousemapping-detail.component';
 import { LanguagesComponent } from "./components/authorization/languages/languages/languages.component";
 import { LanguageDetailComponent } from "./components/authorization/languages/language-detail/language-detail.component";
 import { UsersAssetTypesComponent } from "./components/authorization/assetTypes/assetTypes/assetTypes.component";
@@ -104,6 +108,26 @@ export const routes: Routes = [
                    {
                        path: 'state',
                        component: StateDetailComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'warehouses',
+                       component: WareHousesComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'warehouse',
+                       component: WareHouseDetailComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'truckdriverwarehousemappings',
+                       component: TruckDriverWareHouseMappingsComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'truckdriverwarehousemapping',
+                       component: TruckDriverWareHouseMappingDetailComponent,
                        outlet: 'menuRouterOutlet'
                    },
                    {

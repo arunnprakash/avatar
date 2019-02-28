@@ -50,6 +50,7 @@ public class FeignRequestInterceptor implements RequestInterceptor {
 					userInfo.getUserToken());
 			template.header(jwtConfig.getHeaderName(), userInfo.getUserToken());
 		}
+		log.info("Authorization token interceptor completed");
 	}
 
 

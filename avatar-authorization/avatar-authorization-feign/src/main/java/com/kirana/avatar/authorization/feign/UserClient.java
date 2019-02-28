@@ -16,12 +16,13 @@ package com.kirana.avatar.authorization.feign;
 import org.springframework.cloud.openfeign.FeignClient;
 
 import com.kirana.avatar.authorization.resource.UserResource;
+import com.kirana.avatar.common.feign.config.FeignClientContract;
 
 /**
  * @author __ArunPrakash__
  *
  */
-@FeignClient(name="user-service")
+@FeignClient(name="authorization-service", configuration={FeignClientContract.class})
 public interface UserClient extends UserResource {
 
 }

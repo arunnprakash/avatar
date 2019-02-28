@@ -43,18 +43,28 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kirana.avatar.authorization.dto.AssetDTO;
 import com.kirana.avatar.authorization.dto.RoleDTO;
 import com.kirana.avatar.authorization.dto.UserDTO;
+import com.kirana.avatar.authorization.dto.WareHouseDTO;
 import com.kirana.avatar.authorization.mapper.AssetMapper;
 import com.kirana.avatar.authorization.mapper.UserMapper;
+import com.kirana.avatar.authorization.mapper.WareHouseMapper;
 import com.kirana.avatar.authorization.model.Asset;
 import com.kirana.avatar.authorization.model.AssetType;
+import com.kirana.avatar.authorization.model.BuyerAgentMapping;
 import com.kirana.avatar.authorization.model.Role;
+import com.kirana.avatar.authorization.model.SellerAgentMapping;
+import com.kirana.avatar.authorization.model.SellerAgentTruckDriverMapping;
+import com.kirana.avatar.authorization.model.TruckDriverWareHouseMapping;
 import com.kirana.avatar.authorization.model.User;
 import com.kirana.avatar.authorization.model.UserAsset;
 import com.kirana.avatar.authorization.model.UserRole;
 import com.kirana.avatar.authorization.repositories.AssetRepository;
 import com.kirana.avatar.authorization.repositories.AssetTypeRepository;
+import com.kirana.avatar.authorization.repositories.BuyerAgentMappingRepository;
 import com.kirana.avatar.authorization.repositories.GenderRepository;
 import com.kirana.avatar.authorization.repositories.LanguageRepository;
+import com.kirana.avatar.authorization.repositories.SellerAgentMappingRepository;
+import com.kirana.avatar.authorization.repositories.SellerAgentTruckDriverMappingRepository;
+import com.kirana.avatar.authorization.repositories.TruckDriverWareHouseMappingRepository;
 import com.kirana.avatar.authorization.repositories.RoleRepository;
 import com.kirana.avatar.authorization.repositories.UserAssetRepository;
 import com.kirana.avatar.authorization.repositories.UserRepository;
@@ -62,6 +72,10 @@ import com.kirana.avatar.authorization.repositories.UserRoleRepository;
 import com.kirana.avatar.authorization.repositories.VillageRepository;
 import com.kirana.avatar.authorization.service.UserService;
 import com.kirana.avatar.authorization.specifications.UserSpecification;
+import com.kirana.avatar.authorization.specifications.SellerAgentMappingSpecification;
+import com.kirana.avatar.authorization.specifications.BuyerAgentMappingSpecification;
+import com.kirana.avatar.authorization.specifications.SellerAgentTruckDriverMappingSpecification;
+import com.kirana.avatar.authorization.specifications.TruckDriverWareHouseMappingSpecification;
 import com.kirana.avatar.common.dto.FilterCriteria;
 import com.kirana.avatar.common.dto.UserInfo;
 import com.kirana.avatar.common.exception.ApiException;
@@ -88,8 +102,17 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 	private AssetRepository assetRepository;
 	private UserAssetRepository userAssetRepository;
 	private AssetTypeRepository assetTypeRepository;
+	private BuyerAgentMappingRepository buyerAgentMappingRepository;
+	private SellerAgentMappingRepository sellerAgentMappingRepository;
+	private SellerAgentMappingSpecification sellerAgentMappingSpecification;
+	private BuyerAgentMappingSpecification buyerAgentMappingSpecification;
+	private SellerAgentTruckDriverMappingRepository sellerAgentTruckDriverMappingRepository;
+	private SellerAgentTruckDriverMappingSpecification sellerAgentTruckDriverMappingSpecification;
+	private TruckDriverWareHouseMappingRepository truckDriverWareHouseMappingRepository;
+	private TruckDriverWareHouseMappingSpecification truckDriverWareHouseMappingSpecification;
 	private UserMapper userMapper;
 	private AssetMapper assetMapper;
+	private WareHouseMapper wareHouseMapper;
 	private UserSpecification userSpecification;
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	private JwtConfig jwtConfig;
@@ -98,7 +121,12 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 			LanguageRepository languageRepository, VillageRepository villageRepository, GenderRepository genderRepository,
 			RoleRepository roleRepository, UserRoleRepository userRoleRepository,
 			AssetRepository assetRepository, UserAssetRepository userAssetRepository, AssetMapper assetMapper,
-			AssetTypeRepository assetTypeRepository,
+			AssetTypeRepository assetTypeRepository, 
+			SellerAgentMappingRepository sellerAgentMappingRepository, SellerAgentMappingSpecification sellerAgentMappingSpecification,
+			SellerAgentTruckDriverMappingRepository sellerAgentTruckDriverMappingRepository, SellerAgentTruckDriverMappingSpecification sellerAgentTruckDriverMappingSpecification, 
+			BuyerAgentMappingRepository buyerAgentMappingRepository, BuyerAgentMappingSpecification buyerAgentMappingSpecification,
+			TruckDriverWareHouseMappingRepository truckDriverWareHouseMappingRepository, TruckDriverWareHouseMappingSpecification truckDriverWareHouseMappingSpecification,
+			WareHouseMapper wareHouseMapper,
 			BCryptPasswordEncoder bCryptPasswordEncoder, JwtConfig jwtConfig) {
 		super(userRepository, userMapper, userSpecification);
 		this.userRepository = userRepository;
@@ -113,6 +141,15 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 		this.userAssetRepository = userAssetRepository;
 		this.assetTypeRepository = assetTypeRepository;
 		this.assetMapper = assetMapper;
+		this.sellerAgentMappingRepository = sellerAgentMappingRepository;
+		this.buyerAgentMappingRepository = buyerAgentMappingRepository;
+		this.sellerAgentMappingSpecification = sellerAgentMappingSpecification;
+		this.buyerAgentMappingSpecification = buyerAgentMappingSpecification;
+		this.sellerAgentTruckDriverMappingRepository = sellerAgentTruckDriverMappingRepository;
+		this.sellerAgentTruckDriverMappingSpecification = sellerAgentTruckDriverMappingSpecification;
+		this.truckDriverWareHouseMappingRepository = truckDriverWareHouseMappingRepository;
+		this.truckDriverWareHouseMappingSpecification = truckDriverWareHouseMappingSpecification;
+		this.wareHouseMapper = wareHouseMapper;
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 		this.jwtConfig = jwtConfig;
 	}
@@ -177,7 +214,39 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 				userAssetRepository.save(userAsset);
 			}
 		}
+		if (userHasRole("SELLER_AGENT")) {
+			UserInfo currentUser = getCurrentlyLoggedInUser();
+			User sellerAgent = userRepository.findByUserNameOrMobileNumber(currentUser.getMobileNumber(), currentUser.getMobileNumber()).get();
+			if (hasRole(userDTO.getRoles(), "SELLER")) {
+				User seller = userRepository.findById(model.getId()).get();
+				SellerAgentMapping sellerAgentMapping = new SellerAgentMapping();
+				sellerAgentMapping.setSeller(seller);
+				sellerAgentMapping.setSellerAgent(sellerAgent);
+				sellerAgentMappingRepository.save(sellerAgentMapping);
+			} else if (hasRole(userDTO.getRoles(), "SELLER_TRUCK_DRIVER")) {
+				User truckDriver = userRepository.findById(model.getId()).get();
+				SellerAgentTruckDriverMapping sellerAgentTruckDriverMapping = new SellerAgentTruckDriverMapping();
+				sellerAgentTruckDriverMapping.setSellerAgent(sellerAgent);
+				sellerAgentTruckDriverMapping.setTruckDriver(truckDriver);
+				sellerAgentTruckDriverMappingRepository.save(sellerAgentTruckDriverMapping);
+			}
+		}
+		if (userHasRole("BUYER_AGENT")) {
+			UserInfo currentUser = getCurrentlyLoggedInUser();
+			User buyerAgent = userRepository.findByUserNameOrMobileNumber(currentUser.getMobileNumber(), currentUser.getMobileNumber()).get();
+			User buyer = userRepository.findById(model.getId()).get();
+			BuyerAgentMapping buyerAgentMapping = new BuyerAgentMapping();
+			buyerAgentMapping.setBuyer(buyer);
+			buyerAgentMapping.setBuyerAgent(buyerAgent);
+			buyerAgentMappingRepository.save(buyerAgentMapping);
+		}
 		return userRepository.findById(model.getId()).get();
+	}
+
+	private boolean hasRole(List<RoleDTO> roles, String roleName) {
+		return roles.stream().anyMatch((role) -> {
+			return role.getRoleName().equalsIgnoreCase(roleName);
+		});
 	}
 
 	@Override
@@ -409,5 +478,49 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 		date = date.minusSeconds(date.getSecond());
 		date = date.minusNanos(date.getNano());
 		return date;
+	}
+
+	@Override
+	public UserDTO getSellerAgentForSeller(Long sellerId) {
+		Specification<SellerAgentMapping> specification = Specification.where(sellerAgentMappingSpecification.hasDeleted(false));
+		specification = specification.and(sellerAgentMappingSpecification.hasSellerId(sellerId));
+		return sellerAgentMappingRepository
+			.findOne(specification)
+			.map(SellerAgentMapping::getSellerAgent)
+			.map(userMapper::toDTO)
+			.orElseThrow(ApiException::resourceNotFound);
+	}
+
+	@Override
+	public UserDTO getBuyerAgentForBuyer(Long buyerId) {
+		Specification<BuyerAgentMapping> specification = Specification.where(buyerAgentMappingSpecification.hasDeleted(false));
+		specification = specification.and(buyerAgentMappingSpecification.hasBuyerId(buyerId));
+		return buyerAgentMappingRepository
+			.findOne(specification)
+			.map(BuyerAgentMapping::getBuyerAgent)
+			.map(userMapper::toDTO)
+			.orElseThrow(ApiException::resourceNotFound);
+	}
+
+	@Override
+	public UserDTO getTruckDriverForSellerAgent(Long sellerAgentId) {
+		Specification<SellerAgentTruckDriverMapping> specification = Specification.where(sellerAgentTruckDriverMappingSpecification.hasDeleted(false));
+		specification = specification.and(sellerAgentTruckDriverMappingSpecification.hasSellerAgentId(sellerAgentId));
+		return sellerAgentTruckDriverMappingRepository
+			.findOne(specification)
+			.map(SellerAgentTruckDriverMapping::getTruckDriver)
+			.map(userMapper::toDTO)
+			.orElseThrow(ApiException::resourceNotFound);
+	}
+
+	@Override
+	public WareHouseDTO getWareHouseForTruckDriver(Long truckDriverId) {
+		Specification<TruckDriverWareHouseMapping> specification = Specification.where(truckDriverWareHouseMappingSpecification.hasDeleted(false));
+		specification = specification.and(truckDriverWareHouseMappingSpecification.hasTruckDriverId(truckDriverId));
+		return truckDriverWareHouseMappingRepository
+			.findOne(specification)
+			.map(TruckDriverWareHouseMapping::getWareHouse)
+			.map(wareHouseMapper::toDTO)
+			.orElseThrow(ApiException::resourceNotFound);
 	}
 }

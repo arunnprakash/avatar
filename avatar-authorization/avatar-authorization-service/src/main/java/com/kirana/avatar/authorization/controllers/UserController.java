@@ -14,6 +14,7 @@ package com.kirana.avatar.authorization.controllers;
 
 import java.util.Map;
 
+import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kirana.avatar.authorization.dto.LoginRequest;
 import com.kirana.avatar.authorization.dto.LoginResponse;
 import com.kirana.avatar.authorization.dto.UserDTO;
+import com.kirana.avatar.authorization.dto.WareHouseDTO;
 import com.kirana.avatar.authorization.resource.UserResource;
 import com.kirana.avatar.authorization.service.UserService;
 import com.kirana.avatar.common.controllers.BaseController;
@@ -111,6 +113,30 @@ public class UserController extends BaseController<UserService, UserDTO> impleme
 	@Override
 	public ResponseEntity<Map<String, Long>> buyersYearlyGrowthRate(Integer depth) {
 		return ResponseEntity.ok(userService.buyersYearlyGrowthRate(depth));
+	}
+
+
+	@Override
+	public UserDTO getSellerAgentForSeller(Long sellerId) {
+		return userService.getSellerAgentForSeller(sellerId);
+	}
+
+
+	@Override
+	public UserDTO getBuyerAgentForBuyer(Long buyerId) {
+		return userService.getBuyerAgentForBuyer(buyerId);
+	}
+
+
+	@Override
+	public UserDTO getTruckDriverForSellerAgent(Long sellerAgentId) {
+		return userService.getTruckDriverForSellerAgent(sellerAgentId);
+	}
+
+
+	@Override
+	public WareHouseDTO getWareHouseForTruckDriver(Long truckDriverId) {
+		return userService.getWareHouseForTruckDriver(truckDriverId);
 	}
 
 }

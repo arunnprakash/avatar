@@ -15,10 +15,11 @@
 
 	<modules>
 		<module>avatar-authorization-dto</module>
-		<module>avatar-authorization-feign</module>
 		<module>avatar-authorization-model</module>
 		<module>avatar-authorization-mapper</module>
 		<module>avatar-authorization-dao</module>
+		<module>avatar-authorization-resource</module>
+		<module>avatar-authorization-feign</module>
 		<module>avatar-authorization-service</module>
 	</modules>
 </project>

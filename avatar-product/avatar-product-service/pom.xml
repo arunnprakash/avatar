@@ -90,7 +90,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.kirana.avatar</groupId>
-			<artifactId>avatar-product-feign</artifactId>
+			<artifactId>avatar-product-resource</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

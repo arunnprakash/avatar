@@ -16,12 +16,13 @@ package com.kirana.avatar.authorization.feign;
 import org.springframework.cloud.openfeign.FeignClient;
 
 import com.kirana.avatar.authorization.resource.RolesResource;
+import com.kirana.avatar.common.feign.config.FeignClientContract;
 
 /**
  * @author __ArunPrakash__
  *
  */
-@FeignClient(name="role-service")
+@FeignClient(name="role-service", configuration={FeignClientContract.class})
 public interface RoleClient extends RolesResource {
 
 }

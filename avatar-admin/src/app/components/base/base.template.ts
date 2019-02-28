@@ -42,6 +42,7 @@ export const baseTemplate: string = `
             <tr class="hand-cursor tableRowHoverCss" >
                 <td *ngFor="let col of columns" [ngSwitch]="col.dataType" (click)="rowDataClicked(rowData)">
                     <span *ngSwitchCase="'INPUT'">{{rowData[col.field]}}</span>
+                    <span *ngSwitchCase="'TEXTAREA'">{{rowData[col.field]}}</span>
                     <span *ngSwitchCase="'DATE'">{{rowData[col.field] | date:'dd-MM-yyyy'}}</span>
                     <span *ngSwitchCase="'DATETIME'">{{rowData[col.field] | date:'dd-MM-yyyy HH:mm:ss'}}</span>
                     <span *ngSwitchCase="'MULTISELECT'">{{rowData[col.field]}}</span>

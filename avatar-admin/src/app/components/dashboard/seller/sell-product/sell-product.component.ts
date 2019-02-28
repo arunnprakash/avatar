@@ -68,7 +68,7 @@ export class SellProductComponent implements OnInit {
         let sellerTransaction: SellerTransactionDTO = new SellerTransactionDTO();
         sellerTransaction.product = this.price.product['id'];
         sellerTransaction.sellerProductQuality = this.quality['id'];
-        sellerTransaction.sellerAgentProductQuantity = this.quantity;
+        sellerTransaction.sellerProductQuantity = this.quantity;
         sellerTransaction.seller = this.userDTO['id'];
         this.showLoading(true);
         this.sellerTransactionService.save(sellerTransaction)

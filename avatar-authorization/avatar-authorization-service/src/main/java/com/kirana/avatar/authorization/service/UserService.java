@@ -18,6 +18,7 @@ import java.util.Map;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.kirana.avatar.authorization.dto.UserDTO;
+import com.kirana.avatar.authorization.dto.WareHouseDTO;
 import com.kirana.avatar.common.service.BaseService;
 
 /**
@@ -39,4 +40,12 @@ public interface UserService extends BaseService<UserDTO>{
 	public Map<String, Long> buyersMonthlyGrowthRate(@PathVariable("depth") Integer depth);
 	
 	public Map<String, Long> buyersYearlyGrowthRate(@PathVariable("depth") Integer depth);
+
+	public UserDTO getSellerAgentForSeller(Long sellerId);
+
+	public UserDTO getBuyerAgentForBuyer(Long buyerId);
+
+	public UserDTO getTruckDriverForSellerAgent(Long sellerAgentId);
+
+	public WareHouseDTO getWareHouseForTruckDriver(Long truckDriverId);
 }

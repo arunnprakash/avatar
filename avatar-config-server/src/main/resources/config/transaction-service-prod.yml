@@ -41,6 +41,9 @@ eureka:
     health-check-url-path: /actuator/health
       
   client:
+    healthcheck:
+      enabled: true
+    fetchRegistry: true
     registryFetchIntervalSeconds: 5
     serviceUrl:
       defaultZone: ${EUREKA_SERVICE_URL:http://avatar:eureka@localhost:1100}/eureka/
@@ -73,7 +76,7 @@ logging:
 feign:
   client:
     config:
-      feignName:
+      authorization-service:
         connectTimeout: 5000
         readTimeout: 5000
         loggerLevel: full

@@ -22,12 +22,16 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kirana.avatar.common.dto.BaseDTO;
 import com.kirana.avatar.common.dto.FilterCriteria;
 import com.kirana.avatar.common.dto.PagingAndFilterRequest;
 import com.kirana.avatar.common.dto.PagingAndFilterResponse;
+import com.kirana.avatar.common.dto.UserInfo;
 import com.kirana.avatar.common.exception.ApiException;
 import com.kirana.avatar.common.jpa.entity.BaseEntity;
 import static com.kirana.avatar.common.jpa.entity.BaseEntity_.ID;
@@ -290,6 +294,12 @@ public abstract class BaseServiceImpl<Model extends BaseEntity<Model>,
 		log.debug("getResourceByFilterAndPaging paging Parameter {}  includes deleted resource {} results {}", pageRequest, includesDeletedResources, response);
 		return response;
 	}
-
+	protected UserInfo getCurrentlyLoggedInUser() {
+		return (UserInfo)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	}
+	protected boolean userHasRole(String roleName) {
+		GrantedAuthority authority = new SimpleGrantedAuthority(roleName);
+		return getCurrentlyLoggedInUser().getAuthorities().contains(authority);
+	}
 	protected abstract Specification<Model> getSpecification(FilterCriteria filter, Specification<Model> specification);
 }

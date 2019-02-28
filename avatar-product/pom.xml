@@ -15,10 +15,11 @@
 
 	<modules>
 		<module>avatar-product-dto</module>
-		<module>avatar-product-feign</module>
 		<module>avatar-product-model</module>
 		<module>avatar-product-mapper</module>
 		<module>avatar-product-dao</module>
+		<module>avatar-product-resource</module>
+		<module>avatar-product-feign</module>
 		<module>avatar-product-service</module>
 	</modules>
 </project>

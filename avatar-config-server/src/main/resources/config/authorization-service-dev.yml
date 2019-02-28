@@ -41,6 +41,7 @@ eureka:
     health-check-url-path: /actuator/health
       
   client:
+    fetchRegistry: true
     registryFetchIntervalSeconds: 5
     serviceUrl:
       defaultZone: ${EUREKA_SERVICE_URL:http://avatar:eureka@localhost:1100}/eureka/

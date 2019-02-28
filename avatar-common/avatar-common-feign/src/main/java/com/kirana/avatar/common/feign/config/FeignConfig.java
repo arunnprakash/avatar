@@ -12,8 +12,13 @@
  *******************************************************************************/
 package com.kirana.avatar.common.feign.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.kirana.avatar.common.feign.interceptor.FeignRequestInterceptor;
+import com.kirana.avatar.common.jwt.config.JwtConfig;
 
 /**
  * @author __ArunPrakash__
@@ -22,5 +27,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableFeignClients
 public class FeignConfig {
-
+	@Autowired
+	private JwtConfig jwtConfig;
+	
+	@Bean
+	public FeignRequestInterceptor feignRequestInterceptor() {
+		return new FeignRequestInterceptor(jwtConfig);
+	}
 }

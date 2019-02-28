@@ -15,10 +15,11 @@
 
 	<modules>
 		<module>avatar-common-dto</module>
-		<module>avatar-common-feign</module>
 		<module>avatar-common-model</module>
 		<module>avatar-common-mapper</module>
 		<module>avatar-common-dao</module>
+		<module>avatar-common-resource</module>
+		<module>avatar-common-feign</module>
 		<module>avatar-common-service</module>
 	</modules>
 </project>

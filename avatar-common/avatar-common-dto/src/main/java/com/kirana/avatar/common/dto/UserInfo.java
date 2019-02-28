@@ -36,15 +36,16 @@ import lombok.ToString;
 @ToString
 public class UserInfo extends User {
 
-	public UserInfo(String username, String password, String mobileNumber, boolean enabled, boolean accountNonExpired,
+	public UserInfo(String username, String password, String userToken, String mobileNumber, boolean enabled, boolean accountNonExpired,
 			boolean credentialsNonExpired, boolean accountNonLocked,
 			Collection<? extends GrantedAuthority> authorities) {
 		super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
 		this.mobileNumber = mobileNumber;
+		this.userToken = userToken;
 	}
-	public UserInfo(String username, String password, String mobileNumber,
+	public UserInfo(String username, String password, String userToken, String mobileNumber,
 			Collection<? extends GrantedAuthority> authorities) {
-		this(username, password, mobileNumber, true, true, true, true, authorities);
+		this(username, password, userToken, mobileNumber, true, true, true, true, authorities);
 	}
 
 	private String userToken;
@@ -54,7 +55,9 @@ public class UserInfo extends User {
 	public String getMobileNumber() {
 		return mobileNumber;
 	}
-
+	public String getUserToken() {
+		return userToken;
+	}
 	/**
 	 * Creates a UserBuilder
 	 *
@@ -66,9 +69,6 @@ public class UserInfo extends User {
 	public static UserInfoBuilder create(UserInfo userInfo) {
 		return new UserInfoBuilder(userInfo);
 	}
-	public String getUserToken() {
-		return userToken;
-	}
 
 	/**
 	 * Builds the user to be added. At minimum the username, password, and authorities
@@ -78,6 +78,7 @@ public class UserInfo extends User {
 		private String username;
 		private String password;
 		private String mobileNumber;
+		private String userToken;
 		private List<GrantedAuthority> authorities;
 		private boolean accountExpired;
 		private boolean accountLocked;
@@ -150,6 +151,7 @@ public class UserInfo extends User {
 				this.userInfo.userToken = userToken;
 				return this;
 			}
+			this.userToken = userToken;
 			return this;
 		}
 		/**
@@ -295,7 +297,7 @@ public class UserInfo extends User {
 				return userInfo;
 			}
 			String encodedPassword = this.passwordEncoder.apply(password);
-			return new UserInfo(username, encodedPassword, mobileNumber, !disabled, !accountExpired,
+			return new UserInfo(username, encodedPassword, userToken, mobileNumber, !disabled, !accountExpired,
 					!credentialsExpired, !accountLocked, authorities);
 		}
 	}

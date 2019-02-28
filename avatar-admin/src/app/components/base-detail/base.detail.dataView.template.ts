@@ -10,6 +10,7 @@ export const baseDetailDataViewTemplate: string = `
             <div class="p-col-12 p-grid" *ngFor="let col of cols" [ngSwitch]="col.dataType">
                 <div class="p-col-4 text-bold">{{col.header}}</div>
                 <div class="p-col-8" *ngSwitchCase="'INPUT'">{{model[col.field]}}</div>
+                <div class="p-col-8" *ngSwitchCase="'TEXTAREA'">{{model[col.field]}}</div>
                 <div class="p-col-8" *ngSwitchCase="'DATE'">{{model[col.field] | date:'dd-MM-yyyy'}}</div>
                 <div class="p-col-8" *ngSwitchCase="'DATETIME'">{{model[col.field] | date:'dd-MM-yyyy HH:mm:ss'}}</div>
                 <div class="p-col-8" *ngSwitchCase="'MULTISELECT'">{{model[col.field]}}</div>
@@ -29,6 +30,7 @@ export const baseDetailDataViewTemplate: string = `
                 <div class="p-col-4 text-bold">{{col.header}}</div>
                 <div class="p-col-8">
                     <input *ngSwitchCase="'INPUT'" pInputText type="text" [(ngModel)]="model[col.field]" size="23" [placeholder]="col.header" appendTo="body" [style]="{'width':'50%'}">
+                    <textarea *ngSwitchCase="'TEXTAREA'" [(ngModel)]="model[col.field]" [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize"></textarea>
                     <p-calendar *ngSwitchCase="'DATE'" [ngModel]="model[col.field] | date:'yyyy-MM-dd'" (ngModelChange)="dateChanged($event, col.field)" [showIcon]="true" dateFormat="yy-mm-dd" appendTo="body" [inputStyle]="{'width':'65%'}"></p-calendar>
                     <p-calendar *ngSwitchCase="'DATETIME'" [ngModel]="model[col.field] | date:'yyyy-MM-dd'" (ngModelChange)="dateChanged($event, col.field)" [showIcon]="true" dateFormat="yy-mm-dd" appendTo="body" [inputStyle]="{'width':'65%'}"></p-calendar>
                     <p-multiSelect *ngSwitchCase="'MULTISELECT'" [options]="col.options" [(ngModel)]="model[col.field]" [optionLabel]="col.optionLabel" appendTo="body" [style]="{'width':'100%'}"></p-multiSelect>

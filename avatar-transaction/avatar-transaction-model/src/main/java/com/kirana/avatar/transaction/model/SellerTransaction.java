@@ -45,9 +45,6 @@ import lombok.ToString;
 @EntityListeners(AuditingEntityListener.class)
 public class SellerTransaction extends BaseEntity<SellerTransaction> {
 
-	@Column(nullable = false)
-	protected String transactionId;
-
 	@ManyToOne
 	protected SellerTransactionStatus transactionStatus;
 

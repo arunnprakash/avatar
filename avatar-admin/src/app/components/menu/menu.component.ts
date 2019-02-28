@@ -21,6 +21,8 @@ constructor(private authService: AuthService, private router: Router, private ac
       this.menuItems = [
           {label: 'Dashboard', visible: this.authService.hasRole(['ADMIN', 'SELLER_AGENT','BUYER_AGENT', 'SELLER','BUYER']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['dashboard'] } }] },
           {label: 'Users',     visible: this.authService.hasRole(['ADMIN', 'SELLER_AGENT','BUYER_AGENT']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['users']     } }] },
+          {label: 'WareHouses',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['warehouses']     } }] },
+          {label: 'TruckDriver-WareHouse-Mappings',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['truckdriverwarehousemappings']     } }] },
           {label: 'Roles',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['roles']     } }] },
           {label: 'Users AssetTypes',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['usersAssetTypes']     } }] },
           {label: 'Languages',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['languages']     } }] },

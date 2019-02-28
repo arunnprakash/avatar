@@ -47,6 +47,7 @@ export const baseDataViewTemplate: string = `
                      <div class="ui-g" *ngFor="let col of localCols" [ngSwitch]="col.dataType">
                         <div class="ui-g-4 ui-sm-6 text-bold text-align-left">{{col.header}}</div>
                         <div *ngSwitchCase="'INPUT'" class="ui-g-8 ui-sm-6 text-align-left">{{rowData[col.field]}}</div>
+                        <div *ngSwitchCase="'TEXTAREA'" class="ui-g-8 ui-sm-6 text-align-left">{{rowData[col.field]}}</div>
                         <div *ngSwitchCase="'DATE'" class="ui-g-8 ui-sm-6 text-align-left">{{rowData[col.field] | date:'dd-MM-yyyy'}}</div>
                         <div *ngSwitchCase="'DATETIME'" class="ui-g-8 ui-sm-6 text-align-left">{{rowData[col.field] | date:'dd-MM-yyyy HH:mm:ss'}}</div>
                         <div *ngSwitchCase="'MULTISELECT'" class="ui-g-8 ui-sm-6 text-align-left">{{rowData[col.field]}}</div>

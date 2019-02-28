@@ -23,8 +23,10 @@ import com.kirana.avatar.common.jwt.TokenProvider;
 import com.kirana.avatar.common.jwt.config.JwtConfig;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -59,40 +61,50 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
 		log.debug("JwtConfig {}", jwtConfig);
 		String token = request.getHeader(jwtConfig.getHeaderName());
 		SecretKey secretKey = Keys.hmacShaKeyFor(jwtConfig.getSecretKey().getBytes());
 		if (token != null) {
-			// parse the token.
-			Claims claims = Jwts.parser()
-					.setSigningKey(secretKey)
-					.parseClaimsJws(token.replace(jwtConfig.getTokenPrefix(), ""))
-					.getBody();
-			String userName = claims.getSubject();
-			if (userName != null) {
-				@SuppressWarnings("unchecked")
-				List<String> authorities = (List<String>) claims.get("authorities");
-				@SuppressWarnings("unchecked")
-				Map<String, Object> userInfoMap = (Map)claims.get("userInfo");
-				List<GrantedAuthority> grantedAuthorities = authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
-				UserInfo userInfo = UserInfo.create()
-						.password(userInfoMap.get("password").toString())
-						.mobileNumber(userInfoMap.get("mobileNumber").toString())
-						.username(userInfoMap.get("username").toString())
-						.userToken(token)
-						.authorities(grantedAuthorities)
-						.accountExpired(false)
-						.accountLocked(false)
-						.credentialsExpired(false)
-						.disabled(false)
-						.build();
-				log.debug("UserInfo {}", userInfo);
-				// Create auth object
-				// UsernamePasswordAuthenticationToken: A built-in object, used by spring to represent the current authenticated / being authenticated user.
-				// It needs a list of authorities, which has type of GrantedAuthority interface, where SimpleGrantedAuthority is an implementation of that interface
-				return new UsernamePasswordAuthenticationToken(userInfo, null, grantedAuthorities);
+			try {
+				// parse the token.
+				Claims claims = Jwts.parser()
+						.setSigningKey(secretKey)
+						.parseClaimsJws(token.replace(jwtConfig.getTokenPrefix(), ""))
+						.getBody();
+				String userName = claims.getSubject();
+				if (userName != null) {
+					@SuppressWarnings("unchecked")
+					List<String> authorities = (List<String>) claims.get("authorities");
+					@SuppressWarnings("unchecked")
+					Map<String, Object> userInfoMap = (Map)claims.get("userInfo");
+					List<GrantedAuthority> grantedAuthorities = authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+					UserInfo userInfo = UserInfo.create()
+							.password(userInfoMap.get("password").toString())
+							.mobileNumber(userInfoMap.get("mobileNumber").toString())
+							.username(userInfoMap.get("username").toString())
+							.userToken(token)
+							.authorities(grantedAuthorities)
+							.accountExpired(false)
+							.accountLocked(false)
+							.credentialsExpired(false)
+							.disabled(false)
+							.build();
+					log.debug("UserInfo {}", userInfo);
+					// Create auth object
+					// UsernamePasswordAuthenticationToken: A built-in object, used by spring to represent the current authenticated / being authenticated user.
+					// It needs a list of authorities, which has type of GrantedAuthority interface, where SimpleGrantedAuthority is an implementation of that interface
+					return new UsernamePasswordAuthenticationToken(userInfo, null, grantedAuthorities);
+				}
+			} catch (ExpiredJwtException e) {
+				log.info(" Token expired ");
+			} catch (SignatureException e) {
+				log.error(e.getMessage(), e);
+			} catch(Exception e){
+				log.error(e.getMessage(), e);
 			}
+
 			log.debug("UserName not found in token {}", token);
 			return null;
 		}

@@ -80,6 +80,11 @@
 		</dependency>
 		<dependency>
 			<groupId>com.kirana.avatar</groupId>
+			<artifactId>avatar-authorization-feign</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.kirana.avatar</groupId>
 			<artifactId>avatar-transaction-dto</artifactId>
 			<version>${project.version}</version>
 		</dependency>
@@ -90,7 +95,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.kirana.avatar</groupId>
-			<artifactId>avatar-transaction-feign</artifactId>
+			<artifactId>avatar-transaction-resource</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

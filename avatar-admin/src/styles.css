@@ -40,3 +40,19 @@
 .tableRowHoverCss:hover {
 	background-color: lime !important;
 }
+
+p-menu > div > ul > li > a {
+	text-align: left !important;
+	padding-left:  10px !important;
+	padding-right:  0px !important;
+}
+
+p-menu > div > ul > li {
+	border: 0px;
+	border-image: linear-gradient(to right, green, rgba(0, 0, 0, 0)) 1 100%;
+	border-bottom: 2px solid blue !important;
+}
+
+menu > p-menu > div {
+	width: 100% !important;
+}

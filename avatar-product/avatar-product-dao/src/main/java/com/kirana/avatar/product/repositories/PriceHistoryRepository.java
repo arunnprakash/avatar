@@ -3,6 +3,7 @@
  */
 package com.kirana.avatar.product.repositories;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -23,4 +24,12 @@ public interface PriceHistoryRepository extends BaseRepository<PriceHistory> {
 			+ "priceHistory.deleted = false "
 			+ "ORDER BY priceHistory.lastModifiedDate DESC")
 	public List<PriceHistory> getLatestPrice(Long productId);
+	
+	@Query("select priceHistory from PriceHistory priceHistory where "
+			+ "priceHistory.product.id =:productId AND "
+			+ "priceHistory.quality.id = :qualityId AND "
+			+ "priceHistory.createdDate <= :createdDate AND "
+			+ "priceHistory.deleted = false "
+			+ "ORDER BY priceHistory.lastModifiedDate DESC")
+	public List<PriceHistory> getLatestPrice(Long productId, Long qualityId, ZonedDateTime createdDate);
 }

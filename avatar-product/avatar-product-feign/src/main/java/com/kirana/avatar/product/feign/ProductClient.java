@@ -15,13 +15,14 @@ package com.kirana.avatar.product.feign;
 
 import org.springframework.cloud.openfeign.FeignClient;
 
+import com.kirana.avatar.common.feign.config.FeignClientContract;
 import com.kirana.avatar.product.resource.ProductResource;
 
 /**
  * @author __Telmila__
  *
  */
-@FeignClient(name="product-service")
+@FeignClient(name="product-service", configuration={FeignClientContract.class})
 public interface ProductClient extends ProductResource{
 
 }

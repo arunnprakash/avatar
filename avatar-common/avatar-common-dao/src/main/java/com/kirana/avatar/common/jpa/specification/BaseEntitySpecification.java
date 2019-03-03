@@ -64,6 +64,38 @@ public abstract class BaseEntitySpecification<Model extends BaseEntity<Model>> {
 		};
 	}
 
+	public Specification<Model> hasCreatedDateLessThan(final ZonedDateTime date) {
+		return new Specification<Model>() {
+			public Predicate toPredicate(Root<Model> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				return builder.lessThan(root.get(BaseEntity_.CREATED_DATE), date);
+			}
+		};
+	}
+
+	public Specification<Model> hasCreatedDateLessThanOrEqualTo(final ZonedDateTime date) {
+		return new Specification<Model>() {
+			public Predicate toPredicate(Root<Model> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				return builder.lessThanOrEqualTo(root.get(BaseEntity_.CREATED_DATE), date);
+			}
+		};
+	}
+
+	public Specification<Model> hasCreatedDateGreaterThan(final ZonedDateTime date) {
+		return new Specification<Model>() {
+			public Predicate toPredicate(Root<Model> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				return builder.greaterThan(root.get(BaseEntity_.CREATED_DATE), date);
+			}
+		};
+	}
+
+	public Specification<Model> hasCreatedDateGreaterThanOrEqualTo(final ZonedDateTime date) {
+		return new Specification<Model>() {
+			public Predicate toPredicate(Root<Model> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				return builder.greaterThanOrEqualTo(root.get(BaseEntity_.CREATED_DATE), date);
+			}
+		};
+	}
+
 	public Specification<Model> hasCreatedDateBetween(final ZonedDateTime date1, final ZonedDateTime date2) {
 		return new Specification<Model>() {
 			public Predicate toPredicate(Root<Model> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
@@ -76,6 +108,38 @@ public abstract class BaseEntitySpecification<Model extends BaseEntity<Model>> {
 		return new Specification<Model>() {
 			public Predicate toPredicate(Root<Model> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
 				return builder.equal(root.get(BaseEntity_.LAST_MODIFIED_DATE), date);
+			}
+		};
+	}
+
+	public Specification<Model> hasModifiedDateLessThan(final ZonedDateTime date) {
+		return new Specification<Model>() {
+			public Predicate toPredicate(Root<Model> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				return builder.lessThan(root.get(BaseEntity_.LAST_MODIFIED_DATE), date);
+			}
+		};
+	}
+
+	public Specification<Model> hasModifiedDateLessThanOrEqualTo(final ZonedDateTime date) {
+		return new Specification<Model>() {
+			public Predicate toPredicate(Root<Model> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				return builder.lessThanOrEqualTo(root.get(BaseEntity_.LAST_MODIFIED_DATE), date);
+			}
+		};
+	}
+
+	public Specification<Model> hasModifiedDateGreaterThan(final ZonedDateTime date) {
+		return new Specification<Model>() {
+			public Predicate toPredicate(Root<Model> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				return builder.greaterThan(root.get(BaseEntity_.LAST_MODIFIED_DATE), date);
+			}
+		};
+	}
+
+	public Specification<Model> hasModifiedDateGreaterThanOrEqualTo(final ZonedDateTime date) {
+		return new Specification<Model>() {
+			public Predicate toPredicate(Root<Model> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				return builder.greaterThanOrEqualTo(root.get(BaseEntity_.LAST_MODIFIED_DATE), date);
 			}
 		};
 	}
@@ -109,7 +173,6 @@ public abstract class BaseEntitySpecification<Model extends BaseEntity<Model>> {
 			public Predicate toPredicate(Root<Model> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
 				return builder.like(root.get(LocaleEntity_.EN), "%"+en+"%");
 			}
-
 		};
 	}
 	

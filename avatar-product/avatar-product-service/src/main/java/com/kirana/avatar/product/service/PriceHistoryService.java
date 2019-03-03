@@ -15,6 +15,8 @@ import com.kirana.avatar.product.dto.PriceHistoryDTO;
  */
 public interface PriceHistoryService extends BaseService<PriceHistoryDTO>{
 
-	PagingAndFilterResponse<BaseDTO> getProductsForUser(PagingAndFilterRequest pagingAndFilterRequest, Long userId, Long talukId, Long districtId, Long stateId);
+	public PagingAndFilterResponse<BaseDTO> getProductsForUser(PagingAndFilterRequest pagingAndFilterRequest, Long userId, Long talukId, Long districtId, Long stateId);
+
+	public PriceHistoryDTO getPriceForProduct(Long productId, Long qualityId, String pricePublishedDate);
 
 }

@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 
 import static com.kirana.avatar.product.model.PriceHistory_.PRICE;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -124,8 +128,7 @@ public class PriceHistoryServiceImpl extends BaseServiceImpl<PriceHistory, Price
 	private Optional<PriceHistory> getLatestPrice(Product product) {
 		List<PriceHistory> priceHistories = priceHistoryRepository.getLatestPrice(product.getId());
 		if (null != priceHistories && !priceHistories.isEmpty()) {
-			PriceHistory priceHistory = priceHistories.get(0);
-			return Optional.of(priceHistory);
+			return priceHistories.stream().findFirst();
 		} else {
 			return Optional.ofNullable(null);
 		}
@@ -170,5 +173,21 @@ public class PriceHistoryServiceImpl extends BaseServiceImpl<PriceHistory, Price
 				.collect(Collectors.toList());
 		return results;
 	}
-
+	@Override
+	public PriceHistoryDTO getPriceForProduct(Long productId, Long qualityId, String pricePublishedDate) {
+		//ZonedDateTime createdDate = ZonedDateTime.parse(pricePublishedDate, DateTimeFormatter.ISO_DATE.withZone(ZoneId.systemDefault()));
+		Instant instant = Instant.parse(pricePublishedDate);
+		ZonedDateTime createdDate = ZonedDateTime.ofInstant(instant, ZoneId.systemDefault());
+		return getLatestPrice(productId, qualityId, createdDate)
+				.map(priceHistoryMapper::toDTO)
+				.orElseThrow(ApiException::resourceNotFound);
+	}
+	private Optional<PriceHistory> getLatestPrice(Long productId, Long qualityId, ZonedDateTime createdDate) {
+		List<PriceHistory> priceHistories = priceHistoryRepository.getLatestPrice(productId, qualityId, createdDate);
+		if (null != priceHistories && !priceHistories.isEmpty()) {
+			return priceHistories.stream().findFirst();
+		} else {
+			return Optional.ofNullable(null);
+		}
+	}
 }

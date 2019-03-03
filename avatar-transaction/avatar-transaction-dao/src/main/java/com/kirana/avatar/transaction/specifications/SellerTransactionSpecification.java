@@ -21,4 +21,12 @@ import com.kirana.avatar.common.jpa.specification.BaseEntitySpecification;
 @Component
 public class SellerTransactionSpecification extends BaseEntitySpecification<SellerTransaction>{
 
+	public Specification<SellerTransaction> hasSellerAgent(Long sellerAgentId) {
+		return new Specification<SellerTransaction>() {
+			public Predicate toPredicate(Root<SellerTransaction> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				return builder.equal(root.get(SellerTransaction_.SELLER_AGENT), sellerAgentId);
+			}
+		};
+	}
+
 }

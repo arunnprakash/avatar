@@ -1,3 +1,4 @@
+export { SellerOrder } from './sellerorder.model';
 export { PagingAndFilterRequest } from './pagingandfilterrequest.model';
 export { SellerTransactionStatusDTO } from './sellertransactionstatusdto.model';
 export { SellerTransactionDTO } from './sellertransactiondto.model';

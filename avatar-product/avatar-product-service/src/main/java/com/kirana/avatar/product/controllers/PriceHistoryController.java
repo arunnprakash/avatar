@@ -3,7 +3,7 @@
  */
 package com.kirana.avatar.product.controllers;
 
-import java.util.List;
+import java.time.ZonedDateTime;
 
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,6 +34,11 @@ public class PriceHistoryController extends BaseController<PriceHistoryService, 
 	public PagingAndFilterResponse<BaseDTO> getProductsForUser(PagingAndFilterRequest pagingAndFilterRequest, Long userId, Long talukId, Long districtId, Long stateId) {
 		PagingAndFilterResponse<BaseDTO> prices = priceHistoryService.getProductsForUser(pagingAndFilterRequest, userId, talukId, districtId, stateId);
 		return prices;
+	}
+
+	@Override
+	public PriceHistoryDTO getPriceForProduct(Long productId, Long qualityId, String pricePublishedDate) {
+		return priceHistoryService.getPriceForProduct(productId, qualityId, pricePublishedDate);
 	}
 
 }

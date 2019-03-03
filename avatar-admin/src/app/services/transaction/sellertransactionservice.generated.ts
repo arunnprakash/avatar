@@ -5,6 +5,7 @@ import { map, catchError } from 'rxjs/operators';
 
 import { PagingAndFilterResponse } from './pagingandfilterresponse.model';
 import { PagingAndFilterRequest } from './pagingandfilterrequest.model';
+import { SellerOrder } from './sellerorder.model';
 import { SellerTransactionStatusDTO } from './sellertransactionstatusdto.model';
 import { SellerTransactionDTO } from './sellertransactiondto.model';
 import { FilterCriteria } from './filtercriteria.model';
@@ -44,6 +45,14 @@ export class SellerTransactionService {
         const params = this.createHttpParams({});
 
         return this.httpClient.get<SellerTransactionDTO>(url, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
+    public getOrdersForSellerAgent(sellerAgentId: number, orderCreatedDate: string): Observable<SellerOrder[]> {
+        const url = this.serviceBaseURL + '/orders-for-seller-agent/' + sellerAgentId + '/' + orderCreatedDate + '';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.get<SellerOrder[]>(url, {params: params})
             .pipe(catchError(this.handleError));
     }
 

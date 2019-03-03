@@ -22,7 +22,7 @@ import { ServiceConfig } from './serviceconfig';
 @Injectable()
 export class PriceHistoryService {
     private get serviceBaseURL(): string {
-        return this.serviceConfig.context + '/api/priceHistory';
+        return this.serviceConfig.context + '/api/price-history';
     }
 
     constructor(private httpClient: HttpClient, private serviceConfig: ServiceConfig) { }
@@ -45,6 +45,14 @@ export class PriceHistoryService {
 
     public get(id: number): Observable<PriceHistoryDTO> {
         const url = this.serviceBaseURL + '/' + id + '';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.get<PriceHistoryDTO>(url, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
+    public getPriceForProduct(productId: number, qualityId: number, pricePublishedDate: string): Observable<PriceHistoryDTO> {
+        const url = this.serviceBaseURL + '/price/' + productId + '/' + qualityId + '/' + pricePublishedDate + '';
         const params = this.createHttpParams({});
 
         return this.httpClient.get<PriceHistoryDTO>(url, {params: params})

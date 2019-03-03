@@ -23,7 +23,7 @@ import com.kirana.avatar.transaction.resource.SellerTransactionResource;
  * @author __Telmila__
  *
  */
-@FeignClient(name="seller-transaction-service", configuration={FeignClientContract.class})
+@FeignClient(name="transaction-service", configuration={FeignClientContract.class})
 public interface SellerTransactionClient extends SellerTransactionResource {
 
 }

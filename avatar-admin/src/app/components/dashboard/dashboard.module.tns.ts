@@ -7,6 +7,7 @@ import { NativeScriptUIChartModule } from "nativescript-ui-chart/angular";
 import { routes, componentDeclarations } from './dashboard.common';
 import { DashboardComponent } from './dashboard.component';
 import { SellProductComponent } from './seller/sell-product/sell-product.component';
+import { SellerOrderComponent } from './selleragent/seller-order/seller-order.component';
 
 @NgModule({
   declarations: componentDeclarations,
@@ -20,7 +21,8 @@ import { SellProductComponent } from './seller/sell-product/sell-product.compone
     DashboardComponent
   ],
   entryComponents: [
-    SellProductComponent
+    SellProductComponent,
+    SellerOrderComponent
   ],
   schemas: [NO_ERRORS_SCHEMA]
 })

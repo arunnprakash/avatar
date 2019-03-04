@@ -78,12 +78,12 @@ export class SellerAgentComponent implements OnInit {
     protected showLoading(value: boolean) {
         this.loading = value;
     }
-    protected showDetailDialog(price: any) {
+    protected showDetailDialog(sellerOrder: any) {
         let ref: DynamicDialogRef = this.dialogService.open(SellerOrderComponent, {
             data: {
-                price: price, qualities: this.qualities
+                sellerOrder: sellerOrder, qualities: this.qualities
             },
-            header: price.product[this.languageCode],
+            header: sellerOrder.priceTag.product[this.languageCode],
             width: '50%',
             height: '70%'
         });

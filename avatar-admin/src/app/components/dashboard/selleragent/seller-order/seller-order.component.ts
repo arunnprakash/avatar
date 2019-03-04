@@ -16,7 +16,7 @@ import * as _ from "lodash";
   styleUrls: ['./seller-order.component.css']
 })
 export class SellerOrderComponent implements OnInit {
-    protected price: any;
+    protected sellerOrder: any;
     protected quality: QualityDTO;
     protected quantity: number;
     protected qualities: QualityDTO[];
@@ -31,9 +31,8 @@ export class SellerOrderComponent implements OnInit {
     constructor(private userService: UserService, private authService: AuthService, 
             private sellerTransactionService: SellerTransactionService,
             private params: DynamicDialogConfig, private dialog: DynamicDialogRef ) {
-        this.price = params.data.price;
+        this.sellerOrder = params.data.sellerOrder;
         this.qualities = params.data.qualities;
-        this.quality = this.qualities[0];
         this.userDTO = authService.getUserInfo();
         this.languageCode = this.userDTO.preferredLanguage.languageCode;
     }
@@ -42,7 +41,8 @@ export class SellerOrderComponent implements OnInit {
         console.log("ngOnInit SellProductComponent.ts");
         this.loading = false;
         this.displayAlertDialog = false;
-        this.quantity = 1;
+        this.quantity = this.sellerOrder.sellerTransaction.sellerProductQuantity;
+        this.quality = _.find(this.qualities, { 'id': this.sellerOrder.sellerTransaction.sellerProductQuality });
         this.saved = false;
     }
 
@@ -65,18 +65,18 @@ export class SellerOrderComponent implements OnInit {
         this.qualities = temp;
     }
     protected createTransaction() {
-        let sellerTransaction: SellerTransactionDTO = new SellerTransactionDTO();
-        sellerTransaction.product = this.price.product['id'];
-        sellerTransaction.sellerProductQuality = this.quality['id'];
-        sellerTransaction.sellerProductQuantity = this.quantity;
-        sellerTransaction.seller = this.userDTO['id'];
+        let sellerTransaction: SellerTransactionDTO = this.sellerOrder.sellerTransaction;
+        sellerTransaction.product = this.sellerOrder.priceTag.product['id'];
+        sellerTransaction.sellerAgentProductQuality = this.quality['id'];
+        sellerTransaction.sellerAgentProductQuantity = this.quantity;
+        sellerTransaction.sellerAgent = this.userDTO['id'];
         this.showLoading(true);
-        this.sellerTransactionService.save(sellerTransaction)
+        this.sellerTransactionService.update(sellerTransaction)
         .subscribe((model: any) => {
             this.showLoading(false);
             this.saved = true;
             this.closeDetailDialog();
-            this.showAlertDialog('Success', 'Successfully Saved. Your Agent AgentName contact You.');
+            this.showAlertDialog('Success', 'Successfully Saved. Your Agent QC contact You.');
         },
         ( error ) => {
             this.showLoading(false);

@@ -1,0 +1,30 @@
+<p-dataView #dataView layout="grid" [value]="orders" [paginator]="true" [rows]="numberOfRowsPerPage" [totalRecords]="totalRecords" 
+    [lazy]="true" (onLazyLoad)="lazyLoadRecordList($event)" paginatorPosition="both" filterBy="id"
+    [sortField]="sortField" [sortOrder]="sortOrder">
+    <p-header>
+        <div class="ui-helper-clearfix">
+            <div class="ui-g">
+                <div class="ui-g-4 ui-md-4 text-align-left text-align-bottom">
+                     <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+                </div>
+                <div class="ui-g-4 ui-md-4 text-align-center text-align-bottom">
+                     <h3>Todays Order</h3>
+                </div>
+                <div class="ui-col-4 ui-md-4 ui-col-nogutter text-align-right text-align-bottom">
+                </div>
+            </div>
+        </div>
+    </p-header>
+    <ng-template let-sellerOrder let-rowIndex="rowIndex" let-columns="columns" pTemplate="gridItem">
+        <div style="padding:.5em" class="ui-g-12 ui-md-3 hand-cursor tableRowHoverCss" (click)="showDetailDialog(sellerOrder)">
+            <p-panel [header]="languageCode + ' ' +sellerOrder.priceTag.product[languageCode]" [style]="{'text-align':'center'}">
+                  <img *ngIf="hasPhoto(sellerOrder.priceTag.product.assets)" class="card-img-top" [src]="getPhoto(sellerOrder.priceTag.product.assets)" alt="image"
+                            style="width: 100%" width="60">
+                  <img *ngIf="!hasPhoto(sellerOrder.priceTag.product.assets)" class="card-img-top" src="/assets/images/avatar.png" alt="image"
+                            style="width: 100%" width="60">
+                  <div>{{sellerOrder.sellerTransaction.sellerProductQuantity}} kg</div>
+                  <hr class="ui-widget-content" style="border-top:0">
+            </p-panel>
+        </div>
+     </ng-template>
+</p-dataView>

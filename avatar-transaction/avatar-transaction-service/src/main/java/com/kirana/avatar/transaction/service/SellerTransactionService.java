@@ -12,7 +12,6 @@
  *******************************************************************************/
 package com.kirana.avatar.transaction.service;
 
-import java.time.ZonedDateTime;
 import java.util.List;
 
 import com.kirana.avatar.common.service.BaseService;
@@ -26,5 +25,5 @@ import com.kirana.avatar.transaction.dto.SellerTransactionDTO;
 public interface SellerTransactionService extends BaseService<SellerTransactionDTO>{
 
 	public List<SellerOrder> getOrdersForSellerAgent(Long sellerAgentId, String orderCreatedDate);
-
+	public List<SellerOrder> getOrdersForWareHouse(Long wareHouseId, String orderCreatedDate);
 }

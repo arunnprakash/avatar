@@ -45,6 +45,7 @@ import { TaluksModule } from './components/authorization/taluks/taluks.module';
 import { DistrictsModule } from './components/authorization/districts/districts.module';
 import { StatesModule } from './components/authorization/states/states.module';
 import { WareHousesModule } from './components/authorization/warehouses/warehouses.module';
+import { QcWareHouseMappingsModule } from './components/authorization/qc-warehouse-mappings/qc-warehouse-mappings.module';
 import { TruckDriverWareHouseMappingsModule } from './components/authorization/truckdriver-warehouse-mappings/truckdriver-warehouse-mappings.module';
 import { UsersAssetTypesModule } from './components/authorization/assetTypes/assetTypes.module';
 
@@ -103,6 +104,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DistrictsModule,
     StatesModule,
     WareHousesModule,
+    QcWareHouseMappingsModule,
     TruckDriverWareHouseMappingsModule,
     UsersAssetTypesModule,
     

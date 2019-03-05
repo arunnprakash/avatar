@@ -37,6 +37,14 @@
 				<seller></seller>
 				<StackLayout marginBottom="2px" class="hr-light"></StackLayout>
 			</StackLayout>
+			<StackLayout orientation="vertical" *ngIf="hasRole(['SELLER_AGENT'])">
+				<selleragent></selleragent>
+				<StackLayout marginBottom="2px" class="hr-light"></StackLayout>
+			</StackLayout>
+			<StackLayout orientation="vertical" *ngIf="hasRole(['WAREHOUSE_QC'])">
+				<qc></qc>
+				<StackLayout marginBottom="2px" class="hr-light"></StackLayout>
+			</StackLayout>
 		</ScrollView>
 	</FlexboxLayout>
 </Page>

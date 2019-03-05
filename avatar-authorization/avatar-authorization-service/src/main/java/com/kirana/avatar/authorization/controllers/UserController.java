@@ -14,7 +14,6 @@ package com.kirana.avatar.authorization.controllers;
 
 import java.util.Map;
 
-import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

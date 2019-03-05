@@ -18,6 +18,8 @@ import { StatesComponent } from "./components/authorization/states/states/states
 import { StateDetailComponent } from "./components/authorization/states/state-detail/state-detail.component";
 import { WareHousesComponent } from './components/authorization/warehouses/warehouses/warehouses.component';
 import { WareHouseDetailComponent } from './components/authorization/warehouses/warehouse-detail/warehouse-detail.component';
+import { QcWareHouseMappingsComponent } from './components/authorization/qc-warehouse-mappings/qc-warehouse-mappings/qc-warehouse-mappings.component';
+import { QcWareHouseMappingDetailComponent } from './components/authorization/qc-warehouse-mappings/qc-warehouse-mapping-detail/qc-warehouse-mapping-detail.component';
 import { TruckDriverWareHouseMappingsComponent } from './components/authorization/truckdriver-warehouse-mappings/truckdriver-warehouse-mappings/truckdriver-warehouse-mappings.component';
 import { TruckDriverWareHouseMappingDetailComponent } from './components/authorization/truckdriver-warehouse-mappings/truckdriver-warehouse-mapping-detail/truckdriver-warehouse-mapping-detail.component';
 import { LanguagesComponent } from "./components/authorization/languages/languages/languages.component";
@@ -118,6 +120,16 @@ export const routes: Routes = [
                    {
                        path: 'warehouse',
                        component: WareHouseDetailComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'qc-warehouse-mappings',
+                       component: QcWareHouseMappingsComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'qc-warehouse-mapping',
+                       component: QcWareHouseMappingDetailComponent,
                        outlet: 'menuRouterOutlet'
                    },
                    {

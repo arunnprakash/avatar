@@ -26,4 +26,6 @@ public interface SellerTransactionResource extends BaseResource<SellerTransactio
 	@GetMapping(value= {"/orders-for-seller-agent/{sellerAgentId}/{orderCreatedDate}"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 	public List<SellerOrder> getOrdersForSellerAgent(@PathVariable("sellerAgentId")Long sellerAgentId, @PathVariable("orderCreatedDate") String orderCreatedDate);
 
+	@GetMapping(value= {"/orders-for-warehouse/{wareHouseId}/{orderCreatedDate}"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+	public List<SellerOrder> getOrdersForWareHouse(@PathVariable("wareHouseId")Long wareHouseId, @PathVariable("orderCreatedDate") String orderCreatedDate);
 }

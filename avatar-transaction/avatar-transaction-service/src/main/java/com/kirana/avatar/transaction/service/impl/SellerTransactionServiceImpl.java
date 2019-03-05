@@ -105,6 +105,21 @@ public class SellerTransactionServiceImpl extends BaseServiceImpl<SellerTransact
 				.map(this::createSellerOrder)
 				.collect(Collectors.toList());
 	}
+
+	@Override
+	public List<SellerOrder> getOrdersForWareHouse(Long wareHouseId, String orderCreatedDate) {
+		ZonedDateTime createdDate = ZonedDateTime.parse(orderCreatedDate, DateTimeFormatter.ISO_DATE_TIME.withZone(ZoneId.systemDefault()));
+		log.debug("CreatedDate {}", createdDate);
+		Specification<SellerTransaction> specification = Specification.where(sellerTransactionSpecification.hasDeleted(false));
+		specification = specification.and(sellerTransactionSpecification.hasWareHouse(wareHouseId));
+		specification = specification.and(sellerTransactionSpecification.hasCreatedDateBetween(createdDate, createdDate.plusHours(23).plusMinutes(59).plusSeconds(59)));
+		return sellerTransactionRepository
+				.findAll(specification)
+				.stream()
+				.map(sellerTransactionMapper::toDTO)
+				.map(this::createSellerOrder)
+				.collect(Collectors.toList());
+	}
 	@SuppressWarnings("unchecked")
 	private SellerOrder createSellerOrder(SellerTransactionDTO sellerTransactionDTO) {
 		log.debug("Seller Transaction {}", sellerTransactionDTO);
@@ -115,4 +130,5 @@ public class SellerTransactionServiceImpl extends BaseServiceImpl<SellerTransact
 		sellerOrder.setPriceTag(priceTag);
 		return sellerOrder;
 	}
+
 }

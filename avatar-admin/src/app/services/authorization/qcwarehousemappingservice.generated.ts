@@ -4,11 +4,21 @@ import { Observable, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { PagingAndFilterResponse } from './pagingandfilterresponse.model';
-import { PagingAndFilterRequest } from './pagingandfilterrequest.model';
-import { SellerOrder } from './sellerorder.model';
-import { SellerTransactionStatusDTO } from './sellertransactionstatusdto.model';
-import { SellerTransactionDTO } from './sellertransactiondto.model';
+import { RoleDTO } from './roledto.model';
+import { StateDTO } from './statedto.model';
+import { CountryDTO } from './countrydto.model';
+import { TalukDTO } from './talukdto.model';
+import { UserDTO } from './userdto.model';
+import { AssetTypeDTO } from './assettypedto.model';
 import { FilterCriteria } from './filtercriteria.model';
+import { VillageDTO } from './villagedto.model';
+import { QcWareHouseMappingDTO } from './qcwarehousemappingdto.model';
+import { DistrictDTO } from './districtdto.model';
+import { WareHouseDTO } from './warehousedto.model';
+import { AssetDTO } from './assetdto.model';
+import { LanguageDTO } from './languagedto.model';
+import { PagingAndFilterRequest } from './pagingandfilterrequest.model';
+import { GenderDTO } from './genderdto.model';
 import { ServiceConfig } from './serviceconfig';
 
 /**
@@ -17,50 +27,42 @@ import { ServiceConfig } from './serviceconfig';
  * 
  */
 @Injectable()
-export class SellerTransactionService {
+export class QcWareHouseMappingService {
     private get serviceBaseURL(): string {
-        return this.serviceConfig.context + '/api/seller-transaction';
+        return this.serviceConfig.context + '/api/qc-warehouse-mapping';
     }
 
     constructor(private httpClient: HttpClient, private serviceConfig: ServiceConfig) { }
     /* GET */
-    public getAll(): Observable<SellerTransactionDTO[]> {
+    public getAll(): Observable<QcWareHouseMappingDTO[]> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.get<SellerTransactionDTO[]>(url, {params: params})
+        return this.httpClient.get<QcWareHouseMappingDTO[]>(url, {params: params})
             .pipe(catchError(this.handleError));
     }
 
-    public getAllExceptDeleted(): Observable<SellerTransactionDTO[]> {
+    public getAllExceptDeleted(): Observable<QcWareHouseMappingDTO[]> {
         const url = this.serviceBaseURL + '/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
-        return this.httpClient.get<SellerTransactionDTO[]>(url, {params: params})
+        return this.httpClient.get<QcWareHouseMappingDTO[]>(url, {params: params})
             .pipe(catchError(this.handleError));
     }
 
-    public get(id: number): Observable<SellerTransactionDTO> {
+    public get(id: number): Observable<QcWareHouseMappingDTO> {
         const url = this.serviceBaseURL + '/' + id + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.get<SellerTransactionDTO>(url, {params: params})
+        return this.httpClient.get<QcWareHouseMappingDTO>(url, {params: params})
             .pipe(catchError(this.handleError));
     }
 
-    public getOrdersForSellerAgent(sellerAgentId: number, orderCreatedDate: string): Observable<SellerOrder[]> {
-        const url = this.serviceBaseURL + '/orders-for-seller-agent/' + sellerAgentId + '/' + orderCreatedDate + '';
+    public findByQcId(qcId: number): Observable<QcWareHouseMappingDTO> {
+        const url = this.serviceBaseURL + '/find-by-qc/' + qcId + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.get<SellerOrder[]>(url, {params: params})
-            .pipe(catchError(this.handleError));
-    }
-
-    public getOrdersForWareHouse(wareHouseId: number, orderCreatedDate: string): Observable<SellerOrder[]> {
-        const url = this.serviceBaseURL + '/orders-for-warehouse/' + wareHouseId + '/' + orderCreatedDate + '';
-        const params = this.createHttpParams({});
-
-        return this.httpClient.get<SellerOrder[]>(url, {params: params})
+        return this.httpClient.get<QcWareHouseMappingDTO>(url, {params: params})
             .pipe(catchError(this.handleError));
     }
 
@@ -68,11 +70,11 @@ export class SellerTransactionService {
     /* HEAD */
 
     /* POST */
-    public save(arg0: SellerTransactionDTO): Observable<SellerTransactionDTO> {
+    public save(arg0: QcWareHouseMappingDTO): Observable<QcWareHouseMappingDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.post<SellerTransactionDTO>(url, arg0, {params: params})
+        return this.httpClient.post<QcWareHouseMappingDTO>(url, arg0, {params: params})
             .pipe(catchError(this.handleError));
     }
 
@@ -94,11 +96,11 @@ export class SellerTransactionService {
 
 
     /* PUT */
-    public update(arg0: SellerTransactionDTO): Observable<SellerTransactionDTO> {
+    public update(arg0: QcWareHouseMappingDTO): Observable<QcWareHouseMappingDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.put<SellerTransactionDTO>(url, arg0, {params: params})
+        return this.httpClient.put<QcWareHouseMappingDTO>(url, arg0, {params: params})
             .pipe(catchError(this.handleError));
     }
 

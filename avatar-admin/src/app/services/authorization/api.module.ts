@@ -1,18 +1,19 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { VillageService } from './villageservice.generated';
 import { RoleService } from './roleservice.generated';
-import { LanguageService } from './languageservice.generated';
+import { CountryService } from './countryservice.generated';
 import { GenderService } from './genderservice.generated';
 import { WareHouseService } from './warehouseservice.generated';
-import { AssetTypeService } from './assettypeservice.generated';
-import { DistrictService } from './districtservice.generated';
-import { CountryService } from './countryservice.generated';
-import { UserDeviceService } from './userdeviceservice.generated';
-import { TalukService } from './talukservice.generated';
-import { TruckDriverWareHouseMappingService } from './truckdriverwarehousemappingservice.generated';
+import { LanguageService } from './languageservice.generated';
 import { AssetService } from './assetservice.generated';
-import { StateService } from './stateservice.generated';
+import { UserDeviceService } from './userdeviceservice.generated';
 import { UserService } from './userservice.generated';
+import { TalukService } from './talukservice.generated';
+import { QcWareHouseMappingService } from './qcwarehousemappingservice.generated';
+import { StateService } from './stateservice.generated';
+import { VillageService } from './villageservice.generated';
+import { DistrictService } from './districtservice.generated';
+import { TruckDriverWareHouseMappingService } from './truckdriverwarehousemappingservice.generated';
+import { AssetTypeService } from './assettypeservice.generated';
 import { ServiceConfig } from './serviceconfig';
 
 @NgModule({})
@@ -22,20 +23,21 @@ export class AuthorizationAPIModule {
             ngModule: AuthorizationAPIModule,
             providers: [
                 {provide: ServiceConfig, useValue: serviceConfig},
-                VillageService,
                 RoleService,
-                LanguageService,
+                CountryService,
                 GenderService,
                 WareHouseService,
-                AssetTypeService,
-                DistrictService,
-                CountryService,
-                UserDeviceService,
-                TalukService,
-                TruckDriverWareHouseMappingService,
+                LanguageService,
                 AssetService,
+                UserDeviceService,
+                UserService,
+                TalukService,
+                QcWareHouseMappingService,
                 StateService,
-                UserService
+                VillageService,
+                DistrictService,
+                TruckDriverWareHouseMappingService,
+                AssetTypeService
             ]
         };
     }

@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { DatePipe, SlicePipe } from '@angular/common';
 
-import { TruckDriverWareHouseMappingsComponent } from './truckdriverwarehousemappings/truckdriverwarehousemappings.component';
-import { TruckDriverWareHouseMappingDetailComponent } from './truckdriverwarehousemapping-detail/truckdriverwarehousemapping-detail.component';
+import { TruckDriverWareHouseMappingsComponent } from './truckdriver-warehouse-mappings/truckdriver-warehouse-mappings.component';
+import { TruckDriverWareHouseMappingDetailComponent } from './truckdriver-warehouse-mapping-detail/truckdriver-warehouse-mapping-detail.component';
 
 export const componentDeclarations: any[] = [TruckDriverWareHouseMappingsComponent, TruckDriverWareHouseMappingDetailComponent];
 
@@ -12,12 +12,12 @@ export const providerDeclarations: any[] = [
 
 export const routes: Routes = [
                                {
-                                   path: 'truckdriverwarehousemappings',
+                                   path: 'truckdriver-warehouse-mappings',
                                    component: TruckDriverWareHouseMappingsComponent,
                                    outlet: 'menuRouterOutlet'
                                },
                                {
-                                   path: 'truckdriverwarehousemapping',
+                                   path: 'truckdriver-warehouse-mapping',
                                    component: TruckDriverWareHouseMappingDetailComponent,
                                    outlet: 'menuRouterOutlet'
                                }

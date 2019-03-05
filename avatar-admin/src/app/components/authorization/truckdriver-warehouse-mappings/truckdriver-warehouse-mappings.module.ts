@@ -20,7 +20,7 @@ import { MessageModule } from 'primeng/message';
 import { ChipsModule } from 'primeng/chips';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 
-import { routes, componentDeclarations, providerDeclarations } from './truckdriverwarehousemappings.common';
+import { routes, componentDeclarations, providerDeclarations } from './truckdriver-warehouse-mappings.common';
 
 @NgModule({
   declarations: componentDeclarations,

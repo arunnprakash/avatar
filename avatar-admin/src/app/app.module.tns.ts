@@ -36,7 +36,7 @@ import { TaluksModule } from './components/authorization/taluks/taluks.module';
 import { DistrictsModule } from './components/authorization/districts/districts.module';
 import { StatesModule } from './components/authorization/states/states.module';
 import { WareHousesModule } from './components/authorization/warehouses/warehouses.module';
-import { TruckDriverWareHouseMappingsModule } from './components/authorization/truckdriverwarehousemappings/truckdriverwarehousemappings.module';
+import { TruckDriverWareHouseMappingsModule } from './components/authorization/truckdriver-warehouse-mappings/truckdriver-warehouse-mappings.module';
 import { LanguagesModule } from './components/authorization/languages/languages.module';
 import { UsersAssetTypesModule } from './components/authorization/assetTypes/assetTypes.module';
 

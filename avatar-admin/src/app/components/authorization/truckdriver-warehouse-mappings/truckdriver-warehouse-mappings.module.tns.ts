@@ -4,7 +4,7 @@ import { NativeScriptCommonModule } from 'nativescript-angular/common';
 import { NativeScriptFormsModule } from 'nativescript-angular/forms';
 import { NativeScriptUIAutoCompleteTextViewModule } from "nativescript-ui-autocomplete/angular";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
-import { routes, componentDeclarations, providerDeclarations } from './truckdriverwarehousemappings.common';
+import { routes, componentDeclarations, providerDeclarations } from './truckdriver-warehouse-mappings.common';
 
 @NgModule({
     declarations: [componentDeclarations],

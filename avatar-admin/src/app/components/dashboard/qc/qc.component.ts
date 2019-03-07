@@ -88,7 +88,13 @@ export class QcComponent implements OnInit {
         var date = new Date();
         date.setHours(0, 0, 0, 0);
         this.sellerTransactionService.getOrdersForWareHouse(this.wareHouseDTO['id'], date.toISOString())
-            .subscribe((sellerOrders: SellerOrder[]) => {
+            .subscribe((results: SellerOrder[]) => {
+                let sellerOrders: SellerOrder[] = [];
+                results.forEach( (sellerOrder: any ) => {
+                    if (!sellerOrder.sellerTransaction.wareHouseProductQuality) {
+                        sellerOrders.push(sellerOrder);
+                    }
+                });
             this.orders = sellerOrders;
             this.showLoading(false);
         },

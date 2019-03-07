@@ -65,7 +65,13 @@ export class SellerAgentComponent implements OnInit {
         var date = new Date();
         date.setHours(0, 0, 0, 0);
         this.sellerTransactionService.getOrdersForSellerAgent(this.userDTO['id'], date.toISOString())
-            .subscribe((sellerOrders: SellerOrder[]) => {
+            .subscribe((results: SellerOrder[]) => {
+                let sellerOrders: SellerOrder[] = [];
+                results.forEach( (sellerOrder: any ) => {
+                    if (!sellerOrder.sellerTransaction.sellerAgentProductQuality) {
+                        sellerOrders.push(sellerOrder);
+                    }
+                });
             this.orders = sellerOrders;
             this.showLoading(false);
         },

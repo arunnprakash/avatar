@@ -142,7 +142,7 @@ export class SellerComponent implements OnInit {
         });
         ref.onClose.subscribe((saved: boolean) => {
             if (saved) {
-                this.showAlertDialog('Success', 'Successfully Saved');
+                this.showAlertDialog('Success', 'Successfully Saved. Your Agent AgentName contact You.');
                 this.lazyLoadRecordList();
             }
         });

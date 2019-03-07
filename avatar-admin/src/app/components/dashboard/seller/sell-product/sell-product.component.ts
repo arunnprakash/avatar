@@ -76,7 +76,6 @@ export class SellProductComponent implements OnInit {
             this.showLoading(false);
             this.saved = true;
             this.closeDetailDialog();
-            this.showAlertDialog('Success', 'Successfully Saved. Your Agent AgentName contact You.');
         },
         ( error ) => {
             this.showLoading(false);

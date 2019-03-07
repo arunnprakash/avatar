@@ -170,6 +170,7 @@ public abstract class BaseServiceImpl<Model extends BaseEntity<Model>,
 				|| pagingAndFilterRequest.getFilters().isEmpty()) {
 			if (includesDeletedResources) {
 				Specification<Model> specification = Specification.where(entitySpecification.hasDeletedNotNull());
+				specification = beforeExecutePagingAndFilteringCriteria(specification);
 				totalRecords = repository.count(specification);
 				results = repository
 						.findAll(specification, pageRequest)
@@ -278,6 +279,7 @@ public abstract class BaseServiceImpl<Model extends BaseEntity<Model>,
 					specification = getSpecification(filter, specification);
 				}
 			}
+			specification = beforeExecutePagingAndFilteringCriteria(specification);
 			log.debug("specification paging Parameter {}", specification);
 			totalRecords = repository.count(specification);
 			results = repository
@@ -293,6 +295,13 @@ public abstract class BaseServiceImpl<Model extends BaseEntity<Model>,
 				.build();
 		log.debug("getResourceByFilterAndPaging paging Parameter {}  includes deleted resource {} results {}", pageRequest, includesDeletedResources, response);
 		return response;
+	}
+
+	protected Specification<Model> beforeExecutePagingAndFilteringCriteria(Specification<Model> specification) {
+		if (!userHasRole("ADMIN")) {
+			specification = specification.and(entitySpecification.hasCreatedBy(getCurrentlyLoggedInUser().getUsername()));
+		}
+		return specification;
 	}
 	protected UserInfo getCurrentlyLoggedInUser() {
 		return (UserInfo)SecurityContextHolder.getContext().getAuthentication().getPrincipal();

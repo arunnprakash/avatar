@@ -16,34 +16,34 @@ import { SellerTransactionService } from "../../../../services/transaction/selle
 import * as _ from "lodash";
 
 @Component({
-  selector: 'sell-product',
-  templateUrl: './sell-product.component.html',
-  styleUrls: ['./sell-product.component.css']
+  selector: 'seller-order',
+  templateUrl: './seller-order.component.html',
+  styleUrls: ['./seller-order.component.css']
 })
-export class SellProductComponent implements OnInit {
-    protected price: any;
+export class SellerOrderComponent implements OnInit {
+    protected sellerOrder: any;
     protected quality: QualityDTO;
     protected quantity: number;
     protected qualities: QualityDTO[];
     
     protected languageCode: string;
-    protected loading: boolean;
+    protected userDTO: UserDTO;
+
     private loadingIndicator: LoadingIndicator;
     private loadingIndicatorOptions: any;
     protected saved: boolean;
-    protected userDTO: UserDTO;
+
     constructor(private userService: UserService, private authService: AuthService, 
             private sellerTransactionService: SellerTransactionService,
             private params: ModalDialogParams ) {
-        this.price = params.context.price;
+        this.sellerOrder = params.context.sellerOrder;
         this.qualities = params.context.qualities;
-        this.quality = this.qualities[0];
         this.userDTO = authService.getUserInfo();
         this.languageCode = this.userDTO.preferredLanguage.languageCode;
     }
 
     ngOnInit() {
-        console.log("ngOnInit SellProductComponent.tns.ts");
+        console.log("ngOnInit SellProductComponent.ts");
         this.loadingIndicator = new LoadingIndicator();
         this.loadingIndicatorOptions = {
                 message: 'Loading...',
@@ -59,8 +59,9 @@ export class SellProductComponent implements OnInit {
                   secondaryProgress: 1
                 }
               };
-        this.quantity = 1;
         this.saved = false;
+        this.quantity = this.sellerOrder.sellerTransaction.sellerProductQuantity;
+        this.quality = _.find(this.qualities, { 'id': this.sellerOrder.sellerTransaction.sellerProductQuality });
     }
     onLoaded(event) {
         if (isAndroid && event.object._dialogFragment) {
@@ -93,18 +94,18 @@ export class SellProductComponent implements OnInit {
         });
     }
     protected createTransaction() {
-        let sellerTransaction: SellerTransactionDTO = new SellerTransactionDTO();
-        sellerTransaction.product = this.price.product['id'];
-        sellerTransaction.sellerProductQuality = this.quality['id'];
-        sellerTransaction.sellerProductQuantity = this.quantity;
-        sellerTransaction.seller = this.userDTO['id'];
+        let sellerTransaction: SellerTransactionDTO = this.sellerOrder.sellerTransaction;
+        sellerTransaction.product = this.sellerOrder.priceTag.product['id'];
+        sellerTransaction.sellerAgentProductQuality = this.quality['id'];
+        sellerTransaction.sellerAgentProductQuantity = this.quantity;
+        sellerTransaction.sellerAgent = this.userDTO['id'];
         this.showLoading(true);
-        this.sellerTransactionService.save(sellerTransaction)
+        this.sellerTransactionService.update(sellerTransaction)
         .subscribe((model: any) => {
             this.showLoading(false);
             this.saved = true;
             this.closeDetailDialog();
-            this.showAlertDialog('Success', 'Intent Saved Successfully. Your Agent will Contact You Soon.');
+            this.showAlertDialog('Success', 'Successfully Saved. Your Agent QC contact You.');
         },
         ( error ) => {
             this.showLoading(false);

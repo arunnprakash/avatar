@@ -1,1 +1,32 @@
-<Button text="sell-product works!" class="btn btn-primary"></Button>
+<FlexboxLayout flexDirection="column" alignItems="stretch">
+    <GridLayout height="12%" rows="auto, auto, *" columns="auto, auto, *" class="bg-green">
+      <Label [text]="sellerOrder.priceTag.product[this.languageCode]" col="0" width="95%" horizontalAlignment="center" verticalAlignment="center" class="text-bold text-align-center vertical-align-center"></Label>
+      <Label text="&#xf410;" (tap)="closeDetailDialog();" col="1" width="5%" verticalAlignment="top" horizontalAlignment="right" class="fa"></Label>
+    </GridLayout>
+     <GridLayout height="76%" class="all-sides-margin all-sides-padding record-content rounded-corner-border">
+         <ScrollView>
+            <StackLayout class="form">
+                <StackLayout>
+                    <GridLayout rows="auto, auto, *" columns="auto, auto, *" width="100%" class="input-field">
+                        <Label row="0" col="0" width="120" text="Quality" class="text-bold text-align-left vertical-align-center"></Label>
+                        <Label row="0" col="1" width="24px" height="24px" (tap)="selectQuality(1);" text="{{quality['id']==1?'&#xf14a;':'&#xf0c8;'}}" class="fa bg-green rounded-corner-border-12 top-padding-4 left-padding-6 bottom-margin-5 right-margin-5"></Label>
+                        <Label row="0" col="2" text="FirstQuality" (tap)="selectQuality(1);"></Label>
+                        <Label row="1" col="1" width="24px" height="24px" (tap)="selectQuality(2);" text="{{quality['id']==2?'&#xf14a;':'&#xf0c8;'}}" class="fa bg-green rounded-corner-border-12 top-padding-4 left-padding-6 bottom-margin-5 right-margin-5"></Label>
+                        <Label row="1" col="2" text="SecondQuality" (tap)="selectQuality(2);"></Label>
+                        <Label row="2" col="1" width="24px" height="24px" (tap)="selectQuality(3);" text="{{quality['id']==3?'&#xf14a;':'&#xf0c8;'}}" class="fa bg-green rounded-corner-border-12 top-padding-4 left-padding-6 bottom-margin-5 right-margin-5"></Label>
+                        <Label row="2" col="2" text="ThirdQuality" (tap)="selectQuality(3);"></Label>
+                    </GridLayout>
+                    <GridLayout rows="auto, auto, *" columns="auto, auto, *" width="100%" class="input-field">
+                        <Label row="0" col="0" width="120" text="Quantity" class="text-bold text-align-left vertical-align-center"></Label>
+                        <TextField row="0" col="1" class="input" hint="Quantity" [(ngModel)]="quantity" autocapitalizationType="none" keyboardType="number" returnKeyType="next"></TextField>
+                        <StackLayout row="1" col="1" class="hr-light"></StackLayout>
+                    </GridLayout>
+                </StackLayout>
+            </StackLayout>
+         </ScrollView>
+     </GridLayout>
+    <FlexboxLayout height="12%" horizontalAlignment="center" verticalAlignment="bottom" flexDirection="row" alignItems="stretch" justifyContent="center">
+        <Button text="Cancel" (tap)="closeDetailDialog();" class="btn btn-primary btn-rounded-sm all-sides-margin button"></Button>
+        <Button text="Save" (tap)="createTransaction();" class="btn btn-primary btn-rounded-sm all-sides-margin button"></Button>
+    </FlexboxLayout>
+</FlexboxLayout>

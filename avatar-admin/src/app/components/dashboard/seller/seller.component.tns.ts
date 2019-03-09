@@ -24,8 +24,6 @@ import { PriceHistoryService } from '../../../services/product/pricehistoryservi
 
 import { SellProductComponent } from "./sell-product/sell-product.component";
 import { ObservableArray } from "tns-core-modules/data/observable-array";
-import { TokenModel, RadAutoCompleteTextView } from "nativescript-ui-autocomplete";
-import { RadAutoCompleteTextViewComponent  } from "nativescript-ui-autocomplete/angular";
 import * as _ from "lodash";
 
 @Component( {
@@ -48,7 +46,8 @@ export class SellerComponent implements OnInit {
     constructor(private authService: AuthService, private priceHistoryService: PriceHistoryService,
             private qualityService: QualityService,
             private translate: TranslateService, 
-            private router: Router, private activatedRoute: ActivatedRoute, private vcRef: ViewContainerRef, private dialogService: ModalDialogService) { 
+            private router: Router, private activatedRoute: ActivatedRoute, 
+            private vcRef: ViewContainerRef, private dialogService: ModalDialogService) { 
         this.userDTO = authService.getUserInfo();
         this.languageCode = this.userDTO.preferredLanguage.languageCode;
     }

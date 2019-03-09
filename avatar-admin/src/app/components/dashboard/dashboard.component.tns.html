@@ -3,7 +3,7 @@
 	<FlexboxLayout horizontalAlignment="center" verticalAlignment="top" flexDirection="column" alignItems="stretch" justifyContent="center">
 		<ScrollView>
 			<!-- Sellers and Buyers growth rate -->
-			<StackLayout orientation="vertical" *ngIf="hasRole(['ADMIN', 'SELLER_AGENT','BUYER_AGENT'])">
+			<StackLayout height="96%" orientation="vertical" *ngIf="hasRole(['ADMIN', 'SELLER_AGENT','BUYER_AGENT'])">
 				<Label [text]="userTitle" class="text-bold" horizontalAlignment="center"></Label>
 				<GridLayout rows="*" height="300px">
 					<RadCartesianChart col="0" row="0" tkExampleTitle tkToggleNavButton>
@@ -37,11 +37,11 @@
 				<seller></seller>
 				<StackLayout marginBottom="2px" class="hr-light"></StackLayout>
 			</StackLayout>
-			<StackLayout orientation="vertical" *ngIf="hasRole(['SELLER_AGENT'])">
+			<StackLayout height="96%" orientation="vertical" *ngIf="hasRole(['SELLER_AGENT'])">
 				<selleragent></selleragent>
 				<StackLayout marginBottom="2px" class="hr-light"></StackLayout>
 			</StackLayout>
-			<StackLayout orientation="vertical" *ngIf="hasRole(['WAREHOUSE_QC'])">
+			<StackLayout height="96%" orientation="vertical" *ngIf="hasRole(['WAREHOUSE_QC'])">
 				<qc></qc>
 				<StackLayout marginBottom="2px" class="hr-light"></StackLayout>
 			</StackLayout>

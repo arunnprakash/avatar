@@ -1,24 +1,24 @@
 <Page hasActionBar="true" actionBarHidden="true">
 <ActionBar title="" isCollapsed="true"></ActionBar>
-	<FlexboxLayout horizontalAlignment="center" verticalAlignment="bottom" flexDirection="column" alignItems="stretch" justifyContent="center">
+	<FlexboxLayout horizontalAlignment="center" verticalAlignment="top" flexDirection="column" alignItems="stretch" justifyContent="center">
 		<ScrollView>
 			<!-- Sellers and Buyers growth rate -->
 			<StackLayout orientation="vertical" *ngIf="hasRole(['ADMIN', 'SELLER_AGENT','BUYER_AGENT'])">
 				<Label [text]="userTitle" class="text-bold" horizontalAlignment="center"></Label>
 				<GridLayout rows="*" height="300px">
-				<RadCartesianChart col="0" row="0" tkExampleTitle tkToggleNavButton>
-					<CategoricalAxis tkCartesianHorizontalAxis labelRotationAngle="45" labelFitMode="Rotate"></CategoricalAxis>
-					<LinearAxis tkCartesianVerticalAxis></LinearAxis>
-					<BarSeries *ngIf="hasRole(['ADMIN', 'SELLER_AGENT'])" tkCartesianSeries seriesName="sellers" [items]="sellersChartData" categoryProperty="label" valueProperty="labelValue" showLabels="true"></BarSeries>
-					<BarSeries *ngIf="hasRole(['ADMIN', 'BUYER_AGENT'])" tkCartesianSeries seriesName="buyers" [items]="buyersChartData" categoryProperty="label" valueProperty="labelValue" showLabels="true"></BarSeries>
-				
-					<Palette *ngIf="hasRole(['ADMIN', 'SELLER_AGENT'])" tkCartesianPalette seriesName="sellers">
-						<PaletteEntry tkCartesianPaletteEntry fillColor="#33cc33" strokeColor="#33cc33" strokeWidth="1"></PaletteEntry>
-					</Palette>
-					<Palette *ngIf="hasRole(['ADMIN', 'BUYER_AGENT'])" tkCartesianPalette seriesName="buyers">
-						<PaletteEntry tkCartesianPaletteEntry fillColor="#ffff00" strokeColor="#ffff00" strokeWidth="1"></PaletteEntry>
-					</Palette>
-				</RadCartesianChart>
+					<RadCartesianChart col="0" row="0" tkExampleTitle tkToggleNavButton>
+						<CategoricalAxis tkCartesianHorizontalAxis labelRotationAngle="45" labelFitMode="Rotate"></CategoricalAxis>
+						<LinearAxis tkCartesianVerticalAxis></LinearAxis>
+						<BarSeries *ngIf="hasRole(['ADMIN', 'SELLER_AGENT'])" tkCartesianSeries seriesName="sellers" [items]="sellersChartData" categoryProperty="label" valueProperty="labelValue" showLabels="true"></BarSeries>
+						<BarSeries *ngIf="hasRole(['ADMIN', 'BUYER_AGENT'])" tkCartesianSeries seriesName="buyers" [items]="buyersChartData" categoryProperty="label" valueProperty="labelValue" showLabels="true"></BarSeries>
+					
+						<Palette *ngIf="hasRole(['ADMIN', 'SELLER_AGENT'])" tkCartesianPalette seriesName="sellers">
+							<PaletteEntry tkCartesianPaletteEntry fillColor="#33cc33" strokeColor="#33cc33" strokeWidth="1"></PaletteEntry>
+						</Palette>
+						<Palette *ngIf="hasRole(['ADMIN', 'BUYER_AGENT'])" tkCartesianPalette seriesName="buyers">
+							<PaletteEntry tkCartesianPaletteEntry fillColor="#ffff00" strokeColor="#ffff00" strokeWidth="1"></PaletteEntry>
+						</Palette>
+					</RadCartesianChart>
 				</GridLayout>
 				<FlexboxLayout marginBottom="2px" horizontalAlignment="center" verticalAlignment="bottom" flexDirection="row" alignItems="stretch" justifyContent="center">
 					<Label *ngIf="hasRole(['ADMIN', 'SELLER_AGENT'])" text="      " backgroundColor="#33cc33"></Label>
@@ -33,7 +33,7 @@
 				</FlexboxLayout>
 				<StackLayout marginBottom="2px" class="hr-light"></StackLayout>
 			</StackLayout>
-			<StackLayout orientation="vertical" *ngIf="hasRole(['SELLER'])">
+			<StackLayout height="96%" orientation="vertical" *ngIf="hasRole(['SELLER'])">
 				<seller></seller>
 				<StackLayout marginBottom="2px" class="hr-light"></StackLayout>
 			</StackLayout>

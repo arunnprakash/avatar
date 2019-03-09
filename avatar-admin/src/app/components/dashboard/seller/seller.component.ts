@@ -15,6 +15,7 @@ import { PagingAndFilterResponse } from "../../../services/product/pagingandfilt
 import { PriceHistoryService } from '../../../services/product/pricehistoryservice.generated';
 
 import { SellProductComponent } from "./sell-product/sell-product.component";
+
 import * as _ from "lodash";
 
 

@@ -1,3 +1,14 @@
-<Button text="Seller" class="btn btn-primary btn-rounded-sm all-sides-margin button"></Button>
-<Button text="Seller" class="btn btn-primary btn-rounded-sm all-sides-margin button"></Button>
-<Button text="Seller" class="btn btn-primary btn-rounded-sm all-sides-margin button"></Button>
+<ListView verticalAlignment="stretch" id="product-list" [items]="priceList">
+    <ng-template let-price="item" let-rowIndex="index"> 
+        <StackLayout class="all-sides-margin all-sides-padding record-content rounded-corner-border" (tap)="showDetailDialog(price)">
+            <FlexboxLayout verticalAlignment="bottom" flexDirection="row" alignItems="flex-end" justifyContent="space-around">
+                <Image *ngIf="hasPhoto(price.product.assets)" class="thumbnail" [src]="getPhoto(price.product.assets)" loadMode="async" stretch="fill"></Image>
+                <Image *ngIf="!hasPhoto(price.product.assets)" class="thumbnail" src="~/assets/images/avatar.png" loadMode="async"></Image>
+            </FlexboxLayout>
+            <GridLayout rows="auto, auto" columns="auto, auto" horizontalAlignment="center">
+            	<Label row="0" [text]="price.product[languageCode]" class="text-bold text-align-left vertical-align-center"></Label>
+                <Label row="1" text="&#x20b9; {{price.price}} / kg" class="text-bold text-align-left vertical-align-center"></Label>
+            </GridLayout>
+        </StackLayout>
+    </ng-template>
+</ListView>

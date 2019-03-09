@@ -1,8 +1,8 @@
 <ListView id="root-drawer-list" [items]="menuItems"
 	 class="root-drawer-content">
 	<ng-template let-menuItem="item"> 
-		<StackLayout class="sidedrawer-content" (tap)="naviagateByMenuIem(menuItem)">
-			<GridLayout columns="auto, *" class="sidedrawer-list-item">
+		<StackLayout visibility="{{menuItem.visible?'visible':'collapsed'}}" class="sidedrawer-content" (tap)="naviagateByMenuIem(menuItem)">
+			<GridLayout  columns="auto, *" class="sidedrawer-list-item">
 				<Label col="0" width="100%" textAlignment="left" [text]="menuItem.label" class="p-l-30 text-align-left vertical-align-center" [class.selected]="isMenuSelected(menuItem)"></Label>
 				<StackLayout class="hr-light" verticalAlignment="bottom"></StackLayout>
 			</GridLayout>

@@ -96,6 +96,8 @@ public class SellerTransactionServiceImpl extends BaseServiceImpl<SellerTransact
 		ZonedDateTime createdDate = ZonedDateTime.parse(orderCreatedDate, DateTimeFormatter.ISO_DATE_TIME.withZone(ZoneId.systemDefault()));
 		log.debug("CreatedDate {}", createdDate);
 		Specification<SellerTransaction> specification = Specification.where(sellerTransactionSpecification.hasDeleted(false));
+		specification = specification.and(sellerTransactionSpecification.hasSellerAgentProductQualityIsNull());
+		specification = specification.and(sellerTransactionSpecification.hasSellerAgentProductQuantityIsNull());
 		specification = specification.and(sellerTransactionSpecification.hasSellerAgent(sellerAgentId));
 		specification = specification.and(sellerTransactionSpecification.hasCreatedDateBetween(createdDate, createdDate.plusHours(23).plusMinutes(59).plusSeconds(59)));
 		return sellerTransactionRepository
@@ -111,6 +113,10 @@ public class SellerTransactionServiceImpl extends BaseServiceImpl<SellerTransact
 		ZonedDateTime createdDate = ZonedDateTime.parse(orderCreatedDate, DateTimeFormatter.ISO_DATE_TIME.withZone(ZoneId.systemDefault()));
 		log.debug("CreatedDate {}", createdDate);
 		Specification<SellerTransaction> specification = Specification.where(sellerTransactionSpecification.hasDeleted(false));
+		specification = specification.and(sellerTransactionSpecification.hasSellerAgentProductQualityIsNotNull());
+		specification = specification.and(sellerTransactionSpecification.hasSellerAgentProductQuantityIsNotNull());
+		specification = specification.and(sellerTransactionSpecification.hasWareHouseQualityIsNull());
+		specification = specification.and(sellerTransactionSpecification.hasWareHouseQuantityIsNull());
 		specification = specification.and(sellerTransactionSpecification.hasWareHouse(wareHouseId));
 		specification = specification.and(sellerTransactionSpecification.hasCreatedDateBetween(createdDate, createdDate.plusHours(23).plusMinutes(59).plusSeconds(59)));
 		return sellerTransactionRepository
@@ -128,6 +134,12 @@ public class SellerTransactionServiceImpl extends BaseServiceImpl<SellerTransact
 		sellerOrder.setSellerTransaction(sellerTransactionDTO);
 		Map<String, Object> priceTag = objectMapper.convertValue(priceHistoryDTO, Map.class);
 		sellerOrder.setPriceTag(priceTag);
+		UserDTO sellerUserDTO = userClient.get(sellerTransactionDTO.getSeller());
+		Map<String, Object> seller = objectMapper.convertValue(sellerUserDTO, Map.class);
+		UserDTO sellerAgentUserDTO = userClient.get(sellerTransactionDTO.getSellerAgent());
+		Map<String, Object> sellerAgent = objectMapper.convertValue(sellerAgentUserDTO, Map.class);
+		sellerOrder.setSeller(seller);
+		sellerOrder.setSellerAgent(sellerAgent);
 		return sellerOrder;
 	}
 

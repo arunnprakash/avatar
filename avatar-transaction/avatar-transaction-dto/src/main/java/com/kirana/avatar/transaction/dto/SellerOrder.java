@@ -20,6 +20,8 @@ import java.util.Map;
  */
 public class SellerOrder {
 	private SellerTransactionDTO sellerTransaction;
+	private Map<String, Object> seller;
+	private Map<String, Object> sellerAgent;
 	private Map<String, Object> priceTag;
 	public SellerTransactionDTO getSellerTransaction() {
 		return sellerTransaction;
@@ -32,5 +34,17 @@ public class SellerOrder {
 	}
 	public void setPriceTag(Map<String, Object> priceTag) {
 		this.priceTag = priceTag;
+	}
+	public Map<String, Object> getSeller() {
+		return seller;
+	}
+	public void setSeller(Map<String, Object> seller) {
+		this.seller = seller;
+	}
+	public Map<String, Object> getSellerAgent() {
+		return sellerAgent;
+	}
+	public void setSellerAgent(Map<String, Object> sellerAgent) {
+		this.sellerAgent = sellerAgent;
 	}
 }

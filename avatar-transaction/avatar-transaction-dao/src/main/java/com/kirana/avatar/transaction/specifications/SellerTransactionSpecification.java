@@ -1,5 +1,7 @@
 package com.kirana.avatar.transaction.specifications;
 
+import java.math.BigDecimal;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -22,6 +24,53 @@ import com.kirana.avatar.transaction.model.SellerTransaction_;
 @SuppressWarnings("serial")
 @Component
 public class SellerTransactionSpecification extends BaseEntitySpecification<SellerTransaction>{
+
+	public Specification<SellerTransaction> hasWareHouseQuantityIsNull() {
+		return new Specification<SellerTransaction>() {
+			public Predicate toPredicate(Root<SellerTransaction> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				return builder.isNull(root.get(SellerTransaction_.WARE_HOUSE_PRODUCT_QUANTITY));
+			}
+		};
+	}
+
+	public Specification<SellerTransaction> hasWareHouseQualityIsNull() {
+		return new Specification<SellerTransaction>() {
+			public Predicate toPredicate(Root<SellerTransaction> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				return builder.isNull(root.get(SellerTransaction_.WARE_HOUSE_PRODUCT_QUALITY));
+			}
+		};
+	}
+	public Specification<SellerTransaction> hasSellerAgentProductQuantityIsNotNull() {
+		return new Specification<SellerTransaction>() {
+			public Predicate toPredicate(Root<SellerTransaction> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				return builder.isNotNull(root.get(SellerTransaction_.SELLER_AGENT_PRODUCT_QUANTITY));
+			}
+		};
+	}
+
+	public Specification<SellerTransaction> hasSellerAgentProductQualityIsNotNull() {
+		return new Specification<SellerTransaction>() {
+			public Predicate toPredicate(Root<SellerTransaction> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				return builder.isNotNull(root.get(SellerTransaction_.SELLER_AGENT_PRODUCT_QUALITY));
+			}
+		};
+	}
+	
+	public Specification<SellerTransaction> hasSellerAgentProductQuantityIsNull() {
+		return new Specification<SellerTransaction>() {
+			public Predicate toPredicate(Root<SellerTransaction> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				return builder.isNull(root.get(SellerTransaction_.SELLER_AGENT_PRODUCT_QUANTITY));
+			}
+		};
+	}
+
+	public Specification<SellerTransaction> hasSellerAgentProductQualityIsNull() {
+		return new Specification<SellerTransaction>() {
+			public Predicate toPredicate(Root<SellerTransaction> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				return builder.isNull(root.get(SellerTransaction_.SELLER_AGENT_PRODUCT_QUALITY));
+			}
+		};
+	}
 
 	public Specification<SellerTransaction> hasSellerAgent(Long sellerAgentId) {
 		return new Specification<SellerTransaction>() {

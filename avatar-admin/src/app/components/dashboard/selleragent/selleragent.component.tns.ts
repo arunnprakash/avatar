@@ -83,7 +83,7 @@ export class SellerAgentComponent implements OnInit {
     lazyLoadRecordList(event?: any) {
         this.showLoading(true);
         var date = new Date();
-        date.setHours(0, 0, 0, 0);
+        date.setHours(24, 0, 0, 0);
         this.sellerTransactionService.getOrdersForSellerAgent(this.userDTO['id'], date.toISOString())
             .subscribe((results: SellerOrder[]) => {
                 let sellerOrders: SellerOrder[] = [];
@@ -101,7 +101,6 @@ export class SellerAgentComponent implements OnInit {
         });
     }
     protected showDetailDialog(sellerOrder: any) {
-        console.log("showDetailDialog");
         const options: any = {
                 viewContainerRef: this.vcRef,
                 context: { sellerOrder: sellerOrder, qualities: this.qualities },

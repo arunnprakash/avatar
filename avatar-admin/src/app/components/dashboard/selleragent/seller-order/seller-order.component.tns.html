@@ -1,6 +1,6 @@
 <FlexboxLayout flexDirection="column" alignItems="stretch">
     <GridLayout height="12%" rows="auto, auto, *" columns="auto, auto, *" class="bg-green">
-      <Label [text]="sellerOrder.priceTag.product[this.languageCode]" col="0" width="95%" horizontalAlignment="center" verticalAlignment="center" class="text-bold text-align-center vertical-align-center"></Label>
+      <Label text="{{sellerOrder.seller.firstName + ' ' + sellerOrder.priceTag.product[this.languageCode]}}" col="0" width="95%" horizontalAlignment="center" verticalAlignment="center" class="text-bold text-align-center vertical-align-center"></Label>
       <Label text="&#xf410;" (tap)="closeDetailDialog();" col="1" width="5%" verticalAlignment="top" horizontalAlignment="right" class="fa"></Label>
     </GridLayout>
      <GridLayout height="76%" class="all-sides-margin all-sides-padding record-content rounded-corner-border">

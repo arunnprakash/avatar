@@ -17,7 +17,7 @@
     </p-header>
     <ng-template let-sellerOrder let-rowIndex="rowIndex" let-columns="columns" pTemplate="gridItem">
         <div style="padding:.5em" class="ui-g-12 ui-md-3 hand-cursor tableRowHoverCss" (click)="showDetailDialog(sellerOrder)">
-            <p-panel [header]="languageCode + ' ' +sellerOrder.priceTag.product[languageCode]" [style]="{'text-align':'center'}">
+            <p-panel [header]="sellerOrder.sellerTransaction['id'] + ' ' +sellerOrder.priceTag.product[languageCode]" [style]="{'text-align':'center'}">
                   <img *ngIf="hasPhoto(sellerOrder.priceTag.product.assets)" class="card-img-top" [src]="getPhoto(sellerOrder.priceTag.product.assets)" alt="image"
                             style="width: 100%" width="60">
                   <img *ngIf="!hasPhoto(sellerOrder.priceTag.product.assets)" class="card-img-top" src="/assets/images/avatar.png" alt="image"

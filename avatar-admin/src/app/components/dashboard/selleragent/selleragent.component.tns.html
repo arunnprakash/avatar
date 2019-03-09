@@ -6,7 +6,7 @@
                 <Image *ngIf="!hasPhoto(sellerOrder.priceTag.product.assets)" class="thumbnail" src="~/assets/images/avatar.png" loadMode="async"></Image>
             </FlexboxLayout>
             <GridLayout rows="auto, auto" columns="auto, auto" horizontalAlignment="center">
-            	<Label row="0" [text]="sellerOrder.priceTag.product[languageCode]" class="text-bold text-align-left vertical-align-center"></Label>
+            	<Label row="0" text="{{sellerOrder.seller.firstName +' '+ sellerOrder.priceTag.product[languageCode]}}" class="text-bold text-align-left vertical-align-center"></Label>
                 <Label row="1" text="{{sellerOrder.sellerTransaction.sellerProductQuantity}} kg" class="text-bold text-align-left vertical-align-center"></Label>
             </GridLayout>
         </StackLayout>

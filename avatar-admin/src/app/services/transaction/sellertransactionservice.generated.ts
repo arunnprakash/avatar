@@ -48,6 +48,14 @@ export class SellerTransactionService {
             .pipe(catchError(this.handleError));
     }
 
+    public getOrdersFromSeller(sellerId: number, orderCreatedDate: string): Observable<SellerOrder[]> {
+        const url = this.serviceBaseURL + '/orders-from-seller/' + sellerId + '/' + orderCreatedDate + '';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.get<SellerOrder[]>(url, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
     public getOrdersForSellerAgent(sellerAgentId: number, orderCreatedDate: string): Observable<SellerOrder[]> {
         const url = this.serviceBaseURL + '/orders-for-seller-agent/' + sellerAgentId + '/' + orderCreatedDate + '';
         const params = this.createHttpParams({});

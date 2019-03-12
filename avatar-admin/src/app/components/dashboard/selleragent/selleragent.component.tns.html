@@ -1,4 +1,4 @@
-<ListView verticalAlignment="stretch" id="order-list" [items]="orders">
+<ListView verticalAlignment="stretch" id="order-list" [items]="sellerOrders">
     <ng-template let-sellerOrder="item" let-rowIndex="index"> 
         <StackLayout class="all-sides-margin all-sides-padding record-content rounded-corner-border" (tap)="showDetailDialog(sellerOrder)">
             <FlexboxLayout verticalAlignment="bottom" flexDirection="row" alignItems="flex-end" justifyContent="space-around">

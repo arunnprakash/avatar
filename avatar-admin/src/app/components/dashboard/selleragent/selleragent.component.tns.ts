@@ -38,7 +38,7 @@ export class SellerAgentComponent implements OnInit {
     private drawer: RadSideDrawer;
     private loadingIndicator: LoadingIndicator;
     private loadingIndicatorOptions: any;
-    protected orders: any[];
+    protected sellerOrders: any[];
     protected languageCode: string;
     protected userDTO: UserDTO;
     protected qualities: QualityDTO[];
@@ -85,14 +85,8 @@ export class SellerAgentComponent implements OnInit {
         var date = new Date();
         date.setHours(24, 0, 0, 0);
         this.sellerTransactionService.getOrdersForSellerAgent(this.userDTO['id'], date.toISOString())
-            .subscribe((results: SellerOrder[]) => {
-                let sellerOrders: SellerOrder[] = [];
-                results.forEach( (sellerOrder: any ) => {
-                    if (!sellerOrder.sellerTransaction.sellerAgentProductQuality) {
-                        sellerOrders.push(sellerOrder);
-                    }
-                });
-            this.orders = sellerOrders;
+            .subscribe((sellerOrders: SellerOrder[]) => {
+            this.sellerOrders = sellerOrders;
             this.showLoading(false);
         },
         ( error ) => {

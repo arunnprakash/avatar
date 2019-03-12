@@ -21,8 +21,10 @@ import { PagingAndFilterRequest } from "../../../services/product/pagingandfilte
 import { FilterCriteria } from "../../../services/product/filtercriteria.model";
 import { PagingAndFilterResponse } from "../../../services/product/pagingandfilterresponse.model";
 import { PriceHistoryService } from '../../../services/product/pricehistoryservice.generated';
-
+import { SellerOrder } from "../../../services/transaction/sellerorder.model";
+import { SellerTransactionService } from "../../../services/transaction/sellertransactionservice.generated";
 import { SellProductComponent } from "./sell-product/sell-product.component";
+
 import { ObservableArray } from "tns-core-modules/data/observable-array";
 import * as _ from "lodash";
 
@@ -39,11 +41,14 @@ export class SellerComponent implements OnInit {
     private loadingIndicatorOptions: any;
     protected numberOfRowsPerPage = 8;
     protected priceList: any[];
+    protected sellerOrders: any[];
     protected totalRecords: number;
     protected languageCode: string;
     protected userDTO: UserDTO;
     protected qualities: QualityDTO[];
-    constructor(private authService: AuthService, private priceHistoryService: PriceHistoryService,
+    constructor(private authService: AuthService, 
+            private sellerTransactionService: SellerTransactionService,
+            private priceHistoryService: PriceHistoryService,
             private qualityService: QualityService,
             private translate: TranslateService, 
             private router: Router, private activatedRoute: ActivatedRoute, 
@@ -71,6 +76,7 @@ export class SellerComponent implements OnInit {
               };
         this.initQualityList();
         this.lazyLoadRecordList();
+        this.sellerOrders = [];
     }
     initQualityList() {
         this.qualityService.getAllExceptDeleted().subscribe((qualities: QualityDTO[]) => {
@@ -149,7 +155,19 @@ export class SellerComponent implements OnInit {
             this.showLoading(false);
             this.showAlertDialog('Error', 'Error while getting Products');
         });
+        var date = new Date();
+        date.setHours(0, 0, 0, 0);
+        this.sellerTransactionService.getOrdersFromSeller(this.userDTO['id'], date.toISOString())
+            .subscribe((sellerOrders: SellerOrder[]) => {
+            this.sellerOrders = sellerOrders;
+            this.showLoading(false);
+        },
+        ( error ) => {
+            this.showLoading(false);
+            this.showAlertDialog('Error', 'Error while getting Seller Orders');
+        });
     }
+    
     protected showDetailDialog(price: any) {
         console.log("showDetailDialog");
         const options: any = {

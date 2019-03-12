@@ -26,4 +26,5 @@ public interface SellerTransactionService extends BaseService<SellerTransactionD
 
 	public List<SellerOrder> getOrdersForSellerAgent(Long sellerAgentId, String orderCreatedDate);
 	public List<SellerOrder> getOrdersForWareHouse(Long wareHouseId, String orderCreatedDate);
+	public List<SellerOrder> getOrdersFromSeller(Long sellerId, String orderCreatedDate);
 }

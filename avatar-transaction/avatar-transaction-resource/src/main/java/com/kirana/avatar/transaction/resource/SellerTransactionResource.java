@@ -23,6 +23,9 @@ import com.kirana.avatar.common.resource.BaseResource;
 @RequestMapping(value= {"/api/seller-transaction"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 public interface SellerTransactionResource extends BaseResource<SellerTransactionDTO> {
 
+	@GetMapping(value= {"/orders-from-seller/{sellerId}/{orderCreatedDate}"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+	public List<SellerOrder> getOrdersFromSeller(@PathVariable("sellerId")Long sellerId, @PathVariable("orderCreatedDate") String orderCreatedDate);
+
 	@GetMapping(value= {"/orders-for-seller-agent/{sellerAgentId}/{orderCreatedDate}"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 	public List<SellerOrder> getOrdersForSellerAgent(@PathVariable("sellerAgentId")Long sellerAgentId, @PathVariable("orderCreatedDate") String orderCreatedDate);
 

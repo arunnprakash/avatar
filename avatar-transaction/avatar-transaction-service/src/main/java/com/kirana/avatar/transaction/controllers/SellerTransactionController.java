@@ -34,4 +34,9 @@ public class SellerTransactionController extends BaseController<SellerTransactio
 	public List<SellerOrder> getOrdersForWareHouse(Long wareHouseId, String orderCreatedDate) {
 		return sellerTransactionService.getOrdersForWareHouse(wareHouseId, orderCreatedDate);
 	}
+
+	@Override
+	public List<SellerOrder> getOrdersFromSeller(Long sellerId, String orderCreatedDate) {
+		return sellerTransactionService.getOrdersFromSeller(sellerId, orderCreatedDate);
+	}
 }

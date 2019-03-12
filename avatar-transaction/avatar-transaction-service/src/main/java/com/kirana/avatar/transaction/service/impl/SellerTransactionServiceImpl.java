@@ -92,6 +92,21 @@ public class SellerTransactionServiceImpl extends BaseServiceImpl<SellerTransact
 	}
 
 	@Override
+	public List<SellerOrder> getOrdersFromSeller(Long sellerId, String orderCreatedDate) {
+		ZonedDateTime createdDate = ZonedDateTime.parse(orderCreatedDate, DateTimeFormatter.ISO_DATE_TIME.withZone(ZoneId.systemDefault()));
+		log.debug("CreatedDate {}", createdDate);
+		Specification<SellerTransaction> specification = Specification.where(sellerTransactionSpecification.hasDeleted(false));
+		specification = specification.and(sellerTransactionSpecification.hasSeller(sellerId));
+		specification = specification.and(sellerTransactionSpecification.hasCreatedDateBetween(createdDate, createdDate.plusHours(23).plusMinutes(59).plusSeconds(59)));
+		return sellerTransactionRepository
+				.findAll(specification)
+				.stream()
+				.map(sellerTransactionMapper::toDTO)
+				.map(this::createSellerOrder)
+				.collect(Collectors.toList());
+	}
+
+	@Override
 	public List<SellerOrder> getOrdersForSellerAgent(Long sellerAgentId, String orderCreatedDate) {
 		ZonedDateTime createdDate = ZonedDateTime.parse(orderCreatedDate, DateTimeFormatter.ISO_DATE_TIME.withZone(ZoneId.systemDefault()));
 		log.debug("CreatedDate {}", createdDate);

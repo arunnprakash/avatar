@@ -1,4 +1,4 @@
-<p-dataView #dataView layout="grid" [value]="orders" [paginator]="true" [rows]="numberOfRowsPerPage" [totalRecords]="totalRecords" 
+<p-dataView #dataView layout="grid" [value]="sellerOrders" [paginator]="true" [rows]="numberOfRowsPerPage" [totalRecords]="totalRecords" 
     [lazy]="true" (onLazyLoad)="lazyLoadRecordList($event)" paginatorPosition="both" filterBy="id"
     [sortField]="sortField" [sortOrder]="sortOrder">
     <p-header>

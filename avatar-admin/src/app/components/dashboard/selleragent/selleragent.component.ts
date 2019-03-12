@@ -27,7 +27,7 @@ import * as _ from "lodash";
 })
 export class SellerAgentComponent implements OnInit {
     protected numberOfRowsPerPage = 8;
-    protected orders: any[];
+    protected sellerOrders: any[];
     protected languageCode: string;
     protected displayAlertDialog: boolean;
     protected alertDialogTitle: string;
@@ -47,7 +47,7 @@ export class SellerAgentComponent implements OnInit {
 
     ngOnInit() {
         console.info( "OnInit SellerAgent Component tns" );
-        this.orders = [];
+        this.sellerOrders = [];
         this.displayAlertDialog = false;
         this.loading = false;
         this.initQualityList();
@@ -65,14 +65,8 @@ export class SellerAgentComponent implements OnInit {
         var date = new Date();
         date.setHours(24, 0, 0, 0);
         this.sellerTransactionService.getOrdersForSellerAgent(this.userDTO['id'], date.toISOString())
-            .subscribe((results: SellerOrder[]) => {
-                let sellerOrders: SellerOrder[] = [];
-                results.forEach( (sellerOrder: any ) => {
-                    if (!sellerOrder.sellerTransaction.sellerAgentProductQuality) {
-                        sellerOrders.push(sellerOrder);
-                    }
-                });
-            this.orders = sellerOrders;
+            .subscribe((sellerOrders: SellerOrder[]) => {
+            this.sellerOrders = sellerOrders;
             this.showLoading(false);
         },
         ( error ) => {

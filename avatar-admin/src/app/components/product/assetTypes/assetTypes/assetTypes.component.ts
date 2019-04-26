@@ -11,7 +11,7 @@ import { BaseComponent } from '../../../base/base.component';
 
 import { AssetTypeService } from "../../../../services/product/assettypeservice.generated";
 import { AuthService } from "../../../../services/auth.service";
-import { AssetTypeDTO } from "../../../../services/product/assetTypedto.model";
+import { AssetTypeDTO } from "../../../../services/product/assettypedto.model";
 import { ProductsAssetTypeDetailComponent } from "../assetType-detail/assetType-detail.component";
 
 import * as _ from "lodash";

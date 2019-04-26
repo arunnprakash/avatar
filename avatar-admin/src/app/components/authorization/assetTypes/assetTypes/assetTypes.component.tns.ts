@@ -11,7 +11,7 @@ import { BaseComponent } from '../../../base/base.component';
 
 import { AssetTypeService } from "../../../../services/authorization/assettypeservice.generated";
 import { AuthService } from "../../../../services/auth.service";
-import { AssetTypeDTO } from "../../../../services/authorization/assetTypedto.model";
+import { AssetTypeDTO } from "../../../../services/authorization/assettypedto.model";
 import { UsersAssetTypeDetailComponent } from "../assetType-detail/assetType-detail.component";
 
 @Component( {

@@ -85,6 +85,11 @@
 		</dependency>
 		<dependency>
 			<groupId>com.kirana.avatar</groupId>
+			<artifactId>avatar-common-resource</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.kirana.avatar</groupId>
 			<artifactId>avatar-common-mapper</artifactId>
 			<version>${project.version}</version>
 		</dependency>

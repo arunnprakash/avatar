@@ -71,12 +71,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.leandreck.endpoints</groupId>
-                <artifactId>typescript-annotations</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
             <!-- printer template engine -->
             <dependency>
                 <groupId>org.freemarker</groupId>

@@ -25,7 +25,11 @@
                 "./node_modules/tns-core-modules/*",
                 "./node_modules/*"
             ]
-        }
+        },
+      "plugins": [
+        { "name": "@angular/language-service"},
+        { "name": "tslint-language-service"}
+      ]
     },
     "exclude": [
         "**/*.tns.ts",

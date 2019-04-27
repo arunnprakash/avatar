@@ -22,6 +22,27 @@ VALUES ('admin', now(), b'000000', 'admin', NOW(), '0', 'ta', 'Tamil');
 INSERT INTO `roles` (`created_by`, `created_date`, `deleted`, `last_modified_by`, `last_modified_date`, `version`, `role_name`) 
 VALUES ('admin', NOW(), b'000000', 'admin', NOW(), '0', 'ADMIN'); 
 
+INSERT INTO `roles` (`created_by`, `created_date`, `deleted`, `last_modified_by`, `last_modified_date`, `version`, `role_name`) 
+VALUES ('admin', NOW(), b'000000', 'admin', NOW(), '0', 'SELLER');
+
+INSERT INTO `roles` (`created_by`, `created_date`, `deleted`, `last_modified_by`, `last_modified_date`, `version`, `role_name`) 
+VALUES ('admin', NOW(), b'000000', 'admin', NOW(), '0', 'SELLER_AGENT');
+
+INSERT INTO `roles` (`created_by`, `created_date`, `deleted`, `last_modified_by`, `last_modified_date`, `version`, `role_name`) 
+VALUES ('admin', NOW(), b'000000', 'admin', NOW(), '0', 'SELLER_TRUCK_DRIVER');
+
+INSERT INTO `roles` (`created_by`, `created_date`, `deleted`, `last_modified_by`, `last_modified_date`, `version`, `role_name`) 
+VALUES ('admin', NOW(), b'000000', 'admin', NOW(), '0', 'BUYER');
+
+INSERT INTO `roles` (`created_by`, `created_date`, `deleted`, `last_modified_by`, `last_modified_date`, `version`, `role_name`) 
+VALUES ('admin', NOW(), b'000000', 'admin', NOW(), '0', 'BUYER_AGENT');
+
+INSERT INTO `roles` (`created_by`, `created_date`, `deleted`, `last_modified_by`, `last_modified_date`, `version`, `role_name`) 
+VALUES ('admin', NOW(), b'000000', 'admin', NOW(), '0', 'BUYER_TRUCK_DRIVER');
+
+INSERT INTO `roles` (`created_by`, `created_date`, `deleted`, `last_modified_by`, `last_modified_date`, `version`, `role_name`) 
+VALUES ('admin', NOW(), b'000000', 'admin', NOW(), '0', 'WAREHOUSE_QC');
+
 INSERT INTO `genders` (`created_by`, `created_date`, `deleted`, `last_modified_by`, `last_modified_date`, `version`, `en`, `ta`) 
 VALUES ('admin', NOW(), b'000000', 'admin', NOW(), '0', 'Male', 'ஆண்'); 
 

@@ -45,6 +45,7 @@ server:
 
 # zuul config
 zuul:
+  retryable: true
   sensitiveHeaders: Cookie,Set-Cookie
   routes:
       authorization-service:
@@ -68,3 +69,18 @@ logging:
     org.hibernate: WARN
     com.kirana: DEBUG
 
+ribbon:
+  retryable: true
+  ConnectTimeout: 3000
+  ReadTimeout: 60000
+feign:
+  histrix:
+    enabled: false
+
+hystrix:
+  command:
+    choose:
+      default:
+        execution:
+          timeout:
+            enabled: false

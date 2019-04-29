@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -94,6 +95,7 @@ public class SellerTransactionServiceImpl extends BaseServiceImpl<SellerTransact
 	@Override
 	public List<SellerOrder> getOrdersFromSeller(Long sellerId, String orderCreatedDate) {
 		ZonedDateTime createdDate = ZonedDateTime.parse(orderCreatedDate, DateTimeFormatter.ISO_DATE_TIME.withZone(ZoneId.systemDefault()));
+		createdDate = createdDate.truncatedTo(ChronoUnit.DAYS);
 		log.debug("CreatedDate {}", createdDate);
 		Specification<SellerTransaction> specification = Specification.where(sellerTransactionSpecification.hasDeleted(false));
 		specification = specification.and(sellerTransactionSpecification.hasSeller(sellerId));
@@ -109,6 +111,7 @@ public class SellerTransactionServiceImpl extends BaseServiceImpl<SellerTransact
 	@Override
 	public List<SellerOrder> getOrdersForSellerAgent(Long sellerAgentId, String orderCreatedDate) {
 		ZonedDateTime createdDate = ZonedDateTime.parse(orderCreatedDate, DateTimeFormatter.ISO_DATE_TIME.withZone(ZoneId.systemDefault()));
+		createdDate = createdDate.truncatedTo(ChronoUnit.DAYS);
 		log.debug("CreatedDate {}", createdDate);
 		Specification<SellerTransaction> specification = Specification.where(sellerTransactionSpecification.hasDeleted(false));
 		specification = specification.and(sellerTransactionSpecification.hasSellerAgentProductQualityIsNull());
@@ -126,6 +129,7 @@ public class SellerTransactionServiceImpl extends BaseServiceImpl<SellerTransact
 	@Override
 	public List<SellerOrder> getOrdersForWareHouse(Long wareHouseId, String orderCreatedDate) {
 		ZonedDateTime createdDate = ZonedDateTime.parse(orderCreatedDate, DateTimeFormatter.ISO_DATE_TIME.withZone(ZoneId.systemDefault()));
+		createdDate = createdDate.truncatedTo(ChronoUnit.DAYS);
 		log.debug("CreatedDate {}", createdDate);
 		Specification<SellerTransaction> specification = Specification.where(sellerTransactionSpecification.hasDeleted(false));
 		specification = specification.and(sellerTransactionSpecification.hasSellerAgentProductQualityIsNotNull());

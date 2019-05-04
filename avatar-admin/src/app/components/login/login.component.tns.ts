@@ -64,8 +64,7 @@ export class LoginComponent implements OnInit {
           this.username = manager.getLine1Number();
           //Initiate OTP Request
       } else {
-          console.log("Foreground activity", application.android.foregroundActivity);
-          console.log("startActivity", application.android.startActivity);
+
           let reqid: number = Math.floor(Math.random() * 999);
           application.android.addEventListener(application.AndroidApplication.activityRequestPermissionsEvent, function onPermissionsEvent(args) {
               if ((<any>args).requestCode == reqid && (<any>args).permissions[0] == android.Manifest.permission.READ_PHONE_STATE) {
@@ -83,8 +82,10 @@ export class LoginComponent implements OnInit {
               }
           });
           if (application.android.foregroundActivity) {
+              console.log("Request Permission for Read Phone State using Foreground activity");
               android.support.v4.app.ActivityCompat.requestPermissions(application.android.foregroundActivity, [android.Manifest.permission.READ_PHONE_STATE], reqid);
           } else if (application.android.startActivity) {
+              console.log("Request Permission for Read Phone State using startActivity");
               android.support.v4.app.ActivityCompat.requestPermissions(application.android.startActivity, [android.Manifest.permission.READ_PHONE_STATE], reqid);
           } else {
               

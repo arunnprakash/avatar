@@ -25,7 +25,9 @@ import { SellerTransactionService } from "../../../services/transaction/sellertr
 import { SellerTruckDriverOrderComponent } from "./seller-truckdriver-order/seller-truckdriver-order.component";
 
 import { ObservableArray } from "tns-core-modules/data/observable-array";
+
 import * as _ from "lodash";
+
 
 @Component( {
     selector: 'sellertruckdriver',
@@ -51,7 +53,23 @@ export class SellerTruckDriverComponent implements OnInit {
         this.userDTO = authService.getUserInfo();
         this.languageCode = this.userDTO.preferredLanguage.languageCode;
     }
-
+    public onMapReady(args: any) {
+        // you can tap into the native MapView objects (MGLMapView for iOS and com.mapbox.mapboxsdk.maps.MapView for Android)
+        var nativeMapView = args.ios ? args.ios : args.android;
+        console.log("Mapbox onMapReady for " + (args.ios ? "iOS" : "Android") + ", native object received: " + nativeMapView);
+       
+        // .. or use the convenience methods exposed on args.map, for instance:
+        args.map.addMarkers([
+          {
+            lat: 52.3602160,
+            lng: 4.8891680,
+            title: 'One-line title here',
+            subtitle: 'Really really nice location',
+            selected: true, // makes the callout show immediately when the marker is added (note: only 1 marker can be selected at a time)
+            onCalloutTap: () =>{console.log("'Nice location' marker callout tapped");}
+          }]
+        );
+    }
     ngOnInit() {
         console.info( "On Init SellerTruckDriver Component" );
         this.loadingIndicator = new LoadingIndicator();

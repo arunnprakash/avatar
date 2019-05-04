@@ -55,6 +55,9 @@ import { AuthorizationAPIModule } from "./services/authorization/api.module";
 import { ProductAPIModule } from "./services/product/api.module";
 import { TransactionAPIModule } from "./services/transaction/api.module";
 
+import { registerElement } from "nativescript-angular/element-registry";
+registerElement("Mapbox", () => require("nativescript-mapbox").MapboxView);
+
 //required for AOT compilation
 /*export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);

@@ -134,6 +134,11 @@ public class UserController extends BaseController<UserService, UserDTO> impleme
 
 
 	@Override
+	public UserDTO getSellerAgentForTruckDriver(Long truckDriverId) {
+		return userService.getSellerAgentForTruckDriver(truckDriverId);
+	}
+
+	@Override
 	public WareHouseDTO getWareHouseForTruckDriver(Long truckDriverId) {
 		return userService.getWareHouseForTruckDriver(truckDriverId);
 	}

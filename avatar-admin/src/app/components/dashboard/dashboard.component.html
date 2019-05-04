@@ -13,6 +13,9 @@
 	<div class="p-col" *ngIf="hasRole(['SELLER_AGENT'])">
 		<selleragent></selleragent>
 	</div>
+	<div class="p-col" *ngIf="hasRole(['SELLER_TRUCK_DRIVER'])">
+		<sellertruckdriver></sellertruckdriver>
+	</div>
 	<div class="p-col" *ngIf="hasRole(['WAREHOUSE_QC'])">
 		<qc></qc>
 	</div>

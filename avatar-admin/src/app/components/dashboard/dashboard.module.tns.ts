@@ -8,6 +8,7 @@ import { routes, componentDeclarations } from './dashboard.common';
 import { DashboardComponent } from './dashboard.component';
 import { SellProductComponent } from './seller/sell-product/sell-product.component';
 import { SellerOrderComponent } from './selleragent/seller-order/seller-order.component';
+import { SellerTruckDriverOrderComponent } from './sellertruckdriver/seller-truckdriver-order/seller-truckdriver-order.component';
 import { QcOrderComponent } from './qc/qc-order/qc-order.component';
 
 @NgModule({
@@ -25,6 +26,7 @@ import { QcOrderComponent } from './qc/qc-order/qc-order.component';
   entryComponents: [
     SellProductComponent,
     SellerOrderComponent,
+    SellerTruckDriverOrderComponent,
     QcOrderComponent
   ],
   schemas: [NO_ERRORS_SCHEMA]

@@ -25,6 +25,7 @@ import com.kirana.avatar.transaction.dto.SellerTransactionDTO;
 public interface SellerTransactionService extends BaseService<SellerTransactionDTO>{
 
 	public List<SellerOrder> getOrdersForSellerAgent(Long sellerAgentId, String orderCreatedDate);
+	public List<SellerOrder> getOrdersForSellerTruckDriver(Long truckDriverId, String orderCreatedDate);
 	public List<SellerOrder> getOrdersForWareHouse(Long wareHouseId, String orderCreatedDate);
 	public List<SellerOrder> getOrdersFromSeller(Long sellerId, String orderCreatedDate);
 }

@@ -74,6 +74,9 @@ public interface UserResource extends BaseResource<UserDTO> {
 
 	@GetMapping(value= {"/seller-agent/{sellerAgentId}/truck-driver"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 	public UserDTO getTruckDriverForSellerAgent(@PathVariable("sellerAgentId") Long sellerAgentId);
+
+	@GetMapping(value= {"/truck-driver/{truckDriverId}/seller-agent"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+	public UserDTO getSellerAgentForTruckDriver(@PathVariable("truckDriverId") Long truckDriverId);
 	
 	@GetMapping(value= {"/truck-driver/{truckDriverId}/warehouse"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 	public WareHouseDTO getWareHouseForTruckDriver(@PathVariable("truckDriverId") Long truckDriverId);

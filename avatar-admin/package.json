@@ -37,6 +37,7 @@
     "nativescript-imagepicker": "^6.0.6",
     "nativescript-loading-indicator": "^2.4.0",
     "nativescript-localstorage": "^2.0.0",
+    "nativescript-mapbox": "^4.4.1",
     "nativescript-pager": "^9.3.12",
     "nativescript-tag": "^1.1.2",
     "nativescript-telephony": "^1.0.4",

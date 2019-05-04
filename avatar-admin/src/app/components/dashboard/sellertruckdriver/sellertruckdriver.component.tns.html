@@ -1,0 +1,14 @@
+<ListView verticalAlignment="stretch" id="order-list" [items]="sellerOrders">
+    <ng-template let-sellerOrder="item" let-rowIndex="index"> 
+        <StackLayout class="all-sides-margin all-sides-padding record-content rounded-corner-border" (tap)="showDetailDialog(sellerOrder)">
+            <FlexboxLayout verticalAlignment="bottom" flexDirection="row" alignItems="flex-end" justifyContent="space-around">
+                <Image *ngIf="hasPhoto(sellerOrder.priceTag.product.assets)" class="thumbnail" [src]="getPhoto(sellerOrder.priceTag.product.assets)" loadMode="async" stretch="fill"></Image>
+                <Image *ngIf="!hasPhoto(sellerOrder.priceTag.product.assets)" class="thumbnail" src="~/assets/images/avatar.png" loadMode="async"></Image>
+            </FlexboxLayout>
+            <GridLayout rows="auto, auto" columns="auto, auto" horizontalAlignment="center">
+            	<Label row="0" text="{{sellerOrder.seller.firstName +' '+ sellerOrder.priceTag.product[languageCode]}}" class="text-bold text-align-left vertical-align-center"></Label>
+                <Label row="1" text="{{sellerOrder.sellerTransaction.sellerProductQuantity}} kg" class="text-bold text-align-left vertical-align-center"></Label>
+            </GridLayout>
+        </StackLayout>
+    </ng-template>
+</ListView>

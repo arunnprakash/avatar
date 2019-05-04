@@ -46,6 +46,8 @@ public interface UserService extends BaseService<UserDTO>{
 	public UserDTO getBuyerAgentForBuyer(Long buyerId);
 
 	public UserDTO getTruckDriverForSellerAgent(Long sellerAgentId);
+	
+	public UserDTO getSellerAgentForTruckDriver(Long truckDriverId);
 
 	public WareHouseDTO getWareHouseForTruckDriver(Long truckDriverId);
 }

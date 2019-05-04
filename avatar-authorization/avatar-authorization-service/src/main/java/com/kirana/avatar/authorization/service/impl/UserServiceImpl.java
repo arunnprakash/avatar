@@ -514,6 +514,17 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 	}
 
 	@Override
+	public UserDTO getSellerAgentForTruckDriver(Long truckDriverId) {
+		Specification<SellerAgentTruckDriverMapping> specification = Specification.where(sellerAgentTruckDriverMappingSpecification.hasDeleted(false));
+		specification = specification.and(sellerAgentTruckDriverMappingSpecification.hasTruckDriverId(truckDriverId));
+		return sellerAgentTruckDriverMappingRepository
+			.findOne(specification)
+			.map(SellerAgentTruckDriverMapping::getSellerAgent)
+			.map(userMapper::toDTO)
+			.orElseThrow(ApiException::resourceNotFound);
+	}
+
+	@Override
 	public WareHouseDTO getWareHouseForTruckDriver(Long truckDriverId) {
 		Specification<TruckDriverWareHouseMapping> specification = Specification.where(truckDriverWareHouseMappingSpecification.hasDeleted(false));
 		specification = specification.and(truckDriverWareHouseMappingSpecification.hasTruckDriverId(truckDriverId));

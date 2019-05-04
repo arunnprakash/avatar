@@ -10,6 +10,7 @@ import { DashboardComponent } from './dashboard.component';
 import { SellProductComponent } from './seller/sell-product/sell-product.component';
 import { SellerOrderComponent } from './selleragent/seller-order/seller-order.component';
 import { QcOrderComponent } from './qc/qc-order/qc-order.component';
+import { SellerTruckDriverOrderComponent } from './sellertruckdriver/seller-truckdriver-order/seller-truckdriver-order.component';
 
 import { PanelModule } from 'primeng/panel';
 import { ChartModule } from 'primeng/chart';
@@ -47,6 +48,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
   entryComponents: [
     SellProductComponent,
     SellerOrderComponent,
+    SellerTruckDriverOrderComponent,
     QcOrderComponent
   ],
   schemas: [NO_ERRORS_SCHEMA]

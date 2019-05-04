@@ -4,6 +4,8 @@ import { SellerComponent } from './seller/seller.component';
 import { SellProductComponent } from './seller/sell-product/sell-product.component';
 import { SellerAgentComponent } from './selleragent/selleragent.component';
 import { SellerOrderComponent } from './selleragent/seller-order/seller-order.component';
+import { SellerTruckDriverComponent } from './sellertruckdriver/sellertruckdriver.component';
+import { SellerTruckDriverOrderComponent } from './sellertruckdriver/seller-truckdriver-order/seller-truckdriver-order.component';
 import { QcComponent } from './qc/qc.component';
 import { QcOrderComponent } from './qc/qc-order/qc-order.component';
 export const componentDeclarations: any[] = [
@@ -12,6 +14,8 @@ export const componentDeclarations: any[] = [
     SellProductComponent,
     SellerAgentComponent,
     SellerOrderComponent,
+    SellerTruckDriverComponent,
+    SellerTruckDriverOrderComponent,
     QcComponent,
     QcOrderComponent
 ];

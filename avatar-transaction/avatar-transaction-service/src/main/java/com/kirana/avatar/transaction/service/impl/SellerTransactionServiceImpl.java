@@ -127,6 +127,12 @@ public class SellerTransactionServiceImpl extends BaseServiceImpl<SellerTransact
 	}
 
 	@Override
+	public List<SellerOrder> getOrdersForSellerTruckDriver(Long truckDriverId, String orderCreatedDate) {
+		UserDTO sellerAgent = userClient.getSellerAgentForTruckDriver(truckDriverId);
+		return getOrdersForSellerAgent(sellerAgent.getId(), orderCreatedDate);
+	}
+
+	@Override
 	public List<SellerOrder> getOrdersForWareHouse(Long wareHouseId, String orderCreatedDate) {
 		ZonedDateTime createdDate = ZonedDateTime.parse(orderCreatedDate, DateTimeFormatter.ISO_DATE_TIME.withZone(ZoneId.systemDefault()));
 		createdDate = createdDate.truncatedTo(ChronoUnit.DAYS);

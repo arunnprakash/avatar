@@ -139,6 +139,14 @@ export class UserService {
             .pipe(catchError(this.handleError));
     }
 
+    public getSellerAgentForTruckDriver(truckDriverId: number): Observable<UserDTO> {
+        const url = this.serviceBaseURL + '/truck-driver/' + truckDriverId + '/seller-agent';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.get<UserDTO>(url, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
     public getWareHouseForTruckDriver(truckDriverId: number): Observable<WareHouseDTO> {
         const url = this.serviceBaseURL + '/truck-driver/' + truckDriverId + '/warehouse';
         const params = this.createHttpParams({});

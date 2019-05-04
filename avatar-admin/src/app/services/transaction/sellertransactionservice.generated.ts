@@ -64,6 +64,14 @@ export class SellerTransactionService {
             .pipe(catchError(this.handleError));
     }
 
+    public getOrdersForSellerTruckDriver(truckDriverId: number, orderCreatedDate: string): Observable<SellerOrder[]> {
+        const url = this.serviceBaseURL + '/orders-for-seller-truckdriver/' + truckDriverId + '/' + orderCreatedDate + '';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.get<SellerOrder[]>(url, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
     public getOrdersForWareHouse(wareHouseId: number, orderCreatedDate: string): Observable<SellerOrder[]> {
         const url = this.serviceBaseURL + '/orders-for-warehouse/' + wareHouseId + '/' + orderCreatedDate + '';
         const params = this.createHttpParams({});

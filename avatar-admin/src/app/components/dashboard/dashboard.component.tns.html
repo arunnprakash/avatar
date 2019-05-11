@@ -41,6 +41,10 @@
 				<selleragent></selleragent>
 				<StackLayout marginBottom="2px" class="hr-light"></StackLayout>
 			</StackLayout>
+			<StackLayout height="96%" orientation="vertical" *ngIf="hasRole(['SELLER_TRUCK_DRIVER'])">
+				<sellertruckdriver></sellertruckdriver>
+				<StackLayout marginBottom="2px" class="hr-light"></StackLayout>
+			</StackLayout>
 			<StackLayout height="96%" orientation="vertical" *ngIf="hasRole(['WAREHOUSE_QC'])">
 				<qc></qc>
 				<StackLayout marginBottom="2px" class="hr-light"></StackLayout>

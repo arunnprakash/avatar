@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Page } from "tns-core-modules/ui/page";
 import { device, screen, isAndroid, isIOS } from "tns-core-modules/platform";
 import * as application from "tns-core-modules/application";
-import { Telephony } from 'nativescript-telephony';
 
 import { UserService } from '../../services/authorization/userservice.generated';
 import { UserDTO } from "../../services/authorization/userdto.model";
@@ -29,58 +28,82 @@ export class LoginComponent implements OnInit {
       console.log("ngOnInit LoginComponent tns");
       this.page.actionBarHidden = true;
       this.page.actionBar.isCollapsed = true;
-      this.setPhoneNumberAsUserName();
+      this.addAndriodPermissionResultEventListener();
+      this.requestReadPhoneStatePermission();
+      this.requestAccessFineLocationPermission();
 
-      /*Telephony().then((resolved) => {
-          console.log('resolved >', resolved)
-          console.dir(resolved);
-          this.username = resolved.phoneNumber;
-      }).catch((error) => {
-          console.error('error >', error)
-          console.dir(error);
-      });*/
       if (this.authService.isLogged()) {
           this.setPreferredLanguage(this.authService.getUserInfo().preferredLanguage.languageCode);
           console.info("Already Logged in So Login Navigate to Home");
           this.router.navigate(["/home"]).then( (e) => {
               if (e) {
                   console.log("Navigation to Home is successful!");
-                } else {
+              } else {
                   console.log("Navigation to Home has failed!");
-                }
+              }
           });
       }
   }
-  setPhoneNumberAsUserName() {
+  addAndriodPermissionResultEventListener() {
+      application.android.addEventListener(application.AndroidApplication.activityRequestPermissionsEvent, (args: any) => {
+          if ((<any>args).permissions[0] == android.Manifest.permission.ACCESS_FINE_LOCATION) {
+              // removeEventListener to reduce memory usage since it doesnt need to listen anymore
+              application.android.removeEventListener(application.AndroidApplication.activityRequestPermissionsEvent, onPermissionsEvent)
+              if ((<any>args).grantResults[0] == android.content.pm.PackageManager.PERMISSION_GRANTED) {
+                  console.log("ACCESS_FINE_LOCATION PERMISSION GRANTED");
+                  //Initiate OTP Request
+              } else {
+                  console.log("ACCESS_FINE_LOCATION PERMISSION DENIED");
+                  // reject(new Error("Permission DENIED for android.permission.ACCESS_FINE_LOCATION"))
+              }
+          }
+          if ((<any>args).permissions[0] == android.Manifest.permission.READ_PHONE_STATE) {
+              // removeEventListener to reduce memory usage since it doesnt need to listen anymore
+              application.android.removeEventListener(application.AndroidApplication.activityRequestPermissionsEvent, onPermissionsEvent)
+              if ((<any>args).grantResults[0] == android.content.pm.PackageManager.PERMISSION_GRANTED) {
+                  console.log("READ_PHONE_STATE PERMISSION GRANTED");
+                  this.setPhoneNumberAsUserName();
+                  //Initiate OTP Request
+              } else {
+                  console.log("READ_PHONE_STATE PERMISSION DENIED");
+                  // reject(new Error("Permission DENIED for android.permission.READ_PHONE_STATE"))
+              }
+          }
+      });
+  }
+  requestAccessFineLocationPermission() {
+      let doesHavePermission: boolean = (
+              android.content.pm.PackageManager.PERMISSION_GRANTED
+              ==
+              android.support.v4.content.ContextCompat.checkSelfPermission(application.android.context, android.Manifest.permission.ACCESS_FINE_LOCATION)
+          );
+	  console.log("App Have ACCESS_FINE_LOCATION Permission ", doesHavePermission);
+	  if (!doesHavePermission) {
+          let reqid: number = Math.floor(Math.random() * 999);
+	      if (application.android.foregroundActivity) {
+	          console.log("Request Permission for Access Fine Location using Foreground activity");
+	          android.support.v4.app.ActivityCompat.requestPermissions(application.android.foregroundActivity, [android.Manifest.permission.ACCESS_FINE_LOCATION], reqid);
+	      } else if (application.android.startActivity) {
+	          console.log("Request Permission for Access Fine Location using startActivity");
+	          android.support.v4.app.ActivityCompat.requestPermissions(application.android.startActivity, [android.Manifest.permission.ACCESS_FINE_LOCATION], reqid);
+	      } else {
+	          
+	      }
+	  }
+  }
+  requestReadPhoneStatePermission() {
       // Interesting, this actually works on API less than 23 and will return false if the manifest permission was forgotten
       let doesHavePermission: boolean = (
           android.content.pm.PackageManager.PERMISSION_GRANTED
           ==
           android.support.v4.content.ContextCompat.checkSelfPermission(application.android.context, android.Manifest.permission.READ_PHONE_STATE)
       );
-      console.log("DoesHavePermission ", doesHavePermission);
+      console.log("App Have READ_PHONE_STATE Permission ", doesHavePermission);
       if (doesHavePermission) {
-          let manager = application.android.context.getSystemService(android.content.Context.TELEPHONY_SERVICE);
-          this.username = manager.getLine1Number();
+    	  this.setPhoneNumberAsUserName();
           //Initiate OTP Request
       } else {
-
           let reqid: number = Math.floor(Math.random() * 999);
-          application.android.addEventListener(application.AndroidApplication.activityRequestPermissionsEvent, function onPermissionsEvent(args) {
-              if ((<any>args).requestCode == reqid && (<any>args).permissions[0] == android.Manifest.permission.READ_PHONE_STATE) {
-                  // removeEventListener to reduce memory usage since it doesnt need to listen anymore
-                  application.android.removeEventListener(application.AndroidApplication.activityRequestPermissionsEvent, onPermissionsEvent)
-                  if ((<any>args).grantResults[0] == android.content.pm.PackageManager.PERMISSION_GRANTED) {
-                      console.log("READ_PHONE_STATE PERMISSION_GRANTED");
-                      let manager = application.android.context.getSystemService(android.content.Context.TELEPHONY_SERVICE);
-                      this.username = manager.getLine1Number();
-                      //Initiate OTP Request
-                  } else {
-                      console.log("READ_PHONE_STATE Permission Denied");
-                      // reject(new Error("Permission DENIED for android.permission.READ_PHONE_STATE"))
-                  }
-              }
-          });
           if (application.android.foregroundActivity) {
               console.log("Request Permission for Read Phone State using Foreground activity");
               android.support.v4.app.ActivityCompat.requestPermissions(application.android.foregroundActivity, [android.Manifest.permission.READ_PHONE_STATE], reqid);
@@ -91,6 +114,10 @@ export class LoginComponent implements OnInit {
               
           }
       }
+  }
+  setPhoneNumberAsUserName() {
+      let manager = application.android.context.getSystemService(android.content.Context.TELEPHONY_SERVICE);
+      this.username = manager.getLine1Number();
   }
   pageLoaded( args ) {
       var page = args.object;

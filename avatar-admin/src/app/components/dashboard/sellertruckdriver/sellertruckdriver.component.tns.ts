@@ -87,8 +87,8 @@ export class SellerTruckDriverComponent implements OnInit {
                   secondaryProgress: 1
                 }
               };
-        this.initQualityList();
-        this.lazyLoadRecordList();
+        //this.initQualityList();
+        //this.lazyLoadRecordList();
     }
     initQualityList() {
         this.qualityService.getAllExceptDeleted().subscribe((qualities: QualityDTO[]) => {

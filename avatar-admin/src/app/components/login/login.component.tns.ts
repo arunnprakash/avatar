@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
       application.android.addEventListener(application.AndroidApplication.activityRequestPermissionsEvent, (args: any) => {
           if ((<any>args).permissions[0] == android.Manifest.permission.ACCESS_FINE_LOCATION) {
               // removeEventListener to reduce memory usage since it doesnt need to listen anymore
-              application.android.removeEventListener(application.AndroidApplication.activityRequestPermissionsEvent, onPermissionsEvent)
+              //application.android.removeEventListener(application.AndroidApplication.activityRequestPermissionsEvent, onPermissionsEvent)
               if ((<any>args).grantResults[0] == android.content.pm.PackageManager.PERMISSION_GRANTED) {
                   console.log("ACCESS_FINE_LOCATION PERMISSION GRANTED");
                   //Initiate OTP Request
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
           }
           if ((<any>args).permissions[0] == android.Manifest.permission.READ_PHONE_STATE) {
               // removeEventListener to reduce memory usage since it doesnt need to listen anymore
-              application.android.removeEventListener(application.AndroidApplication.activityRequestPermissionsEvent, onPermissionsEvent)
+              //application.android.removeEventListener(application.AndroidApplication.activityRequestPermissionsEvent, onPermissionsEvent)
               if ((<any>args).grantResults[0] == android.content.pm.PackageManager.PERMISSION_GRANTED) {
                   console.log("READ_PHONE_STATE PERMISSION GRANTED");
                   this.setPhoneNumberAsUserName();

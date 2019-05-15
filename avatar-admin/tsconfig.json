@@ -26,10 +26,14 @@
                 "./node_modules/*"
             ]
         },
-      "plugins": [
-        { "name": "@angular/language-service"},
-        { "name": "tslint-language-service"}
-      ]
+        "plugins": [
+            {
+                "name": "@angular/language-service"
+            },
+            {
+                "name": "tslint-language-service"
+            }
+        ]
     },
     "exclude": [
         "**/*.tns.ts",

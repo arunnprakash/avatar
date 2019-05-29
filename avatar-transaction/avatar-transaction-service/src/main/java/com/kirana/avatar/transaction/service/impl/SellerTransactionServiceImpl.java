@@ -22,7 +22,7 @@ import com.kirana.avatar.transaction.service.SellerTransactionService;
 import com.kirana.avatar.transaction.specifications.SellerTransactionSpecification;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kirana.avatar.authorization.dto.UserDTO;
-import com.kirana.avatar.authorization.dto.WareHouseDTO;
+import com.kirana.avatar.master.dto.WareHouseDTO;
 import com.kirana.avatar.authorization.feign.UserClient;
 import com.kirana.avatar.common.dto.FilterCriteria;
 import com.kirana.avatar.common.exception.ApiException;

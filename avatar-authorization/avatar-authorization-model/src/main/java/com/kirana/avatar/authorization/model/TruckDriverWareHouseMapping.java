@@ -12,6 +12,7 @@
  *******************************************************************************/
 package com.kirana.avatar.authorization.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
@@ -49,8 +50,7 @@ public class TruckDriverWareHouseMapping extends BaseEntity<TruckDriverWareHouse
 	@JoinColumn(name = "truck_driver_id", referencedColumnName = "id", nullable = false)
 	private User truckDriver;
 
-	@ManyToOne(optional = false, fetch = FetchType.EAGER)
-	@JoinColumn(name = "warehouse_id", referencedColumnName = "id", nullable = false)
-	private WareHouse wareHouse;
+	@Column(name="warehouse_id", nullable = false)
+	private Long wareHouse;
 
 }

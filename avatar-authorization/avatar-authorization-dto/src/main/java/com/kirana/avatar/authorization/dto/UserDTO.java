@@ -15,6 +15,7 @@ package com.kirana.avatar.authorization.dto;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.kirana.avatar.common.dto.BaseDTO;
 
@@ -43,15 +44,15 @@ public class UserDTO extends BaseDTO {
 	protected String latitude;
 	protected String longitude;
 	protected List<RoleDTO> roles;
-	protected List<AssetDTO> assets;
-	protected LanguageDTO preferredLanguage;
-	protected VillageDTO village;
-	protected GenderDTO gender;
+	protected List<Map<String, Object>> assets;
+	protected Map<String, Object> preferredLanguage;
+	protected Map<String, Object> village;
+	protected Map<String, Object> gender;
 	@Builder
 	public UserDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
 			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, String userName, String firstName, 
 			String lastName, String mobileNumber, Date dob, Boolean suspended, String latitude, String longitude, List<RoleDTO> roles,
-			List<AssetDTO> assets, LanguageDTO preferredLanguage, VillageDTO village, GenderDTO gender) {
+			List<Map<String, Object>> assets, Map<String, Object> preferredLanguage, Map<String, Object> village, Map<String, Object> gender) {
 		super(id, createdBy, createdDate, lastModifiedBy, lastModifiedDate, deleted, version);
 		this.userName = userName;
 		this.firstName = firstName;

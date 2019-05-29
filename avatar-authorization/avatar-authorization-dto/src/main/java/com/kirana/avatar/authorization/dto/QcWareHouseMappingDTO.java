@@ -4,6 +4,7 @@
 package com.kirana.avatar.authorization.dto;
 
 import java.time.ZonedDateTime;
+import java.util.Map;
 
 import com.kirana.avatar.common.dto.BaseDTO;
 
@@ -26,12 +27,12 @@ import lombok.ToString;
 public class QcWareHouseMappingDTO extends BaseDTO {
 
 	protected UserDTO qc;
-	protected WareHouseDTO wareHouse;
+	protected Map<String, Object> wareHouse;
 
 	@Builder
 	public QcWareHouseMappingDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
 			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, 
-			UserDTO qc, WareHouseDTO wareHouse) {
+			UserDTO qc, Map<String, Object> wareHouse) {
 		super(id, createdBy, createdDate, lastModifiedBy, lastModifiedDate, deleted, version);
 		this.qc = qc;
 		this.wareHouse = wareHouse;

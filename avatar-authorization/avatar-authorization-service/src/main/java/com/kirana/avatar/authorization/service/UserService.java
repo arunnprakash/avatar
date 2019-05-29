@@ -18,7 +18,6 @@ import java.util.Map;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.kirana.avatar.authorization.dto.UserDTO;
-import com.kirana.avatar.authorization.dto.WareHouseDTO;
 import com.kirana.avatar.common.service.BaseService;
 
 /**
@@ -49,5 +48,5 @@ public interface UserService extends BaseService<UserDTO>{
 	
 	public UserDTO getSellerAgentForTruckDriver(Long truckDriverId);
 
-	public WareHouseDTO getWareHouseForTruckDriver(Long truckDriverId);
+	public  Map<String, Object> getWareHouseForTruckDriver(Long truckDriverId);
 }

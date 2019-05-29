@@ -36,6 +36,7 @@
 	<modules>
 		<module>avatar-config-server</module>
 		<module>avatar-common</module>
+		<module>avatar-master</module>
 		<module>avatar-authorization</module>
 		<module>avatar-product</module>
 		<module>avatar-transaction</module>

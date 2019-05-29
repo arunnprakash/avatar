@@ -70,27 +70,18 @@ public class User extends BaseEntity<User> {
 	@Column(nullable = true)
 	protected String longitude;
 
-	@ManyToOne(optional = false, fetch=FetchType.EAGER)
-	@JoinColumn(name = "language_id", referencedColumnName="id", nullable = false)
-	protected Language preferredLanguage;
+	@Column(name = "language_id", nullable = false)
+	protected Long preferredLanguage;
 
-
-	@ManyToOne(optional = false, fetch=FetchType.EAGER)
-	@JoinColumn(name = "village_id", referencedColumnName="id", nullable = false)
-	protected Village village;
+	@Column(name = "village_id", nullable = false)
+	protected Long village;
 
 	@ManyToMany(cascade= {CascadeType.MERGE})
 	@JoinTable(name = "user_roles", joinColumns={@JoinColumn(name="user_id", referencedColumnName="id", unique=false)}, 
 			inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="id", unique=false)})
 	protected List<Role> roles;
 
-	@ManyToMany
-	@JoinTable(name = "user_assets", joinColumns={@JoinColumn(name="user_id", referencedColumnName="id", unique=false)}, 
-			inverseJoinColumns={@JoinColumn(name="asset_id", referencedColumnName="id", unique=false)})
-	protected List<Asset> assets;
-	
-	@ManyToOne(optional = false, fetch=FetchType.EAGER)
-	@JoinColumn(name = "gender_id", referencedColumnName="id", nullable = false)
-	protected Gender gender;
+	@Column(name = "gender_id", nullable = false)
+	protected Long gender;
 
 }

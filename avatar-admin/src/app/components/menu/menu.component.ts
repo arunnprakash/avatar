@@ -20,7 +20,7 @@ constructor(private authService: AuthService, private router: Router, private ac
   ngOnInit() {
       this.menuItems = [
           {label: 'Dashboard', visible: this.authService.hasRole(['ADMIN', 'SELLER_AGENT','SELLER_TRUCK_DRIVER', 'BUYER_AGENT', 'SELLER','BUYER', 'WAREHOUSE_QC']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['dashboard'] } }] },
-          /*{label: 'Users',     visible: this.authService.hasRole(['ADMIN', 'SELLER_AGENT','BUYER_AGENT']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['users']     } }] },
+          {label: 'Users',     visible: this.authService.hasRole(['ADMIN', 'SELLER_AGENT','BUYER_AGENT']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['users']     } }] },
           {label: 'WareHouses',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['warehouses']     } }] },
           {label: 'Qc-WareHouse-Mappings',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['qc-warehouse-mappings']     } }] },
           {label: 'TruckDriver-WareHouse-Mappings',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['truckdriver-warehouse-mappings']     } }] },
@@ -34,7 +34,7 @@ constructor(private authService: AuthService, private router: Router, private ac
           {label: 'Products',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['products']     } }] },
           {label: 'Products AssetTypes',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['productsAssetTypes']     } }] },
           {label: 'Product Regions',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['productregions']     } }] },
-          {label: 'Prices',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['prices']     } }] },*/
+          {label: 'Prices',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['prices']     } }] },
           {label: 'Holidays',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['holidays']     } }] }
       ];
   }

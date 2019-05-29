@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 import com.kirana.avatar.authorization.dto.QcWareHouseMappingDTO;
 import com.kirana.avatar.authorization.mapper.QcWareHouseMapper;
 import com.kirana.avatar.authorization.model.QcWareHouseMapping;
-import com.kirana.avatar.authorization.repositories.TalukRepository;
 import com.kirana.avatar.authorization.repositories.QcWareHouseMappingRepository;
 import com.kirana.avatar.authorization.service.QcWareHouseMappingService;
 import com.kirana.avatar.authorization.specifications.QcWareHouseMappingSpecification;
 import com.kirana.avatar.common.dto.FilterCriteria;
 import com.kirana.avatar.common.exception.ApiException;
 import com.kirana.avatar.common.service.impl.BaseServiceImpl;
+import com.kirana.avatar.master.feign.TalukClient;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,15 +33,12 @@ public class QcWareHouseMappingServiceImpl extends BaseServiceImpl<QcWareHouseMa
 	private QcWareHouseMappingRepository wareHouseRepository;
 	private QcWareHouseMapper qcWareHouseMapper;
 	private QcWareHouseMappingSpecification wareHouseSpecification;
-	private TalukRepository talukRepository;
 	
-	public QcWareHouseMappingServiceImpl(QcWareHouseMappingRepository wareHouseRepository, QcWareHouseMapper qcWareHouseMapper, QcWareHouseMappingSpecification wareHouseSpecification,
-			TalukRepository talukRepository) {
+	public QcWareHouseMappingServiceImpl(QcWareHouseMappingRepository wareHouseRepository, QcWareHouseMapper qcWareHouseMapper, QcWareHouseMappingSpecification wareHouseSpecification) {
 		super(wareHouseRepository, qcWareHouseMapper, wareHouseSpecification);
 		this.wareHouseRepository = wareHouseRepository;
 		this.qcWareHouseMapper = qcWareHouseMapper;
 		this.wareHouseSpecification = wareHouseSpecification;
-		this.talukRepository = talukRepository;
 	}
 
 	@Override

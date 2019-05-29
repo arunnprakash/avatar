@@ -1,0 +1,98 @@
+spring:
+  profiles: 
+    default: dev
+  security:
+    user:
+      name: "avatar"
+      password: "eureka"
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        default_schema: master
+  datasource:
+    platform: postgres
+    url: jdbc:mysql://localhost:3306/avatar?useUnicode=yes&characterEncoding=UTF-8
+    username: root
+    password: admin
+    driverClassName: com.mysql.cj.jdbc.Driver
+    validationQuery: SELECT 1
+  # Send distributed traces to zipkin server (using Eureka to find the server)
+  sleuth:
+    sampler:
+      percentage: 1.0
+  zipkin:
+    baseUrl: http://zipkin-service/
+
+#Environment
+environment: DEV
+# Configure this Discovery Server
+# tag::configuration-eureka[]
+eureka:
+  instance:
+    metadata-map:
+      user.name: "avatar"         #These two are needed so that the server
+      user.password: "eureka" #can access the protected client endpoints
+      startup: ${random.int}    #needed to trigger info and endpoint update after restart
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+      
+  client:
+    fetchRegistry: true
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVICE_URL:http://avatar:eureka@localhost:1100}/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  #<2>
+  endpoint:
+    health:
+      show-details: ALWAYS
+# end::configuration-eureka[]
+
+# HTTP (Tomcat) port
+server:
+  port: 1110
+
+# logging
+logging:
+  file: logs/application-debug.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"
+  level:
+    org.springframework.web: DEBUG
+    org.hibernate: WARN
+    com.kirana: DEBUG
+#Feign Config
+feign:
+  client:
+    config:
+      feignName:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: full
+#        errorDecoder: com.example.SimpleErrorDecoder
+#        retryer: com.example.SimpleRetryer
+        requestInterceptors:
+          - com.kirana.avatar.common.feign.interceptor.FeignRequestInterceptor
+        decode404: false
+#        encoder: com.example.SimpleEncoder
+#        decoder: com.example.SimpleDecoder
+#        contract: com.example.SimpleContract
+
+#JWT Config
+security:
+  jwt:
+    loginUri: /api/login
+    headerName: Authorization
+    tokenPrefix: Bearer 
+    expiration: 864000000 #10 days
+    secretKey: TelmilaArunPrakashAvatar2019MobileReChargeAndFarmerApplicationSecretKey
+    defaultPassword: avatar

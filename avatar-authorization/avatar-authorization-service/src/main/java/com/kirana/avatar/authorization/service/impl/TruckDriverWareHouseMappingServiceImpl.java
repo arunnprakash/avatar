@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.kirana.avatar.authorization.dto.TruckDriverWareHouseMappingDTO;
 import com.kirana.avatar.authorization.mapper.TruckDriverWareHouseMapper;
 import com.kirana.avatar.authorization.model.TruckDriverWareHouseMapping;
-import com.kirana.avatar.authorization.repositories.TalukRepository;
 import com.kirana.avatar.authorization.repositories.TruckDriverWareHouseMappingRepository;
 import com.kirana.avatar.authorization.service.TruckDriverWareHouseMappingService;
 import com.kirana.avatar.authorization.specifications.TruckDriverWareHouseMappingSpecification;
@@ -33,15 +32,12 @@ public class TruckDriverWareHouseMappingServiceImpl extends BaseServiceImpl<Truc
 	private TruckDriverWareHouseMappingRepository wareHouseRepository;
 	private TruckDriverWareHouseMapper truckDriverWareHouseMapper;
 	private TruckDriverWareHouseMappingSpecification wareHouseSpecification;
-	private TalukRepository talukRepository;
 	
-	public TruckDriverWareHouseMappingServiceImpl(TruckDriverWareHouseMappingRepository wareHouseRepository, TruckDriverWareHouseMapper truckDriverWareHouseMapper, TruckDriverWareHouseMappingSpecification wareHouseSpecification,
-			TalukRepository talukRepository) {
+	public TruckDriverWareHouseMappingServiceImpl(TruckDriverWareHouseMappingRepository wareHouseRepository, TruckDriverWareHouseMapper truckDriverWareHouseMapper, TruckDriverWareHouseMappingSpecification wareHouseSpecification) {
 		super(wareHouseRepository, truckDriverWareHouseMapper, wareHouseSpecification);
 		this.wareHouseRepository = wareHouseRepository;
 		this.truckDriverWareHouseMapper = truckDriverWareHouseMapper;
 		this.wareHouseSpecification = wareHouseSpecification;
-		this.talukRepository = talukRepository;
 	}
 
 	@Override

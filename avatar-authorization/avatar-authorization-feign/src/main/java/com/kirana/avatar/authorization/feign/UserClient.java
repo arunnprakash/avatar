@@ -22,7 +22,7 @@ import com.kirana.avatar.common.feign.config.FeignClientContract;
  * @author __ArunPrakash__
  *
  */
-@FeignClient(name="authorization-service", configuration={FeignClientContract.class})
+@FeignClient(name="user-service", configuration={FeignClientContract.class})
 public interface UserClient extends UserResource {
 
 }

@@ -11,6 +11,14 @@ Move image from local machine to Emulator
 
 C:\Android\android-sdk\platform-tools>adb push husky-3380548__340.jpg /sdcard/Pictures
 
+Add Androidd Platform
+-----------------------
+tns platform add android
+
+Remove Androidd Platform
+-----------------------
+tns platform remove android
+
 Debug Application
 ------------------
 tns debug android --bundle

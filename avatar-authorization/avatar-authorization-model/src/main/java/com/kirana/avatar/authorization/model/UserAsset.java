@@ -12,6 +12,7 @@
  *******************************************************************************/
 package com.kirana.avatar.authorization.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
@@ -52,8 +53,7 @@ public class UserAsset extends BaseEntity<UserAsset>{
 	@JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
 	private User user;
 
-	@ManyToOne(optional = false, fetch = FetchType.EAGER)
-	@JoinColumn(name = "asset_id", referencedColumnName = "id", nullable = false)
-	private Asset asset;
+	@Column(name = "asset_id", nullable = false)
+	private Long asset;
 
 }

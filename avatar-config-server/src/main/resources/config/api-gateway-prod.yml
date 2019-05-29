@@ -48,9 +48,10 @@ zuul:
   retryable: true
   sensitiveHeaders: Cookie,Set-Cookie
   routes:
-      authorization-service:
+      master-service:
         path: /api/**
         serviceId: master-service
+      authorization-service:
         path: /api/**
         serviceId: authorization-service
       product-service:

@@ -42,6 +42,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kirana.avatar.master.dto.AssetDTO;
+import com.kirana.avatar.master.dto.GenderDTO;
+import com.kirana.avatar.master.dto.LanguageDTO;
+import com.kirana.avatar.master.dto.VillageDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kirana.avatar.authorization.dto.RoleDTO;
 import com.kirana.avatar.authorization.dto.UserDTO;
@@ -302,6 +305,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public UserDTO findByUserNameOrMobileNumber(String userNameOrMobileNumber) {
 		User user = userRepository
 				.findByUserNameOrMobileNumber(userNameOrMobileNumber, userNameOrMobileNumber)
@@ -309,7 +313,18 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 					new UsernameNotFoundException("User not found with username or mobilenumber : " + userNameOrMobileNumber)
 				);
 		log.debug("User :: {}", user);
-		return userMapper.toDTO(user);
+		UserDTO userDTO = userMapper.toDTO(user);
+		LanguageDTO languageDTO = languageClient.get(user.getPreferredLanguage());
+		Map<String, Object> languageMap = objectMapper.convertValue(languageDTO, Map.class);
+		VillageDTO villageDTO = villageClient.get(user.getVillage());
+		Map<String, Object> villageMap = objectMapper.convertValue(villageDTO, Map.class);
+		GenderDTO genderDTO = genderClient.get(user.getGender());
+		Map<String, Object> genderMap = objectMapper.convertValue(genderDTO, Map.class);
+		return userDTO.toBuilder()
+				.preferredLanguage(languageMap)
+				.village(villageMap)
+				.gender(genderMap)
+				.build();
 	}
 
 	@Override

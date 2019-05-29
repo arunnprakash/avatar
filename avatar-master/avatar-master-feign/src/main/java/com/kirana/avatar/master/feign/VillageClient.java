@@ -11,7 +11,7 @@ import com.kirana.avatar.master.resource.VillageResource;
  * @author __Telmila__
  *
  */
-@FeignClient(name="village-service", configuration={FeignClientContract.class})
+@FeignClient(name="master-service", configuration={FeignClientContract.class})
 public interface VillageClient extends VillageResource {
 
 }

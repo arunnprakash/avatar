@@ -48,7 +48,7 @@ public class UserDTO extends BaseDTO {
 	protected Map<String, Object> preferredLanguage;
 	protected Map<String, Object> village;
 	protected Map<String, Object> gender;
-	@Builder
+	@Builder(toBuilder=true)
 	public UserDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
 			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, String userName, String firstName, 
 			String lastName, String mobileNumber, Date dob, Boolean suspended, String latitude, String longitude, List<RoleDTO> roles,

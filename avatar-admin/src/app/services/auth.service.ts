@@ -2,10 +2,12 @@ import {Injectable} from '@angular/core';
 import * as _ from "lodash";
 import { UserDTO } from "../services/authorization/userdto.model";
 import { RoleDTO } from "../services/authorization/roledto.model";
+import { LanguageDTO } from "../services/master/languagedto.model";
 import { WareHouseDTO } from "../services/master/warehousedto.model";
 
 const TOKEN = 'TOKEN';
 const USER_INFO = 'USER_INFO';
+const PRFERRED_LANGUAGE = 'PRFERRED_LANGUAGE';
 const WARE_HOUSE_INFO = 'WARE_HOUSE_INFO';
 
 @Injectable({
@@ -34,6 +36,18 @@ export class AuthService {
   getUserInfo(): UserDTO {
       if (this.localStorage.getItem(USER_INFO)) {
           let jsonString = this.localStorage.getItem(USER_INFO);
+          return JSON.parse(jsonString);
+      } else {
+          return null;
+      }
+  }
+  setPreferredLanguage(languageDTO: LanguageDTO): void {
+	let jsonString: string = JSON.stringify(languageDTO);
+  	this.localStorage.setItem(PRFERRED_LANGUAGE, jsonString);
+  }
+  getPreferredLanguage(): LanguageDTO {
+      if (this.localStorage.getItem(PRFERRED_LANGUAGE)) {
+          let jsonString = this.localStorage.getItem(PRFERRED_LANGUAGE);
           return JSON.parse(jsonString);
       } else {
           return null;

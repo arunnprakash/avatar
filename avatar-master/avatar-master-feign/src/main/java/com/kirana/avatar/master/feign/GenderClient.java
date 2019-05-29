@@ -11,7 +11,7 @@ import com.kirana.avatar.master.resource.GenderResource;
  * @author __Telmila__
  *
  */
-@FeignClient(name="gender-service", configuration={FeignClientContract.class})
+@FeignClient(name="master-service", configuration={FeignClientContract.class})
 public interface GenderClient extends GenderResource {
 
 }

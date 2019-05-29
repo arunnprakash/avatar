@@ -26,6 +26,7 @@ import com.kirana.avatar.master.dto.WareHouseDTO;
 import com.kirana.avatar.authorization.feign.UserClient;
 import com.kirana.avatar.common.dto.FilterCriteria;
 import com.kirana.avatar.common.exception.ApiException;
+import com.kirana.avatar.common.jpa.entity.BaseEntity_;
 import com.kirana.avatar.common.service.impl.BaseServiceImpl;
 import com.kirana.avatar.product.dto.PriceHistoryDTO;
 import com.kirana.avatar.product.feign.PriceHistoryClient;
@@ -67,8 +68,8 @@ public class SellerTransactionServiceImpl extends BaseServiceImpl<SellerTransact
 		model.setSellerAgent(sellerAgent.getId());
 		UserDTO truckDriver = userClient.getTruckDriverForSellerAgent(sellerAgent.getId());
 		model.setTruckDriver(truckDriver.getId());
-		WareHouseDTO wareHouseDTO = userClient.getWareHouseForTruckDriver(truckDriver.getId());
-		model.setWareHouse(wareHouseDTO.getId());
+		Map<String, Object> wareHouseDTO = userClient.getWareHouseForTruckDriver(truckDriver.getId());
+		model.setWareHouse((Long)wareHouseDTO.get(BaseEntity_.ID));
 		return model;
 	}
 

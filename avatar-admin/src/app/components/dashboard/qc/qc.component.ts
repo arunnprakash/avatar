@@ -8,7 +8,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { AuthService } from "../../../services/auth.service";
 import { UserDTO } from "../../../services/authorization/userdto.model";
 import { QcWareHouseMappingService } from "../../../services/authorization/qcwarehousemappingservice.generated"
-import { WareHouseDTO } from "../../../services/authorization/warehousedto.model";
+import { WareHouseDTO } from "../../../services/master/warehousedto.model";
 import { QcWareHouseMappingDTO } from "../../../services/authorization/qcwarehousemappingdto.model";
 import { QualityDTO } from "../../../services/product/qualitydto.model";
 import { QualityService } from '../../../services/product/qualityservice.generated';
@@ -73,7 +73,11 @@ export class QcComponent implements OnInit {
         } else {
             this.qcWareHouseMappingService.findByQcId(this.userDTO['id'])
             .subscribe((qcWareHouseMappingDTO: QcWareHouseMappingDTO) => {
-                this.wareHouseDTO = qcWareHouseMappingDTO.wareHouse;
+            	this.wareHouseDTO = qcWareHouseMappingDTO.wareHouse;
+            	//Todo: Delete console log
+            	console.log("-------WareHouse--------");
+            	console.log(qcWareHouseMappingDTO.wareHouse);
+            	console.log("-------/WareHouse--------");
                 this.authService.setWareHouse(this.wareHouseDTO);
                 this.loadOrders();
                 this.showLoading(false);

@@ -23,7 +23,6 @@ import org.springframework.stereotype.Component;
 import com.kirana.avatar.authorization.model.QcWareHouseMapping;
 import com.kirana.avatar.authorization.model.QcWareHouseMapping_;
 import com.kirana.avatar.authorization.model.User;
-import com.kirana.avatar.authorization.model.WareHouse;
 import com.kirana.avatar.common.jpa.entity.BaseEntity_;
 import com.kirana.avatar.common.jpa.specification.BaseEntitySpecification;
 
@@ -50,20 +49,12 @@ public class QcWareHouseMappingSpecification extends BaseEntitySpecification<QcW
 		};
 	}
 
-	public Specification<QcWareHouseMapping> hasWareHouse(final WareHouse wareHouse) {
+	public Specification<QcWareHouseMapping> hasWareHouse(final Long wareHouse) {
 		return new Specification<QcWareHouseMapping>() {
 			public Predicate toPredicate(Root<QcWareHouseMapping> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
 				return builder.equal(root.get(QcWareHouseMapping_.WARE_HOUSE), wareHouse);
 			}
 		};
 	}
-	public Specification<QcWareHouseMapping> hasWareHouseId(final Long wareHouseId) {
-		return new Specification<QcWareHouseMapping>() {
-			public Predicate toPredicate(Root<QcWareHouseMapping> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-				return builder.equal(root.get(QcWareHouseMapping_.WARE_HOUSE).get(BaseEntity_.ID), wareHouseId);
-			}
-		};
-	}
-
 
 }

@@ -10,18 +10,18 @@ import { BaseComponent } from '../../../base/base.component';
 
 import { UserService } from '../../../../services/authorization/userservice.generated';
 import { RoleService } from '../../../../services/authorization/roleservice.generated';
-import { LanguageService } from '../../../../services/authorization/languageservice.generated';
-import { VillageService } from '../../../../services/authorization/villageservice.generated';
-import { GenderService } from '../../../../services/authorization/genderservice.generated';
-import { AssetTypeService } from "../../../../services/authorization/assettypeservice.generated";
+import { LanguageService } from '../../../../services/master/languageservice.generated';
+import { VillageService } from '../../../../services/master/villageservice.generated';
+import { GenderService } from '../../../../services/master/genderservice.generated';
+import { AssetTypeService } from "../../../../services/master/assettypeservice.generated";
 import { AuthService } from "../../../../services/auth.service";
 
 import { UserDTO } from "../../../../services/authorization/userdto.model";
 import { RoleDTO } from "../../../../services/authorization/roledto.model";
-import { LanguageDTO } from "../../../../services/authorization/languagedto.model";
-import { VillageDTO } from "../../../../services/authorization/villagedto.model";
-import { GenderDTO } from "../../../../services/authorization/genderdto.model";
-import { AssetTypeDTO } from "../../../../services/authorization/assettypedto.model";
+import { LanguageDTO } from "../../../../services/master/languagedto.model";
+import { VillageDTO } from "../../../../services/master/villagedto.model";
+import { GenderDTO } from "../../../../services/master/genderdto.model";
+import { AssetTypeDTO } from "../../../../services/master/assettypedto.model";
 import { UserDetailComponent } from "../user-detail/user-detail.component";
 
 import { ObservableArray } from "tns-core-modules/data/observable-array";

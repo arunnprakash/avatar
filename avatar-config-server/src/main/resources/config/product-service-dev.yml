@@ -57,7 +57,7 @@ management:
 
 # HTTP (Tomcat) port
 server:
-  port: 1120
+  port: 1130
 
 # logging
 logging:

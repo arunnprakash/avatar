@@ -6,7 +6,7 @@ import { baseDetailTemplate } from '../../../base-detail/base.detail.template';
 import { baseDetailCss } from '../../../base-detail/base.detail.css';
 import { BaseDetailComponent } from '../../../base-detail/base.detail.component';
 import { AuthService } from "../../../../services/auth.service";
-import { WareHouseService } from "../../../../services/authorization/warehouseservice.generated";
+import { WareHouseService } from "../../../../services/master/warehouseservice.generated";
 
 @Component({
   selector: 'warehouse-detail',

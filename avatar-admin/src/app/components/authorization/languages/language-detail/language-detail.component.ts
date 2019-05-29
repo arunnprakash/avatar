@@ -6,7 +6,7 @@ import { baseDetailTemplate } from '../../../base-detail/base.detail.template';
 import { baseDetailCss } from '../../../base-detail/base.detail.css';
 import { BaseDetailComponent } from '../../../base-detail/base.detail.component';
 import { AuthService } from "../../../../services/auth.service";
-import { LanguageService } from "../../../../services/authorization/languageservice.generated";
+import { LanguageService } from "../../../../services/master/languageservice.generated";
 
 @Component({
   selector: 'language-detail',

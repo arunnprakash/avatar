@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import * as _ from "lodash";
 import { UserDTO } from "../services/authorization/userdto.model";
 import { RoleDTO } from "../services/authorization/roledto.model";
-import { WareHouseDTO } from "../services/authorization/warehousedto.model";
+import { WareHouseDTO } from "../services/master/warehousedto.model";
 
 const TOKEN = 'TOKEN';
 const USER_INFO = 'USER_INFO';

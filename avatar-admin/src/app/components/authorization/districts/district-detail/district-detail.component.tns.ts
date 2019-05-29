@@ -6,7 +6,7 @@ import { baseDetailTemplate } from '../../../base-detail/base.detail.template';
 import { baseDetailCss } from '../../../base-detail/base.detail.css';
 import { BaseDetailComponent } from '../../../base-detail/base.detail.component';
 import { AuthService } from "../../../../services/auth.service";
-import { DistrictService } from "../../../../services/authorization/districtservice.generated";
+import { DistrictService } from "../../../../services/master/districtservice.generated";
 
 @Component({
   selector: 'district-detail',

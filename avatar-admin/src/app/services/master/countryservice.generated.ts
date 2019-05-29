@@ -22,7 +22,7 @@ export class CountryService {
 
     constructor(private httpClient: HttpClient, private serviceConfig: ServiceConfig) { }
     /* GET */
-    public getAllGet(): Observable<CountryDTO[]> {
+    public getAll(): Observable<CountryDTO[]> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -30,7 +30,7 @@ export class CountryService {
             .pipe(catchError(this.handleError));
     }
 
-    public getAllExceptDeletedGet(): Observable<CountryDTO[]> {
+    public getAllExceptDeleted(): Observable<CountryDTO[]> {
         const url = this.serviceBaseURL + '/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
@@ -38,7 +38,7 @@ export class CountryService {
             .pipe(catchError(this.handleError));
     }
 
-    public getGet(id: number): Observable<CountryDTO> {
+    public get(id: number): Observable<CountryDTO> {
         const url = this.serviceBaseURL + '/' + id + '';
         const params = this.createHttpParams({});
 
@@ -50,7 +50,7 @@ export class CountryService {
     /* HEAD */
 
     /* POST */
-    public savePost(arg0: CountryDTO): Observable<CountryDTO> {
+    public save(arg0: CountryDTO): Observable<CountryDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -58,7 +58,7 @@ export class CountryService {
             .pipe(catchError(this.handleError));
     }
 
-    public getResourceByFilterAndPagingPost(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
+    public getResourceByFilterAndPaging(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
         const url = this.serviceBaseURL + '/with-filter-and-paging';
         const params = this.createHttpParams({});
 
@@ -66,7 +66,7 @@ export class CountryService {
             .pipe(catchError(this.handleError));
     }
 
-    public getResourceByFilterAndPagingExceptDeletedPost(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
+    public getResourceByFilterAndPagingExceptDeleted(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
         const url = this.serviceBaseURL + '/with-filter-and-paging/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
@@ -76,7 +76,7 @@ export class CountryService {
 
 
     /* PUT */
-    public updatePut(arg0: CountryDTO): Observable<CountryDTO> {
+    public update(arg0: CountryDTO): Observable<CountryDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -88,7 +88,7 @@ export class CountryService {
     /* PATCH */
 
     /* DELETE */
-    public deleteDelete(ids: number[]): Observable<boolean> {
+    public delete(ids: number[]): Observable<boolean> {
         const url = this.serviceBaseURL + '/' + ids + '';
         const params = this.createHttpParams({});
 

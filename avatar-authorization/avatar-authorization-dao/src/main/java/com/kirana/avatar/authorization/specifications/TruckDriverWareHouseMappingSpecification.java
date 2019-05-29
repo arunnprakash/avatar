@@ -23,7 +23,6 @@ import org.springframework.stereotype.Component;
 import com.kirana.avatar.authorization.model.TruckDriverWareHouseMapping;
 import com.kirana.avatar.authorization.model.TruckDriverWareHouseMapping_;
 import com.kirana.avatar.authorization.model.User;
-import com.kirana.avatar.authorization.model.WareHouse;
 import com.kirana.avatar.common.jpa.entity.BaseEntity_;
 import com.kirana.avatar.common.jpa.specification.BaseEntitySpecification;
 
@@ -50,20 +49,11 @@ public class TruckDriverWareHouseMappingSpecification extends BaseEntitySpecific
 		};
 	}
 
-	public Specification<TruckDriverWareHouseMapping> hasWareHouse(final WareHouse wareHouse) {
+	public Specification<TruckDriverWareHouseMapping> hasWareHouse(final Long wareHouse) {
 		return new Specification<TruckDriverWareHouseMapping>() {
 			public Predicate toPredicate(Root<TruckDriverWareHouseMapping> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
 				return builder.equal(root.get(TruckDriverWareHouseMapping_.WARE_HOUSE), wareHouse);
 			}
 		};
 	}
-	public Specification<TruckDriverWareHouseMapping> hasWareHouseId(final Long wareHouseId) {
-		return new Specification<TruckDriverWareHouseMapping>() {
-			public Predicate toPredicate(Root<TruckDriverWareHouseMapping> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-				return builder.equal(root.get(TruckDriverWareHouseMapping_.WARE_HOUSE).get(BaseEntity_.ID), wareHouseId);
-			}
-		};
-	}
-
-
 }

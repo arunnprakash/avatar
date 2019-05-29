@@ -10,15 +10,15 @@ import { baseCss } from '../../../base/base.css';
 import { BaseComponent } from '../../../base/base.component';
 
 import { HolidayService } from "../../../../services/product/holidayservice.generated";
-import { StateService } from '../../../../services/authorization/stateservice.generated';
+import { StateService } from '../../../../services/master/stateservice.generated';
 import { AuthService } from "../../../../services/auth.service";
-import { StateDTO } from "../../../../services/authorization/statedto.model";
+import { StateDTO } from "../../../../services/master/statedto.model";
 import { HolidayDTO } from "../../../../services/product/holidaydto.model";
 import { HolidayDetailComponent } from "../holiday-detail/holiday-detail.component";
-import { DistrictDTO } from "../../../../services/authorization/districtdto.model";
-import { DistrictService } from '../../../../services/authorization/districtservice.generated';
-import { TalukDTO } from "../../../../services/authorization/talukdto.model";
-import { TalukService } from '../../../../services/authorization/talukservice.generated';
+import { DistrictDTO } from "../../../../services/master/districtdto.model";
+import { DistrictService } from '../../../../services/master/districtservice.generated';
+import { TalukDTO } from "../../../../services/master/talukdto.model";
+import { TalukService } from '../../../../services/master/talukservice.generated';
 
 import { ObservableArray } from "tns-core-modules/data/observable-array";
 import { TokenModel, RadAutoCompleteTextView } from "nativescript-ui-autocomplete";

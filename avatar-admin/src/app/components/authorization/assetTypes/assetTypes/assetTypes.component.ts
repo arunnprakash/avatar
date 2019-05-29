@@ -9,9 +9,9 @@ import { baseTemplate } from '../../../base/base.template';
 import { baseCss } from '../../../base/base.css';
 import { BaseComponent } from '../../../base/base.component';
 
-import { AssetTypeService } from "../../../../services/authorization/assettypeservice.generated";
+import { AssetTypeService } from "../../../../services/master/assettypeservice.generated";
 import { AuthService } from "../../../../services/auth.service";
-import { AssetTypeDTO } from "../../../../services/authorization/assettypedto.model";
+import { AssetTypeDTO } from "../../../../services/master/assettypedto.model";
 import { UsersAssetTypeDetailComponent } from "../assetType-detail/assetType-detail.component";
 
 import * as _ from "lodash";

@@ -9,9 +9,9 @@ import { baseTemplate } from '../../../base/base.template';
 import { baseCss } from '../../../base/base.css';
 import { BaseComponent } from '../../../base/base.component';
 
-import { TalukService } from "../../../../services/authorization/talukservice.generated";
+import { TalukService } from "../../../../services/master/talukservice.generated";
 import { AuthService } from "../../../../services/auth.service";
-import { TalukDTO } from "../../../../services/authorization/talukdto.model";
+import { TalukDTO } from "../../../../services/master/talukdto.model";
 import { TalukDetailComponent } from "../taluk-detail/taluk-detail.component";
 
 import * as _ from "lodash";

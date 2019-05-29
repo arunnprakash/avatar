@@ -51,6 +51,7 @@ import { ApiUrls } from './api-settings/api-urls';
 import { AuthService } from "./services/auth.service";
 import { TokenInterceptor } from "./services/token.interceptor";
 import { NeedAuthGuard } from "./services/needauthguard";
+import { MasterAPIModule } from "./services/master/api.module";
 import { AuthorizationAPIModule } from "./services/authorization/api.module";
 import { ProductAPIModule } from "./services/product/api.module";
 import { TransactionAPIModule } from "./services/transaction/api.module";
@@ -86,6 +87,7 @@ export function createTranslateLoader() {
             useFactory: createTranslateLoader
         }
     }),
+    MasterAPIModule.forRoot({context: ApiUrls.masterServiceApiBaseUrl}),
     AuthorizationAPIModule.forRoot({context: ApiUrls.authorizationServiceApiBaseUrl}),
     ProductAPIModule.forRoot({context: ApiUrls.productServiceApiBaseUrl}),
     TransactionAPIModule.forRoot({context: ApiUrls.transactionServiceApiBaseUrl}),

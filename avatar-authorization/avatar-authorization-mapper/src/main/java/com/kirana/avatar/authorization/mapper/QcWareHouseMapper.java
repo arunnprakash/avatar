@@ -28,58 +28,36 @@ public interface QcWareHouseMapper extends BaseMapper<QcWareHouseMappingDTO, QcW
 	})
 	public QcWareHouseMappingDTO toDTO(QcWareHouseMapping model);
 
-	/*
-	 * @Mappings({
-	 * 
-	 * @Mapping(target = "id", ignore = true),
-	 * 
-	 * @Mapping(target = "createdBy", ignore = true),
-	 * 
-	 * @Mapping(target = "createdDate", ignore = true),
-	 * 
-	 * @Mapping(target = "lastModifiedBy", ignore = true),
-	 * 
-	 * @Mapping(target = "lastModifiedDate", ignore = true),
-	 * 
-	 * @Mapping(target = "version", ignore = true),
-	 * 
-	 * @Mapping(target = "deleted", ignore = true),
-	 * 
-	 * @Mapping(target = "wareHouse", ignore = true),
-	 * 
-	 * @Mapping(target = "preferredLanguage", ignore = true),
-	 * 
-	 * @Mapping(target = "village", ignore = true),
-	 * 
-	 * @Mapping(target = "gender", ignore = true) }) public QcWareHouseMapping
-	 * toModel(QcWareHouseMappingDTO dto);
-	 */
+	
+	@Mappings({
+		@Mapping(target = "id", ignore = true),
+		@Mapping(target = "createdBy", ignore = true),
+		@Mapping(target = "createdDate", ignore = true),
+		@Mapping(target = "lastModifiedBy", ignore = true),
+		@Mapping(target = "lastModifiedDate", ignore = true),
+		@Mapping(target = "version", ignore = true),
+		@Mapping(target = "deleted", ignore = true),
+		@Mapping(target = "wareHouse", ignore = true),
+		@Mapping(source = "qc.preferredLanguage", target = "qc.preferredLanguage", ignore = true),
+		@Mapping(source = "qc.village", target = "qc.village", ignore = true),
+		@Mapping(source = "qc.gender", target = "qc.gender", ignore = true)
+	})
+	public QcWareHouseMapping toModel(QcWareHouseMappingDTO dto);
+	 
 
-	/*
-	 * @Mappings({
-	 * 
-	 * @Mapping(target = "id", ignore = true),
-	 * 
-	 * @Mapping(target = "createdBy", ignore = true),
-	 * 
-	 * @Mapping(target = "createdDate", ignore = true),
-	 * 
-	 * @Mapping(target = "lastModifiedBy", ignore = true),
-	 * 
-	 * @Mapping(target = "lastModifiedDate", ignore = true),
-	 * 
-	 * @Mapping(target = "version", ignore = true),
-	 * 
-	 * @Mapping(target = "deleted", ignore = true),
-	 * 
-	 * @Mapping(target = "wareHouse", ignore = true),
-	 * 
-	 * @Mapping(target = "preferredLanguage", ignore = true),
-	 * 
-	 * @Mapping(target = "village", ignore = true),
-	 * 
-	 * @Mapping(target = "gender", ignore = true) }) public QcWareHouseMapping
-	 * updateModel(QcWareHouseMappingDTO dto, @MappingTarget QcWareHouseMapping
-	 * model);
-	 */
+	@Mappings({
+		@Mapping(target = "id", ignore = true),
+		@Mapping(target = "createdBy", ignore = true),
+		@Mapping(target = "createdDate", ignore = true),
+		@Mapping(target = "lastModifiedBy", ignore = true),
+		@Mapping(target = "lastModifiedDate", ignore = true),
+		@Mapping(target = "version", ignore = true),
+		@Mapping(target = "deleted", ignore = true),
+		@Mapping(target = "wareHouse", ignore = true),
+		@Mapping(source = "qc.preferredLanguage", target = "qc.preferredLanguage", ignore = true),
+		@Mapping(source = "qc.village", target = "qc.village", ignore = true),
+		@Mapping(source = "qc.gender", target = "qc.gender", ignore = true)
+	})
+	public QcWareHouseMapping updateModel(QcWareHouseMappingDTO dto, @MappingTarget QcWareHouseMapping model);
+
 }

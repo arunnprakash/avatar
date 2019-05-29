@@ -48,5 +48,5 @@ public interface UserService extends BaseService<UserDTO>{
 	
 	public UserDTO getSellerAgentForTruckDriver(Long truckDriverId);
 
-	public  Map<String, Object> getWareHouseForTruckDriver(Long truckDriverId);
+	public Map<String, Object> getWareHouseForTruckDriver(Long truckDriverId);
 }

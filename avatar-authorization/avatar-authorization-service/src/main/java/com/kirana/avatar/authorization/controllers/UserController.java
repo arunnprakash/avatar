@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kirana.avatar.authorization.dto.LoginRequest;
 import com.kirana.avatar.authorization.dto.LoginResponse;
 import com.kirana.avatar.authorization.dto.UserDTO;
-import com.kirana.avatar.authorization.dto.WareHouseDTO;
 import com.kirana.avatar.authorization.resource.UserResource;
 import com.kirana.avatar.authorization.service.UserService;
 import com.kirana.avatar.common.controllers.BaseController;
@@ -139,7 +138,7 @@ public class UserController extends BaseController<UserService, UserDTO> impleme
 	}
 
 	@Override
-	public WareHouseDTO getWareHouseForTruckDriver(Long truckDriverId) {
+	public Map<String, Object> getWareHouseForTruckDriver(Long truckDriverId) {
 		return userService.getWareHouseForTruckDriver(truckDriverId);
 	}
 

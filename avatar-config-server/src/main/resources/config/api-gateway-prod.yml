@@ -50,6 +50,8 @@ zuul:
   routes:
       authorization-service:
         path: /api/**
+        serviceId: master-service
+        path: /api/**
         serviceId: authorization-service
       product-service:
         path: /api/**

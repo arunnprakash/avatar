@@ -9,9 +9,9 @@ import { baseTemplate } from '../../../base/base.template';
 import { baseCss } from '../../../base/base.css';
 import { BaseComponent } from '../../../base/base.component';
 
-import { StateService } from "../../../../services/authorization/stateservice.generated";
+import { StateService } from "../../../../services/master/stateservice.generated";
 import { AuthService } from "../../../../services/auth.service";
-import { StateDTO } from "../../../../services/authorization/statedto.model";
+import { StateDTO } from "../../../../services/master/statedto.model";
 import { StateDetailComponent } from "../state-detail/state-detail.component";
 
 import * as _ from "lodash";

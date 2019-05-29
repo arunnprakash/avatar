@@ -11,15 +11,15 @@ import { BaseComponent } from '../../../base/base.component';
 
 import { ProductRegionService } from "../../../../services/product/productregionservice.generated";
 import { ProductService } from '../../../../services/product/productservice.generated';
-import { StateService } from '../../../../services/authorization/stateservice.generated';
+import { StateService } from '../../../../services/master/stateservice.generated';
 import { AuthService } from "../../../../services/auth.service";
-import { StateDTO } from "../../../../services/authorization/statedto.model";
+import { StateDTO } from "../../../../services/master/statedto.model";
 import { ProductDTO } from "../../../../services/product/productdto.model";
 import { ProductRegionDTO } from "../../../../services/product/productregiondto.model";
-import { DistrictDTO } from "../../../../services/authorization/districtdto.model";
-import { DistrictService } from '../../../../services/authorization/districtservice.generated';
-import { TalukDTO } from "../../../../services/authorization/talukdto.model";
-import { TalukService } from '../../../../services/authorization/talukservice.generated';
+import { DistrictDTO } from "../../../../services/master/districtdto.model";
+import { DistrictService } from '../../../../services/master/districtservice.generated';
+import { TalukDTO } from "../../../../services/master/talukdto.model";
+import { TalukService } from '../../../../services/master/talukservice.generated';
 import { ProductRegionDetailComponent } from "../productregion-detail/productregion-detail.component";
 
 

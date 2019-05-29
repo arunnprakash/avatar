@@ -23,7 +23,7 @@ export class AssetService {
 
     constructor(private httpClient: HttpClient, private serviceConfig: ServiceConfig) { }
     /* GET */
-    public getAllGet(): Observable<AssetDTO[]> {
+    public getAll(): Observable<AssetDTO[]> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -31,7 +31,7 @@ export class AssetService {
             .pipe(catchError(this.handleError));
     }
 
-    public getAllExceptDeletedGet(): Observable<AssetDTO[]> {
+    public getAllExceptDeleted(): Observable<AssetDTO[]> {
         const url = this.serviceBaseURL + '/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
@@ -39,7 +39,7 @@ export class AssetService {
             .pipe(catchError(this.handleError));
     }
 
-    public getGet(id: number): Observable<AssetDTO> {
+    public get(id: number): Observable<AssetDTO> {
         const url = this.serviceBaseURL + '/' + id + '';
         const params = this.createHttpParams({});
 
@@ -51,7 +51,7 @@ export class AssetService {
     /* HEAD */
 
     /* POST */
-    public savePost(arg0: AssetDTO): Observable<AssetDTO> {
+    public save(arg0: AssetDTO): Observable<AssetDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -59,7 +59,7 @@ export class AssetService {
             .pipe(catchError(this.handleError));
     }
 
-    public getResourceByFilterAndPagingPost(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
+    public getResourceByFilterAndPaging(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
         const url = this.serviceBaseURL + '/with-filter-and-paging';
         const params = this.createHttpParams({});
 
@@ -67,7 +67,7 @@ export class AssetService {
             .pipe(catchError(this.handleError));
     }
 
-    public getResourceByFilterAndPagingExceptDeletedPost(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
+    public getResourceByFilterAndPagingExceptDeleted(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
         const url = this.serviceBaseURL + '/with-filter-and-paging/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
@@ -77,7 +77,7 @@ export class AssetService {
 
 
     /* PUT */
-    public updatePut(arg0: AssetDTO): Observable<AssetDTO> {
+    public update(arg0: AssetDTO): Observable<AssetDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -89,7 +89,7 @@ export class AssetService {
     /* PATCH */
 
     /* DELETE */
-    public deleteDelete(ids: number[]): Observable<boolean> {
+    public delete(ids: number[]): Observable<boolean> {
         const url = this.serviceBaseURL + '/' + ids + '';
         const params = this.createHttpParams({});
 

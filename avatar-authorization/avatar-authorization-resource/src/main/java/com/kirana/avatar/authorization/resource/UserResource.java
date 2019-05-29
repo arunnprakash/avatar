@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.kirana.avatar.authorization.dto.LoginRequest;
 import com.kirana.avatar.authorization.dto.LoginResponse;
 import com.kirana.avatar.authorization.dto.UserDTO;
-import com.kirana.avatar.authorization.dto.WareHouseDTO;
 import com.kirana.avatar.common.resource.BaseResource;
 
 /**
@@ -79,5 +78,5 @@ public interface UserResource extends BaseResource<UserDTO> {
 	public UserDTO getSellerAgentForTruckDriver(@PathVariable("truckDriverId") Long truckDriverId);
 	
 	@GetMapping(value= {"/truck-driver/{truckDriverId}/warehouse"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-	public WareHouseDTO getWareHouseForTruckDriver(@PathVariable("truckDriverId") Long truckDriverId);
+	public Map<String, Object> getWareHouseForTruckDriver(@PathVariable("truckDriverId") Long truckDriverId);
 }

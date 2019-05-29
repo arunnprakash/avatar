@@ -14,9 +14,9 @@ import { AuthService } from "../../../../services/auth.service";
 import { TruckDriverWareHouseMappingDTO } from "../../../../services/authorization/truckdriverwarehousemappingdto.model";
 import { TruckDriverWareHouseMappingDetailComponent } from "../truckdriver-warehouse-mapping-detail/truckdriver-warehouse-mapping-detail.component";
 import { UserDTO } from "../../../../services/authorization/userdto.model";
-import { WareHouseDTO } from "../../../../services/authorization/warehousedto.model";
+import { WareHouseDTO } from "../../../../services/master/warehousedto.model";
 import { UserService } from '../../../../services/authorization/userservice.generated';
-import { WareHouseService } from "../../../../services/authorization/warehouseservice.generated";
+import { WareHouseService } from "../../../../services/master/warehouseservice.generated";
 
 import { ObservableArray } from "tns-core-modules/data/observable-array";
 import { TokenModel, RadAutoCompleteTextView } from "nativescript-ui-autocomplete";

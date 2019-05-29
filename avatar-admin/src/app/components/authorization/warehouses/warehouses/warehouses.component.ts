@@ -9,12 +9,12 @@ import { baseTemplate } from '../../../base/base.template';
 import { baseCss } from '../../../base/base.css';
 import { BaseComponent } from '../../../base/base.component';
 
-import { WareHouseService } from "../../../../services/authorization/warehouseservice.generated";
+import { WareHouseService } from "../../../../services/master/warehouseservice.generated";
 import { AuthService } from "../../../../services/auth.service";
-import { WareHouseDTO } from "../../../../services/authorization/warehousedto.model";
+import { WareHouseDTO } from "../../../../services/master/warehousedto.model";
 import { WareHouseDetailComponent } from "../warehouse-detail/warehouse-detail.component";
-import { TalukService } from '../../../../services/authorization/talukservice.generated';
-import { TalukDTO } from "../../../../services/authorization/talukdto.model";
+import { TalukService } from '../../../../services/master/talukservice.generated';
+import { TalukDTO } from "../../../../services/master/talukdto.model";
 
 import * as _ from "lodash";
 

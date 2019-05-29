@@ -7,10 +7,10 @@ import { baseDetailCss } from '../../../base-detail/base.detail.css';
 import { BaseDetailComponent } from '../../../base-detail/base.detail.component';
 import { AuthService } from "../../../../services/auth.service";
 import { HolidayService } from "../../../../services/product/holidayservice.generated";
-import { DistrictDTO } from "../../../../services/authorization/districtdto.model";
-import { DistrictService } from '../../../../services/authorization/districtservice.generated';
-import { TalukDTO } from "../../../../services/authorization/talukdto.model";
-import { TalukService } from '../../../../services/authorization/talukservice.generated';
+import { DistrictDTO } from "../../../../services/master/districtdto.model";
+import { DistrictService } from '../../../../services/master/districtservice.generated';
+import { TalukDTO } from "../../../../services/master/talukdto.model";
+import { TalukService } from '../../../../services/master/talukservice.generated';
 
 import * as _ from "lodash";
 

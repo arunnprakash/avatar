@@ -9,9 +9,9 @@ import { baseTemplate } from '../../../base/base.template';
 import { baseCss } from '../../../base/base.css';
 import { BaseComponent } from '../../../base/base.component';
 
-import { VillageService } from "../../../../services/authorization/villageservice.generated";
+import { VillageService } from "../../../../services/master/villageservice.generated";
 import { AuthService } from "../../../../services/auth.service";
-import { VillageDTO } from "../../../../services/authorization/villagedto.model";
+import { VillageDTO } from "../../../../services/master/villagedto.model";
 import { VillageDetailComponent } from "../village-detail/village-detail.component";
 
 import * as _ from "lodash";

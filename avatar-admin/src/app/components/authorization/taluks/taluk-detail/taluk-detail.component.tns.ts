@@ -6,7 +6,7 @@ import { baseDetailTemplate } from '../../../base-detail/base.detail.template';
 import { baseDetailCss } from '../../../base-detail/base.detail.css';
 import { BaseDetailComponent } from '../../../base-detail/base.detail.component';
 import { AuthService } from "../../../../services/auth.service";
-import { TalukService } from "../../../../services/authorization/talukservice.generated";
+import { TalukService } from "../../../../services/master/talukservice.generated";
 
 @Component({
   selector: 'taluk-detail',

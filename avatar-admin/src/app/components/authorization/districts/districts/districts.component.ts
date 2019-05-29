@@ -9,9 +9,9 @@ import { baseTemplate } from '../../../base/base.template';
 import { baseCss } from '../../../base/base.css';
 import { BaseComponent } from '../../../base/base.component';
 
-import { DistrictService } from "../../../../services/authorization/districtservice.generated";
+import { DistrictService } from "../../../../services/master/districtservice.generated";
 import { AuthService } from "../../../../services/auth.service";
-import { DistrictDTO } from "../../../../services/authorization/districtdto.model";
+import { DistrictDTO } from "../../../../services/master/districtdto.model";
 import { DistrictDetailComponent } from "../district-detail/district-detail.component";
 
 import * as _ from "lodash";

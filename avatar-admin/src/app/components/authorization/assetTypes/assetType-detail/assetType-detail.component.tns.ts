@@ -6,7 +6,7 @@ import { baseDetailTemplate } from '../../../base-detail/base.detail.template';
 import { baseDetailCss } from '../../../base-detail/base.detail.css';
 import { BaseDetailComponent } from '../../../base-detail/base.detail.component';
 import { AuthService } from "../../../../services/auth.service";
-import { AssetTypeService } from "../../../../services/authorization/assettypeservice.generated";
+import { AssetTypeService } from "../../../../services/master/assettypeservice.generated";
 
 @Component({
   selector: 'assetType-detail',

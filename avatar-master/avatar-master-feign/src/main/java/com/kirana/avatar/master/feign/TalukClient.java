@@ -11,7 +11,7 @@ import com.kirana.avatar.master.resource.TalukResource;
  * @author __Telmila__
  *
  */
-@FeignClient(name="taluk-service", configuration={FeignClientContract.class})
+@FeignClient(name="master-service", configuration={FeignClientContract.class})
 public interface TalukClient extends TalukResource {
 
 }

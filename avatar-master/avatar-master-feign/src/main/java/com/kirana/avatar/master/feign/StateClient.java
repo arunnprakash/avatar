@@ -11,7 +11,7 @@ import com.kirana.avatar.master.resource.StateResource;
  * @author __Telmila__
  *
  */
-@FeignClient(name="state-service", configuration={FeignClientContract.class})
+@FeignClient(name="master-service", configuration={FeignClientContract.class})
 public interface StateClient extends StateResource {
 
 }

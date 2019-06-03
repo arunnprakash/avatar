@@ -11,7 +11,7 @@ import com.kirana.avatar.master.resource.AssetResource;
  * @author __Telmila__
  *
  */
-@FeignClient(name="asset-service", configuration={FeignClientContract.class})
+@FeignClient(name="master-service", configuration={FeignClientContract.class})
 public interface AssetClient extends AssetResource {
 
 }

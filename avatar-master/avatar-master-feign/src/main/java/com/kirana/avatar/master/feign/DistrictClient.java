@@ -11,7 +11,7 @@ import com.kirana.avatar.master.resource.DistrictResource;
  * @author __Telmila__
  *
  */
-@FeignClient(name="district-service", configuration={FeignClientContract.class})
+@FeignClient(name="master-service", configuration={FeignClientContract.class})
 public interface DistrictClient extends DistrictResource {
 
 }

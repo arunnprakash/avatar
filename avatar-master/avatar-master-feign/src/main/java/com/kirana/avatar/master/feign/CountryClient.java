@@ -11,7 +11,7 @@ import com.kirana.avatar.master.resource.CountryResource;
  * @author __Telmila__
  *
  */
-@FeignClient(name="country-service", configuration={FeignClientContract.class})
+@FeignClient(name="master-service", configuration={FeignClientContract.class})
 public interface CountryClient extends CountryResource {
 
 }

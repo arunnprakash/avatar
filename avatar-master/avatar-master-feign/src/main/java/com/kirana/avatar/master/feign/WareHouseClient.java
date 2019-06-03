@@ -11,7 +11,7 @@ import com.kirana.avatar.master.resource.WareHouseResource;
  * @author __Telmila__
  *
  */
-@FeignClient(name="warehouse-service", configuration={FeignClientContract.class})
+@FeignClient(name="master-service", configuration={FeignClientContract.class})
 public interface WareHouseClient extends WareHouseResource {
 
 }

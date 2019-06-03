@@ -96,9 +96,6 @@ import lombok.extern.slf4j.Slf4j;
 public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, UserRepository, UserSpecification> implements UserService, UserDetailsService {
 
 	private UserRepository userRepository;
-	private LanguageClient languageClient;
-	private VillageClient villageClient;
-	private GenderClient genderClient;
 	private RoleRepository roleRepository;
 	private UserRoleRepository userRoleRepository;
 	private AssetClient assetClient;
@@ -118,6 +115,9 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	private JwtConfig jwtConfig;
 	private ObjectMapper objectMapper;
+	private LanguageClient languageClient;
+	private VillageClient villageClient;
+	private GenderClient genderClient;
 
 	public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, UserSpecification userSpecification,
 			LanguageClient languageClient, VillageClient villageClient, GenderClient genderClient,
@@ -134,9 +134,6 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 		this.userRepository = userRepository;
 		this.userMapper = userMapper;
 		this.userSpecification = userSpecification;
-		this.languageClient = languageClient;
-		this.villageClient = villageClient;
-		this.genderClient = genderClient;
 		this.roleRepository = roleRepository;
 		this.userRoleRepository = userRoleRepository;
 		this.assetClient = assetClient;
@@ -154,6 +151,9 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 		this.jwtConfig = jwtConfig;
 		this.objectMapper = objectMapper;
+		this.languageClient = languageClient;
+		this.villageClient = villageClient;
+		this.genderClient = genderClient;
 	}
 
 	@Override
@@ -305,7 +305,6 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public UserDTO findByUserNameOrMobileNumber(String userNameOrMobileNumber) {
 		User user = userRepository
 				.findByUserNameOrMobileNumber(userNameOrMobileNumber, userNameOrMobileNumber)
@@ -313,18 +312,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 					new UsernameNotFoundException("User not found with username or mobilenumber : " + userNameOrMobileNumber)
 				);
 		log.debug("User :: {}", user);
-		UserDTO userDTO = userMapper.toDTO(user);
-		LanguageDTO languageDTO = languageClient.get(user.getPreferredLanguage());
-		Map<String, Object> languageMap = objectMapper.convertValue(languageDTO, Map.class);
-		VillageDTO villageDTO = villageClient.get(user.getVillage());
-		Map<String, Object> villageMap = objectMapper.convertValue(villageDTO, Map.class);
-		GenderDTO genderDTO = genderClient.get(user.getGender());
-		Map<String, Object> genderMap = objectMapper.convertValue(genderDTO, Map.class);
-		return userDTO.toBuilder()
-				.preferredLanguage(languageMap)
-				.village(villageMap)
-				.gender(genderMap)
-				.build();
+		return userMapper.toDTO(user);
 	}
 
 	@Override
@@ -524,5 +512,35 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 				return objectMapper.convertValue(warehouseDTO, Map.class);
 			})
 			.orElseThrow(ApiException::resourceNotFound);
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> getPreferredLanguage(UserDTO userDTO) {
+		return userRepository.findById(userDTO.getId())
+				.map(User::getPreferredLanguage)
+				.map(languageClient::get)
+				.map(languageDTO->objectMapper.convertValue(languageDTO, Map.class))
+				.get();
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> getVillage(UserDTO userDTO) {
+		return userRepository.findById(userDTO.getId())
+				.map(User::getVillage)
+				.map(villageClient::get)
+				.map(villageDTO->objectMapper.convertValue(villageDTO, Map.class))
+				.get();
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> getGender(UserDTO userDTO) {
+		return userRepository.findById(userDTO.getId())
+				.map(User::getGender)
+				.map(genderClient::get)
+				.map(genderDTO->objectMapper.convertValue(genderDTO, Map.class))
+				.get();
 	}
 }

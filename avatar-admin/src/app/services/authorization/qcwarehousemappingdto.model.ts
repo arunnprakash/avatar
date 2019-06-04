@@ -3,5 +3,5 @@ import { UserDTO } from './userdto.model';
 
 export class QcWareHouseMappingDTO {
     qc: UserDTO;
-    wareHouse: any;
+    wareHouse: { [index: string]: any };
 }

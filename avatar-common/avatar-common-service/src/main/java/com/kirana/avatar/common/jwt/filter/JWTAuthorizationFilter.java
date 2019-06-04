@@ -18,7 +18,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.kirana.avatar.common.dto.UserInfo;
-import com.kirana.avatar.common.dto.UserInfo.UserInfoBuilder;
 import com.kirana.avatar.common.jwt.TokenProvider;
 import com.kirana.avatar.common.jwt.config.JwtConfig;
 
@@ -33,11 +32,9 @@ import lombok.extern.slf4j.Slf4j;
 public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
 	private JwtConfig jwtConfig;
-	private TokenProvider tokenProvider;
 	public JWTAuthorizationFilter(JwtConfig jwtConfig, TokenProvider tokenProvider) {
 		super();
 		this.jwtConfig = jwtConfig;
-		this.tokenProvider = tokenProvider;
 	}
 
 	@Override

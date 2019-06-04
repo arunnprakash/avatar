@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LanguageService } from '../../services/master/languageservice.generated';
 import { LanguageDTO } from "../../services/master/languagedto.model";
 import { UserService } from '../../services/authorization/userservice.generated';
 import { UserDTO } from "../../services/authorization/userdto.model";
@@ -19,13 +18,13 @@ export class LoginComponent implements OnInit {
     loginResponse: LoginResponse;
     loginProgress: boolean;
     loginError: boolean;
-  constructor(private userService: UserService, private languageService: LanguageService,
+  constructor(private userService: UserService, 
 		  private authService: AuthService, 
           private translate: TranslateService, private router: Router) { }
 
   ngOnInit() {
       if (this.authService.isLogged()) {
-          this.setPreferredLanguage(this.authService.getPreferredLanguage().languageCode);
+          this.setPreferredLanguage(this.authService.getUserInfo().preferredLanguage['languageCode']);
           console.info("Already Logged in So Login Navigate to Home");
           this.router.navigate(["/home"]).then( (e) => {
               if (e) {
@@ -55,24 +54,15 @@ export class LoginComponent implements OnInit {
           console.log(loginResponse);
           this.authService.setToken(this.loginResponse.accessToken);
           this.authService.setUserInfo(this.loginResponse.userDTO);
-          this.languageService.get(loginResponse.userDTO.preferredLanguage['id']).subscribe(( languageDTO: LanguageDTO ) => {   
-        	  this.authService.setPreferredLanguage(languageDTO);
-        	  this.setPreferredLanguage(languageDTO.languageCode);
-        	  console.info("Login Navigate to Home");
-              this.router.navigate(["/home"]).then( (e) => {
-                  if (e) {
-                      console.log("Navigation to Home is successful!");
-                    } else {
-                      console.log("Navigation to Home has failed!");
-                    }
-                  });
-          },
-          ( error ) => {
-        	  this.loginError = true;
-        	  this.loginProgress = false;
-        	  console.error("get preferred language error!");
-        	  console.error(error);
-          });
+    	  this.setPreferredLanguage(this.loginResponse.userDTO.preferredLanguage['languageCode']);
+    	  console.info("Login Navigate to Home");
+          this.router.navigate(["/home"]).then( (e) => {
+              if (e) {
+                  console.log("Navigation to Home is successful!");
+                } else {
+                  console.log("Navigation to Home has failed!");
+                }
+              });
       },
           ( error ) => {
               this.loginError = true;

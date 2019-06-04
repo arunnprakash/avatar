@@ -73,7 +73,7 @@ export class QcComponent implements OnInit {
         } else {
             this.qcWareHouseMappingService.findByQcId(this.userDTO['id'])
             .subscribe((qcWareHouseMappingDTO: QcWareHouseMappingDTO) => {
-            	this.wareHouseDTO = qcWareHouseMappingDTO.wareHouse;
+            	//this.wareHouseDTO = qcWareHouseMappingDTO.wareHouse;
             	//Todo: Delete console log
             	console.log("-------WareHouse--------");
             	console.log(qcWareHouseMappingDTO.wareHouse);

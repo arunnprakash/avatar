@@ -81,6 +81,7 @@ import com.kirana.avatar.authorization.specifications.TruckDriverWareHouseMappin
 import com.kirana.avatar.common.dto.FilterCriteria;
 import com.kirana.avatar.common.dto.UserInfo;
 import com.kirana.avatar.common.exception.ApiException;
+import com.kirana.avatar.common.jwt.TokenProvider;
 import com.kirana.avatar.common.jwt.config.JwtConfig;
 import com.kirana.avatar.common.service.impl.BaseServiceImpl;
 
@@ -118,7 +119,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 	private LanguageClient languageClient;
 	private VillageClient villageClient;
 	private GenderClient genderClient;
-
+	private TokenProvider tokenProvider;
 	public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, UserSpecification userSpecification,
 			LanguageClient languageClient, VillageClient villageClient, GenderClient genderClient,
 			RoleRepository roleRepository, UserRoleRepository userRoleRepository,
@@ -129,7 +130,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 			SellerAgentTruckDriverMappingRepository sellerAgentTruckDriverMappingRepository, SellerAgentTruckDriverMappingSpecification sellerAgentTruckDriverMappingSpecification, 
 			BuyerAgentMappingRepository buyerAgentMappingRepository, BuyerAgentMappingSpecification buyerAgentMappingSpecification,
 			TruckDriverWareHouseMappingRepository truckDriverWareHouseMappingRepository, TruckDriverWareHouseMappingSpecification truckDriverWareHouseMappingSpecification,
-			BCryptPasswordEncoder bCryptPasswordEncoder, JwtConfig jwtConfig, ObjectMapper objectMapper) {
+			BCryptPasswordEncoder bCryptPasswordEncoder, JwtConfig jwtConfig, ObjectMapper objectMapper,
+			TokenProvider tokenProvider) {
 		super(userRepository, userMapper, userSpecification);
 		this.userRepository = userRepository;
 		this.userMapper = userMapper;
@@ -154,6 +156,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 		this.languageClient = languageClient;
 		this.villageClient = villageClient;
 		this.genderClient = genderClient;
+		this.tokenProvider = tokenProvider;
 	}
 
 	@Override
@@ -312,7 +315,12 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 					new UsernameNotFoundException("User not found with username or mobilenumber : " + userNameOrMobileNumber)
 				);
 		log.debug("User :: {}", user);
-		return userMapper.toDTO(user);
+		UserDTO userDTO = userMapper.toDTO(user);
+		return userDTO.toBuilder()
+				.preferredLanguage(getPreferredLanguage(user))
+				.village(getVillage(user))
+				.gender(getGender(user))
+				.build(); 
 	}
 
 	@Override
@@ -330,13 +338,14 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 		
 		// The "UserInfo" class is provided by common and represents a model class for user to be returned by UserDetailsService
 		// And used by auth manager to verify and check user authentication.
-		return UserInfo.create()
+		UserInfo userinfo = UserInfo.create()
 				.password(user.getPassword())
 				.username(user.getUserName())
 				.mobileNumber(user.getMobileNumber())
 				.authorities(grantedAuthorities)
 				.build();
-		
+		String token = tokenProvider.generateToken(userinfo);
+		return UserInfo.create(userinfo).userToken(token).build();
 	}
 
 	@Override
@@ -382,7 +391,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 				user -> {return String.valueOf(user.getCreatedDate().getYear());},
 				counting()
 				));
-		Map<String, Long> formerResult = new LinkedHashMap<String, Long>();
+		Map<String, Long> formerResult = new LinkedHashMap<>();
 		for (int i = 0; i < depth; i++) {
 			String year = String.valueOf(startDate.getYear());
 			if (actualResult.containsKey(year)) {
@@ -408,7 +417,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 				user -> {return user.getCreatedDate().getMonth().name();},
 				counting()
 				));
-		Map<String, Long> formerResult = new LinkedHashMap<String, Long>();
+		Map<String, Long> formerResult = new LinkedHashMap<>();
 		for (int i = 0; i < depth; i++) {
 			String monthName = startDate.getMonth().name();
 			if (actualResult.containsKey(monthName)) {
@@ -434,7 +443,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 				user -> {return formatter.format(user.getCreatedDate());},
 				counting()
 				));
-		Map<String, Long> formerResult = new LinkedHashMap<String, Long>();
+		Map<String, Long> formerResult = new LinkedHashMap<>();
 		for (int i = 0; i < depth; i++) {
 			String date = formatter.format(startDate);
 			if (actualResult.containsKey(date)) {
@@ -508,39 +517,34 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 			.findOne(specification)
 			.map(TruckDriverWareHouseMapping::getWareHouse)
 			.map(wareHouseClient::get)
-			.map(warehouseDTO -> {
-				return objectMapper.convertValue(warehouseDTO, Map.class);
-			})
+			.map(warehouseDTO -> objectMapper.convertValue(warehouseDTO, Map.class))
 			.orElseThrow(ApiException::resourceNotFound);
 	}
 
-	@Override
 	@SuppressWarnings("unchecked")
-	public Map<String, Object> getPreferredLanguage(UserDTO userDTO) {
-		return userRepository.findById(userDTO.getId())
+	public Map<String, Object> getPreferredLanguage(User user) {
+		return userRepository.findById(user.getId())
 				.map(User::getPreferredLanguage)
 				.map(languageClient::get)
 				.map(languageDTO->objectMapper.convertValue(languageDTO, Map.class))
-				.get();
+				.orElseThrow(ApiException::resourceNotFound);
 	}
 
-	@Override
 	@SuppressWarnings("unchecked")
-	public Map<String, Object> getVillage(UserDTO userDTO) {
-		return userRepository.findById(userDTO.getId())
+	public Map<String, Object> getVillage(User user) {
+		return userRepository.findById(user.getId())
 				.map(User::getVillage)
 				.map(villageClient::get)
 				.map(villageDTO->objectMapper.convertValue(villageDTO, Map.class))
-				.get();
+				.orElseThrow(ApiException::resourceNotFound);
 	}
 
-	@Override
 	@SuppressWarnings("unchecked")
-	public Map<String, Object> getGender(UserDTO userDTO) {
-		return userRepository.findById(userDTO.getId())
+	public Map<String, Object> getGender(User user) {
+		return userRepository.findById(user.getId())
 				.map(User::getGender)
 				.map(genderClient::get)
 				.map(genderDTO->objectMapper.convertValue(genderDTO, Map.class))
-				.get();
+				.orElseThrow(ApiException::resourceNotFound);
 	}
 }

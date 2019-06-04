@@ -19,7 +19,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kirana.avatar.authorization.dto.LoginRequest;
@@ -40,16 +39,12 @@ public class UserController extends BaseController<UserService, UserDTO> impleme
 
 	private AuthenticationManager authenticationManager;
 	private UserService userService;
-	private UserDetailsService userDetailsService;
-	private TokenProvider tokenProvider;
 
 
-	public UserController(UserService userService, UserDetailsService userDetailsService, AuthenticationManager authenticationManager, TokenProvider tokenProvider) {
+	public UserController(UserService userService, AuthenticationManager authenticationManager, TokenProvider tokenProvider) {
 		super(userService);
 		this.authenticationManager = authenticationManager;
 		this.userService = userService;
-		this.userDetailsService = userDetailsService;
-		this.tokenProvider = tokenProvider;
 	}
 
 	
@@ -62,20 +57,11 @@ public class UserController extends BaseController<UserService, UserDTO> impleme
 				)
 		);
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-		UserInfo userInfo = (UserInfo)userDetailsService.loadUserByUsername(loginRequest.getUserNameOrMobileNumber());
+		UserInfo userInfo = (UserInfo)authentication.getPrincipal();
 		UserDTO userDTO = userService.findByUserNameOrMobileNumber(loginRequest.getUserNameOrMobileNumber());
-		String token = tokenProvider.generateToken(userInfo);
-		Map<String, Object> languageMap = userService.getPreferredLanguage(userDTO);
-		Map<String, Object> villageMap = userService.getVillage(userDTO);
-		Map<String, Object> genderMap = userService.getGender(userDTO);
-		userDTO = userDTO.toBuilder()
-				.preferredLanguage(languageMap)
-				.village(villageMap)
-				.gender(genderMap)
-				.build();
 		return ResponseEntity.ok(LoginResponse
 				.builder()
-				.accessToken(token)
+				.accessToken(userInfo.getUserToken())
 				.userDTO(userDTO)
 				.build());
 	}

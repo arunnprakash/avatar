@@ -49,10 +49,4 @@ public interface UserService extends BaseService<UserDTO>{
 	public UserDTO getSellerAgentForTruckDriver(Long truckDriverId);
 
 	public Map<String, Object> getWareHouseForTruckDriver(Long truckDriverId);
-
-	public Map<String, Object> getPreferredLanguage(UserDTO userDTO);
-
-	public Map<String, Object> getVillage(UserDTO userDTO);
-
-	public Map<String, Object> getGender(UserDTO userDTO);
 }

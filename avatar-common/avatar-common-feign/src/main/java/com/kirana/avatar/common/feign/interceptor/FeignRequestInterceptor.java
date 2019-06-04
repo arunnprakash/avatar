@@ -46,9 +46,9 @@ public class FeignRequestInterceptor implements RequestInterceptor {
 			log.warn("Can not obtain existing token for request, if it is a non secured request, ignore.");
 		} else {
 			UserInfo userInfo = (UserInfo)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			log.debug("Constructing Header {} for Token {}", jwtConfig.getHeaderName(),
-					userInfo.getUserToken());
-			template.header(jwtConfig.getHeaderName(), userInfo.getUserToken());
+			log.debug("Constructing Header {} with Token {}", jwtConfig.getHeaderName(),
+					jwtConfig.getTokenPrefix() + " " + userInfo.getUserToken());
+			template.header(jwtConfig.getHeaderName(), jwtConfig.getTokenPrefix() + " " + userInfo.getUserToken());
 		}
 		log.info("Authorization token interceptor completed");
 	}

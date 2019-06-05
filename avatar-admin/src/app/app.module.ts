@@ -37,17 +37,20 @@ import { HomeComponent } from './components/home/home.component';
 
 import { CoreModule } from './components/core/core.module';
 import { DashboardModule } from './components/dashboard/dashboard.module';
+
 import { UsersModule } from './components/authorization/users/users.module';
 import { RolesModule } from './components/authorization/roles/roles.module';
-import { LanguagesModule } from './components/authorization/languages/languages.module';
-import { VillagesModule } from './components/authorization/villages/villages.module';
-import { TaluksModule } from './components/authorization/taluks/taluks.module';
-import { DistrictsModule } from './components/authorization/districts/districts.module';
-import { StatesModule } from './components/authorization/states/states.module';
-import { WareHousesModule } from './components/authorization/warehouses/warehouses.module';
 import { QcWareHouseMappingsModule } from './components/authorization/qc-warehouse-mappings/qc-warehouse-mappings.module';
 import { TruckDriverWareHouseMappingsModule } from './components/authorization/truckdriver-warehouse-mappings/truckdriver-warehouse-mappings.module';
 import { UsersAssetTypesModule } from './components/authorization/assetTypes/assetTypes.module';
+
+import { VillagesModule } from './components/master/villages/villages.module';
+import { TaluksModule } from './components/master/taluks/taluks.module';
+import { DistrictsModule } from './components/master/districts/districts.module';
+import { StatesModule } from './components/master/states/states.module';
+import { WareHousesModule } from './components/master/warehouses/warehouses.module';
+import { LanguagesModule } from './components/master/languages/languages.module';
+import { MarketsModule } from './components/master/market/markets.module';
 
 import { ProductsAssetTypesModule } from './components/product/assetTypes/assetTypes.module';
 import { ProductsModule } from './components/product/products/products.module';
@@ -96,16 +99,18 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     
     CoreModule,
-    
-    DashboardModule,
-    UsersModule,
-    RolesModule,
+
     LanguagesModule,
     VillagesModule,
     TaluksModule,
     DistrictsModule,
     StatesModule,
     WareHousesModule,
+    MarketsModule,
+
+    DashboardModule,
+    UsersModule,
+    RolesModule,
     QcWareHouseMappingsModule,
     TruckDriverWareHouseMappingsModule,
     UsersAssetTypesModule,

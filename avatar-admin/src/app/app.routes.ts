@@ -4,26 +4,30 @@ import { NeedAuthGuard } from './services/needauthguard';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from "./components/home/home.component";
+
+import { LanguagesComponent } from "./components/master/languages/languages/languages.component";
+import { LanguageDetailComponent } from "./components/master/languages/language-detail/language-detail.component";
+import { VillagesComponent } from "./components/master/villages/villages/villages.component";
+import { VillageDetailComponent } from "./components/master/villages/village-detail/village-detail.component";
+import { TaluksComponent } from "./components/master/taluks/taluks/taluks.component";
+import { TalukDetailComponent } from "./components/master/taluks/taluk-detail/taluk-detail.component";
+import { DistrictsComponent } from "./components/master/districts/districts/districts.component";
+import { DistrictDetailComponent } from "./components/master/districts/district-detail/district-detail.component";
+import { StatesComponent } from "./components/master/states/states/states.component";
+import { StateDetailComponent } from "./components/master/states/state-detail/state-detail.component";
+import { WareHousesComponent } from './components/master/warehouses/warehouses/warehouses.component';
+import { WareHouseDetailComponent } from './components/master/warehouses/warehouse-detail/warehouse-detail.component';
+import { MarketsComponent } from './components/master/market/markets/markets.component';
+import { MarketDetailComponent } from './components/master/market/market-detail/market-detail.component';
+
 import { UsersComponent } from "./components/authorization/users/users/users.component";
 import { UserDetailComponent } from "./components/authorization/users/user-detail/user-detail.component";
 import { RolesComponent } from "./components/authorization/roles/roles/roles.component";
 import { RoleDetailComponent } from "./components/authorization/roles/role-detail/role-detail.component";
-import { VillagesComponent } from "./components/authorization/villages/villages/villages.component";
-import { VillageDetailComponent } from "./components/authorization/villages/village-detail/village-detail.component";
-import { TaluksComponent } from "./components/authorization/taluks/taluks/taluks.component";
-import { TalukDetailComponent } from "./components/authorization/taluks/taluk-detail/taluk-detail.component";
-import { DistrictsComponent } from "./components/authorization/districts/districts/districts.component";
-import { DistrictDetailComponent } from "./components/authorization/districts/district-detail/district-detail.component";
-import { StatesComponent } from "./components/authorization/states/states/states.component";
-import { StateDetailComponent } from "./components/authorization/states/state-detail/state-detail.component";
-import { WareHousesComponent } from './components/authorization/warehouses/warehouses/warehouses.component';
-import { WareHouseDetailComponent } from './components/authorization/warehouses/warehouse-detail/warehouse-detail.component';
 import { QcWareHouseMappingsComponent } from './components/authorization/qc-warehouse-mappings/qc-warehouse-mappings/qc-warehouse-mappings.component';
 import { QcWareHouseMappingDetailComponent } from './components/authorization/qc-warehouse-mappings/qc-warehouse-mapping-detail/qc-warehouse-mapping-detail.component';
 import { TruckDriverWareHouseMappingsComponent } from './components/authorization/truckdriver-warehouse-mappings/truckdriver-warehouse-mappings/truckdriver-warehouse-mappings.component';
 import { TruckDriverWareHouseMappingDetailComponent } from './components/authorization/truckdriver-warehouse-mappings/truckdriver-warehouse-mapping-detail/truckdriver-warehouse-mapping-detail.component';
-import { LanguagesComponent } from "./components/authorization/languages/languages/languages.component";
-import { LanguageDetailComponent } from "./components/authorization/languages/language-detail/language-detail.component";
 import { UsersAssetTypesComponent } from "./components/authorization/assetTypes/assetTypes/assetTypes.component";
 import { UsersAssetTypeDetailComponent } from "./components/authorization/assetTypes/assetType-detail/assetType-detail.component";
 import { ProductsComponent } from "./components/product/products/products/products.component";
@@ -120,6 +124,16 @@ export const routes: Routes = [
                    {
                        path: 'warehouse',
                        component: WareHouseDetailComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'markets',
+                       component: MarketsComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'market',
+                       component: MarketDetailComponent,
                        outlet: 'menuRouterOutlet'
                    },
                    {

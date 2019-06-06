@@ -15,6 +15,8 @@ import { WareHouseDTO } from "../../../../services/master/warehousedto.model";
 import { WareHouseDetailComponent } from "../warehouse-detail/warehouse-detail.component";
 import { TalukService } from '../../../../services/master/talukservice.generated';
 import { TalukDTO } from "../../../../services/master/talukdto.model";
+import { MarketService } from '../../../../services/master/marketservice.generated';
+import { MarketDTO } from "../../../../services/master/marketdto.model";
 
 import { ObservableArray } from "tns-core-modules/data/observable-array";
 import { TokenModel, RadAutoCompleteTextView } from "nativescript-ui-autocomplete";
@@ -33,6 +35,7 @@ export class WareHousesComponent extends BaseComponent implements OnInit {
     protected title = 'WareHouse';
     protected localCols: any[] = [
            { field: 'name', header: 'WareHouseName', dataType: 'INPUT', autocapitalizationType:'none', keyboardType: 'email' },
+           { field: 'market', header: 'Market', dataType: 'AUTOCOMPLETE', multiple: false, options: new ObservableArray<TokenModel>() , optionLabel:"en" },
            { field: 'address', header: 'Address', dataType: 'TEXTAREA', autocapitalizationType:'none', keyboardType: 'email' },
            { field: 'taluk', header: 'Taluk', dataType: 'AUTOCOMPLETE', multiple: false, options: new ObservableArray<TokenModel>() , optionLabel:"en"},
            { field: 'latitude', header: 'Latitude', dataType: 'INPUT' },
@@ -41,7 +44,7 @@ export class WareHousesComponent extends BaseComponent implements OnInit {
 
     constructor( warehouseService: WareHouseService, authService: AuthService, translate: TranslateService, 
             modalDialogService: ModalDialogService, dialogService: ModalDialogService, 
-            private talukService: TalukService,
+            private marketService: MarketService, private talukService: TalukService,
             router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef, private page: Page) {
         super( warehouseService, authService, translate, modalDialogService, dialogService, WareHouseDetailComponent, router, activatedRoute, vcRef);
         this.languageCode = authService.getUserInfo().preferredLanguage.languageCode;
@@ -50,7 +53,21 @@ export class WareHousesComponent extends BaseComponent implements OnInit {
         super.ngOnInit();
         this.page.actionBarHidden = true;
         console.log("ngOnInit warehouse.component.tns");
+        this.initMarketList();
         this.initTalukList();
+    }
+    initMarketList() {
+        this.marketService.getAllExceptDeleted().subscribe((markets: MarketDTO[]) => {
+            let menuItem: any = _.find(this.localCols, { 'field': 'market' });
+            menuItem.optionLabel = this.languageCode;
+            menuItem.originalOptions = markets;
+            markets.forEach( (market: MarketDTO ) => {
+                menuItem.options.push(new TokenModel(market[this.languageCode], null));
+            });
+        },
+        ( error ) => {
+            this.showAlertDialog('Error', 'Error while getting Market List');
+        });
     }
     initTalukList() {
         this.talukService.getAllExceptDeleted().subscribe((taluks: TalukDTO[]) => {

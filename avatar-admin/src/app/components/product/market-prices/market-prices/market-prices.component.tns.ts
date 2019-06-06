@@ -15,8 +15,8 @@ import { QualityService } from '../../../../services/product/qualityservice.gene
 import { AuthService } from "../../../../services/auth.service";
 import { ProductDTO } from "../../../../services/product/productdto.model";
 import { QualityDTO } from "../../../../services/product/qualitydto.model";
-import { PriceHistoryDTO } from "../../../../services/product/pricehistorydto.model";
-import { PriceDetailComponent } from "../price-detail/price-detail.component";
+import { MarketPriceDTO } from "../../../../services/product/marketpricedto.model";
+import { MarketPriceDetailComponent } from "../market-price-detail/market-price-detail.component";
 
 import { ObservableArray } from "tns-core-modules/data/observable-array";
 import { TokenModel, RadAutoCompleteTextView } from "nativescript-ui-autocomplete";
@@ -25,12 +25,12 @@ import { RadAutoCompleteTextViewComponent  } from "nativescript-ui-autocomplete/
 import * as _ from "lodash";
 
 @Component( {
-    selector: 'prices',
+    selector: 'market-prices',
     template: baseTemplate,
     styles: [baseCss],
     providers: [ModalDialogService]
 } )
-export class PricesComponent extends BaseComponent implements OnInit {
+export class MarketPricesComponent extends BaseComponent implements OnInit {
 
     protected title = 'Price';
     protected localCols: any[] = [
@@ -38,11 +38,11 @@ export class PricesComponent extends BaseComponent implements OnInit {
                                   { field: 'quality', header: 'Quality', dataType: 'AUTOCOMPLETE', multiple: false, options: new ObservableArray<TokenModel>() , optionLabel:"qualityType"},
                                   { field: 'price', header: 'Price', dataType: 'INPUT' }
                         ];
-    constructor( priceHistoryService: SellerPriceHistoryService, authService: AuthService, translate: TranslateService, 
+    constructor( marketPriceService: MarketPriceService, authService: AuthService, translate: TranslateService, 
             private productService: ProductService, private qualityService: QualityService,
             modalDialogService: ModalDialogService, dialogService: ModalDialogService, 
             router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef, private page: Page) {
-        super( priceHistoryService, authService, translate, modalDialogService, dialogService, PriceDetailComponent, router, activatedRoute, vcRef);
+        super( marketPriceService, authService, translate, modalDialogService, dialogService, MarketPriceDetailComponent, router, activatedRoute, vcRef);
         this.languageCode = authService.getUserInfo().preferredLanguage.languageCode;
     }
     ngOnInit() {
@@ -82,6 +82,6 @@ export class PricesComponent extends BaseComponent implements OnInit {
         });
     }
     protected initEmptyModel() {
-        this.model = new SellerPriceHistoryDTO();
+        this.model = new MarketPriceDTO();
     }
 }

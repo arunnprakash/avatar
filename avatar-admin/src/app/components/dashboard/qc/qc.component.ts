@@ -13,7 +13,7 @@ import { QcWareHouseMappingDTO } from "../../../services/authorization/qcwarehou
 import { QualityDTO } from "../../../services/product/qualitydto.model";
 import { QualityService } from '../../../services/product/qualityservice.generated';
 import { FilterCriteria } from "../../../services/product/filtercriteria.model";
-import { PriceHistoryService } from '../../../services/product/pricehistoryservice.generated';
+import { SellerPriceHistoryService } from '../../../services/product/sellerpricehistoryservice.generated';
 import { SellerTransactionDTO } from "../../../services/transaction/sellertransactiondto.model";
 import { SellerOrder } from "../../../services/transaction/sellerorder.model";
 import { SellerTransactionService } from "../../../services/transaction/sellertransactionservice.generated";
@@ -41,7 +41,7 @@ export class QcComponent implements OnInit {
     protected qualities: QualityDTO[];
     constructor(private authService: AuthService, 
             private sellerTransactionService: SellerTransactionService,
-            private priceHistoryService: PriceHistoryService,
+            private priceHistoryService: SellerPriceHistoryService,
             private qualityService: QualityService,
             private qcWareHouseMappingService: QcWareHouseMappingService,
             private dialogService: DialogService, private translate: TranslateService, private domSanitizer: DomSanitizer,

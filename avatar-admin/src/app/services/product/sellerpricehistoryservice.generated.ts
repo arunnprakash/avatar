@@ -5,13 +5,13 @@ import { map, catchError } from 'rxjs/operators';
 
 import { PagingAndFilterResponse } from './pagingandfilterresponse.model';
 import { AssetDTO } from './assetdto.model';
+import { SellerPriceHistoryDTO } from './sellerpricehistorydto.model';
 import { PagingAndFilterRequest } from './pagingandfilterrequest.model';
 import { AssetTypeDTO } from './assettypedto.model';
 import { BaseDTO } from './basedto.model';
 import { FilterCriteria } from './filtercriteria.model';
 import { ProductDTO } from './productdto.model';
 import { QualityDTO } from './qualitydto.model';
-import { PriceHistoryDTO } from './pricehistorydto.model';
 import { ServiceConfig } from './serviceconfig';
 
 /**
@@ -20,42 +20,42 @@ import { ServiceConfig } from './serviceconfig';
  * 
  */
 @Injectable()
-export class PriceHistoryService {
+export class SellerPriceHistoryService {
     private get serviceBaseURL(): string {
         return this.serviceConfig.context + '/api/price-history';
     }
 
     constructor(private httpClient: HttpClient, private serviceConfig: ServiceConfig) { }
     /* GET */
-    public getAll(): Observable<PriceHistoryDTO[]> {
+    public getAll(): Observable<SellerPriceHistoryDTO[]> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.get<PriceHistoryDTO[]>(url, {params: params})
+        return this.httpClient.get<SellerPriceHistoryDTO[]>(url, {params: params})
             .pipe(catchError(this.handleError));
     }
 
-    public getAllExceptDeleted(): Observable<PriceHistoryDTO[]> {
+    public getAllExceptDeleted(): Observable<SellerPriceHistoryDTO[]> {
         const url = this.serviceBaseURL + '/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
-        return this.httpClient.get<PriceHistoryDTO[]>(url, {params: params})
+        return this.httpClient.get<SellerPriceHistoryDTO[]>(url, {params: params})
             .pipe(catchError(this.handleError));
     }
 
-    public get(id: number): Observable<PriceHistoryDTO> {
+    public get(id: number): Observable<SellerPriceHistoryDTO> {
         const url = this.serviceBaseURL + '/' + id + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.get<PriceHistoryDTO>(url, {params: params})
+        return this.httpClient.get<SellerPriceHistoryDTO>(url, {params: params})
             .pipe(catchError(this.handleError));
     }
 
-    public getPriceForProduct(productId: number, qualityId: number, pricePublishedDate: string): Observable<PriceHistoryDTO> {
+    public getPriceForProduct(productId: number, qualityId: number, pricePublishedDate: string): Observable<SellerPriceHistoryDTO> {
         const url = this.serviceBaseURL + '/price/' + productId + '/' + qualityId + '/' + pricePublishedDate + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.get<PriceHistoryDTO>(url, {params: params})
+        return this.httpClient.get<SellerPriceHistoryDTO>(url, {params: params})
             .pipe(catchError(this.handleError));
     }
 
@@ -63,11 +63,11 @@ export class PriceHistoryService {
     /* HEAD */
 
     /* POST */
-    public save(arg0: PriceHistoryDTO): Observable<PriceHistoryDTO> {
+    public save(arg0: SellerPriceHistoryDTO): Observable<SellerPriceHistoryDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.post<PriceHistoryDTO>(url, arg0, {params: params})
+        return this.httpClient.post<SellerPriceHistoryDTO>(url, arg0, {params: params})
             .pipe(catchError(this.handleError));
     }
 
@@ -97,11 +97,11 @@ export class PriceHistoryService {
 
 
     /* PUT */
-    public update(arg0: PriceHistoryDTO): Observable<PriceHistoryDTO> {
+    public update(arg0: SellerPriceHistoryDTO): Observable<SellerPriceHistoryDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.put<PriceHistoryDTO>(url, arg0, {params: params})
+        return this.httpClient.put<SellerPriceHistoryDTO>(url, arg0, {params: params})
             .pipe(catchError(this.handleError));
     }
 

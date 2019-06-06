@@ -1,15 +1,15 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { CountryService } from './countryservice.generated';
-import { LanguageService } from './languageservice.generated';
-import { WareHouseService } from './warehouseservice.generated';
+import { StateService } from './stateservice.generated';
 import { VillageService } from './villageservice.generated';
-import { AssetService } from './assetservice.generated';
 import { DistrictService } from './districtservice.generated';
+import { LanguageService } from './languageservice.generated';
 import { GenderService } from './genderservice.generated';
 import { TalukService } from './talukservice.generated';
+import { WareHouseService } from './warehouseservice.generated';
 import { MarketService } from './marketservice.generated';
-import { StateService } from './stateservice.generated';
 import { AssetTypeService } from './assettypeservice.generated';
+import { AssetService } from './assetservice.generated';
+import { CountryService } from './countryservice.generated';
 import { ServiceConfig } from './serviceconfig';
 
 @NgModule({})
@@ -19,17 +19,17 @@ export class MasterAPIModule {
             ngModule: MasterAPIModule,
             providers: [
                 {provide: ServiceConfig, useValue: serviceConfig},
-                CountryService,
-                LanguageService,
-                WareHouseService,
+                StateService,
                 VillageService,
-                AssetService,
                 DistrictService,
+                LanguageService,
                 GenderService,
                 TalukService,
+                WareHouseService,
                 MarketService,
-                StateService,
-                AssetTypeService
+                AssetTypeService,
+                AssetService,
+                CountryService
             ]
         };
     }

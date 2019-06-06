@@ -4,14 +4,13 @@ import { Observable, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { PagingAndFilterResponse } from './pagingandfilterresponse.model';
-import { DistrictDTO } from './districtdto.model';
-import { WareHouseDTO } from './warehousedto.model';
-import { StateDTO } from './statedto.model';
-import { CountryDTO } from './countrydto.model';
-import { TalukDTO } from './talukdto.model';
+import { AssetDTO } from './assetdto.model';
 import { PagingAndFilterRequest } from './pagingandfilterrequest.model';
-import { MarketDTO } from './marketdto.model';
+import { AssetTypeDTO } from './assettypedto.model';
 import { FilterCriteria } from './filtercriteria.model';
+import { MarketPriceDTO } from './marketpricedto.model';
+import { ProductDTO } from './productdto.model';
+import { QualityDTO } from './qualitydto.model';
 import { ServiceConfig } from './serviceconfig';
 
 /**
@@ -20,34 +19,34 @@ import { ServiceConfig } from './serviceconfig';
  * 
  */
 @Injectable()
-export class WareHouseService {
+export class MarketPriceService {
     private get serviceBaseURL(): string {
-        return this.serviceConfig.context + '/api/warehouse';
+        return this.serviceConfig.context + '/api/market-price';
     }
 
     constructor(private httpClient: HttpClient, private serviceConfig: ServiceConfig) { }
     /* GET */
-    public getAll(): Observable<WareHouseDTO[]> {
+    public getAll(): Observable<MarketPriceDTO[]> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.get<WareHouseDTO[]>(url, {params: params})
+        return this.httpClient.get<MarketPriceDTO[]>(url, {params: params})
             .pipe(catchError(this.handleError));
     }
 
-    public getAllExceptDeleted(): Observable<WareHouseDTO[]> {
+    public getAllExceptDeleted(): Observable<MarketPriceDTO[]> {
         const url = this.serviceBaseURL + '/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
-        return this.httpClient.get<WareHouseDTO[]>(url, {params: params})
+        return this.httpClient.get<MarketPriceDTO[]>(url, {params: params})
             .pipe(catchError(this.handleError));
     }
 
-    public get(id: number): Observable<WareHouseDTO> {
+    public get(id: number): Observable<MarketPriceDTO> {
         const url = this.serviceBaseURL + '/' + id + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.get<WareHouseDTO>(url, {params: params})
+        return this.httpClient.get<MarketPriceDTO>(url, {params: params})
             .pipe(catchError(this.handleError));
     }
 
@@ -55,11 +54,11 @@ export class WareHouseService {
     /* HEAD */
 
     /* POST */
-    public save(arg0: WareHouseDTO): Observable<WareHouseDTO> {
+    public save(arg0: MarketPriceDTO): Observable<MarketPriceDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.post<WareHouseDTO>(url, arg0, {params: params})
+        return this.httpClient.post<MarketPriceDTO>(url, arg0, {params: params})
             .pipe(catchError(this.handleError));
     }
 
@@ -81,11 +80,11 @@ export class WareHouseService {
 
 
     /* PUT */
-    public update(arg0: WareHouseDTO): Observable<WareHouseDTO> {
+    public update(arg0: MarketPriceDTO): Observable<MarketPriceDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.put<WareHouseDTO>(url, arg0, {params: params})
+        return this.httpClient.put<MarketPriceDTO>(url, arg0, {params: params})
             .pipe(catchError(this.handleError));
     }
 

@@ -28,8 +28,8 @@ import com.kirana.avatar.common.dto.FilterCriteria;
 import com.kirana.avatar.common.exception.ApiException;
 import com.kirana.avatar.common.jpa.entity.BaseEntity_;
 import com.kirana.avatar.common.service.impl.BaseServiceImpl;
-import com.kirana.avatar.product.dto.PriceHistoryDTO;
-import com.kirana.avatar.product.feign.PriceHistoryClient;
+import com.kirana.avatar.product.dto.SellerPriceHistoryDTO;
+import com.kirana.avatar.product.feign.SellerPriceHistoryClient;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -46,19 +46,19 @@ public class SellerTransactionServiceImpl extends BaseServiceImpl<SellerTransact
 	private SellerTransactionMapper sellerTransactionMapper;
 	private SellerTransactionSpecification sellerTransactionSpecification;
 	private UserClient userClient;
-	private PriceHistoryClient priceHistoryClient;
+	private SellerPriceHistoryClient sellerPriceHistoryClient;
 	private ObjectMapper objectMapper;
 	public SellerTransactionServiceImpl(SellerTransactionRepository sellerTransactionRepository, SellerTransactionMapper sellerTransactionMapper, 
 			SellerTransactionSpecification sellerTransactionSpecification, 
 			UserClient userClient,
-			PriceHistoryClient priceHistoryClient,
+			SellerPriceHistoryClient sellerPriceHistoryClient,
 			ObjectMapper objectMapper) {
 		super(sellerTransactionRepository, sellerTransactionMapper, sellerTransactionSpecification);
 		this.sellerTransactionRepository = sellerTransactionRepository;
 		this.sellerTransactionMapper = sellerTransactionMapper;
 		this.sellerTransactionSpecification = sellerTransactionSpecification;
 		this.userClient = userClient;
-		this.priceHistoryClient = priceHistoryClient;
+		this.sellerPriceHistoryClient = sellerPriceHistoryClient;
 		this.objectMapper = objectMapper;
 	}
 
@@ -155,10 +155,10 @@ public class SellerTransactionServiceImpl extends BaseServiceImpl<SellerTransact
 	@SuppressWarnings("unchecked")
 	private SellerOrder createSellerOrder(SellerTransactionDTO sellerTransactionDTO) {
 		log.debug("Seller Transaction {}", sellerTransactionDTO);
-		PriceHistoryDTO priceHistoryDTO = priceHistoryClient.getPriceForProduct(sellerTransactionDTO.getProduct(), sellerTransactionDTO.getSellerProductQuality(), sellerTransactionDTO.getCreatedDate().format(DateTimeFormatter.ISO_INSTANT));
+		SellerPriceHistoryDTO sellerPriceHistoryDTO = sellerPriceHistoryClient.getPriceForProduct(sellerTransactionDTO.getProduct(), sellerTransactionDTO.getSellerProductQuality(), sellerTransactionDTO.getCreatedDate().format(DateTimeFormatter.ISO_INSTANT));
 		SellerOrder sellerOrder = new SellerOrder();
 		sellerOrder.setSellerTransaction(sellerTransactionDTO);
-		Map<String, Object> priceTag = objectMapper.convertValue(priceHistoryDTO, Map.class);
+		Map<String, Object> priceTag = objectMapper.convertValue(sellerPriceHistoryDTO, Map.class);
 		sellerOrder.setPriceTag(priceTag);
 		UserDTO sellerUserDTO = userClient.get(sellerTransactionDTO.getSeller());
 		Map<String, Object> seller = objectMapper.convertValue(sellerUserDTO, Map.class);

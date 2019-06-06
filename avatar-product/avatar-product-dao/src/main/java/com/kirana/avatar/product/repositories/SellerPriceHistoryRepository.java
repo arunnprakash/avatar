@@ -10,26 +10,26 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.kirana.avatar.common.jpa.repository.BaseRepository;
-import com.kirana.avatar.product.model.PriceHistory;
+import com.kirana.avatar.product.model.SellerPriceHistory;
 
 /**
  * @author __Telmila__
  *
  */
 @Repository
-public interface PriceHistoryRepository extends BaseRepository<PriceHistory> {
-	@Query("select priceHistory from PriceHistory priceHistory where "
+public interface SellerPriceHistoryRepository extends BaseRepository<SellerPriceHistory> {
+	@Query("select priceHistory from SellerPriceHistory priceHistory where "
 			+ "priceHistory.product.id =:productId AND "
 			+ "priceHistory.quality.id = 1 AND "
 			+ "priceHistory.deleted = false "
 			+ "ORDER BY priceHistory.lastModifiedDate DESC")
-	public List<PriceHistory> getLatestPrice(Long productId);
+	public List<SellerPriceHistory> getLatestPrice(Long productId);
 	
-	@Query("select priceHistory from PriceHistory priceHistory where "
+	@Query("select priceHistory from SellerPriceHistory priceHistory where "
 			+ "priceHistory.product.id =:productId AND "
 			+ "priceHistory.quality.id = :qualityId AND "
 			+ "priceHistory.createdDate <= :createdDate AND "
 			+ "priceHistory.deleted = false "
 			+ "ORDER BY priceHistory.lastModifiedDate DESC")
-	public List<PriceHistory> getLatestPrice(Long productId, Long qualityId, ZonedDateTime createdDate);
+	public List<SellerPriceHistory> getLatestPrice(Long productId, Long qualityId, ZonedDateTime createdDate);
 }

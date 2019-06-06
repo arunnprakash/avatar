@@ -46,6 +46,7 @@ import { MarketsModule } from './components/master/market/markets.module';
 
 import { ProductsAssetTypesModule } from './components/product/assetTypes/assetTypes.module';
 import { ProductsModule } from './components/product/products/products.module';
+import { MarketPricesModule } from './components/product/market-prices/market-prices.module';
 import { PricesModule } from './components/product/prices/prices.module';
 import { HolidaysModule } from './components/product/holidays/holidays.module';
 import { ProductRegionsModule } from './components/product/productregions/productregions.module';
@@ -115,6 +116,7 @@ export function createTranslateLoader() {
     
     ProductsAssetTypesModule,
     ProductsModule,
+    MarketPricesModule,
     PricesModule,
     HolidaysModule,
     ProductRegionsModule,

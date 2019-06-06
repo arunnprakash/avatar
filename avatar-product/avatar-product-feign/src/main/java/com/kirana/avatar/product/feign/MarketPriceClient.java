@@ -16,13 +16,13 @@ package com.kirana.avatar.product.feign;
 import org.springframework.cloud.openfeign.FeignClient;
 
 import com.kirana.avatar.common.feign.config.FeignClientContract;
-import com.kirana.avatar.product.resource.PriceHistoryResource;
+import com.kirana.avatar.product.resource.MarketPriceResource;
 
 /**
  * @author __Telmila__
  *
  */
 @FeignClient(name="product-service", configuration={FeignClientContract.class})
-public interface PriceHistoryClient extends PriceHistoryResource {
+public interface MarketPriceClient extends MarketPriceResource {
 
 }

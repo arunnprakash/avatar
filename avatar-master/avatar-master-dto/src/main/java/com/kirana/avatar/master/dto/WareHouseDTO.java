@@ -30,17 +30,18 @@ public class WareHouseDTO extends BaseDTO {
 	protected String longitude;
 	protected String address;
 	protected TalukDTO taluk;
-
+	protected MarketDTO market;
 	@Builder
 	public WareHouseDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
 			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, 
-			String name, String latitude, String longitude, String address, TalukDTO taluk) {
+			String name, String latitude, String longitude, String address, TalukDTO taluk, MarketDTO market) {
 		super(id, createdBy, createdDate, lastModifiedBy, lastModifiedDate, deleted, version);
 		this.name = name;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.address = address;
 		this.taluk = taluk;
+		this.market = market;
 	}
 
 }

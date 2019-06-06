@@ -12,7 +12,7 @@ import { QualityService } from '../../../services/product/qualityservice.generat
 import { PagingAndFilterRequest } from "../../../services/product/pagingandfilterrequest.model";
 import { FilterCriteria } from "../../../services/product/filtercriteria.model";
 import { PagingAndFilterResponse } from "../../../services/product/pagingandfilterresponse.model";
-import { PriceHistoryService } from '../../../services/product/pricehistoryservice.generated';
+import { SellerPriceHistoryService } from '../../../services/product/sellerpricehistoryservice.generated';
 
 import { SellProductComponent } from "./sell-product/sell-product.component";
 
@@ -36,7 +36,7 @@ export class SellerComponent implements OnInit {
     protected loading: boolean;
     protected userDTO: UserDTO;
     protected qualities: QualityDTO[];
-    constructor(private authService: AuthService, private priceHistoryService: PriceHistoryService,
+    constructor(private authService: AuthService, private priceHistoryService: SellerPriceHistoryService,
             private qualityService: QualityService,
             private dialogService: DialogService, private translate: TranslateService, private domSanitizer: DomSanitizer,
             private router: Router, private activatedRoute: ActivatedRoute) { 

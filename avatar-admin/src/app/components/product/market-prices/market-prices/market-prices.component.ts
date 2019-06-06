@@ -9,24 +9,24 @@ import { baseTemplate } from '../../../base/base.template';
 import { baseCss } from '../../../base/base.css';
 import { BaseComponent } from '../../../base/base.component';
 
-import { SellerPriceHistoryService } from "../../../../services/product/sellerpricehistoryservice.generated";
+import { MarketPriceService } from "../../../../services/product/marketpriceservice.generated";
 import { ProductService } from '../../../../services/product/productservice.generated';
 import { QualityService } from '../../../../services/product/qualityservice.generated';
 import { AuthService } from "../../../../services/auth.service";
 import { ProductDTO } from "../../../../services/product/productdto.model";
 import { QualityDTO } from "../../../../services/product/qualitydto.model";
-import { SellerPriceHistoryDTO } from "../../../../services/product/sellerpricehistorydto.model";
-import { PriceDetailComponent } from "../price-detail/price-detail.component";
+import { MarketPriceDTO } from "../../../../services/product/marketpricedto.model";
+import { MarketPriceDetailComponent } from "../market-price-detail/market-price-detail.component";
 
 import * as _ from "lodash";
 
 @Component( {
-    selector: 'prices',
+    selector: 'market-prices',
     template: baseTemplate,
     styles: [baseCss],
     providers: [ConfirmationService, DialogService]
 } )
-export class PricesComponent extends BaseComponent implements OnInit {
+export class MarketPricesComponent extends BaseComponent implements OnInit {
 
     protected title = 'Price';
     protected localCols: any[] = [
@@ -35,16 +35,16 @@ export class PricesComponent extends BaseComponent implements OnInit {
               { field: 'price', header: 'Price', dataType: 'INPUT' }
     ];
 
-    constructor( priceHistoryService: SellerPriceHistoryService, authService: AuthService, translate: TranslateService, domSanitizer: DomSanitizer,
+    constructor( marketPriceService: MarketPriceService, authService: AuthService, translate: TranslateService, domSanitizer: DomSanitizer,
             private productService: ProductService, private qualityService: QualityService,
             confirmationService: ConfirmationService, dialogService: DialogService, 
             router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef) {
-        super( priceHistoryService, authService, translate, domSanitizer, confirmationService, dialogService, PriceDetailComponent, router, activatedRoute, vcRef);
+        super( marketPriceService, authService, translate, domSanitizer, confirmationService, dialogService, MarketPriceDetailComponent, router, activatedRoute, vcRef);
         this.languageCode = authService.getUserInfo().preferredLanguage.languageCode;
     }
     ngOnInit() {
         super.ngOnInit();
-        console.log("ngOnInit price.component");
+        console.log("ngOnInit market-price.component");
         this.initFieldsLabel("prices");
         this.initProductList();
         this.initQualityList();
@@ -73,6 +73,6 @@ export class PricesComponent extends BaseComponent implements OnInit {
         });
     }
     protected initEmptyModel() {
-        this.model = new SellerPriceHistoryDTO();
+        this.model = new MarketPriceDTO();
     }
 }

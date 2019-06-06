@@ -28,20 +28,35 @@ import lombok.ToString;
  */
 
 @Entity
-@Table(name = "price_histories")
+@Table(name = "seller_price_histories")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @ToString
 @EqualsAndHashCode(callSuper=true)
 @EntityListeners(AuditingEntityListener.class)
-public class PriceHistory extends BaseEntity<PriceHistory> {
-	
+public class SellerPriceHistory extends BaseEntity<SellerPriceHistory> {
+
+	@ManyToOne(optional = false, fetch=FetchType.EAGER)
+	@JoinColumn(name = "market_price_id", referencedColumnName="id", nullable = false)
+	protected MarketPrice marketPrice;
+
+	@Column(name="seller_agent_commission_id", nullable = false)
+	protected Long sellerAgentCommission;
+
+	@Column(name="seller_transportation_charge_id", nullable = false)
+	protected Long sellerTransportationCharge;
+
+	@Column(name="seller_merchant_commission_id", nullable = false)
+	protected Long sellerMerchantCommission;
+
 	@ManyToOne(optional = false, fetch=FetchType.EAGER)
 	@JoinColumn(name = "product_id", referencedColumnName="id", nullable = false)
 	protected Product product;
+
 	@Column(nullable = false)
 	protected Double price;
+
 	@ManyToOne(optional = false, fetch=FetchType.EAGER)
 	@JoinColumn(name = "quality_id", referencedColumnName="id", nullable = false)
 	protected Quality quality;

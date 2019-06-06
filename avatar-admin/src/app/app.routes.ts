@@ -36,6 +36,8 @@ import { ProductsAssetTypesComponent } from "./components/product/assetTypes/ass
 import { ProductsAssetTypeDetailComponent } from "./components/product/assetTypes/assetType-detail/assetType-detail.component";
 import { PricesComponent } from "./components/product/prices/prices/prices.component";
 import { PriceDetailComponent } from "./components/product/prices/price-detail/price-detail.component";
+import { MarketPricesComponent } from "./components/product/market-prices/market-prices/market-prices.component";
+import { MarketPriceDetailComponent } from "./components/product/market-prices/market-price-detail/market-price-detail.component";
 import { HolidaysComponent } from "./components/product/holidays/holidays/holidays.component";
 import { HolidayDetailComponent } from "./components/product/holidays/holiday-detail/holiday-detail.component";
 import { ProductRegionsComponent } from "./components/product/productregions/productregions/productregions.component";
@@ -209,6 +211,16 @@ export const routes: Routes = [
                    {
                        path: 'price',
                        component: PriceDetailComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'market-prices',
+                       component: MarketPricesComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'market-price',
+                       component: MarketPriceDetailComponent,
                        outlet: 'menuRouterOutlet'
                    },
                    {

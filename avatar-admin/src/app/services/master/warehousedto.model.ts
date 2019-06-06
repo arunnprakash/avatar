@@ -2,6 +2,7 @@ import { DistrictDTO } from './districtdto.model';
 import { StateDTO } from './statedto.model';
 import { CountryDTO } from './countrydto.model';
 import { TalukDTO } from './talukdto.model';
+import { MarketDTO } from './marketdto.model';
 
 export class WareHouseDTO {
     name: string;
@@ -9,4 +10,5 @@ export class WareHouseDTO {
     longitude: string;
     address: string;
     taluk: TalukDTO;
+    market: MarketDTO;
 }

@@ -56,7 +56,11 @@ public class WareHouse extends BaseEntity<WareHouse> {
 	
 	@Column(nullable = false)
 	protected String address;
-	
+
+	@ManyToOne(optional=false, fetch=FetchType.EAGER)
+	@JoinColumn(name="market_id", referencedColumnName="id")
+	private Market market;
+
 	@ManyToOne(optional=false, fetch=FetchType.EAGER)
 	@JoinColumn(name="taluk_id", referencedColumnName="id")
 	private Taluk taluk;

@@ -12,8 +12,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 import com.kirana.avatar.common.jpa.specification.BaseEntitySpecification;
-import com.kirana.avatar.product.model.PriceHistory;
-import com.kirana.avatar.product.model.PriceHistory_;
+import com.kirana.avatar.product.model.SellerPriceHistory;
+import com.kirana.avatar.product.model.SellerPriceHistory_;
 
 /**
  * @author __Telmila__
@@ -21,12 +21,12 @@ import com.kirana.avatar.product.model.PriceHistory_;
  */
 @SuppressWarnings("serial")
 @Component
-public class PriceHistorySpecification extends BaseEntitySpecification<PriceHistory>{
+public class SellerPriceHistorySpecification extends BaseEntitySpecification<SellerPriceHistory>{
 	
-	public Specification<PriceHistory> hasPrice(final String price) {
-		return new Specification<PriceHistory>() {
-			public Predicate toPredicate(Root<PriceHistory> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-				return builder.like(root.get(PriceHistory_.PRICE), "%"+price+"%");
+	public Specification<SellerPriceHistory> hasPrice(final String price) {
+		return new Specification<SellerPriceHistory>() {
+			public Predicate toPredicate(Root<SellerPriceHistory> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				return builder.like(root.get(SellerPriceHistory_.PRICE), "%"+price+"%");
 			}
 		};
 	}

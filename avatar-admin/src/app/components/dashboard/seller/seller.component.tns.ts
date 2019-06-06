@@ -20,7 +20,7 @@ import { QualityService } from '../../../services/product/qualityservice.generat
 import { PagingAndFilterRequest } from "../../../services/product/pagingandfilterrequest.model";
 import { FilterCriteria } from "../../../services/product/filtercriteria.model";
 import { PagingAndFilterResponse } from "../../../services/product/pagingandfilterresponse.model";
-import { PriceHistoryService } from '../../../services/product/pricehistoryservice.generated';
+import { SellerPriceHistoryService } from '../../../services/product/sellerpricehistoryservice.generated';
 import { SellerOrder } from "../../../services/transaction/sellerorder.model";
 import { SellerTransactionService } from "../../../services/transaction/sellertransactionservice.generated";
 import { SellProductComponent } from "./sell-product/sell-product.component";
@@ -48,7 +48,7 @@ export class SellerComponent implements OnInit {
     protected qualities: QualityDTO[];
     constructor(private authService: AuthService, 
             private sellerTransactionService: SellerTransactionService,
-            private priceHistoryService: PriceHistoryService,
+            private priceHistoryService: SellerPriceHistoryService,
             private qualityService: QualityService,
             private translate: TranslateService, 
             private router: Router, private activatedRoute: ActivatedRoute, 

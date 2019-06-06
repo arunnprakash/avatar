@@ -28,26 +28,27 @@ import lombok.ToString;
  */
 
 @Entity
-@Table(name = "product_regions")
+@Table(name = "market_prices")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @ToString
 @EqualsAndHashCode(callSuper=true)
 @EntityListeners(AuditingEntityListener.class)
-public class ProductRegion extends BaseEntity<ProductRegion>{
+public class MarketPrice extends BaseEntity<MarketPrice> {
 	
+	@Column(name="market_id", nullable = false)
+	protected Long market;
+
 	@ManyToOne(optional = false, fetch=FetchType.EAGER)
 	@JoinColumn(name = "product_id", referencedColumnName="id", nullable = false)
 	protected Product product;
 
-	@Column(name="state_id" ,nullable = false)
-	protected Long state;
+	@Column(nullable = false)
+	protected Double price;
 
-	@Column(name="district_id",nullable = false)
-	protected Long district;
-
-	@Column(name="taluk_id", nullable = false)
-	protected Long taluk;
+	@ManyToOne(optional = false, fetch=FetchType.EAGER)
+	@JoinColumn(name = "quality_id", referencedColumnName="id", nullable = false)
+	protected Quality quality;
 
 }

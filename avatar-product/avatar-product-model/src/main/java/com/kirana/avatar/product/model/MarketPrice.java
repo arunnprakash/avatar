@@ -36,7 +36,7 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper=true)
 @EntityListeners(AuditingEntityListener.class)
 public class MarketPrice extends BaseEntity<MarketPrice> {
-	
+
 	@Column(name="market_id", nullable = false)
 	protected Long market;
 

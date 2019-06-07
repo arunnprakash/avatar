@@ -30,7 +30,7 @@ export class WareHousesComponent extends BaseComponent implements OnInit {
 
     protected title = 'WareHouse';
     protected localCols: any[] = [
-           { field: 'name', header: 'WareHouseName', dataType: 'INPUT' },
+           { field: 'wareHouseName', header: 'WareHouseName', dataType: 'INPUT' },
            { field: 'market', header: 'Market', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"en" },
            { field: 'address', header: 'Address', dataType: 'TEXTAREA' },
            { field: 'taluk', header: 'Taluk', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"en"},
@@ -47,8 +47,13 @@ export class WareHousesComponent extends BaseComponent implements OnInit {
     }
     ngOnInit() {
         super.ngOnInit();
+        this.initWareHouseNameField();
         this.initMarketList();
         this.initTalukList();
+    }
+    initWareHouseNameField() {
+        let menuItem: any = _.find(this.localCols, { 'field': 'wareHouseName' });
+        menuItem.field = this.languageCode;
     }
     initMarketList() {
         this.marketService.getAllExceptDeleted().subscribe((markets: MarketDTO[]) => {

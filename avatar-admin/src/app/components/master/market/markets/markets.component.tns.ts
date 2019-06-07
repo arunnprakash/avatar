@@ -32,7 +32,7 @@ export class MarketsComponent extends BaseComponent implements OnInit {
 
     protected title = 'Market';
     protected localCols: any[] = [
-           { field: 'name', header: 'MarketName', dataType: 'INPUT', autocapitalizationType:'none', keyboardType: 'email' },
+           { field: 'marketName', header: 'MarketName', dataType: 'INPUT', autocapitalizationType:'none', keyboardType: 'email' },
            { field: 'address', header: 'Address', dataType: 'TEXTAREA', autocapitalizationType:'none', keyboardType: 'email' },
            { field: 'taluk', header: 'Taluk', dataType: 'AUTOCOMPLETE', multiple: false, options: new ObservableArray<TokenModel>() , optionLabel:"en"},
            { field: 'latitude', header: 'Latitude', dataType: 'INPUT' },
@@ -50,7 +50,12 @@ export class MarketsComponent extends BaseComponent implements OnInit {
         super.ngOnInit();
         this.page.actionBarHidden = true;
         console.log("ngOnInit market.component.tns");
+        this.initMarketNameField();
         this.initTalukList();
+    }
+    initMarketNameField() {
+        let menuItem: any = _.find(this.localCols, { 'field': 'marketName' });
+        menuItem.field = this.languageCode;
     }
     initTalukList() {
         this.talukService.getAllExceptDeleted().subscribe((taluks: TalukDTO[]) => {

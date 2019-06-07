@@ -4,7 +4,6 @@ import { CountryDTO } from './countrydto.model';
 import { TalukDTO } from './talukdto.model';
 
 export class MarketDTO {
-    name: string;
     latitude: string;
     longitude: string;
     address: string;

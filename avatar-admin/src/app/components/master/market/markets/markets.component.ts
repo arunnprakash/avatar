@@ -28,7 +28,7 @@ export class MarketsComponent extends BaseComponent implements OnInit {
 
     protected title = 'Market';
     protected localCols: any[] = [
-           { field: 'name', header: 'MarketName', dataType: 'INPUT' },
+           { field: 'marketName', header: 'MarketName', dataType: 'INPUT' },
            { field: 'address', header: 'Address', dataType: 'TEXTAREA' },
            { field: 'taluk', header: 'Taluk', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"en"},
            { field: 'latitude', header: 'Latitude', dataType: 'INPUT' },
@@ -44,7 +44,12 @@ export class MarketsComponent extends BaseComponent implements OnInit {
     }
     ngOnInit() {
         super.ngOnInit();
+        this.initMarketNameField();
         this.initTalukList();
+    }
+    initMarketNameField() {
+        let menuItem: any = _.find(this.localCols, { 'field': 'marketName' });
+        menuItem.field = this.languageCode;
     }
     initTalukList() {
         this.talukService.getAllExceptDeleted().subscribe((taluks: TalukDTO[]) => {

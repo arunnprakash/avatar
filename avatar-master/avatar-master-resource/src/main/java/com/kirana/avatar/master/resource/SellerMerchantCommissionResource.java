@@ -16,8 +16,8 @@ import com.kirana.avatar.common.resource.BaseResource;
  *
  */
 
-@TypeScriptEndpoint("SellerTransportationChargeService")
-@RequestMapping(value= {"/api/seller-transportation-charge"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+@TypeScriptEndpoint("SellerMerchantCommissionService")
+@RequestMapping(value= {"/api/seller-merchant-commission"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 public interface SellerMerchantCommissionResource extends BaseResource<SellerMerchantCommissionDTO>{
 
 }

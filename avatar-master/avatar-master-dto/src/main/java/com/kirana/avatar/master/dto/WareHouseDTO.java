@@ -5,7 +5,7 @@ package com.kirana.avatar.master.dto;
 
 import java.time.ZonedDateTime;
 
-import com.kirana.avatar.common.dto.BaseDTO;
+import com.kirana.avatar.common.dto.LocaleDTO;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -23,9 +23,8 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @EqualsAndHashCode(callSuper = true)
 @ToString
-public class WareHouseDTO extends BaseDTO {
+public class WareHouseDTO extends LocaleDTO {
 
-	protected String name;
 	protected String latitude;
 	protected String longitude;
 	protected String address;
@@ -34,9 +33,10 @@ public class WareHouseDTO extends BaseDTO {
 	@Builder
 	public WareHouseDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
 			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, 
-			String name, String latitude, String longitude, String address, TalukDTO taluk, MarketDTO market) {
-		super(id, createdBy, createdDate, lastModifiedBy, lastModifiedDate, deleted, version);
-		this.name = name;
+			String en, String ta, String ma, String ka, String te, 
+			String latitude, String longitude, String address, TalukDTO taluk, MarketDTO market) {
+		super(id, createdBy, createdDate, lastModifiedBy, lastModifiedDate, deleted, version, 
+				en, ta, ma, ka, te);
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.address = address;

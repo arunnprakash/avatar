@@ -22,7 +22,7 @@ import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.kirana.avatar.common.jpa.entity.BaseEntity;
+import com.kirana.avatar.common.jpa.entity.LocaleEntity;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
@@ -43,11 +43,8 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(callSuper=true)
 @EntityListeners(AuditingEntityListener.class)
-public class WareHouse extends BaseEntity<WareHouse> {
-	
-	@Column(nullable = false)
-	protected String name;
-	
+public class WareHouse extends LocaleEntity<WareHouse> {
+
 	@Column(nullable = true)
 	protected String latitude;
 	

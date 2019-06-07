@@ -6,7 +6,7 @@ package com.kirana.avatar.master.specifications;
 import org.springframework.stereotype.Component;
 
 import com.kirana.avatar.common.jpa.specification.BaseEntitySpecification;
-import com.kirana.avatar.master.model.WareHouse;
+import com.kirana.avatar.master.model.SellerAgentCommission;
 
 /**
  * @author __Telmila__
@@ -14,6 +14,6 @@ import com.kirana.avatar.master.model.WareHouse;
  */
 
 @Component
-public class WareHouseSpecification extends BaseEntitySpecification<WareHouse> {
+public class SellerAgentCommissionSpecification extends BaseEntitySpecification<SellerAgentCommission> {
 
 }

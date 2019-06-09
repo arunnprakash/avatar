@@ -51,6 +51,9 @@ import { StatesModule } from './components/master/states/states.module';
 import { WareHousesModule } from './components/master/warehouses/warehouses.module';
 import { LanguagesModule } from './components/master/languages/languages.module';
 import { MarketsModule } from './components/master/market/markets.module';
+import { SellerMerchantCommissionsModule } from './components/master/seller-merchant-commission/seller-merchant-commissions.module';
+import { SellerAgentCommissionsModule } from './components/master/seller-agent-commission/seller-agent-commissions.module';
+import { SellerTransportationChargesModule } from './components/master/seller-transportation-charge/seller-transportation-charges.module';
 
 import { ProductsAssetTypesModule } from './components/product/assetTypes/assetTypes.module';
 import { ProductsModule } from './components/product/products/products.module';
@@ -108,6 +111,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     StatesModule,
     WareHousesModule,
     MarketsModule,
+    SellerMerchantCommissionsModule,
+    SellerAgentCommissionsModule,
+    SellerTransportationChargesModule,
 
     DashboardModule,
     UsersModule,

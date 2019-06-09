@@ -19,6 +19,12 @@ import { WareHousesComponent } from './components/master/warehouses/warehouses/w
 import { WareHouseDetailComponent } from './components/master/warehouses/warehouse-detail/warehouse-detail.component';
 import { MarketsComponent } from './components/master/market/markets/markets.component';
 import { MarketDetailComponent } from './components/master/market/market-detail/market-detail.component';
+import { SellerAgentCommissionsComponent } from './components/master/seller-agent-commission/seller-agent-commission/seller-agent-commissions.component';
+import { SellerAgentCommissionDetailComponent } from './components/master/seller-agent-commission/seller-agent-commission-detail/seller-agent-commission-detail.component';
+import { SellerMerchantCommissionsComponent } from './components/master/seller-merchant-commission/seller-merchant-commission/seller-merchant-commissions.component';
+import { SellerMerchantCommissionDetailComponent } from './components/master/seller-merchant-commission/seller-merchant-commission-detail/seller-merchant-commission-detail.component';
+import { SellerTransportationChargesComponent } from './components/master/seller-transportation-charge/seller-transportation-charge/seller-transportation-charges.component';
+import { SellerTransportationChargeDetailComponent } from './components/master/seller-transportation-charge/seller-transportation-charge-detail/seller-transportation-charge-detail.component';
 
 import { UsersComponent } from "./components/authorization/users/users/users.component";
 import { UserDetailComponent } from "./components/authorization/users/user-detail/user-detail.component";
@@ -116,6 +122,36 @@ export const routes: Routes = [
                    {
                        path: 'state',
                        component: StateDetailComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'seller-agent-commissions',
+                       component: SellerAgentCommissionsComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'seller-agent-commission',
+                       component: SellerAgentCommissionDetailComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'seller-merchant-commissions',
+                       component: SellerMerchantCommissionsComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'seller-merchant-commission',
+                       component: SellerMerchantCommissionDetailComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'seller-transportation-charges',
+                       component: SellerTransportationChargesComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'seller-transportation-charge',
+                       component: SellerTransportationChargeDetailComponent,
                        outlet: 'menuRouterOutlet'
                    },
                    {

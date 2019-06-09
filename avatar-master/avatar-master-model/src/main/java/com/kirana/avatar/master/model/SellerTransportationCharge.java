@@ -33,7 +33,7 @@ import lombok.ToString;
  */
 
 @Entity
-@Table(name = "seller-transportation-charge")
+@Table(name = "seller_transportation_charge")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
@@ -42,9 +42,9 @@ import lombok.ToString;
 @EntityListeners(AuditingEntityListener.class)
 public class SellerTransportationCharge extends BaseEntity<SellerTransportationCharge> {
 
-	@Column(name="transportation-charge", nullable = false)
+	@Column(name="transportation_charge", nullable = false)
 	protected Double transportationCharge;
 
-	@Column(name="transportation-exemption", nullable = false)
+	@Column(name="transportation_exemption", nullable = false)
 	protected Double exemption;
 }

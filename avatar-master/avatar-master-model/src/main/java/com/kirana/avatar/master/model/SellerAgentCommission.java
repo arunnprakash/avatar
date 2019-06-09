@@ -33,7 +33,7 @@ import lombok.ToString;
  */
 
 @Entity
-@Table(name = "seller-agent-commission")
+@Table(name = "seller_agent_commission")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)

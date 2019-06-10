@@ -69,4 +69,9 @@ public class SellerAgentCommissionImpl extends BaseServiceImpl<SellerAgentCommis
 		return specification;
 	}
 
+	@Override
+	protected SellerAgentCommissionDTO afterLoad(SellerAgentCommissionDTO resource, SellerAgentCommission model) {
+		return resource;
+	}
+
 }

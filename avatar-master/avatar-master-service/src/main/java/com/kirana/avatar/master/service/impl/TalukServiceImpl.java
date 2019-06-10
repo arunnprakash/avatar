@@ -86,5 +86,10 @@ public class TalukServiceImpl extends BaseServiceImpl<Taluk, TalukDTO, TalukMapp
 		}
 		return specification;
 	}
+
+	@Override
+	protected TalukDTO afterLoad(TalukDTO resource, Taluk model) {
+		return resource;
+	}
 	
 }

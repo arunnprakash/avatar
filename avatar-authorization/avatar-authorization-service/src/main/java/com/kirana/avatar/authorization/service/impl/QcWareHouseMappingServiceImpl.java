@@ -76,4 +76,9 @@ public class QcWareHouseMappingServiceImpl extends BaseServiceImpl<QcWareHouseMa
 				.orElseThrow(ApiException::resourceNotFound);
 	}
 
+	@Override
+	protected QcWareHouseMappingDTO afterLoad(QcWareHouseMappingDTO resource, QcWareHouseMapping model) {
+		return resource;
+	}
+
 }

@@ -75,4 +75,9 @@ public class MarketServiceImpl extends BaseServiceImpl<Market, MarketDTO, Market
 		return specification;
 	}
 
+	@Override
+	protected MarketDTO afterLoad(MarketDTO resource, Market model) {
+		return resource;
+	}
+
 }

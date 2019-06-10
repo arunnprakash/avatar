@@ -65,5 +65,10 @@ public class LanguageServiceImpl extends BaseServiceImpl<Language, LanguageDTO, 
 		return null;
 	}
 
+	@Override
+	protected LanguageDTO afterLoad(LanguageDTO resource, Language model) {
+		return resource;
+	}
+
 	
 }

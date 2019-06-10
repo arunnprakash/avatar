@@ -86,5 +86,10 @@ public class StateServiceImpl extends BaseServiceImpl<State, StateDTO, StateMapp
 		}
 		return specification;
 	}
+
+	@Override
+	protected StateDTO afterLoad(StateDTO resource, State model) {
+		return resource;
+	}
 	
 }

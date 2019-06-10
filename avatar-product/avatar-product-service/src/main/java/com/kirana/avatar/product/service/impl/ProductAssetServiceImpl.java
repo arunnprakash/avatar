@@ -85,4 +85,9 @@ public class ProductAssetServiceImpl extends
 		return specification;
 	}
 
+	@Override
+	protected ProductAssetDTO afterLoad(ProductAssetDTO resource, ProductAsset model) {
+		return resource;
+	}
+
 }

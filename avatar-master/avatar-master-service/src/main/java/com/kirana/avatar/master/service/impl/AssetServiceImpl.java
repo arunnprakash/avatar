@@ -72,4 +72,9 @@ public class AssetServiceImpl extends BaseServiceImpl<Asset, AssetDTO, AssetMapp
 		return specification;
 	}
 
+	@Override
+	protected AssetDTO afterLoad(AssetDTO resource, Asset model) {
+		return resource;
+	}
+
 }

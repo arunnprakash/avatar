@@ -87,4 +87,9 @@ public class VillageServiceImpl extends BaseServiceImpl<Village, VillageDTO, Vil
 		return specification;
 	}
 
+	@Override
+	protected VillageDTO afterLoad(VillageDTO resource, Village model) {
+		return resource;
+	}
+
 }

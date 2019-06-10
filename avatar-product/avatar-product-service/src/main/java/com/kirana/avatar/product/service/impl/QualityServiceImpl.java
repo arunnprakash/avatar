@@ -71,5 +71,9 @@ public class QualityServiceImpl extends BaseServiceImpl<Quality, QualityDTO, Qua
 		}
 		return specification;
 	}
+	@Override
+	protected QualityDTO afterLoad(QualityDTO resource, Quality model) {
+		return resource;
+	}
 
 }

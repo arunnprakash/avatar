@@ -65,4 +65,10 @@ public class TruckDriverWareHouseMappingServiceImpl extends BaseServiceImpl<Truc
 		return specification;
 	}
 
+	@Override
+	protected TruckDriverWareHouseMappingDTO afterLoad(TruckDriverWareHouseMappingDTO resource,
+			TruckDriverWareHouseMapping model) {
+		return resource;
+	}
+
 }

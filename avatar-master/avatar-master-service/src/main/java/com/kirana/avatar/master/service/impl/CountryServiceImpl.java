@@ -76,5 +76,10 @@ public class CountryServiceImpl extends BaseServiceImpl<Country, CountryDTO, Cou
 		}
 		return specification;
 	}
+
+	@Override
+	protected CountryDTO afterLoad(CountryDTO resource, Country model) {
+		return resource;
+	}
 	
 }

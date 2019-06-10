@@ -92,5 +92,9 @@ public class HolidayServiceImpl extends BaseServiceImpl<Holiday, HolidayDTO, Hol
 		}
 		return specification;
 	}
+	@Override
+	protected HolidayDTO afterLoad(HolidayDTO resource, Holiday model) {
+		return resource;
+	}
 
 }

@@ -547,4 +547,9 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 				.map(genderDTO->objectMapper.convertValue(genderDTO, Map.class))
 				.orElseThrow(ApiException::resourceNotFound);
 	}
+
+	@Override
+	protected UserDTO afterLoad(UserDTO resource, User model) {
+		return resource;
+	}
 }

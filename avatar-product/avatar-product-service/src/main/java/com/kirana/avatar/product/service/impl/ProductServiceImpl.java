@@ -122,5 +122,9 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, ProductDTO, Pro
 		}
 		return specification;
 	}
+	@Override
+	protected ProductDTO afterLoad(ProductDTO resource, Product model) {
+		return resource;
+	}
 
 }

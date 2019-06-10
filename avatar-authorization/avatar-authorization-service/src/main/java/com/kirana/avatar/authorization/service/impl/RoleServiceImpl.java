@@ -85,4 +85,9 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, RoleDTO, RoleMapper, 
 		return specification;
 	}
 
+	@Override
+	protected RoleDTO afterLoad(RoleDTO resource, Role model) {
+		return resource;
+	}
+
 }

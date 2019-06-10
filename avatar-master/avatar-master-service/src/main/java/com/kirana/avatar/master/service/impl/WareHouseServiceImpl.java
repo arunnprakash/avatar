@@ -75,4 +75,9 @@ public class WareHouseServiceImpl extends BaseServiceImpl<WareHouse, WareHouseDT
 		return specification;
 	}
 
+	@Override
+	protected WareHouseDTO afterLoad(WareHouseDTO resource, WareHouse model) {
+		return resource;
+	}
+
 }

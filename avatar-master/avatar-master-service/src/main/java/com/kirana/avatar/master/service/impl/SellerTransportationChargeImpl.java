@@ -69,4 +69,10 @@ public class SellerTransportationChargeImpl extends BaseServiceImpl<SellerTransp
 		return specification;
 	}
 
+	@Override
+	protected SellerTransportationChargeDTO afterLoad(SellerTransportationChargeDTO resource,
+			SellerTransportationCharge model) {
+		return resource;
+	}
+
 }

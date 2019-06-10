@@ -65,4 +65,9 @@ public class GenderServiceImpl extends BaseServiceImpl<Gender, GenderDTO, Gender
 		return null;
 	}
 
+	@Override
+	protected GenderDTO afterLoad(GenderDTO resource, Gender model) {
+		return resource;
+	}
+
 }

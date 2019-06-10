@@ -74,4 +74,8 @@ public class ProductRegionServiceImpl extends BaseServiceImpl<ProductRegion, Pro
 		 */
 		return specification;
 	}
+	@Override
+	protected ProductRegionDTO afterLoad(ProductRegionDTO resource, ProductRegion model) {
+		return resource;
+	}
 }

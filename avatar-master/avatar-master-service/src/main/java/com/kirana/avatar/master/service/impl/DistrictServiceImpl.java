@@ -86,5 +86,10 @@ public class DistrictServiceImpl extends BaseServiceImpl<District, DistrictDTO, 
 		}
 		return specification;
 	}
+
+	@Override
+	protected DistrictDTO afterLoad(DistrictDTO resource, District model) {
+		return resource;
+	}
 	
 }

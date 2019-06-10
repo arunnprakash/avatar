@@ -89,5 +89,9 @@ public class MarketPriceServiceImpl extends BaseServiceImpl<MarketPrice, MarketP
 		}
 		return specification;
 	}
+	@Override
+	protected MarketPriceDTO afterLoad(MarketPriceDTO resource, MarketPrice model) {
+		return resource;
+	}
 
 }

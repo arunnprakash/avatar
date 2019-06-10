@@ -1,7 +1,6 @@
 package com.kirana.avatar.transaction.service.impl;
 
 
-import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,6 +12,14 @@ import java.util.stream.Collectors;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kirana.avatar.authorization.dto.UserDTO;
+import com.kirana.avatar.authorization.feign.UserClient;
+import com.kirana.avatar.common.dto.FilterCriteria;
+import com.kirana.avatar.common.jpa.entity.BaseEntity_;
+import com.kirana.avatar.common.service.impl.BaseServiceImpl;
+import com.kirana.avatar.product.dto.SellerPriceHistoryDTO;
+import com.kirana.avatar.product.feign.SellerPriceHistoryClient;
 import com.kirana.avatar.transaction.dto.SellerOrder;
 import com.kirana.avatar.transaction.dto.SellerTransactionDTO;
 import com.kirana.avatar.transaction.mapper.SellerTransactionMapper;
@@ -20,16 +27,6 @@ import com.kirana.avatar.transaction.model.SellerTransaction;
 import com.kirana.avatar.transaction.repositories.SellerTransactionRepository;
 import com.kirana.avatar.transaction.service.SellerTransactionService;
 import com.kirana.avatar.transaction.specifications.SellerTransactionSpecification;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kirana.avatar.authorization.dto.UserDTO;
-import com.kirana.avatar.master.dto.WareHouseDTO;
-import com.kirana.avatar.authorization.feign.UserClient;
-import com.kirana.avatar.common.dto.FilterCriteria;
-import com.kirana.avatar.common.exception.ApiException;
-import com.kirana.avatar.common.jpa.entity.BaseEntity_;
-import com.kirana.avatar.common.service.impl.BaseServiceImpl;
-import com.kirana.avatar.product.dto.SellerPriceHistoryDTO;
-import com.kirana.avatar.product.feign.SellerPriceHistoryClient;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -167,6 +164,11 @@ public class SellerTransactionServiceImpl extends BaseServiceImpl<SellerTransact
 		sellerOrder.setSeller(seller);
 		sellerOrder.setSellerAgent(sellerAgent);
 		return sellerOrder;
+	}
+
+	@Override
+	protected SellerTransactionDTO afterLoad(SellerTransactionDTO resource, SellerTransaction model) {
+		return resource;
 	}
 
 }

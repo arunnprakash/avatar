@@ -69,4 +69,10 @@ public class SellerMerchantCommissionImpl extends BaseServiceImpl<SellerMerchant
 		return specification;
 	}
 
+	@Override
+	protected SellerMerchantCommissionDTO afterLoad(SellerMerchantCommissionDTO resource,
+			SellerMerchantCommission model) {
+		return resource;
+	}
+
 }

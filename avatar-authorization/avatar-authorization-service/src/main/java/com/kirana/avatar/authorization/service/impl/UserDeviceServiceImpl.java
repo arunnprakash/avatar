@@ -107,5 +107,10 @@ public class UserDeviceServiceImpl extends BaseServiceImpl<UserDevice, UserDevic
 		}
 		return specification;
 	}
+
+	@Override
+	protected UserDeviceDTO afterLoad(UserDeviceDTO resource, UserDevice model) {
+		return resource;
+	}
 	
 }

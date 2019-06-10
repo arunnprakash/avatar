@@ -185,4 +185,8 @@ public class SellerPriceHistoryServiceImpl extends BaseServiceImpl<SellerPriceHi
 			return Optional.ofNullable(null);
 		}
 	}
+	@Override
+	protected SellerPriceHistoryDTO afterLoad(SellerPriceHistoryDTO resource, SellerPriceHistory model) {
+		return resource;
+	}
 }

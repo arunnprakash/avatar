@@ -30,7 +30,8 @@ export class SellerTransportationChargesComponent extends BaseComponent implemen
 
     protected title = 'Seller Transportation Charge';
     protected localCols: any[] = [
-           { field: 'commission', header: 'Commission', dataType: 'INPUT' }
+           { field: 'transportationCharge', header: 'Transportation Charge', dataType: 'INPUT' },
+           { field: 'exemption', header: 'Exemption', dataType: 'INPUT' }
     ];
 
     constructor( sellerAgentCommissionService: SellerTransportationChargeService, authService: AuthService, translate: TranslateService, domSanitizer: DomSanitizer,

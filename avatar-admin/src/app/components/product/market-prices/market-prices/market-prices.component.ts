@@ -17,6 +17,8 @@ import { ProductDTO } from "../../../../services/product/productdto.model";
 import { QualityDTO } from "../../../../services/product/qualitydto.model";
 import { MarketPriceDTO } from "../../../../services/product/marketpricedto.model";
 import { MarketPriceDetailComponent } from "../market-price-detail/market-price-detail.component";
+import { MarketService } from '../../../../services/master/marketservice.generated';
+import { MarketDTO } from "../../../../services/master/marketdto.model";
 
 import * as _ from "lodash";
 
@@ -30,13 +32,14 @@ export class MarketPricesComponent extends BaseComponent implements OnInit {
 
     protected title = 'Price';
     protected localCols: any[] = [
+              { field: 'market', header: 'Market', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"en" },
               { field: 'product', header: 'Product', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"en"},
               { field: 'quality', header: 'Quality', dataType: 'AUTOCOMPLETE', multiple: false, options: [] , optionLabel:"qualityType"},
               { field: 'price', header: 'Price', dataType: 'INPUT' }
     ];
 
     constructor( marketPriceService: MarketPriceService, authService: AuthService, translate: TranslateService, domSanitizer: DomSanitizer,
-            private productService: ProductService, private qualityService: QualityService,
+            private marketService: MarketService, private productService: ProductService, private qualityService: QualityService,
             confirmationService: ConfirmationService, dialogService: DialogService, 
             router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef) {
         super( marketPriceService, authService, translate, domSanitizer, confirmationService, dialogService, MarketPriceDetailComponent, router, activatedRoute, vcRef);
@@ -46,6 +49,7 @@ export class MarketPricesComponent extends BaseComponent implements OnInit {
         super.ngOnInit();
         console.log("ngOnInit market-price.component");
         this.initFieldsLabel("prices");
+        this.initMarketList();
         this.initProductList();
         this.initQualityList();
         this.initProductNameField();
@@ -53,6 +57,16 @@ export class MarketPricesComponent extends BaseComponent implements OnInit {
     initProductNameField() {
         let menuItem: any = _.find(this.localCols, { 'field': 'product' });
         menuItem.optionLabel = this.languageCode;
+    }
+    initMarketList() {
+        this.marketService.getAllExceptDeleted().subscribe((markets: MarketDTO[]) => {
+            let menuItem: any = _.find(this.localCols, { 'field': 'market' });
+            menuItem.optionLabel = this.languageCode;
+            menuItem.options = markets;
+        },
+        ( error ) => {
+            this.showAlertDialog('Error', 'Error while getting Market List');
+        });
     }
     initProductList() {
         this.productService.getAllExceptDeleted().subscribe((products: ProductDTO[]) => {

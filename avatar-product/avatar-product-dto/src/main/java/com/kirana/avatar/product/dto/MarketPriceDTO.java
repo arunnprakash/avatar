@@ -4,6 +4,7 @@
 package com.kirana.avatar.product.dto;
 
 import java.time.ZonedDateTime;
+import java.util.Map;
 
 import com.kirana.avatar.common.dto.BaseDTO;
 
@@ -24,7 +25,7 @@ import lombok.ToString;
 @ToString
 public class MarketPriceDTO extends BaseDTO{
 	
-	protected Long market;
+	protected Map<String, Object> market;
 	protected ProductDTO product;
 	protected Double price;
 	protected QualityDTO quality;
@@ -32,7 +33,7 @@ public class MarketPriceDTO extends BaseDTO{
 	@Builder(toBuilder = true)
 	public MarketPriceDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
 			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, 
-			Long market, ProductDTO product, Double price, QualityDTO quality) {
+			Map<String, Object> market, ProductDTO product, Double price, QualityDTO quality) {
 		super(id, createdBy, createdDate, lastModifiedBy, lastModifiedDate, deleted, version);
 		this.market = market;
 		this.product = product;

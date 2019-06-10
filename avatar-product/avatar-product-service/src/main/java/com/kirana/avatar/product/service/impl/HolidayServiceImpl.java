@@ -46,7 +46,7 @@ public class HolidayServiceImpl extends BaseServiceImpl<Holiday, HolidayDTO, Hol
 		this.holidaySpecification = holidaySpecification;
 	}
 	@Override
-	protected Holiday beforeSave(Holiday model) {
+	protected Holiday beforeSave(HolidayDTO holidayDTO, Holiday model) {
 		return model;
 	}
 	@Override

@@ -45,7 +45,7 @@ public class DistrictServiceImpl extends BaseServiceImpl<District, DistrictDTO, 
 	}
 
 	@Override
-	protected District beforeSave(District model) {
+	protected District beforeSave(DistrictDTO districtDTO, District model) {
 		return model;
 	}
 

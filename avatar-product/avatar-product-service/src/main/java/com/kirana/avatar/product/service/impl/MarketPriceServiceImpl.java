@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.kirana.avatar.common.dto.FilterCriteria;
 import com.kirana.avatar.common.exception.ApiException;
+import com.kirana.avatar.common.jpa.entity.BaseEntity_;
 import com.kirana.avatar.common.service.impl.BaseServiceImpl;
 import com.kirana.avatar.product.dto.MarketPriceDTO;
 import com.kirana.avatar.product.mapper.MarketPriceMapper;
@@ -56,7 +57,9 @@ public class MarketPriceServiceImpl extends BaseServiceImpl<MarketPrice, MarketP
 		this.productRegionSpecification = productRegionSpecification;
 	}
 	@Override
-	protected MarketPrice beforeSave(MarketPrice model) {
+	protected MarketPrice beforeSave(MarketPriceDTO marketPriceDTO, MarketPrice model) {
+		Number market = (Number)marketPriceDTO.getMarket().get(BaseEntity_.ID);
+		model.setMarket(market.longValue());
 		return model;
 	}
 	@Override

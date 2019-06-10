@@ -60,7 +60,7 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, ProductDTO, Pro
 		this.assetMapper = assetMapper;
 	}
 	@Override
-	protected Product beforeSave(Product model) {
+	protected Product beforeSave(ProductDTO resource, Product model) {
 		model.setAssets(null);
 		return model;
 	}

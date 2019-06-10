@@ -42,7 +42,7 @@ public class QcWareHouseMappingServiceImpl extends BaseServiceImpl<QcWareHouseMa
 	}
 
 	@Override
-	protected QcWareHouseMapping beforeSave(QcWareHouseMapping model) {
+	protected QcWareHouseMapping beforeSave(QcWareHouseMappingDTO wareHouseDTO, QcWareHouseMapping model) {
 		return model;
 	}
 

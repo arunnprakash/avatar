@@ -45,7 +45,7 @@ public class SellerMerchantCommissionImpl extends BaseServiceImpl<SellerMerchant
 	}
 
 	@Override
-	protected SellerMerchantCommission beforeSave(SellerMerchantCommission model) {
+	protected SellerMerchantCommission beforeSave(SellerMerchantCommissionDTO sellerMerchantCommissionDTO, SellerMerchantCommission model) {
 		return model;
 	}
 

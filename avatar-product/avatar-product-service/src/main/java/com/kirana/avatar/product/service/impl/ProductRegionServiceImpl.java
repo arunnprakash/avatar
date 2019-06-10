@@ -39,7 +39,7 @@ public class ProductRegionServiceImpl extends BaseServiceImpl<ProductRegion, Pro
 		this.productAssetSpecification = productAssetSpecification;
 	}
 	@Override
-	protected ProductRegion beforeSave(ProductRegion model) {
+	protected ProductRegion beforeSave(ProductRegionDTO productAssetDTO, ProductRegion model) {
 		return model;
 	}
 	@Override

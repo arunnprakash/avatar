@@ -40,7 +40,7 @@ public class GenderServiceImpl extends BaseServiceImpl<Gender, GenderDTO, Gender
 	}
 
 	@Override
-	protected Gender beforeSave(Gender model) {
+	protected Gender beforeSave(GenderDTO genderDTO, Gender model) {
 		return model;
 	}
 

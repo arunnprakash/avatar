@@ -63,7 +63,7 @@ public class SellerTransactionServiceImpl extends BaseServiceImpl<SellerTransact
 	}
 
 	@Override
-	protected SellerTransaction beforeSave(SellerTransaction model) {
+	protected SellerTransaction beforeSave(SellerTransactionDTO sellerTransactionDTO, SellerTransaction model) {
 		UserDTO sellerAgent = userClient.getSellerAgentForSeller(model.getSeller());
 		model.setSellerAgent(sellerAgent.getId());
 		UserDTO truckDriver = userClient.getTruckDriverForSellerAgent(sellerAgent.getId());

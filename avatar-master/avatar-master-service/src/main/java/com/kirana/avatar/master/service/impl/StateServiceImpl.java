@@ -46,7 +46,7 @@ public class StateServiceImpl extends BaseServiceImpl<State, StateDTO, StateMapp
 	}
 
 	@Override
-	protected State beforeSave(State model) {
+	protected State beforeSave(StateDTO stateDTO, State model) {
 		return model;
 	}
 

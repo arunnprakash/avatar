@@ -38,7 +38,7 @@ public class AssetTypeServiceImpl extends BaseServiceImpl<AssetType, AssetTypeDT
 	}
 	
 	@Override
-	protected AssetType beforeSave(AssetType model) {
+	protected AssetType beforeSave(AssetTypeDTO assetTypeDTO, AssetType model) {
 		return model;
 	}
 

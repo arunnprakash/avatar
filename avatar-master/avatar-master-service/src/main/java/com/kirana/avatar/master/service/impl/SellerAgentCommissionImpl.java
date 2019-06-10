@@ -45,7 +45,7 @@ public class SellerAgentCommissionImpl extends BaseServiceImpl<SellerAgentCommis
 	}
 
 	@Override
-	protected SellerAgentCommission beforeSave(SellerAgentCommission model) {
+	protected SellerAgentCommission beforeSave(SellerAgentCommissionDTO sellerAgentCommissionDTO, SellerAgentCommission model) {
 		return model;
 	}
 

@@ -45,7 +45,7 @@ public class MarketServiceImpl extends BaseServiceImpl<Market, MarketDTO, Market
 	}
 
 	@Override
-	protected Market beforeSave(Market model) {
+	protected Market beforeSave(MarketDTO marketDTO, Market model) {
 		return model;
 	}
 

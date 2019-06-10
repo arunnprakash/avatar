@@ -41,7 +41,7 @@ public class TruckDriverWareHouseMappingServiceImpl extends BaseServiceImpl<Truc
 	}
 
 	@Override
-	protected TruckDriverWareHouseMapping beforeSave(TruckDriverWareHouseMapping model) {
+	protected TruckDriverWareHouseMapping beforeSave(TruckDriverWareHouseMappingDTO wareHouseDTO, TruckDriverWareHouseMapping model) {
 		return model;
 	}
 

@@ -160,7 +160,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 	}
 
 	@Override
-	protected User beforeSave(User model) {
+	protected User beforeSave(UserDTO userDTO, User model) {
 		String encryptedPassword = bCryptPasswordEncoder.encode(jwtConfig.getDefaultPassword());
 		model.setPassword(encryptedPassword);
 		model.setSuspended(false);

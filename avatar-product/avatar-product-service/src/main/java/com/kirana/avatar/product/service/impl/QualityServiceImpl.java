@@ -41,7 +41,7 @@ public class QualityServiceImpl extends BaseServiceImpl<Quality, QualityDTO, Qua
 		this.qualitySpecification = qualitySpecification;
 	}
 	@Override
-	protected Quality beforeSave(Quality model) {
+	protected Quality beforeSave(QualityDTO qualityDTO, Quality model) {
 		return model;
 	}
 	@Override

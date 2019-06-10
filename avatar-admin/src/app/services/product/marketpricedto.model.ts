@@ -4,7 +4,7 @@ import { ProductDTO } from './productdto.model';
 import { QualityDTO } from './qualitydto.model';
 
 export class MarketPriceDTO {
-    market: number;
+    market: { [index: string]: any };
     product: ProductDTO;
     price: number;
     quality: QualityDTO;

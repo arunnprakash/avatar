@@ -73,7 +73,7 @@ public class SellerPriceHistoryServiceImpl extends BaseServiceImpl<SellerPriceHi
 		this.productRegionSpecification = productRegionSpecification;
 	}
 	@Override
-	protected SellerPriceHistory beforeSave(SellerPriceHistory model) {
+	protected SellerPriceHistory beforeSave(SellerPriceHistoryDTO priceHistoryDTO, SellerPriceHistory model) {
 		return model;
 	}
 	@Override

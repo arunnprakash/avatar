@@ -46,7 +46,7 @@ public class VillageServiceImpl extends BaseServiceImpl<Village, VillageDTO, Vil
 	}
 
 	@Override
-	protected Village beforeSave(Village model) {
+	protected Village beforeSave(VillageDTO villageDTO, Village model) {
 		return model;
 	}
 

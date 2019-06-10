@@ -96,17 +96,25 @@ public abstract class BaseServiceImpl<Model extends BaseEntity<Model>,
 			return repository
 					.findAll()
 					.stream()
-					.map(mapper::toDTO)
+					.map(model -> {
+						DTO resource = this.mapper.toDTO(model);
+						return this.afterLoad(resource, model);
+					})
 					.collect(Collectors.toList());
 		} else {
 			return repository
 					.findAll()
 					.stream()
-					.map(mapper::toDTO)
+					.map(model -> {
+						DTO resource = this.mapper.toDTO(model);
+						return this.afterLoad(resource, model);
+					})
 					.collect(Collectors.toList());
 		}
 		
 	}
+
+	protected abstract DTO afterLoad(DTO resource, Model model);
 
 	@Override
 	public DTO get(Long roleId) {
@@ -122,14 +130,14 @@ public abstract class BaseServiceImpl<Model extends BaseEntity<Model>,
 			throw ApiException.resourceAlreadyExist();
 		} else {
 			Model model = mapper.toModel(resource);
-			model = beforeSave(model);
+			model = beforeSave(resource, model);
 			model = repository.save(model);
 			model = afterSave(resource, model);
 			return mapper.toDTO(model);
 		}
 	}
 
-	protected abstract Model beforeSave(Model model);
+	protected abstract Model beforeSave(DTO resource, Model model);
 	protected abstract Model afterSave(DTO resource, Model model);
 
 	@Override

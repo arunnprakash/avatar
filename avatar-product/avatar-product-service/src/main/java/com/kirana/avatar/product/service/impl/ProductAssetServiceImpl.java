@@ -44,7 +44,7 @@ public class ProductAssetServiceImpl extends
 	}
 
 	@Override
-	protected ProductAsset beforeSave(ProductAsset model) {
+	protected ProductAsset beforeSave(ProductAssetDTO productAssetDTO, ProductAsset model) {
 		return model;
 	}
 

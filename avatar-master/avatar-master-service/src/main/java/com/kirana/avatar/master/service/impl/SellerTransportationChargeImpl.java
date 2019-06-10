@@ -45,7 +45,7 @@ public class SellerTransportationChargeImpl extends BaseServiceImpl<SellerTransp
 	}
 
 	@Override
-	protected SellerTransportationCharge beforeSave(SellerTransportationCharge model) {
+	protected SellerTransportationCharge beforeSave(SellerTransportationChargeDTO sellerTransportationChargeDTO, SellerTransportationCharge model) {
 		return model;
 	}
 

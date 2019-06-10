@@ -45,7 +45,7 @@ public class WareHouseServiceImpl extends BaseServiceImpl<WareHouse, WareHouseDT
 	}
 
 	@Override
-	protected WareHouse beforeSave(WareHouse model) {
+	protected WareHouse beforeSave(WareHouseDTO wareHouseDTO, WareHouse model) {
 		return model;
 	}
 

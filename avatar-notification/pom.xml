@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.kirana.avatar</groupId>
+		<artifactId>avatar</artifactId>
+		<version>1.0.0</version>
+	</parent>
+	<artifactId>avatar-notification</artifactId>
+	<packaging>pom</packaging>
+
+	<name>avatar-notification</name>
+	<description>notification Service</description>
+
+	<modules>
+		<module>avatar-notification-dto</module>
+		<module>avatar-notification-model</module>
+		<module>avatar-notification-mapper</module>
+		<module>avatar-notification-dao</module>
+		<module>avatar-notification-resource</module>
+		<module>avatar-notification-feign</module>
+		<module>avatar-notification-service</module>
+	</modules>
+</project>

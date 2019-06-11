@@ -18,8 +18,16 @@ import com.kirana.avatar.common.controllers.BaseController;
 @RestController
 public class SellerMerchantCommissionController extends BaseController<SellerMerchantCommissionService, SellerMerchantCommissionDTO> implements SellerMerchantCommissionResource {
 	
+	private SellerMerchantCommissionService sellerMerchantCommissionService;
+
 	public SellerMerchantCommissionController(SellerMerchantCommissionService sellerMerchantCommissionService) {
 		super(sellerMerchantCommissionService);
+		this.sellerMerchantCommissionService = sellerMerchantCommissionService;
+	}
+
+	@Override
+	public SellerMerchantCommissionDTO getLatestSellerMerchantCommission() {
+		return sellerMerchantCommissionService.getLatestSellerMerchantCommission();
 	}
 
 }

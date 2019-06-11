@@ -18,7 +18,7 @@ import { ServiceConfig } from './serviceconfig';
 @Injectable()
 export class AssetService {
     private get serviceBaseURL(): string {
-        return this.serviceConfig.context + '/api/asset';
+        return this.serviceConfig.context + '/api/product/asset';
     }
 
     constructor(private httpClient: HttpClient, private serviceConfig: ServiceConfig) { }

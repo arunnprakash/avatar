@@ -18,8 +18,16 @@ import com.kirana.avatar.common.controllers.BaseController;
 @RestController
 public class SellerAgentCommissionController extends BaseController<SellerAgentCommissionService, SellerAgentCommissionDTO> implements SellerAgentCommissionResource {
 	
-	public SellerAgentCommissionController(SellerAgentCommissionService wareHouseService) {
-		super(wareHouseService);
+	private SellerAgentCommissionService sellerAgentCommissionService;
+
+	public SellerAgentCommissionController(SellerAgentCommissionService sellerAgentCommissionService) {
+		super(sellerAgentCommissionService);
+		this.sellerAgentCommissionService = sellerAgentCommissionService;
+	}
+
+	@Override
+	public SellerAgentCommissionDTO getLatestSellerAgentCommission() {
+		return sellerAgentCommissionService.getLatestSellerAgentCommission();
 	}
 
 }

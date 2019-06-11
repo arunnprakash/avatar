@@ -75,4 +75,13 @@ public class SellerTransportationChargeImpl extends BaseServiceImpl<SellerTransp
 		return resource;
 	}
 
+	@Override
+	public SellerTransportationChargeDTO getLatestSellerTransportationCharge() {
+		Specification<SellerTransportationCharge> specification = Specification.where(sellerTransportationChargeSpecification.hasDeleted(false));
+		return sellerTransportationChargeRepository
+				.findOne(specification)
+				.map(sellerTransportationChargeMapper::toDTO)
+				.orElseThrow(ApiException::resourceNotFound);
+	}
+
 }

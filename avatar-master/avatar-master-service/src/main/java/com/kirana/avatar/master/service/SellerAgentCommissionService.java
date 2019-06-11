@@ -13,4 +13,6 @@ import com.kirana.avatar.common.service.BaseService;
 
 public interface SellerAgentCommissionService extends BaseService<SellerAgentCommissionDTO>{
 
+	public SellerAgentCommissionDTO getLatestSellerAgentCommission();
+
 }

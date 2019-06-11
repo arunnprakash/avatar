@@ -20,7 +20,7 @@ import { ServiceConfig } from './serviceconfig';
 @Injectable()
 export class ProductRegionService {
     private get serviceBaseURL(): string {
-        return this.serviceConfig.context + '/api/productRegion';
+        return this.serviceConfig.context + '/api/product-region';
     }
 
     constructor(private httpClient: HttpClient, private serviceConfig: ServiceConfig) { }

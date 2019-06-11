@@ -120,7 +120,10 @@ public abstract class BaseServiceImpl<Model extends BaseEntity<Model>,
 	public DTO get(Long roleId) {
 		return repository
 				.findById(roleId)
-				.map(mapper::toDTO)
+				.map(model -> {
+					DTO resource = this.mapper.toDTO(model);
+					return this.afterLoad(resource, model);
+				})
 				.orElseThrow(ApiException::resourceNotFound);
 	}
 
@@ -183,14 +186,20 @@ public abstract class BaseServiceImpl<Model extends BaseEntity<Model>,
 				results = repository
 						.findAll(specification, pageRequest)
 						.stream()
-						.map(mapper::toDTO)
+						.map(model -> {
+							DTO resource = this.mapper.toDTO(model);
+							return this.afterLoad(resource, model);
+						})
 						.collect(Collectors.toList());
 			} else {
 				totalRecords = repository.countByDeleted(includesDeletedResources);
 				results = repository
 						.findByDeleted(includesDeletedResources, pageRequest)
 						.stream()
-						.map(mapper::toDTO)
+						.map(model -> {
+							DTO resource = this.mapper.toDTO(model);
+							return this.afterLoad(resource, model);
+						})
 						.collect(Collectors.toList());
 			}
 		} else {
@@ -293,7 +302,10 @@ public abstract class BaseServiceImpl<Model extends BaseEntity<Model>,
 			results = repository
 					.findAll(specification, pageRequest)
 					.stream()
-					.map(mapper::toDTO)
+					.map(model -> {
+						DTO resource = this.mapper.toDTO(model);
+						return this.afterLoad(resource, model);
+					})
 					.collect(Collectors.toList());
 		}
 		PagingAndFilterResponse<DTO> response = (PagingAndFilterResponse<DTO>) PagingAndFilterResponse

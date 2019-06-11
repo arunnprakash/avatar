@@ -20,4 +20,7 @@ import com.kirana.avatar.common.resource.BaseResource;
 @RequestMapping(value= {"/api/seller-transportation-charge"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 public interface SellerTransportationChargeResource extends BaseResource<SellerTransportationChargeDTO>{
 
+	@RequestMapping(value= {"/latest-seller-transportation-charge"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+	public SellerTransportationChargeDTO getLatestSellerTransportationCharge();
+
 }

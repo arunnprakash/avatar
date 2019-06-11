@@ -13,4 +13,6 @@ import com.kirana.avatar.common.service.BaseService;
 
 public interface SellerMerchantCommissionService extends BaseService<SellerMerchantCommissionDTO>{
 
+	public SellerMerchantCommissionDTO getLatestSellerMerchantCommission();
+
 }

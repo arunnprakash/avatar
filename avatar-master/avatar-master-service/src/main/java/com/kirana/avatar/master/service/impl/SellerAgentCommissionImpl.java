@@ -74,4 +74,13 @@ public class SellerAgentCommissionImpl extends BaseServiceImpl<SellerAgentCommis
 		return resource;
 	}
 
+	@Override
+	public SellerAgentCommissionDTO getLatestSellerAgentCommission() {
+		Specification<SellerAgentCommission> specification = Specification.where(sellerAgentCommissionSpecification.hasDeleted(false));
+		return sellerAgentCommissionRepository
+				.findOne(specification)
+				.map(sellerAgentCommissionMapper::toDTO)
+				.orElseThrow(ApiException::resourceNotFound);
+	}
+
 }

@@ -15,7 +15,7 @@ import com.kirana.avatar.common.resource.BaseResource;
  */
 @TypeScriptEndpoint("AssetService")
 @TypeScriptTemplatesConfiguration(useSuffixes = false)
-@RequestMapping(value= {"/api/asset"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+@RequestMapping(value= {"/api/product/asset"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 public interface AssetResource extends BaseResource<AssetDTO> {
 
 }

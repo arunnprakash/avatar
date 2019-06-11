@@ -26,14 +26,17 @@ import com.kirana.avatar.common.dto.FilterCriteria;
 import com.kirana.avatar.common.dto.PagingAndFilterRequest;
 import com.kirana.avatar.common.dto.PagingAndFilterResponse;
 import com.kirana.avatar.common.exception.ApiException;
+import static com.kirana.avatar.common.jpa.entity.BaseEntity_.ID;
 import com.kirana.avatar.common.service.impl.BaseServiceImpl;
 import com.kirana.avatar.product.dto.SellerPriceHistoryDTO;
 import com.kirana.avatar.product.mapper.SellerPriceHistoryMapper;
 import com.kirana.avatar.product.model.SellerPriceHistory;
+import com.kirana.avatar.product.model.MarketPrice;
 import com.kirana.avatar.product.model.Product;
 import com.kirana.avatar.product.model.ProductRegion;
 import com.kirana.avatar.product.model.UserProduct;
 import com.kirana.avatar.product.repositories.SellerPriceHistoryRepository;
+import com.kirana.avatar.product.repositories.MarketPriceRepository;
 import com.kirana.avatar.product.repositories.ProductRegionRepository;
 import com.kirana.avatar.product.repositories.UserProductRepository;
 import com.kirana.avatar.product.service.SellerPriceHistoryService;
@@ -60,9 +63,11 @@ public class SellerPriceHistoryServiceImpl extends BaseServiceImpl<SellerPriceHi
 	private UserProductSpecification userProductSpecification;
 	private ProductRegionRepository productRegionRepository;
 	private ProductRegionSpecification productRegionSpecification;
+	private MarketPriceRepository marketPriceRepository;
 	public SellerPriceHistoryServiceImpl(SellerPriceHistoryRepository priceHistoryRepository, SellerPriceHistoryMapper priceHistoryMapper, SellerPriceHistorySpecification priceHistorySpecification,
 			UserProductRepository userProductRepository, UserProductSpecification userProductSpecification,
-			ProductRegionRepository productRegionRepository, ProductRegionSpecification productRegionSpecification) {
+			ProductRegionRepository productRegionRepository, ProductRegionSpecification productRegionSpecification,
+			MarketPriceRepository marketPriceRepository) {
 		super(priceHistoryRepository, priceHistoryMapper, priceHistorySpecification);
 		this.priceHistoryRepository = priceHistoryRepository;
 		this.priceHistoryMapper = priceHistoryMapper;
@@ -71,9 +76,19 @@ public class SellerPriceHistoryServiceImpl extends BaseServiceImpl<SellerPriceHi
 		this.userProductSpecification = userProductSpecification;
 		this.productRegionRepository = productRegionRepository;
 		this.productRegionSpecification = productRegionSpecification;
+		this.marketPriceRepository = marketPriceRepository;
 	}
 	@Override
 	protected SellerPriceHistory beforeSave(SellerPriceHistoryDTO priceHistoryDTO, SellerPriceHistory model) {
+
+		model.setSellerAgentCommission((Long)priceHistoryDTO.getSellerAgentCommission().get(ID));
+		model.setSellerTransportationCharge((Long)priceHistoryDTO.getSellerTransportationCharge().get(ID));
+		model.setSellerMerchantCommission((Long)priceHistoryDTO.getSellerMerchantCommission().get(ID));
+
+		MarketPrice marketPrice = marketPriceRepository
+				.findById(priceHistoryDTO.getMarketPrice().getId())
+				.orElseThrow(ApiException::resourceNotFound);
+		model.setMarketPrice(marketPrice);
 		return model;
 	}
 	@Override
@@ -87,6 +102,10 @@ public class SellerPriceHistoryServiceImpl extends BaseServiceImpl<SellerPriceHi
 	@Override
 	protected SellerPriceHistory afterUpdate(SellerPriceHistoryDTO resource, SellerPriceHistory model) {
 		return model;
+	}
+	@Override
+	protected SellerPriceHistoryDTO afterLoad(SellerPriceHistoryDTO resource, SellerPriceHistory model) {
+		return resource;
 	}
 	@Override
 	protected Specification<SellerPriceHistory> getSpecification(FilterCriteria filter, Specification<SellerPriceHistory> specification) {
@@ -123,6 +142,15 @@ public class SellerPriceHistoryServiceImpl extends BaseServiceImpl<SellerPriceHi
 				.totalRecords(totalRecords)
 				.results(results)
 				.build();
+	}
+	@Override
+	public SellerPriceHistoryDTO getPriceForProduct(Long productId, Long qualityId, String pricePublishedDate) {
+		//ZonedDateTime createdDate = ZonedDateTime.parse(pricePublishedDate, DateTimeFormatter.ISO_DATE.withZone(ZoneId.systemDefault()));
+		Instant instant = Instant.parse(pricePublishedDate);
+		ZonedDateTime createdDate = ZonedDateTime.ofInstant(instant, ZoneId.systemDefault());
+		return getLatestPrice(productId, qualityId, createdDate)
+				.map(priceHistoryMapper::toDTO)
+				.orElseThrow(ApiException::resourceNotFound);
 	}
 	private Optional<SellerPriceHistory> getLatestPrice(Product product) {
 		List<SellerPriceHistory> priceHistories = priceHistoryRepository.getLatestPrice(product.getId());
@@ -168,15 +196,6 @@ public class SellerPriceHistoryServiceImpl extends BaseServiceImpl<SellerPriceHi
 				.map(UserProduct::getProduct)
 				.collect(Collectors.toList());
 	}
-	@Override
-	public SellerPriceHistoryDTO getPriceForProduct(Long productId, Long qualityId, String pricePublishedDate) {
-		//ZonedDateTime createdDate = ZonedDateTime.parse(pricePublishedDate, DateTimeFormatter.ISO_DATE.withZone(ZoneId.systemDefault()));
-		Instant instant = Instant.parse(pricePublishedDate);
-		ZonedDateTime createdDate = ZonedDateTime.ofInstant(instant, ZoneId.systemDefault());
-		return getLatestPrice(productId, qualityId, createdDate)
-				.map(priceHistoryMapper::toDTO)
-				.orElseThrow(ApiException::resourceNotFound);
-	}
 	private Optional<SellerPriceHistory> getLatestPrice(Long productId, Long qualityId, ZonedDateTime createdDate) {
 		List<SellerPriceHistory> priceHistories = priceHistoryRepository.getLatestPrice(productId, qualityId, createdDate);
 		if (null != priceHistories && !priceHistories.isEmpty()) {
@@ -185,8 +204,5 @@ public class SellerPriceHistoryServiceImpl extends BaseServiceImpl<SellerPriceHi
 			return Optional.ofNullable(null);
 		}
 	}
-	@Override
-	protected SellerPriceHistoryDTO afterLoad(SellerPriceHistoryDTO resource, SellerPriceHistory model) {
-		return resource;
-	}
+
 }

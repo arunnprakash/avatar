@@ -13,4 +13,6 @@ import com.kirana.avatar.common.service.BaseService;
 
 public interface SellerTransportationChargeService extends BaseService<SellerTransportationChargeDTO>{
 
+	public SellerTransportationChargeDTO getLatestSellerTransportationCharge();
+
 }

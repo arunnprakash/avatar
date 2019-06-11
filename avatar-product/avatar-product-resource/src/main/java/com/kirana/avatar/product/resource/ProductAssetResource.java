@@ -15,7 +15,7 @@ import com.kirana.avatar.product.dto.ProductAssetDTO;
  *
  */
 @TypeScriptEndpoint("ProductAssetService")
-@RequestMapping(value= {"/api/productAsset"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+@RequestMapping(value= {"/api/product-asset"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 public interface ProductAssetResource extends BaseResource<ProductAssetDTO>{
 
 }

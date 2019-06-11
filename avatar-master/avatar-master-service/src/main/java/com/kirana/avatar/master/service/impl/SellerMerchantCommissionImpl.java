@@ -75,4 +75,13 @@ public class SellerMerchantCommissionImpl extends BaseServiceImpl<SellerMerchant
 		return resource;
 	}
 
+	@Override
+	public SellerMerchantCommissionDTO getLatestSellerMerchantCommission() {
+		Specification<SellerMerchantCommission> specification = Specification.where(sellerMerchantCommissionSpecification.hasDeleted(false));
+		return sellerMerchantCommissionRepository
+				.findOne(specification)
+				.map(sellerMerchantCommissionMapper::toDTO)
+				.orElseThrow(ApiException::resourceNotFound);
+	}
+
 }

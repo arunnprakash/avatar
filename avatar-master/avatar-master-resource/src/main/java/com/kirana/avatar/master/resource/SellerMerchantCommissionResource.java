@@ -20,4 +20,7 @@ import com.kirana.avatar.common.resource.BaseResource;
 @RequestMapping(value= {"/api/seller-merchant-commission"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 public interface SellerMerchantCommissionResource extends BaseResource<SellerMerchantCommissionDTO>{
 
+	@RequestMapping(value= {"/latest-seller-merchant-commission"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+	public SellerMerchantCommissionDTO getLatestSellerMerchantCommission();
+
 }

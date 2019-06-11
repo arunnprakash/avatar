@@ -15,7 +15,7 @@ import com.kirana.avatar.product.dto.ProductRegionDTO;
  *
  */
 @TypeScriptEndpoint("ProductRegionService")
-@RequestMapping(value= {"/api/productRegion"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+@RequestMapping(value= {"/api/product-region"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 public interface ProductRegionResource extends BaseResource<ProductRegionDTO>{
 
 }

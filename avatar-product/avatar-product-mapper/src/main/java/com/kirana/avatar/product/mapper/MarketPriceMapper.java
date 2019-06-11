@@ -20,7 +20,7 @@ import com.kirana.avatar.product.model.MarketPrice;
 public interface MarketPriceMapper extends BaseMapper<MarketPriceDTO, MarketPrice>{
 
 	@Mappings({
-		@Mapping(target = "market", ignore = true),
+		@Mapping(target = "market", ignore = true)
 	})
 	public MarketPriceDTO toDTO(MarketPrice model);
 
@@ -33,7 +33,7 @@ public interface MarketPriceMapper extends BaseMapper<MarketPriceDTO, MarketPric
 		@Mapping(target = "lastModifiedDate", ignore = true),
 		@Mapping(target = "version", ignore = true),
 		@Mapping(target = "deleted", ignore = true),
-		@Mapping(target = "market", ignore = true),
+		@Mapping(target = "market", ignore = true)
 	})
 	public MarketPrice toModel(MarketPriceDTO dto);
 	 
@@ -46,7 +46,7 @@ public interface MarketPriceMapper extends BaseMapper<MarketPriceDTO, MarketPric
 		@Mapping(target = "lastModifiedDate", ignore = true),
 		@Mapping(target = "version", ignore = true),
 		@Mapping(target = "deleted", ignore = true),
-		@Mapping(target = "market", ignore = true),
+		@Mapping(target = "market", ignore = true)
 	})
 	public MarketPrice updateModel(MarketPriceDTO dto, @MappingTarget MarketPrice model);
 }

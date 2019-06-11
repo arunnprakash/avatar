@@ -17,9 +17,17 @@ import com.kirana.avatar.common.controllers.BaseController;
 
 @RestController
 public class SellerTransportationChargeController extends BaseController<SellerTransportationChargeService, SellerTransportationChargeDTO> implements SellerTransportationChargeResource {
-	
+
+	private SellerTransportationChargeService sellerTransportationChargeService;
+
 	public SellerTransportationChargeController(SellerTransportationChargeService sellerTransportationChargeService) {
 		super(sellerTransportationChargeService);
+		this.sellerTransportationChargeService = sellerTransportationChargeService;
+	}
+
+	@Override
+	public SellerTransportationChargeDTO getLatestSellerTransportationCharge() {
+		return sellerTransportationChargeService.getLatestSellerTransportationCharge();
 	}
 
 }

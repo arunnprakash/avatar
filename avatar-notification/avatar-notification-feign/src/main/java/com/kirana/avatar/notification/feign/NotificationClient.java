@@ -10,20 +10,20 @@
  * Limited
  *
  *******************************************************************************/
-package com.kirana.avatar.transaction.feign;
+package com.kirana.avatar.notification.feign;
 
 
 import org.springframework.cloud.openfeign.FeignClient;
 
 import com.kirana.avatar.common.feign.config.FeignClientContract;
-import com.kirana.avatar.transaction.resource.SellerTransactionResource;
+import com.kirana.avatar.notification.resource.NotificationResource;
 
 
 /**
  * @author __Telmila__
  *
  */
-@FeignClient(name="transaction-service", configuration={FeignClientContract.class})
-public interface SellerTransactionClient extends SellerTransactionResource {
+@FeignClient(name="notification-service", configuration={FeignClientContract.class})
+public interface NotificationClient extends NotificationResource {
 
 }

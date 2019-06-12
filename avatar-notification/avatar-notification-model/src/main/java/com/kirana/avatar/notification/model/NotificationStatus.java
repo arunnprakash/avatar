@@ -10,7 +10,7 @@
  * Limited
  *
  *******************************************************************************/
-package com.kirana.avatar.transaction.model;
+package com.kirana.avatar.notification.model;
 
 import java.time.ZonedDateTime;
 
@@ -35,18 +35,18 @@ import lombok.ToString;
  *
  */
 @Entity
-@Table(name = "transaction_status")
+@Table(name = "notification_status")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @ToString
 @EqualsAndHashCode(callSuper=true)
 @EntityListeners(AuditingEntityListener.class)
-public class SellerTransactionStatus extends BaseEntity<SellerTransactionStatus> {
+public class NotificationStatus extends BaseEntity<NotificationStatus> {
 	@Column(nullable = false)
 	protected String status;
 
-	public SellerTransactionStatus(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
+	public NotificationStatus(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
 			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, String status) {
 		super(id, createdBy, createdDate, lastModifiedBy, lastModifiedDate, deleted, version);
 		this.status = status;

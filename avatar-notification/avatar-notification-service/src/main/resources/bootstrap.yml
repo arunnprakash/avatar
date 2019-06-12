@@ -1,7 +1,7 @@
 # Config Server
 spring:
   application:
-    name: transaction-service
+    name: notification-service
   profiles: 
     active: @spring.profiles.active@
     default: dev

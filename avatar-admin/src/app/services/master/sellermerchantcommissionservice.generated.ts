@@ -46,6 +46,14 @@ export class SellerMerchantCommissionService {
             .pipe(catchError(this.handleError));
     }
 
+    public getLatestSellerMerchantCommission(): Observable<SellerMerchantCommissionDTO> {
+        const url = this.serviceBaseURL + '/latest-seller-merchant-commission';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.get<SellerMerchantCommissionDTO>(url, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
 
     /* HEAD */
 

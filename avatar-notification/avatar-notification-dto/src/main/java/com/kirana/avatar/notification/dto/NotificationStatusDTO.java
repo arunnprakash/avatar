@@ -1,4 +1,4 @@
-package com.kirana.avatar.transaction.dto;
+package com.kirana.avatar.notification.dto;
 
 
 import java.time.ZonedDateTime;
@@ -16,10 +16,10 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @EqualsAndHashCode(callSuper = true)
 @ToString
-public class SellerTransactionStatusDTO extends BaseDTO {
+public class NotificationStatusDTO extends BaseDTO {
 	protected String status;
 	@Builder
-	public SellerTransactionStatusDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
+	public NotificationStatusDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
 			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, 
 			String status) {
 		super(id, createdBy, createdDate, lastModifiedBy, lastModifiedDate, deleted, version);

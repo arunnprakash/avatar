@@ -1,9 +1,8 @@
-package com.kirana.avatar.transaction;
+package com.kirana.avatar.notification;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
@@ -25,7 +24,7 @@ import com.kirana.avatar.common.config.CommonConfig;
 @EnableEurekaClient
 @SpringBootApplication
 @Import(CommonConfig.class)
-public class AvatarTransactionApplication {
+public class AvatarNotificationApplication {
 
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
@@ -45,6 +44,6 @@ public class AvatarTransactionApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(AvatarTransactionApplication.class, args);
+		SpringApplication.run(AvatarNotificationApplication.class, args);
 	}
 }

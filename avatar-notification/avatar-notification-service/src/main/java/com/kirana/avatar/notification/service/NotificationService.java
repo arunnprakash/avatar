@@ -10,22 +10,14 @@
  * Limited
  *
  *******************************************************************************/
-package com.kirana.avatar.transaction.service;
-
-import java.util.List;
+package com.kirana.avatar.notification.service;
 
 import com.kirana.avatar.common.service.BaseService;
-import com.kirana.avatar.transaction.dto.SellerOrder;
-import com.kirana.avatar.transaction.dto.SellerTransactionDTO;
+import com.kirana.avatar.notification.dto.NotificationDTO;
 
 /**
  * @author __ArunPrakash__
  *
  */
-public interface SellerTransactionService extends BaseService<SellerTransactionDTO>{
-
-	public List<SellerOrder> getOrdersForSellerAgent(Long sellerAgentId, String orderCreatedDate);
-	public List<SellerOrder> getOrdersForSellerTruckDriver(Long truckDriverId, String orderCreatedDate);
-	public List<SellerOrder> getOrdersForWareHouse(Long wareHouseId, String orderCreatedDate);
-	public List<SellerOrder> getOrdersFromSeller(Long sellerId, String orderCreatedDate);
+public interface NotificationService extends BaseService<NotificationDTO>{
 }

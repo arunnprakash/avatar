@@ -1,18 +1,18 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
+import { SellerMerchantCommissionService } from './sellermerchantcommissionservice.generated';
+import { SellerAgentCommissionService } from './selleragentcommissionservice.generated';
+import { StateService } from './stateservice.generated';
+import { WareHouseService } from './warehouseservice.generated';
 import { SellerTransportationChargeService } from './sellertransportationchargeservice.generated';
 import { LanguageService } from './languageservice.generated';
+import { GenderService } from './genderservice.generated';
+import { MarketService } from './marketservice.generated';
+import { AssetService } from './assetservice.generated';
 import { DistrictService } from './districtservice.generated';
-import { VillageService } from './villageservice.generated';
-import { WareHouseService } from './warehouseservice.generated';
-import { SellerAgentCommissionService } from './selleragentcommissionservice.generated';
+import { CountryService } from './countryservice.generated';
 import { TalukService } from './talukservice.generated';
 import { AssetTypeService } from './assettypeservice.generated';
-import { AssetService } from './assetservice.generated';
-import { CountryService } from './countryservice.generated';
-import { MarketService } from './marketservice.generated';
-import { StateService } from './stateservice.generated';
-import { SellerMerchantCommissionService } from './sellermerchantcommissionservice.generated';
-import { GenderService } from './genderservice.generated';
+import { VillageService } from './villageservice.generated';
 import { ServiceConfig } from './serviceconfig';
 
 @NgModule({})
@@ -22,20 +22,20 @@ export class MasterAPIModule {
             ngModule: MasterAPIModule,
             providers: [
                 {provide: ServiceConfig, useValue: serviceConfig},
+                SellerMerchantCommissionService,
+                SellerAgentCommissionService,
+                StateService,
+                WareHouseService,
                 SellerTransportationChargeService,
                 LanguageService,
+                GenderService,
+                MarketService,
+                AssetService,
                 DistrictService,
-                VillageService,
-                WareHouseService,
-                SellerAgentCommissionService,
+                CountryService,
                 TalukService,
                 AssetTypeService,
-                AssetService,
-                CountryService,
-                MarketService,
-                StateService,
-                SellerMerchantCommissionService,
-                GenderService
+                VillageService
             ]
         };
     }

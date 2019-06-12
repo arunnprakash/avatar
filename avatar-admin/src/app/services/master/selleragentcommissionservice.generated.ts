@@ -46,6 +46,14 @@ export class SellerAgentCommissionService {
             .pipe(catchError(this.handleError));
     }
 
+    public getLatestSellerAgentCommission(): Observable<SellerAgentCommissionDTO> {
+        const url = this.serviceBaseURL + '/latest-seller-agent-commission';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.get<SellerAgentCommissionDTO>(url, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
 
     /* HEAD */
 

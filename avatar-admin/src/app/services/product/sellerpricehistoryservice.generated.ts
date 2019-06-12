@@ -10,6 +10,7 @@ import { PagingAndFilterRequest } from './pagingandfilterrequest.model';
 import { AssetTypeDTO } from './assettypedto.model';
 import { BaseDTO } from './basedto.model';
 import { FilterCriteria } from './filtercriteria.model';
+import { MarketPriceDTO } from './marketpricedto.model';
 import { ProductDTO } from './productdto.model';
 import { QualityDTO } from './qualitydto.model';
 import { ServiceConfig } from './serviceconfig';

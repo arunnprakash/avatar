@@ -1,12 +1,12 @@
 /*******************************************************************************
  *
- * Copyright (c) 2018 OLAM Limited
+ * Copyright (c) 2018 Granatech Limited
  *
- * All information contained herein is, and remains the property of OLAM
+ * All information contained herein is, and remains the property of Granatech
  * Limited. The intellectual and technical concepts contained herein are
- * proprietary to OLAM and are protected by trade secret or copyright law.
+ * proprietary to Granatech and are protected by trade secret or copyright law.
  * Dissemination of this information or reproduction of this material is
- * strictly forbidden unless prior written permission is obtained from OLAM
+ * strictly forbidden unless prior written permission is obtained from Granatech
  * Limited
  *
  *******************************************************************************/

@@ -10,11 +10,8 @@
  * Limited
  *
  *******************************************************************************/
-package com.kirana.avatar.transaction.model;
+package com.kirana.avatar.notification.model;
 
-import java.math.BigDecimal;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.ManyToOne;
@@ -36,54 +33,15 @@ import lombok.ToString;
  */
 
 @Entity
-@Table(name = "seller_transactions")
+@Table(name = "notifications")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @ToString
 @EqualsAndHashCode(callSuper=true)
 @EntityListeners(AuditingEntityListener.class)
-public class SellerTransaction extends BaseEntity<SellerTransaction> {
+public class Notification extends BaseEntity<Notification> {
 
 	@ManyToOne
-	protected SellerTransactionStatus transactionStatus;
-
-	@Column(nullable = false)
-	protected Long product;
-
-	@Column(nullable = false)
-	protected Long sellerProductQuality;
-
-	@Column(nullable = false)
-	protected BigDecimal sellerProductQuantity;
-
-	@Column(nullable = false)
-	protected Long seller;
-	
-	@Column(nullable = true)
-	protected Long sellerAgentProductQuality;
-
-	@Column(nullable = true)
-	protected BigDecimal sellerAgentProductQuantity;
-	
-	@Column(nullable = false)
-	protected Long sellerAgent;
-	
-	@Column(nullable = false)
-	protected Long truckDriver;
-	
-	@Column(nullable = false)
-	protected Long wareHouse;
-
-	@Column(nullable = true)
-	protected BigDecimal wareHouseProductQuantity;
-	
-	@Column(nullable = true)
-	protected Long quantityCheckedBy;
-
-	@Column(nullable = true)
-	protected Long wareHouseProductQuality;
-	
-	@Column(nullable = true)
-	protected Long qualityCheckedBy;
+	protected NotificationStatus notificationStatus;
 }

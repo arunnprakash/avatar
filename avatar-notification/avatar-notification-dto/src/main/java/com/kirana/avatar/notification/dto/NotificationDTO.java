@@ -10,7 +10,7 @@
  * Limited
  *
  *******************************************************************************/
-package com.kirana.avatar.product.dto;
+package com.kirana.avatar.notification.dto;
 
 import java.time.ZonedDateTime;
 
@@ -32,14 +32,15 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @EqualsAndHashCode(callSuper = true)
 @ToString
-public class AssetTypeDTO extends BaseDTO {
-	
-	protected String assetTypeName;
-	
+public class NotificationDTO extends BaseDTO {
+
+	protected NotificationStatusDTO notificationStatus;
+
 	@Builder
-	public AssetTypeDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
-			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, String assetTypeName) {
+	public NotificationDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
+			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, 
+			NotificationStatusDTO notificationStatus) {
 		super(id, createdBy, createdDate, lastModifiedBy, lastModifiedDate, deleted, version);
-		this.assetTypeName = assetTypeName;
+		this.notificationStatus = notificationStatus;
 	}
 }

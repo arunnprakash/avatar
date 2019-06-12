@@ -1,4 +1,4 @@
-package com.kirana.avatar.transaction.config;
+package com.kirana.avatar.notification.config;
 
 import java.util.List;
 

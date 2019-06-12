@@ -4,8 +4,9 @@ import { Observable, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { PagingAndFilterResponse } from './pagingandfilterresponse.model';
+import { NotificationDTO } from './notificationdto.model';
+import { NotificationStatusDTO } from './notificationstatusdto.model';
 import { PagingAndFilterRequest } from './pagingandfilterrequest.model';
-import { SellerTransportationChargeDTO } from './sellertransportationchargedto.model';
 import { FilterCriteria } from './filtercriteria.model';
 import { ServiceConfig } from './serviceconfig';
 
@@ -15,42 +16,34 @@ import { ServiceConfig } from './serviceconfig';
  * 
  */
 @Injectable()
-export class SellerTransportationChargeService {
+export class NotificationService {
     private get serviceBaseURL(): string {
-        return this.serviceConfig.context + '/api/seller-transportation-charge';
+        return this.serviceConfig.context + '/api/notification';
     }
 
     constructor(private httpClient: HttpClient, private serviceConfig: ServiceConfig) { }
     /* GET */
-    public getAll(): Observable<SellerTransportationChargeDTO[]> {
+    public getAll(): Observable<NotificationDTO[]> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.get<SellerTransportationChargeDTO[]>(url, {params: params})
+        return this.httpClient.get<NotificationDTO[]>(url, {params: params})
             .pipe(catchError(this.handleError));
     }
 
-    public getAllExceptDeleted(): Observable<SellerTransportationChargeDTO[]> {
+    public getAllExceptDeleted(): Observable<NotificationDTO[]> {
         const url = this.serviceBaseURL + '/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
-        return this.httpClient.get<SellerTransportationChargeDTO[]>(url, {params: params})
+        return this.httpClient.get<NotificationDTO[]>(url, {params: params})
             .pipe(catchError(this.handleError));
     }
 
-    public get(id: number): Observable<SellerTransportationChargeDTO> {
+    public get(id: number): Observable<NotificationDTO> {
         const url = this.serviceBaseURL + '/' + id + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.get<SellerTransportationChargeDTO>(url, {params: params})
-            .pipe(catchError(this.handleError));
-    }
-
-    public getLatestSellerTransportationCharge(): Observable<SellerTransportationChargeDTO> {
-        const url = this.serviceBaseURL + '/latest-seller-transportation-charge';
-        const params = this.createHttpParams({});
-
-        return this.httpClient.get<SellerTransportationChargeDTO>(url, {params: params})
+        return this.httpClient.get<NotificationDTO>(url, {params: params})
             .pipe(catchError(this.handleError));
     }
 
@@ -58,11 +51,11 @@ export class SellerTransportationChargeService {
     /* HEAD */
 
     /* POST */
-    public save(arg0: SellerTransportationChargeDTO): Observable<SellerTransportationChargeDTO> {
+    public save(arg0: NotificationDTO): Observable<NotificationDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.post<SellerTransportationChargeDTO>(url, arg0, {params: params})
+        return this.httpClient.post<NotificationDTO>(url, arg0, {params: params})
             .pipe(catchError(this.handleError));
     }
 
@@ -84,11 +77,11 @@ export class SellerTransportationChargeService {
 
 
     /* PUT */
-    public update(arg0: SellerTransportationChargeDTO): Observable<SellerTransportationChargeDTO> {
+    public update(arg0: NotificationDTO): Observable<NotificationDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
-        return this.httpClient.put<SellerTransportationChargeDTO>(url, arg0, {params: params})
+        return this.httpClient.put<NotificationDTO>(url, arg0, {params: params})
             .pipe(catchError(this.handleError));
     }
 

@@ -88,7 +88,8 @@ public class MarketPriceServiceImpl extends BaseServiceImpl<MarketPrice, MarketP
 	}
 	@Override
 	protected MarketPrice beforeSave(MarketPriceDTO marketPriceDTO, MarketPrice model) {
-		model.setMarket((Long)marketPriceDTO.getMarket().get(ID));
+		Number market = (Number)marketPriceDTO.getMarket().get(ID);
+		model.setMarket(market.longValue());
 		return model;
 	}
 	@SuppressWarnings("unchecked")

@@ -97,7 +97,7 @@ public class SellerPriceHistoryServiceImpl extends BaseServiceImpl<SellerPriceHi
 	}
 	@Override
 	protected SellerPriceHistory afterSave(SellerPriceHistoryDTO priceHistoryDTO, SellerPriceHistory model) {
-		this.notificationClient.sendPriceUpdateNotification(priceHistoryDTO.getId());
+		this.notificationClient.sendPriceUpdateNotification(model.getId());
 		return model;
 	}
 	@Override

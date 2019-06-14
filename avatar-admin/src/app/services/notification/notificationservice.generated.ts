@@ -47,6 +47,14 @@ export class NotificationService {
             .pipe(catchError(this.handleError));
     }
 
+    public sendPriceUpdateNotification(priceHistoryId: number): Observable<boolean> {
+        const url = this.serviceBaseURL + '/send-price-update/' + priceHistoryId + '';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.get<boolean>(url, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
 
     /* HEAD */
 

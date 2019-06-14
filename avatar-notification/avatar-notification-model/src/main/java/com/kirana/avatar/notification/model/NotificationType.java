@@ -12,10 +12,11 @@
  *******************************************************************************/
 package com.kirana.avatar.notification.model;
 
+import java.time.ZonedDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -28,27 +29,31 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
 /**
  * @author __ArunPrakash__
  *
  */
-
 @Entity
-@Table(name = "notifications")
+@Table(name = "notification_type")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @ToString
 @EqualsAndHashCode(callSuper=true)
 @EntityListeners(AuditingEntityListener.class)
-public class Notification extends BaseEntity<Notification> {
+public class NotificationType extends BaseEntity<NotificationType> {
 
-	@ManyToOne
-	protected NotificationStatus notificationStatus;
-	
-	@ManyToOne
-	protected NotificationType notificationType;
-	
 	@Column(nullable = false)
-	protected String notificationData;
+	protected String type;
+
+	public NotificationType(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
+			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, String type) {
+		super(id, createdBy, createdDate, lastModifiedBy, lastModifiedDate, deleted, version);
+		this.type = type;
+		if (null == deleted) {
+			super.deleted = false;
+		}
+	}
+
 }

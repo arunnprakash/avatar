@@ -43,6 +43,7 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper=true)
 @EntityListeners(AuditingEntityListener.class)
 public class NotificationStatus extends BaseEntity<NotificationStatus> {
+
 	@Column(nullable = false)
 	protected String status;
 

@@ -108,6 +108,11 @@
 			<artifactId>avatar-master-feign</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.kirana.avatar</groupId>
+			<artifactId>avatar-notification-feign</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		<!-- Getter Setter -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>

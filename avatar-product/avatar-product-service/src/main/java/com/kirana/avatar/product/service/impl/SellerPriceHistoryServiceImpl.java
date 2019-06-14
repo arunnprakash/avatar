@@ -28,6 +28,7 @@ import com.kirana.avatar.common.dto.PagingAndFilterResponse;
 import com.kirana.avatar.common.exception.ApiException;
 import static com.kirana.avatar.common.jpa.entity.BaseEntity_.ID;
 import com.kirana.avatar.common.service.impl.BaseServiceImpl;
+import com.kirana.avatar.notification.feign.NotificationClient;
 import com.kirana.avatar.product.dto.SellerPriceHistoryDTO;
 import com.kirana.avatar.product.mapper.SellerPriceHistoryMapper;
 import com.kirana.avatar.product.model.SellerPriceHistory;
@@ -64,10 +65,12 @@ public class SellerPriceHistoryServiceImpl extends BaseServiceImpl<SellerPriceHi
 	private ProductRegionRepository productRegionRepository;
 	private ProductRegionSpecification productRegionSpecification;
 	private MarketPriceRepository marketPriceRepository;
+	private NotificationClient notificationClient;
 	public SellerPriceHistoryServiceImpl(SellerPriceHistoryRepository priceHistoryRepository, SellerPriceHistoryMapper priceHistoryMapper, SellerPriceHistorySpecification priceHistorySpecification,
 			UserProductRepository userProductRepository, UserProductSpecification userProductSpecification,
 			ProductRegionRepository productRegionRepository, ProductRegionSpecification productRegionSpecification,
-			MarketPriceRepository marketPriceRepository) {
+			MarketPriceRepository marketPriceRepository,
+			NotificationClient notificationClient) {
 		super(priceHistoryRepository, priceHistoryMapper, priceHistorySpecification);
 		this.priceHistoryRepository = priceHistoryRepository;
 		this.priceHistoryMapper = priceHistoryMapper;
@@ -77,6 +80,7 @@ public class SellerPriceHistoryServiceImpl extends BaseServiceImpl<SellerPriceHi
 		this.productRegionRepository = productRegionRepository;
 		this.productRegionSpecification = productRegionSpecification;
 		this.marketPriceRepository = marketPriceRepository;
+		this.notificationClient = notificationClient;
 	}
 	@Override
 	protected SellerPriceHistory beforeSave(SellerPriceHistoryDTO priceHistoryDTO, SellerPriceHistory model) {
@@ -93,6 +97,7 @@ public class SellerPriceHistoryServiceImpl extends BaseServiceImpl<SellerPriceHi
 	}
 	@Override
 	protected SellerPriceHistory afterSave(SellerPriceHistoryDTO priceHistoryDTO, SellerPriceHistory model) {
+		this.notificationClient.sendPriceUpdateNotification(priceHistoryDTO.getId());
 		return model;
 	}
 	@Override

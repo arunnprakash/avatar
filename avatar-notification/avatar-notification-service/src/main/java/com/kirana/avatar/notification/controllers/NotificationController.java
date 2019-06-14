@@ -21,4 +21,9 @@ public class NotificationController extends BaseController<NotificationService, 
 		super(notificationService);
 		this.notificationService = notificationService;
 	}
+
+	@Override
+	public boolean sendPriceUpdateNotification(Long priceHistoryId) {
+		return this.notificationService.sendPriceUpdateNotification(priceHistoryId);
+	}
 }

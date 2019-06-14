@@ -60,6 +60,9 @@ zuul:
       transaction-service:
         path: /api/**
         serviceId: transaction-service
+      notification-service:
+        path: /api/**
+        serviceId: notification-service
 
 # logging
 logging:

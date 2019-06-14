@@ -1,7 +1,5 @@
 package com.kirana.avatar.notification.specifications;
 
-import java.math.BigDecimal;
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;

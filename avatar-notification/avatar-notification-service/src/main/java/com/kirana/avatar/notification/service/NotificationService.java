@@ -20,4 +20,6 @@ import com.kirana.avatar.notification.dto.NotificationDTO;
  *
  */
 public interface NotificationService extends BaseService<NotificationDTO>{
+
+	public boolean sendPriceUpdateNotification(Long priceHistoryId);
 }

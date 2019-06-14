@@ -7,6 +7,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -23,6 +24,7 @@ import com.kirana.avatar.common.config.CommonConfig;
 @EnableFeignClients(basePackages = {"com.kirana.avatar"})
 @EnableEurekaClient
 @SpringBootApplication
+@EnableScheduling
 @Import(CommonConfig.class)
 public class AvatarNotificationApplication {
 

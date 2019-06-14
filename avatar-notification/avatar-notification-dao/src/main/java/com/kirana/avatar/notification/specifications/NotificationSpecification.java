@@ -12,6 +12,7 @@ import com.kirana.avatar.common.jpa.entity.BaseEntity_;
 import com.kirana.avatar.common.jpa.specification.BaseEntitySpecification;
 import com.kirana.avatar.notification.model.Notification;
 import com.kirana.avatar.notification.model.NotificationStatus;
+import com.kirana.avatar.notification.model.NotificationStatus_;
 import com.kirana.avatar.notification.model.Notification_;
 
 /**
@@ -35,6 +36,14 @@ public class NotificationSpecification extends BaseEntitySpecification<Notificat
 		return new Specification<Notification>() {
 			public Predicate toPredicate(Root<Notification> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
 				return builder.equal(root.get(Notification_.NOTIFICATION_STATUS).get(BaseEntity_.ID), notificationStatus);
+			}
+		};
+	}
+
+	public Specification<Notification> hasNotificationStatusNew() {
+		return new Specification<Notification>() {
+			public Predicate toPredicate(Root<Notification> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				return builder.equal(root.get(Notification_.NOTIFICATION_STATUS).get(NotificationStatus_.STATUS), "NEW");
 			}
 		};
 	}

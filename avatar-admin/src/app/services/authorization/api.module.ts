@@ -1,9 +1,9 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { QcWareHouseMappingService } from './qcwarehousemappingservice.generated';
-import { SellerAgentWareHouseMappingService } from './selleragentwarehousemappingservice.generated';
-import { RoleService } from './roleservice.generated';
 import { UserService } from './userservice.generated';
 import { TruckDriverWareHouseMappingService } from './truckdriverwarehousemappingservice.generated';
+import { RoleService } from './roleservice.generated';
+import { SellerAgentWareHouseMappingService } from './selleragentwarehousemappingservice.generated';
 import { UserDeviceService } from './userdeviceservice.generated';
 import { ServiceConfig } from './serviceconfig';
 
@@ -15,10 +15,10 @@ export class AuthorizationAPIModule {
             providers: [
                 {provide: ServiceConfig, useValue: serviceConfig},
                 QcWareHouseMappingService,
-                SellerAgentWareHouseMappingService,
-                RoleService,
                 UserService,
                 TruckDriverWareHouseMappingService,
+                RoleService,
+                SellerAgentWareHouseMappingService,
                 UserDeviceService
             ]
         };

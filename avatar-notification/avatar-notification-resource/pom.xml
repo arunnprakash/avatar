@@ -85,7 +85,7 @@
 					<target>1.8</target>
 					<encoding>UTF-8</encoding>
 					<compilerArgs>
-						<arg>-AserviceName=Transaction</arg>
+						<arg>-AserviceName=Notification</arg>
 					</compilerArgs>
 				</configuration>
 			</plugin>

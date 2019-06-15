@@ -27,7 +27,7 @@ export class WareHouseService {
 
     constructor(private httpClient: HttpClient, private serviceConfig: ServiceConfig) { }
     /* GET */
-    public getAll(): Observable<WareHouseDTO[]> {
+    public getAllGet(): Observable<WareHouseDTO[]> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -35,7 +35,7 @@ export class WareHouseService {
             .pipe(catchError(this.handleError));
     }
 
-    public getAllExceptDeleted(): Observable<WareHouseDTO[]> {
+    public getAllExceptDeletedGet(): Observable<WareHouseDTO[]> {
         const url = this.serviceBaseURL + '/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
@@ -43,7 +43,7 @@ export class WareHouseService {
             .pipe(catchError(this.handleError));
     }
 
-    public get(id: number): Observable<WareHouseDTO> {
+    public getGet(id: number): Observable<WareHouseDTO> {
         const url = this.serviceBaseURL + '/' + id + '';
         const params = this.createHttpParams({});
 
@@ -51,11 +51,19 @@ export class WareHouseService {
             .pipe(catchError(this.handleError));
     }
 
+    public getWareHousesByMarketGet(marketId: number): Observable<WareHouseDTO[]> {
+        const url = this.serviceBaseURL + '/api/find-by-marketid/' + marketId + '';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.get<WareHouseDTO[]>(url, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
 
     /* HEAD */
 
     /* POST */
-    public save(arg0: WareHouseDTO): Observable<WareHouseDTO> {
+    public savePost(arg0: WareHouseDTO): Observable<WareHouseDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -63,7 +71,7 @@ export class WareHouseService {
             .pipe(catchError(this.handleError));
     }
 
-    public getResourceByFilterAndPaging(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
+    public getResourceByFilterAndPagingPost(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
         const url = this.serviceBaseURL + '/with-filter-and-paging';
         const params = this.createHttpParams({});
 
@@ -71,7 +79,7 @@ export class WareHouseService {
             .pipe(catchError(this.handleError));
     }
 
-    public getResourceByFilterAndPagingExceptDeleted(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
+    public getResourceByFilterAndPagingExceptDeletedPost(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
         const url = this.serviceBaseURL + '/with-filter-and-paging/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
@@ -81,7 +89,7 @@ export class WareHouseService {
 
 
     /* PUT */
-    public update(arg0: WareHouseDTO): Observable<WareHouseDTO> {
+    public updatePut(arg0: WareHouseDTO): Observable<WareHouseDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -93,7 +101,7 @@ export class WareHouseService {
     /* PATCH */
 
     /* DELETE */
-    public delete(ids: number[]): Observable<boolean> {
+    public deleteDelete(ids: number[]): Observable<boolean> {
         const url = this.serviceBaseURL + '/' + ids + '';
         const params = this.createHttpParams({});
 

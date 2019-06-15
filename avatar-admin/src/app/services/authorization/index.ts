@@ -9,10 +9,10 @@ export { SellerAgentWareHouseMappingDTO } from './selleragentwarehousemappingdto
 export { LoginRequest } from './loginrequest.model';
 export { TruckDriverWareHouseMappingDTO } from './truckdriverwarehousemappingdto.model';
 export { QcWareHouseMappingService } from './qcwarehousemappingservice.generated';
-export { SellerAgentWareHouseMappingService } from './selleragentwarehousemappingservice.generated';
-export { RoleService } from './roleservice.generated';
 export { UserService } from './userservice.generated';
 export { TruckDriverWareHouseMappingService } from './truckdriverwarehousemappingservice.generated';
+export { RoleService } from './roleservice.generated';
+export { SellerAgentWareHouseMappingService } from './selleragentwarehousemappingservice.generated';
 export { UserDeviceService } from './userdeviceservice.generated';
 export { ServiceConfig } from './serviceconfig';
 export { AuthorizationAPIModule } from './api.module';

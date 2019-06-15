@@ -41,6 +41,7 @@
 		<module>avatar-product</module>
 		<module>avatar-transaction</module>
 		<module>avatar-notification</module>
+		<module>avatar-offline</module>
 		<module>avatar-service-discovery</module>
 		<module>avatar-gateway</module>
 		<module>avatar-app-monitor</module>

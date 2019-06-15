@@ -4,4 +4,4 @@ export { PagingAndFilterRequest } from './pagingandfilterrequest.model';
 export { FilterCriteria } from './filtercriteria.model';
 export { NotificationService } from './notificationservice.generated';
 export { ServiceConfig } from './serviceconfig';
-export { TransactionAPIModule } from './api.module';
+export { NotificationAPIModule } from './api.module';

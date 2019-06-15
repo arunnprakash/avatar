@@ -26,7 +26,7 @@ export class MarketService {
 
     constructor(private httpClient: HttpClient, private serviceConfig: ServiceConfig) { }
     /* GET */
-    public getAll(): Observable<MarketDTO[]> {
+    public getAllGet(): Observable<MarketDTO[]> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -34,7 +34,7 @@ export class MarketService {
             .pipe(catchError(this.handleError));
     }
 
-    public getAllExceptDeleted(): Observable<MarketDTO[]> {
+    public getAllExceptDeletedGet(): Observable<MarketDTO[]> {
         const url = this.serviceBaseURL + '/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
@@ -42,7 +42,7 @@ export class MarketService {
             .pipe(catchError(this.handleError));
     }
 
-    public get(id: number): Observable<MarketDTO> {
+    public getGet(id: number): Observable<MarketDTO> {
         const url = this.serviceBaseURL + '/' + id + '';
         const params = this.createHttpParams({});
 
@@ -54,7 +54,7 @@ export class MarketService {
     /* HEAD */
 
     /* POST */
-    public save(arg0: MarketDTO): Observable<MarketDTO> {
+    public savePost(arg0: MarketDTO): Observable<MarketDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -62,7 +62,7 @@ export class MarketService {
             .pipe(catchError(this.handleError));
     }
 
-    public getResourceByFilterAndPaging(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
+    public getResourceByFilterAndPagingPost(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
         const url = this.serviceBaseURL + '/with-filter-and-paging';
         const params = this.createHttpParams({});
 
@@ -70,7 +70,7 @@ export class MarketService {
             .pipe(catchError(this.handleError));
     }
 
-    public getResourceByFilterAndPagingExceptDeleted(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
+    public getResourceByFilterAndPagingExceptDeletedPost(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
         const url = this.serviceBaseURL + '/with-filter-and-paging/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
@@ -80,7 +80,7 @@ export class MarketService {
 
 
     /* PUT */
-    public update(arg0: MarketDTO): Observable<MarketDTO> {
+    public updatePut(arg0: MarketDTO): Observable<MarketDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -92,7 +92,7 @@ export class MarketService {
     /* PATCH */
 
     /* DELETE */
-    public delete(ids: number[]): Observable<boolean> {
+    public deleteDelete(ids: number[]): Observable<boolean> {
         const url = this.serviceBaseURL + '/' + ids + '';
         const params = this.createHttpParams({});
 

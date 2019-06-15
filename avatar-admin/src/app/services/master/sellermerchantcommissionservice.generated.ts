@@ -22,7 +22,7 @@ export class SellerMerchantCommissionService {
 
     constructor(private httpClient: HttpClient, private serviceConfig: ServiceConfig) { }
     /* GET */
-    public getAll(): Observable<SellerMerchantCommissionDTO[]> {
+    public getAllGet(): Observable<SellerMerchantCommissionDTO[]> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -30,7 +30,7 @@ export class SellerMerchantCommissionService {
             .pipe(catchError(this.handleError));
     }
 
-    public getAllExceptDeleted(): Observable<SellerMerchantCommissionDTO[]> {
+    public getAllExceptDeletedGet(): Observable<SellerMerchantCommissionDTO[]> {
         const url = this.serviceBaseURL + '/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
@@ -38,7 +38,7 @@ export class SellerMerchantCommissionService {
             .pipe(catchError(this.handleError));
     }
 
-    public get(id: number): Observable<SellerMerchantCommissionDTO> {
+    public getGet(id: number): Observable<SellerMerchantCommissionDTO> {
         const url = this.serviceBaseURL + '/' + id + '';
         const params = this.createHttpParams({});
 
@@ -46,7 +46,7 @@ export class SellerMerchantCommissionService {
             .pipe(catchError(this.handleError));
     }
 
-    public getLatestSellerMerchantCommission(): Observable<SellerMerchantCommissionDTO> {
+    public getLatestSellerMerchantCommissionGet(): Observable<SellerMerchantCommissionDTO> {
         const url = this.serviceBaseURL + '/latest-seller-merchant-commission';
         const params = this.createHttpParams({});
 
@@ -58,7 +58,7 @@ export class SellerMerchantCommissionService {
     /* HEAD */
 
     /* POST */
-    public save(arg0: SellerMerchantCommissionDTO): Observable<SellerMerchantCommissionDTO> {
+    public savePost(arg0: SellerMerchantCommissionDTO): Observable<SellerMerchantCommissionDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -66,7 +66,7 @@ export class SellerMerchantCommissionService {
             .pipe(catchError(this.handleError));
     }
 
-    public getResourceByFilterAndPaging(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
+    public getResourceByFilterAndPagingPost(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
         const url = this.serviceBaseURL + '/with-filter-and-paging';
         const params = this.createHttpParams({});
 
@@ -74,7 +74,7 @@ export class SellerMerchantCommissionService {
             .pipe(catchError(this.handleError));
     }
 
-    public getResourceByFilterAndPagingExceptDeleted(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
+    public getResourceByFilterAndPagingExceptDeletedPost(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
         const url = this.serviceBaseURL + '/with-filter-and-paging/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
@@ -84,7 +84,7 @@ export class SellerMerchantCommissionService {
 
 
     /* PUT */
-    public update(arg0: SellerMerchantCommissionDTO): Observable<SellerMerchantCommissionDTO> {
+    public updatePut(arg0: SellerMerchantCommissionDTO): Observable<SellerMerchantCommissionDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -96,7 +96,7 @@ export class SellerMerchantCommissionService {
     /* PATCH */
 
     /* DELETE */
-    public delete(ids: number[]): Observable<boolean> {
+    public deleteDelete(ids: number[]): Observable<boolean> {
         const url = this.serviceBaseURL + '/' + ids + '';
         const params = this.createHttpParams({});
 

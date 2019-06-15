@@ -3,10 +3,10 @@ import { NotificationService } from './notificationservice.generated';
 import { ServiceConfig } from './serviceconfig';
 
 @NgModule({})
-export class TransactionAPIModule {
+export class NotificationAPIModule {
     static forRoot(serviceConfig: ServiceConfig = {context: ''}): ModuleWithProviders {
         return {
-            ngModule: TransactionAPIModule,
+            ngModule: NotificationAPIModule,
             providers: [
                 {provide: ServiceConfig, useValue: serviceConfig},
                 NotificationService

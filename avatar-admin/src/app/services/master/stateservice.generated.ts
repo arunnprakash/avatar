@@ -23,7 +23,7 @@ export class StateService {
 
     constructor(private httpClient: HttpClient, private serviceConfig: ServiceConfig) { }
     /* GET */
-    public getAll(): Observable<StateDTO[]> {
+    public getAllGet(): Observable<StateDTO[]> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -31,7 +31,7 @@ export class StateService {
             .pipe(catchError(this.handleError));
     }
 
-    public getAllExceptDeleted(): Observable<StateDTO[]> {
+    public getAllExceptDeletedGet(): Observable<StateDTO[]> {
         const url = this.serviceBaseURL + '/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
@@ -39,7 +39,7 @@ export class StateService {
             .pipe(catchError(this.handleError));
     }
 
-    public get(id: number): Observable<StateDTO> {
+    public getGet(id: number): Observable<StateDTO> {
         const url = this.serviceBaseURL + '/' + id + '';
         const params = this.createHttpParams({});
 
@@ -51,7 +51,7 @@ export class StateService {
     /* HEAD */
 
     /* POST */
-    public save(arg0: StateDTO): Observable<StateDTO> {
+    public savePost(arg0: StateDTO): Observable<StateDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -59,7 +59,7 @@ export class StateService {
             .pipe(catchError(this.handleError));
     }
 
-    public getResourceByFilterAndPaging(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
+    public getResourceByFilterAndPagingPost(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
         const url = this.serviceBaseURL + '/with-filter-and-paging';
         const params = this.createHttpParams({});
 
@@ -67,7 +67,7 @@ export class StateService {
             .pipe(catchError(this.handleError));
     }
 
-    public getResourceByFilterAndPagingExceptDeleted(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
+    public getResourceByFilterAndPagingExceptDeletedPost(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
         const url = this.serviceBaseURL + '/with-filter-and-paging/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
@@ -77,7 +77,7 @@ export class StateService {
 
 
     /* PUT */
-    public update(arg0: StateDTO): Observable<StateDTO> {
+    public updatePut(arg0: StateDTO): Observable<StateDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -89,7 +89,7 @@ export class StateService {
     /* PATCH */
 
     /* DELETE */
-    public delete(ids: number[]): Observable<boolean> {
+    public deleteDelete(ids: number[]): Observable<boolean> {
         const url = this.serviceBaseURL + '/' + ids + '';
         const params = this.createHttpParams({});
 

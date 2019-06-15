@@ -25,7 +25,7 @@ export class TalukService {
 
     constructor(private httpClient: HttpClient, private serviceConfig: ServiceConfig) { }
     /* GET */
-    public getAll(): Observable<TalukDTO[]> {
+    public getAllGet(): Observable<TalukDTO[]> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -33,7 +33,7 @@ export class TalukService {
             .pipe(catchError(this.handleError));
     }
 
-    public getAllExceptDeleted(): Observable<TalukDTO[]> {
+    public getAllExceptDeletedGet(): Observable<TalukDTO[]> {
         const url = this.serviceBaseURL + '/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
@@ -41,7 +41,7 @@ export class TalukService {
             .pipe(catchError(this.handleError));
     }
 
-    public get(id: number): Observable<TalukDTO> {
+    public getGet(id: number): Observable<TalukDTO> {
         const url = this.serviceBaseURL + '/' + id + '';
         const params = this.createHttpParams({});
 
@@ -53,7 +53,7 @@ export class TalukService {
     /* HEAD */
 
     /* POST */
-    public save(arg0: TalukDTO): Observable<TalukDTO> {
+    public savePost(arg0: TalukDTO): Observable<TalukDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -61,7 +61,7 @@ export class TalukService {
             .pipe(catchError(this.handleError));
     }
 
-    public getResourceByFilterAndPaging(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
+    public getResourceByFilterAndPagingPost(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
         const url = this.serviceBaseURL + '/with-filter-and-paging';
         const params = this.createHttpParams({});
 
@@ -69,7 +69,7 @@ export class TalukService {
             .pipe(catchError(this.handleError));
     }
 
-    public getResourceByFilterAndPagingExceptDeleted(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
+    public getResourceByFilterAndPagingExceptDeletedPost(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
         const url = this.serviceBaseURL + '/with-filter-and-paging/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
@@ -79,7 +79,7 @@ export class TalukService {
 
 
     /* PUT */
-    public update(arg0: TalukDTO): Observable<TalukDTO> {
+    public updatePut(arg0: TalukDTO): Observable<TalukDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -91,7 +91,7 @@ export class TalukService {
     /* PATCH */
 
     /* DELETE */
-    public delete(ids: number[]): Observable<boolean> {
+    public deleteDelete(ids: number[]): Observable<boolean> {
         const url = this.serviceBaseURL + '/' + ids + '';
         const params = this.createHttpParams({});
 

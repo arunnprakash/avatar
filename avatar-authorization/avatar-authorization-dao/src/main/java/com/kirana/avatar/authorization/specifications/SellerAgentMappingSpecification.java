@@ -41,7 +41,7 @@ public class SellerAgentMappingSpecification extends BaseEntitySpecification<Sel
 			}
 		};
 	}
-	public Specification<SellerAgentMapping> hasSellerId(final Long sellerId) {
+	public Specification<SellerAgentMapping> hasSeller(final Long sellerId) {
 		return new Specification<SellerAgentMapping>() {
 			public Predicate toPredicate(Root<SellerAgentMapping> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
 				return builder.equal(root.get(SellerAgentMapping_.SELLER).get(BaseEntity_.ID), sellerId);
@@ -55,7 +55,7 @@ public class SellerAgentMappingSpecification extends BaseEntitySpecification<Sel
 			}
 		};
 	}
-	public Specification<SellerAgentMapping> hasSellerAgentId(final Long sellerAgentId) {
+	public Specification<SellerAgentMapping> hasSellerAgent(final Long sellerAgentId) {
 		return new Specification<SellerAgentMapping>() {
 			public Predicate toPredicate(Root<SellerAgentMapping> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
 				return builder.equal(root.get(SellerAgentMapping_.SELLER_AGENT).get(BaseEntity_.ID), sellerAgentId);

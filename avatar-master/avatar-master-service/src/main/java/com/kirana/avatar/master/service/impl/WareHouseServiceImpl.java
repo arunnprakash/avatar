@@ -4,6 +4,9 @@
 package com.kirana.avatar.master.service.impl;
 
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -78,6 +81,17 @@ public class WareHouseServiceImpl extends BaseServiceImpl<WareHouse, WareHouseDT
 	@Override
 	protected WareHouseDTO afterLoad(WareHouseDTO resource, WareHouse model) {
 		return resource;
+	}
+
+	@Override
+	public List<WareHouseDTO> getWareHousesByMarket(Long marketId) {
+		Specification<WareHouse> specification = Specification.where(wareHouseSpecification.hasDeleted(false));
+		specification = specification.and(wareHouseSpecification.hasMarket(marketId));
+		return wareHouseRepository
+				.findAll(specification)
+				.stream()
+				.map(wareHouseMapper::toDTO)
+				.collect(Collectors.toList());
 	}
 
 }

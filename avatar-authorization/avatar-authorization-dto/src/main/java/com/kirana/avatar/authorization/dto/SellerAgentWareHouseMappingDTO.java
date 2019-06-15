@@ -24,17 +24,17 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @EqualsAndHashCode(callSuper = true)
 @ToString
-public class QcWareHouseMappingDTO extends BaseDTO {
+public class SellerAgentWareHouseMappingDTO extends BaseDTO {
 
-	protected UserDTO qc;
+	protected UserDTO sellerAgent;
 	protected Map<String, Object> wareHouse;
 
 	@Builder(toBuilder = true)
-	public QcWareHouseMappingDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
+	public SellerAgentWareHouseMappingDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
 			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, 
-			UserDTO qc, Map<String, Object> wareHouse) {
+			UserDTO sellerAgent, Map<String, Object> wareHouse) {
 		super(id, createdBy, createdDate, lastModifiedBy, lastModifiedDate, deleted, version);
-		this.qc = qc;
+		this.sellerAgent = sellerAgent;
 		this.wareHouse = wareHouse;
 	}
 

@@ -24,6 +24,7 @@ constructor(private authService: AuthService, private router: Router, private ac
           {label: 'WareHouses',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['warehouses']     } }] },
           {label: 'Markets',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['markets']     } }] },
           {label: 'Qc-WareHouse-Mappings',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['qc-warehouse-mappings']     } }] },
+          {label: 'SellerAgent-WareHouse-Mappings',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['selleragent-warehouse-mappings']     } }] },
           {label: 'TruckDriver-WareHouse-Mappings',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['truckdriver-warehouse-mappings']     } }] },
           {label: 'Roles',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['roles']     } }] },
           {label: 'Users AssetTypes',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['usersAssetTypes']     } }] },
@@ -38,7 +39,7 @@ constructor(private authService: AuthService, private router: Router, private ac
           {label: 'Seller Agent Commissions',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['seller-agent-commissions']     } }] },
           {label: 'Seller Transportation Charge',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['seller-transportation-charges']     } }] },
           {label: 'Seller Merchant Commissions',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['seller-merchant-commissions']     } }] },
-          {label: 'Prices',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['prices']     } }] },
+          {label: 'Seller Prices',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['prices']     } }] },
           {label: 'Market Prices',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['market-prices']     } }] },
           {label: 'Holidays',     visible: this.authService.hasRole(['ADMIN']),   icon: 'pi pi-fw pi-comments', routerLink: [{ outlets: { menuRouterOutlet: ['holidays']     } }] }
       ];

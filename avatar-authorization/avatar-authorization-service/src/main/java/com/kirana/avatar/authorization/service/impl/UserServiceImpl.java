@@ -30,6 +30,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.GrantedAuthority;
@@ -60,6 +61,7 @@ import com.kirana.avatar.authorization.model.BuyerAgentMapping;
 import com.kirana.avatar.authorization.model.Role;
 import com.kirana.avatar.authorization.model.SellerAgentMapping;
 import com.kirana.avatar.authorization.model.SellerAgentTruckDriverMapping;
+import com.kirana.avatar.authorization.model.SellerAgentWareHouseMapping;
 import com.kirana.avatar.authorization.model.TruckDriverWareHouseMapping;
 import com.kirana.avatar.authorization.model.User;
 import com.kirana.avatar.authorization.model.UserAsset;
@@ -67,6 +69,7 @@ import com.kirana.avatar.authorization.model.UserRole;
 import com.kirana.avatar.authorization.repositories.BuyerAgentMappingRepository;
 import com.kirana.avatar.authorization.repositories.SellerAgentMappingRepository;
 import com.kirana.avatar.authorization.repositories.SellerAgentTruckDriverMappingRepository;
+import com.kirana.avatar.authorization.repositories.SellerAgentWareHouseMappingRepository;
 import com.kirana.avatar.authorization.repositories.TruckDriverWareHouseMappingRepository;
 import com.kirana.avatar.authorization.repositories.RoleRepository;
 import com.kirana.avatar.authorization.repositories.UserAssetRepository;
@@ -77,6 +80,7 @@ import com.kirana.avatar.authorization.specifications.UserSpecification;
 import com.kirana.avatar.authorization.specifications.SellerAgentMappingSpecification;
 import com.kirana.avatar.authorization.specifications.BuyerAgentMappingSpecification;
 import com.kirana.avatar.authorization.specifications.SellerAgentTruckDriverMappingSpecification;
+import com.kirana.avatar.authorization.specifications.SellerAgentWareHouseMappingSpecification;
 import com.kirana.avatar.authorization.specifications.TruckDriverWareHouseMappingSpecification;
 import com.kirana.avatar.common.dto.FilterCriteria;
 import com.kirana.avatar.common.dto.UserInfo;
@@ -109,6 +113,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 	private BuyerAgentMappingSpecification buyerAgentMappingSpecification;
 	private SellerAgentTruckDriverMappingRepository sellerAgentTruckDriverMappingRepository;
 	private SellerAgentTruckDriverMappingSpecification sellerAgentTruckDriverMappingSpecification;
+	private SellerAgentWareHouseMappingRepository sellerAgentWareHouseMappingRepository;
+	private SellerAgentWareHouseMappingSpecification sellerAgentWareHouseMappingSpecification;
 	private TruckDriverWareHouseMappingRepository truckDriverWareHouseMappingRepository;
 	private TruckDriverWareHouseMappingSpecification truckDriverWareHouseMappingSpecification;
 	private UserMapper userMapper;
@@ -127,7 +133,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 			AssetTypeClient assetTypeClient, 
 			WareHouseClient wareHouseClient, 
 			SellerAgentMappingRepository sellerAgentMappingRepository, SellerAgentMappingSpecification sellerAgentMappingSpecification,
-			SellerAgentTruckDriverMappingRepository sellerAgentTruckDriverMappingRepository, SellerAgentTruckDriverMappingSpecification sellerAgentTruckDriverMappingSpecification, 
+			SellerAgentTruckDriverMappingRepository sellerAgentTruckDriverMappingRepository, SellerAgentTruckDriverMappingSpecification sellerAgentTruckDriverMappingSpecification,
+			SellerAgentWareHouseMappingRepository sellerAgentWareHouseMappingRepository, SellerAgentWareHouseMappingSpecification sellerAgentWareHouseMappingSpecification, 
 			BuyerAgentMappingRepository buyerAgentMappingRepository, BuyerAgentMappingSpecification buyerAgentMappingSpecification,
 			TruckDriverWareHouseMappingRepository truckDriverWareHouseMappingRepository, TruckDriverWareHouseMappingSpecification truckDriverWareHouseMappingSpecification,
 			BCryptPasswordEncoder bCryptPasswordEncoder, JwtConfig jwtConfig, ObjectMapper objectMapper,
@@ -148,6 +155,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 		this.buyerAgentMappingSpecification = buyerAgentMappingSpecification;
 		this.sellerAgentTruckDriverMappingRepository = sellerAgentTruckDriverMappingRepository;
 		this.sellerAgentTruckDriverMappingSpecification = sellerAgentTruckDriverMappingSpecification;
+		this.sellerAgentWareHouseMappingRepository = sellerAgentWareHouseMappingRepository;
+		this.sellerAgentWareHouseMappingSpecification = sellerAgentWareHouseMappingSpecification;
 		this.truckDriverWareHouseMappingRepository = truckDriverWareHouseMappingRepository;
 		this.truckDriverWareHouseMappingSpecification = truckDriverWareHouseMappingSpecification;
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
@@ -467,7 +476,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 	@Override
 	public UserDTO getSellerAgentForSeller(Long sellerId) {
 		Specification<SellerAgentMapping> specification = Specification.where(sellerAgentMappingSpecification.hasDeleted(false));
-		specification = specification.and(sellerAgentMappingSpecification.hasSellerId(sellerId));
+		specification = specification.and(sellerAgentMappingSpecification.hasSeller(sellerId));
 		return sellerAgentMappingRepository
 			.findOne(specification)
 			.map(SellerAgentMapping::getSellerAgent)
@@ -551,5 +560,29 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDTO, UserMapper, 
 	@Override
 	protected UserDTO afterLoad(UserDTO resource, User model) {
 		return resource;
+	}
+
+	@Override
+	public List<UserDTO> getSellerAgentByWareHouse(Long wareHouseId) {
+		Specification<SellerAgentWareHouseMapping> specification = Specification.where(sellerAgentWareHouseMappingSpecification.hasDeleted(false));
+		specification = specification.and(sellerAgentWareHouseMappingSpecification.hasWareHouse(wareHouseId));
+		return sellerAgentWareHouseMappingRepository
+				.findAll(specification)
+				.stream()
+				.map(SellerAgentWareHouseMapping::getSellerAgent)
+				.map(userMapper::toDTO)
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<UserDTO> getSellersBySellerAgent(Long sellerAgentId) {
+		Specification<SellerAgentMapping> specification = Specification.where(sellerAgentMappingSpecification.hasDeleted(false));
+		specification = specification.and(sellerAgentMappingSpecification.hasSellerAgent(sellerAgentId));
+		return sellerAgentMappingRepository
+				.findAll(specification)
+				.stream()
+				.map(SellerAgentMapping::getSeller)
+				.map(userMapper::toDTO)
+				.collect(Collectors.toList());
 	}
 }

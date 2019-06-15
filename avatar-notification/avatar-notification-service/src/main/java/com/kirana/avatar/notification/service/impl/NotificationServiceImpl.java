@@ -7,7 +7,6 @@ import java.util.Map;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kirana.avatar.authorization.feign.UserClient;
 import com.kirana.avatar.common.dto.FilterCriteria;

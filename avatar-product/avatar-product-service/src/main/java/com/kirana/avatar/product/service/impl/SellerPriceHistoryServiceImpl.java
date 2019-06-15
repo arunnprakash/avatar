@@ -17,10 +17,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kirana.avatar.common.dto.BaseDTO;
 import com.kirana.avatar.common.dto.FilterCriteria;
 import com.kirana.avatar.common.dto.PagingAndFilterRequest;
@@ -28,7 +30,10 @@ import com.kirana.avatar.common.dto.PagingAndFilterResponse;
 import com.kirana.avatar.common.exception.ApiException;
 import static com.kirana.avatar.common.jpa.entity.BaseEntity_.ID;
 import com.kirana.avatar.common.service.impl.BaseServiceImpl;
+import com.kirana.avatar.master.dto.MarketDTO;
+import com.kirana.avatar.master.feign.MarketClient;
 import com.kirana.avatar.notification.feign.NotificationClient;
+import com.kirana.avatar.product.dto.MarketPriceDTO;
 import com.kirana.avatar.product.dto.SellerPriceHistoryDTO;
 import com.kirana.avatar.product.mapper.SellerPriceHistoryMapper;
 import com.kirana.avatar.product.model.SellerPriceHistory;
@@ -66,11 +71,14 @@ public class SellerPriceHistoryServiceImpl extends BaseServiceImpl<SellerPriceHi
 	private ProductRegionSpecification productRegionSpecification;
 	private MarketPriceRepository marketPriceRepository;
 	private NotificationClient notificationClient;
+	private MarketClient marketClient;
+	private ObjectMapper objectMapper;
 	public SellerPriceHistoryServiceImpl(SellerPriceHistoryRepository priceHistoryRepository, SellerPriceHistoryMapper priceHistoryMapper, SellerPriceHistorySpecification priceHistorySpecification,
 			UserProductRepository userProductRepository, UserProductSpecification userProductSpecification,
 			ProductRegionRepository productRegionRepository, ProductRegionSpecification productRegionSpecification,
 			MarketPriceRepository marketPriceRepository,
-			NotificationClient notificationClient) {
+			NotificationClient notificationClient,
+			MarketClient marketClient, ObjectMapper objectMapper) {
 		super(priceHistoryRepository, priceHistoryMapper, priceHistorySpecification);
 		this.priceHistoryRepository = priceHistoryRepository;
 		this.priceHistoryMapper = priceHistoryMapper;
@@ -81,6 +89,8 @@ public class SellerPriceHistoryServiceImpl extends BaseServiceImpl<SellerPriceHi
 		this.productRegionSpecification = productRegionSpecification;
 		this.marketPriceRepository = marketPriceRepository;
 		this.notificationClient = notificationClient;
+		this.marketClient = marketClient;
+		this.objectMapper = objectMapper;
 	}
 	@Override
 	protected SellerPriceHistory beforeSave(SellerPriceHistoryDTO priceHistoryDTO, SellerPriceHistory model) {
@@ -93,8 +103,23 @@ public class SellerPriceHistoryServiceImpl extends BaseServiceImpl<SellerPriceHi
 				.findById(priceHistoryDTO.getMarketPrice().getId())
 				.orElseThrow(ApiException::resourceNotFound);
 		model.setMarketPrice(marketPrice);
+		
+		/******** PRICING LOGIC **********/
+		
+		Double agentCommissionPercentage = ((Number)priceHistoryDTO.getSellerAgentCommission().get("commission")).doubleValue();
+		Double merchantCommissionPercentage = ((Number)priceHistoryDTO.getSellerMerchantCommission().get("commission")).doubleValue();
+		Double chargePerKm = ((Number)priceHistoryDTO.getSellerTransportationCharge().get("transportationCharge")).doubleValue();
+		Double exemptionKm = ((Number)priceHistoryDTO.getSellerTransportationCharge().get("exemption")).doubleValue();;
+		
+		Double actualPrice = priceHistoryDTO.getMarketPrice().getPrice();
+		Double sellerPrice = actualPrice 
+				- (actualPrice * agentCommissionPercentage / 100) 
+				- (actualPrice * merchantCommissionPercentage / 100) 
+				- (chargePerKm * exemptionKm / 100);
+		model.setPrice(sellerPrice);
 		return model;
 	}
+	
 	@Override
 	protected SellerPriceHistory afterSave(SellerPriceHistoryDTO priceHistoryDTO, SellerPriceHistory model) {
 		this.notificationClient.sendPriceUpdateNotification(model.getId());
@@ -108,9 +133,13 @@ public class SellerPriceHistoryServiceImpl extends BaseServiceImpl<SellerPriceHi
 	protected SellerPriceHistory afterUpdate(SellerPriceHistoryDTO resource, SellerPriceHistory model) {
 		return model;
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	protected SellerPriceHistoryDTO afterLoad(SellerPriceHistoryDTO resource, SellerPriceHistory model) {
-		return resource;
+		MarketDTO market = marketClient.get(model.getMarketPrice().getMarket());
+		Map<String, Object> marketMap = objectMapper.convertValue(market, Map.class);
+		MarketPriceDTO marketPrice = resource.getMarketPrice().toBuilder().market(marketMap).build();
+		return resource.toBuilder().marketPrice(marketPrice).build();
 	}
 	@Override
 	protected Specification<SellerPriceHistory> getSpecification(FilterCriteria filter, Specification<SellerPriceHistory> specification) {
@@ -150,7 +179,6 @@ public class SellerPriceHistoryServiceImpl extends BaseServiceImpl<SellerPriceHi
 	}
 	@Override
 	public SellerPriceHistoryDTO getPriceForProduct(Long productId, Long qualityId, String pricePublishedDate) {
-		//ZonedDateTime createdDate = ZonedDateTime.parse(pricePublishedDate, DateTimeFormatter.ISO_DATE.withZone(ZoneId.systemDefault()));
 		Instant instant = Instant.parse(pricePublishedDate);
 		ZonedDateTime createdDate = ZonedDateTime.ofInstant(instant, ZoneId.systemDefault());
 		return getLatestPrice(productId, qualityId, createdDate)

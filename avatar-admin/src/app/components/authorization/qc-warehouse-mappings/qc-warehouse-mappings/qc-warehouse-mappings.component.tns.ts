@@ -55,6 +55,7 @@ export class QcWareHouseMappingsComponent extends BaseComponent implements OnIni
     initWareHouseList() {
         this.warehouseService.getAllExceptDeleted().subscribe((wareHouses: WareHouseDTO[]) => {
             let menuItem: any = _.find(this.localCols, { 'field': 'wareHouse' });
+        	menuItem.optionLabel = this.languageCode;
             menuItem.originalOptions = wareHouses;
             wareHouses.forEach( (wareHouse: WareHouseDTO ) => {
                 menuItem.options.push(new TokenModel(wareHouse['name'], null));

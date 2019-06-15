@@ -13,6 +13,7 @@
 package com.kirana.avatar.authorization.service;
 
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,4 +50,8 @@ public interface UserService extends BaseService<UserDTO>{
 	public UserDTO getSellerAgentForTruckDriver(Long truckDriverId);
 
 	public Map<String, Object> getWareHouseForTruckDriver(Long truckDriverId);
+
+	List<UserDTO> getSellerAgentByWareHouse(Long wareHouseId);
+
+	List<UserDTO> getSellersBySellerAgent(Long sellerAgentId);
 }

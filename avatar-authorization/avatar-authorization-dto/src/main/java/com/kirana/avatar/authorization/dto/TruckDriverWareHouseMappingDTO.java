@@ -29,7 +29,7 @@ public class TruckDriverWareHouseMappingDTO extends BaseDTO {
 	protected UserDTO truckDriver;
 	protected Map<String, Object> wareHouse;
 
-	@Builder
+	@Builder(toBuilder = true)
 	public TruckDriverWareHouseMappingDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
 			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, 
 			UserDTO truckDriver, Map<String, Object> wareHouse) {

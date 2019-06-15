@@ -106,7 +106,7 @@ export class UserService {
     }
 
     public getSellerAgentForSeller(sellerId: number): Observable<UserDTO> {
-        const url = this.serviceBaseURL + '/seller/' + sellerId + '';
+        const url = this.serviceBaseURL + '/seller/' + sellerId + '/seller-agent';
         const params = this.createHttpParams({});
 
         return this.httpClient.get<UserDTO>(url, {params: params})
@@ -114,7 +114,7 @@ export class UserService {
     }
 
     public getBuyerAgentForBuyer(buyerId: number): Observable<UserDTO> {
-        const url = this.serviceBaseURL + '/buyer/' + buyerId + '';
+        const url = this.serviceBaseURL + '/buyer/' + buyerId + '/buyer-agent';
         const params = this.createHttpParams({});
 
         return this.httpClient.get<UserDTO>(url, {params: params})
@@ -126,6 +126,22 @@ export class UserService {
         const params = this.createHttpParams({});
 
         return this.httpClient.get<UserDTO>(url, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
+    public getSellerAgentByWareHouse(wareHouseId: number): Observable<UserDTO[]> {
+        const url = this.serviceBaseURL + '/seller-agent/warehouse/' + wareHouseId + '';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.get<UserDTO[]>(url, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
+    public getSellersBySellerAgent(sellerAgentId: number): Observable<UserDTO[]> {
+        const url = this.serviceBaseURL + '/seller-agent/' + sellerAgentId + '/seller';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.get<UserDTO[]>(url, {params: params})
             .pipe(catchError(this.handleError));
     }
 

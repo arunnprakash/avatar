@@ -42,6 +42,7 @@ import { UsersModule } from './components/authorization/users/users.module';
 import { RolesModule } from './components/authorization/roles/roles.module';
 import { QcWareHouseMappingsModule } from './components/authorization/qc-warehouse-mappings/qc-warehouse-mappings.module';
 import { TruckDriverWareHouseMappingsModule } from './components/authorization/truckdriver-warehouse-mappings/truckdriver-warehouse-mappings.module';
+import { SellerAgentWareHouseMappingsModule } from './components/authorization/selleragent-warehouse-mappings/selleragent-warehouse-mappings.module';
 import { UsersAssetTypesModule } from './components/authorization/assetTypes/assetTypes.module';
 
 import { VillagesModule } from './components/master/villages/villages.module';
@@ -120,6 +121,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     RolesModule,
     QcWareHouseMappingsModule,
     TruckDriverWareHouseMappingsModule,
+    SellerAgentWareHouseMappingsModule,
     UsersAssetTypesModule,
     
     ProductsAssetTypesModule,

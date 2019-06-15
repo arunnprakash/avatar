@@ -34,6 +34,8 @@ import { QcWareHouseMappingsComponent } from './components/authorization/qc-ware
 import { QcWareHouseMappingDetailComponent } from './components/authorization/qc-warehouse-mappings/qc-warehouse-mapping-detail/qc-warehouse-mapping-detail.component';
 import { TruckDriverWareHouseMappingsComponent } from './components/authorization/truckdriver-warehouse-mappings/truckdriver-warehouse-mappings/truckdriver-warehouse-mappings.component';
 import { TruckDriverWareHouseMappingDetailComponent } from './components/authorization/truckdriver-warehouse-mappings/truckdriver-warehouse-mapping-detail/truckdriver-warehouse-mapping-detail.component';
+import { SellerAgentWareHouseMappingsComponent } from './components/authorization/selleragent-warehouse-mappings/selleragent-warehouse-mappings/selleragent-warehouse-mappings.component';
+import { SellerAgentWareHouseMappingDetailComponent } from './components/authorization/selleragent-warehouse-mappings/selleragent-warehouse-mapping-detail/selleragent-warehouse-mapping-detail.component';
 import { UsersAssetTypesComponent } from "./components/authorization/assetTypes/assetTypes/assetTypes.component";
 import { UsersAssetTypeDetailComponent } from "./components/authorization/assetTypes/assetType-detail/assetType-detail.component";
 import { ProductsComponent } from "./components/product/products/products/products.component";
@@ -182,6 +184,16 @@ export const routes: Routes = [
                    {
                        path: 'qc-warehouse-mapping',
                        component: QcWareHouseMappingDetailComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'selleragent-warehouse-mappings',
+                       component: SellerAgentWareHouseMappingsComponent,
+                       outlet: 'menuRouterOutlet'
+                   },
+                   {
+                       path: 'selleragent-warehouse-mapping',
+                       component: SellerAgentWareHouseMappingDetailComponent,
                        outlet: 'menuRouterOutlet'
                    },
                    {

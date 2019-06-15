@@ -13,5 +13,4 @@ import com.kirana.avatar.master.resource.WareHouseResource;
  */
 @FeignClient(name="master-service", configuration={FeignClientContract.class})
 public interface WareHouseClient extends WareHouseResource {
-
 }

@@ -9,10 +9,10 @@ import { baseTemplate } from '../../../base/base.template';
 import { baseCss } from '../../../base/base.css';
 import { BaseComponent } from '../../../base/base.component';
 
-import { TruckDriverWareHouseMappingService } from "../../../../services/authorization/truckdriverwarehousemappingservice.generated";
+import { SellerAgentWareHouseMappingService } from "../../../../services/authorization/selleragentwarehousemappingservice.generated";
 import { AuthService } from "../../../../services/auth.service";
-import { TruckDriverWareHouseMappingDTO } from "../../../../services/authorization/truckdriverwarehousemappingdto.model";
-import { TruckDriverWareHouseMappingDetailComponent } from "../truckdriver-warehouse-mapping-detail/truckdriver-warehouse-mapping-detail.component";
+import { SellerAgentWareHouseMappingDTO } from "../../../../services/authorization/selleragentwarehousemappingdto.model";
+import { SellerAgentWareHouseMappingDetailComponent } from "../selleragent-warehouse-mapping-detail/selleragent-warehouse-mapping-detail.component";
 import { UserDTO } from "../../../../services/authorization/userdto.model";
 import { WareHouseDTO } from "../../../../services/master/warehousedto.model";
 import { UserService } from '../../../../services/authorization/userservice.generated';
@@ -25,31 +25,31 @@ import { RadAutoCompleteTextViewComponent  } from "nativescript-ui-autocomplete/
 import * as _ from "lodash";
 
 @Component( {
-    selector: 'truckdriverwarehousemappings',
+    selector: 'selleragentwarehousemappings',
     template: baseTemplate,
     styles: [baseCss],
     providers: [ModalDialogService]
 } )
-export class TruckDriverWareHouseMappingsComponent extends BaseComponent implements OnInit {
+export class SellerAgentWareHouseMappingsComponent extends BaseComponent implements OnInit {
 
-    protected title = 'TruckDriverWareHouseMapping';
+    protected title = 'SellerAgentWareHouseMapping';
     protected localCols: any[] = [
-           { field: 'truckDriver', header: 'TruckDriver', dataType: 'AUTOCOMPLETE', multiple: false, options: new ObservableArray<TokenModel>() , optionLabel:"firstName"},
+           { field: 'sellerAgent', header: 'SellerAgent', dataType: 'AUTOCOMPLETE', multiple: false, options: new ObservableArray<TokenModel>() , optionLabel:"firstName"},
            { field: 'wareHouse', header: 'WareHouse', dataType: 'AUTOCOMPLETE', multiple: false, options: new ObservableArray<TokenModel>() , optionLabel:"name"}
     ];
 
-    constructor( truckdriverwarehousemappingService: TruckDriverWareHouseMappingService, authService: AuthService, translate: TranslateService, 
+    constructor( selleragentwarehousemappingService: SellerAgentWareHouseMappingService, authService: AuthService, translate: TranslateService, 
             modalDialogService: ModalDialogService, dialogService: ModalDialogService, 
             private userService: UserService, private warehouseService: WareHouseService,
             router: Router, activatedRoute: ActivatedRoute, vcRef: ViewContainerRef, private page: Page) {
-        super( truckdriverwarehousemappingService, authService, translate, modalDialogService, dialogService, TruckDriverWareHouseMappingDetailComponent, router, activatedRoute, vcRef);
+        super( selleragentwarehousemappingService, authService, translate, modalDialogService, dialogService, SellerAgentWareHouseMappingDetailComponent, router, activatedRoute, vcRef);
         this.languageCode = authService.getUserInfo().preferredLanguage.languageCode;
     }
     ngOnInit() {
         super.ngOnInit();
         this.page.actionBarHidden = true;
-        console.log("ngOnInit truckdriver-warehouse-mapping.component.tns");
-        this.initTruckDriverList();
+        console.log("ngOnInit selleragent-warehouse-mapping.component.tns");
+        this.initSellerAgentList();
         this.initWareHouseList();
     }
     initWareHouseList() {
@@ -65,19 +65,19 @@ export class TruckDriverWareHouseMappingsComponent extends BaseComponent impleme
             this.showAlertDialog('Error', 'Error while getting WareHouse List');
         });
     }
-    initTruckDriverList() {
+    initSellerAgentList() {
         this.userService.getAllExceptDeleted().subscribe((users: UserDTO[]) => {
-            let menuItem: any = _.find(this.localCols, { 'field': 'truckDriver' });
+            let menuItem: any = _.find(this.localCols, { 'field': 'sellerAgent' });
             menuItem.originalOptions = users;
             users.forEach( (user: UserDTO ) => {
                 menuItem.options.push(new TokenModel(user['firstName'], null));
             });
         },
         ( error ) => {
-            this.showAlertDialog('Error', 'Error while getting TruckDriver List');
+            this.showAlertDialog('Error', 'Error while getting SellerAgent List');
         });
     }
     protected initEmptyModel() {
-        this.model = new TruckDriverWareHouseMappingDTO();
+        this.model = new SellerAgentWareHouseMappingDTO();
     }
 }

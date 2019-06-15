@@ -4,9 +4,12 @@
 package com.kirana.avatar.authorization.service.impl;
 
 
+import java.util.Map;
+
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kirana.avatar.authorization.dto.QcWareHouseMappingDTO;
 import com.kirana.avatar.authorization.mapper.QcWareHouseMapper;
 import com.kirana.avatar.authorization.model.QcWareHouseMapping;
@@ -15,8 +18,11 @@ import com.kirana.avatar.authorization.service.QcWareHouseMappingService;
 import com.kirana.avatar.authorization.specifications.QcWareHouseMappingSpecification;
 import com.kirana.avatar.common.dto.FilterCriteria;
 import com.kirana.avatar.common.exception.ApiException;
+import com.kirana.avatar.common.jpa.entity.BaseEntity_;
 import com.kirana.avatar.common.service.impl.BaseServiceImpl;
+import com.kirana.avatar.master.dto.WareHouseDTO;
 import com.kirana.avatar.master.feign.TalukClient;
+import com.kirana.avatar.master.feign.WareHouseClient;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,16 +39,24 @@ public class QcWareHouseMappingServiceImpl extends BaseServiceImpl<QcWareHouseMa
 	private QcWareHouseMappingRepository wareHouseRepository;
 	private QcWareHouseMapper qcWareHouseMapper;
 	private QcWareHouseMappingSpecification wareHouseSpecification;
+	private WareHouseClient wareHouseClient;
+	private ObjectMapper objectMapper;
 	
-	public QcWareHouseMappingServiceImpl(QcWareHouseMappingRepository wareHouseRepository, QcWareHouseMapper qcWareHouseMapper, QcWareHouseMappingSpecification wareHouseSpecification) {
+	public QcWareHouseMappingServiceImpl(QcWareHouseMappingRepository wareHouseRepository, QcWareHouseMapper qcWareHouseMapper, QcWareHouseMappingSpecification wareHouseSpecification, 
+			WareHouseClient wareHouseClient, 
+			ObjectMapper objectMapper) {
 		super(wareHouseRepository, qcWareHouseMapper, wareHouseSpecification);
 		this.wareHouseRepository = wareHouseRepository;
 		this.qcWareHouseMapper = qcWareHouseMapper;
 		this.wareHouseSpecification = wareHouseSpecification;
+		this.wareHouseClient = wareHouseClient;
+		this.objectMapper = objectMapper;
 	}
 
 	@Override
 	protected QcWareHouseMapping beforeSave(QcWareHouseMappingDTO wareHouseDTO, QcWareHouseMapping model) {
+		Number wareHouseId = (Number)wareHouseDTO.getWareHouse().get(BaseEntity_.ID);
+		model.setWareHouse(wareHouseId.longValue());
 		return model;
 	}
 
@@ -76,9 +90,14 @@ public class QcWareHouseMappingServiceImpl extends BaseServiceImpl<QcWareHouseMa
 				.orElseThrow(ApiException::resourceNotFound);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected QcWareHouseMappingDTO afterLoad(QcWareHouseMappingDTO resource, QcWareHouseMapping model) {
-		return resource;
+		WareHouseDTO wareHouseDTO = wareHouseClient.get(model.getWareHouse());
+		return resource
+				.toBuilder()
+				.wareHouse(objectMapper.convertValue(wareHouseDTO, Map.class))
+				.build();
 	}
 
 }

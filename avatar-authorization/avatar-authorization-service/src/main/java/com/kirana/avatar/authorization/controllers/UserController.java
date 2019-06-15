@@ -12,9 +12,9 @@
  *******************************************************************************/
 package com.kirana.avatar.authorization.controllers;
 
+import java.util.List;
 import java.util.Map;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -49,7 +49,7 @@ public class UserController extends BaseController<UserService, UserDTO> impleme
 
 	
 	@Override
-	public ResponseEntity<LoginResponse> login(LoginRequest loginRequest) {
+	public LoginResponse login(LoginRequest loginRequest) {
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(
 						loginRequest.getUserNameOrMobileNumber(),
@@ -59,50 +59,50 @@ public class UserController extends BaseController<UserService, UserDTO> impleme
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		UserInfo userInfo = (UserInfo)authentication.getPrincipal();
 		UserDTO userDTO = userService.findByUserNameOrMobileNumber(loginRequest.getUserNameOrMobileNumber());
-		return ResponseEntity.ok(LoginResponse
+		return LoginResponse
 				.builder()
 				.accessToken(userInfo.getUserToken())
 				.userDTO(userDTO)
-				.build());
+				.build();
 	}
 
 	@Override
-	public ResponseEntity<Boolean> logout() {
+	public Boolean logout() {
 		SecurityContextHolder.clearContext();
-		return ResponseEntity.ok(Boolean.TRUE);
+		return Boolean.TRUE;
 	}
 
 	@Override
-	public ResponseEntity<Map<String, Long>> sellersDailyGrowthRate(Integer depth) {
-		return ResponseEntity.ok(userService.sellersDailyGrowthRate(depth));
+	public Map<String, Long> sellersDailyGrowthRate(Integer depth) {
+		return userService.sellersDailyGrowthRate(depth);
 	}
 
 	@Override
-	public ResponseEntity<Map<String, Long>> sellersMonthlyGrowthRate(Integer depth) {
-		return ResponseEntity.ok(userService.sellersMonthlyGrowthRate(depth));
-	}
-
-
-	@Override
-	public ResponseEntity<Map<String, Long>> sellersYearlyGrowthRate(Integer depth) {
-		return ResponseEntity.ok(userService.sellersYearlyGrowthRate(depth));
-	}
-
-	@Override
-	public ResponseEntity<Map<String, Long>> buyersDailyGrowthRate(Integer depth) {
-		return ResponseEntity.ok(userService.buyersDailyGrowthRate(depth));
+	public Map<String, Long> sellersMonthlyGrowthRate(Integer depth) {
+		return userService.sellersMonthlyGrowthRate(depth);
 	}
 
 
 	@Override
-	public ResponseEntity<Map<String, Long>> buyersMonthlyGrowthRate(Integer depth) {
-		return ResponseEntity.ok(userService.buyersMonthlyGrowthRate(depth));
+	public Map<String, Long> sellersYearlyGrowthRate(Integer depth) {
+		return userService.sellersYearlyGrowthRate(depth);
+	}
+
+	@Override
+	public Map<String, Long> buyersDailyGrowthRate(Integer depth) {
+		return userService.buyersDailyGrowthRate(depth);
 	}
 
 
 	@Override
-	public ResponseEntity<Map<String, Long>> buyersYearlyGrowthRate(Integer depth) {
-		return ResponseEntity.ok(userService.buyersYearlyGrowthRate(depth));
+	public Map<String, Long> buyersMonthlyGrowthRate(Integer depth) {
+		return userService.buyersMonthlyGrowthRate(depth);
+	}
+
+
+	@Override
+	public Map<String, Long> buyersYearlyGrowthRate(Integer depth) {
+		return userService.buyersYearlyGrowthRate(depth);
 	}
 
 
@@ -132,6 +132,18 @@ public class UserController extends BaseController<UserService, UserDTO> impleme
 	@Override
 	public Map<String, Object> getWareHouseForTruckDriver(Long truckDriverId) {
 		return userService.getWareHouseForTruckDriver(truckDriverId);
+	}
+
+
+	@Override
+	public List<UserDTO> getSellerAgentByWareHouse(Long wareHouseId) {
+		return userService.getSellerAgentByWareHouse(wareHouseId);
+	}
+
+
+	@Override
+	public List<UserDTO> getSellersBySellerAgent(Long sellerAgentId) {
+		return userService.getSellersBySellerAgent(sellerAgentId);
 	}
 
 }

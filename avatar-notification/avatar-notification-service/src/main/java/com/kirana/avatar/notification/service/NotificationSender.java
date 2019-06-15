@@ -10,5 +10,5 @@ import com.kirana.avatar.notification.model.Notification;
  *
  */
 public interface NotificationSender {
-	public void send(Notification notification);
+	public void send(Notification notification) throws Exception;
 }

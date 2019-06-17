@@ -12,16 +12,10 @@
  *******************************************************************************/
 package com.kirana.avatar.common.controllers;
 
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.List;
-import java.util.TimeZone;
 
 import javax.validation.Valid;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import com.kirana.avatar.common.dto.BaseDTO;
 import com.kirana.avatar.common.dto.PagingAndFilterRequest;

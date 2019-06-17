@@ -22,7 +22,7 @@ export class SellerTransportationChargeService {
 
     constructor(private httpClient: HttpClient, private serviceConfig: ServiceConfig) { }
     /* GET */
-    public getAllGet(): Observable<SellerTransportationChargeDTO[]> {
+    public getAll(): Observable<SellerTransportationChargeDTO[]> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -30,7 +30,7 @@ export class SellerTransportationChargeService {
             .pipe(catchError(this.handleError));
     }
 
-    public getAllExceptDeletedGet(): Observable<SellerTransportationChargeDTO[]> {
+    public getAllExceptDeleted(): Observable<SellerTransportationChargeDTO[]> {
         const url = this.serviceBaseURL + '/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
@@ -38,7 +38,7 @@ export class SellerTransportationChargeService {
             .pipe(catchError(this.handleError));
     }
 
-    public getGet(id: number): Observable<SellerTransportationChargeDTO> {
+    public get(id: number): Observable<SellerTransportationChargeDTO> {
         const url = this.serviceBaseURL + '/' + id + '';
         const params = this.createHttpParams({});
 
@@ -46,7 +46,7 @@ export class SellerTransportationChargeService {
             .pipe(catchError(this.handleError));
     }
 
-    public getLatestSellerTransportationChargeGet(): Observable<SellerTransportationChargeDTO> {
+    public getLatestSellerTransportationCharge(): Observable<SellerTransportationChargeDTO> {
         const url = this.serviceBaseURL + '/latest-seller-transportation-charge';
         const params = this.createHttpParams({});
 
@@ -58,7 +58,7 @@ export class SellerTransportationChargeService {
     /* HEAD */
 
     /* POST */
-    public savePost(arg0: SellerTransportationChargeDTO): Observable<SellerTransportationChargeDTO> {
+    public save(arg0: SellerTransportationChargeDTO): Observable<SellerTransportationChargeDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -66,7 +66,7 @@ export class SellerTransportationChargeService {
             .pipe(catchError(this.handleError));
     }
 
-    public getResourceByFilterAndPagingPost(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
+    public getResourceByFilterAndPaging(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
         const url = this.serviceBaseURL + '/with-filter-and-paging';
         const params = this.createHttpParams({});
 
@@ -74,7 +74,7 @@ export class SellerTransportationChargeService {
             .pipe(catchError(this.handleError));
     }
 
-    public getResourceByFilterAndPagingExceptDeletedPost(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
+    public getResourceByFilterAndPagingExceptDeleted(arg0: PagingAndFilterRequest): Observable<PagingAndFilterResponse> {
         const url = this.serviceBaseURL + '/with-filter-and-paging/with-includes-only-non-deleted';
         const params = this.createHttpParams({});
 
@@ -84,7 +84,7 @@ export class SellerTransportationChargeService {
 
 
     /* PUT */
-    public updatePut(arg0: SellerTransportationChargeDTO): Observable<SellerTransportationChargeDTO> {
+    public update(arg0: SellerTransportationChargeDTO): Observable<SellerTransportationChargeDTO> {
         const url = this.serviceBaseURL + '';
         const params = this.createHttpParams({});
 
@@ -96,7 +96,7 @@ export class SellerTransportationChargeService {
     /* PATCH */
 
     /* DELETE */
-    public deleteDelete(ids: number[]): Observable<boolean> {
+    public delete(ids: number[]): Observable<boolean> {
         const url = this.serviceBaseURL + '/' + ids + '';
         const params = this.createHttpParams({});
 

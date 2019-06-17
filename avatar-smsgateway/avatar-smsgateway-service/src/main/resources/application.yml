@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: smsgateway-service
+received-sms-push-url: http://localhost:9090/api/offline-service/receive-sms
+# HTTP (Tomcat) port
+server:
+  port: 2050

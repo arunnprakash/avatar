@@ -63,7 +63,9 @@ zuul:
       notification-service:
         path: /api/**
         serviceId: notification-service
-
+      offline-service:
+        path: /api/**
+        serviceId: offline-service
 # logging
 logging:
   file: logs/application-debug.log

@@ -7,6 +7,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import javax.validation.Valid;
 
 import org.leandreck.endpoints.annotations.TypeScriptEndpoint;
+import org.leandreck.endpoints.annotations.TypeScriptTemplatesConfiguration;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ import com.kirana.avatar.product.dto.SellerPriceHistoryDTO;
  *
  */
 @TypeScriptEndpoint("SellerPriceHistoryService")
+@TypeScriptTemplatesConfiguration(useSuffixes = false)
 @RequestMapping(value= {"/api/price-history"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 public interface SellerPriceHistoryResource extends BaseResource<SellerPriceHistoryDTO> {
 

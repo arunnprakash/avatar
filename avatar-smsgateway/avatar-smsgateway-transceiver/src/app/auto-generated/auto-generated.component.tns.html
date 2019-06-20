@@ -1,1 +1,12 @@
-<Button text="auto-generated works!" class="btn btn-primary"></Button>
+<ActionBar title="SMS Transceiver"></ActionBar>
+<StackLayout class="form">
+    <StackLayout class="input-field">
+        <Label text="Sms Gateway Base Url" class="label font-weight-bold m-b-5"></Label>
+        <TextField class="input" [isEnabled]="!started" [(ngModel)]="smsGatewayBaseUrl"></TextField>
+        <StackLayout class="hr-light"></StackLayout>
+    </StackLayout>
+    <StackLayout class="input-field">
+        <Button text="Start" *ngIf="!started" class="btn btn-primary" (tap)="start()"></Button>
+        <Button text="Stop" *ngIf="started" class="btn btn-primary" (tap)="stop()"></Button>
+    </StackLayout>
+</StackLayout>

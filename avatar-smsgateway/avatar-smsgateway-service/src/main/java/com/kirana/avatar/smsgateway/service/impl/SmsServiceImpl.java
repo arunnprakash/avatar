@@ -6,6 +6,8 @@ package com.kirana.avatar.smsgateway.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -22,6 +24,7 @@ import com.kirana.avatar.smsgateway.service.SmsService;
 @Service
 public class SmsServiceImpl implements SmsService {
 
+	private static Logger logger = LoggerFactory.getLogger(SmsServiceImpl.class);
 	private List<SendSmsDTO> sendSmsDtoList = new ArrayList<>();
 
 	@Value("${received-sms-push-url}")
@@ -32,6 +35,7 @@ public class SmsServiceImpl implements SmsService {
 	 */
 	@Override
 	public Boolean send(SendSmsDTO sendSmsDTO) {
+		logger.debug("send sms {}", sendSmsDTO);
 		return sendSmsDtoList.add(sendSmsDTO);
 	}
 
@@ -40,6 +44,7 @@ public class SmsServiceImpl implements SmsService {
 	 */
 	@Override
 	public Boolean receiveSms(ReceivedSmsDTO receivedSmsDTO) {
+		logger.debug("Received sms {}", receivedSmsDTO);
 		return WebClient.create()
 				.get()
 				.uri(receivedSmsPushUrl, receivedSmsDTO)
@@ -51,12 +56,15 @@ public class SmsServiceImpl implements SmsService {
 
 	@Override
 	public List<SendSmsDTO> getSendSmsList() {
+		logger.debug("getting Sms List {}", sendSmsDtoList);
 		return sendSmsDtoList;
 	}
 
 	@Override
 	public Boolean sendSmsCompleted(List<SendSmsDTO> sendSmsDtoList) {
-		sendSmsDtoList.forEach(sendSmsDto -> sendSmsDtoList.remove(sendSmsDto));
+		logger.debug("sendSmsDtoList before remove from list {}", this.sendSmsDtoList);
+		sendSmsDtoList.forEach(sendSmsDto -> this.sendSmsDtoList.remove(sendSmsDto));
+		logger.debug("sendSmsDtoList after removed from list {}", this.sendSmsDtoList);
 		return true;
 	}
 

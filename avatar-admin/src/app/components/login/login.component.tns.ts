@@ -10,7 +10,7 @@ import { LoginRequest } from "../../services/authorization/loginrequest.model";
 import { LoginResponse } from "../../services/authorization/loginresponse.model";
 import { AuthService } from "../../services/auth.service";
 import { TranslateService } from '@ngx-translate/core';
-declare let android: any
+declare let android: any;
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',

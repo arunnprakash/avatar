@@ -33,7 +33,7 @@ public class SmsgatewayController {
 		return smsService.getSendSmsList();
 	}
 
-	@GetMapping("send-sms-completed")
+	@PostMapping("send-sms-completed")
 	public Boolean sendSmsCompleted(@RequestBody List<SendSmsDTO> sendSmsDtoList) {
 		return smsService.sendSmsCompleted(sendSmsDtoList);
 	}

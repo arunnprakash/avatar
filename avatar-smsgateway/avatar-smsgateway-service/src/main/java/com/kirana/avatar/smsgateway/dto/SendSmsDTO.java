@@ -53,4 +53,8 @@ public class SendSmsDTO {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "SendSmsDTO [receipients=" + receipients + ", message=" + message + "]";
+	}
 }

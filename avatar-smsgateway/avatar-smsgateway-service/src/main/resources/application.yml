@@ -5,3 +5,13 @@ received-sms-push-url: http://localhost:9090/api/offline-service/receive-sms
 # HTTP (Tomcat) port
 server:
   port: 2050
+# logging
+logging:
+  file: logs/application-debug.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"
+  level:
+    org.springframework.web: DEBUG
+    org.hibernate: WARN
+    com.kirana: DEBUG

@@ -32,7 +32,7 @@
     "nativescript-theme-core": "~1.0.4",
     "reflect-metadata": "~0.1.12",
     "rxjs": "~6.4.0",
-    "tns-core-modules": "~5.2.0",
+    "tns-core-modules": "^5.4.2",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
   },
@@ -62,7 +62,7 @@
   "nativescript": {
     "id": "org.nativescript.ngsample",
     "tns-android": {
-      "version": "5.1.0"
+      "version": "5.3.1"
     }
   }
 }

@@ -9,13 +9,13 @@ import { baseTemplate } from '../../../base/base.template';
 import { baseCss } from '../../../base/base.css';
 import { BaseComponent } from '../../../base/base.component';
 
-import { PriceHistoryService } from "../../../../services/product/pricehistoryservice.generated";
+import { SellerPriceHistoryService } from "../../../../services/product/sellerpricehistoryservice.generated";
 import { ProductService } from '../../../../services/product/productservice.generated';
 import { QualityService } from '../../../../services/product/qualityservice.generated';
 import { AuthService } from "../../../../services/auth.service";
 import { ProductDTO } from "../../../../services/product/productdto.model";
 import { QualityDTO } from "../../../../services/product/qualitydto.model";
-import { PriceHistoryDTO } from "../../../../services/product/pricehistorydto.model";
+import { SellerPriceHistoryDTO } from "../../../../services/product/sellerpricehistorydto.model";
 import { PriceDetailComponent } from "../price-detail/price-detail.component";
 
 import { ObservableArray } from "tns-core-modules/data/observable-array";

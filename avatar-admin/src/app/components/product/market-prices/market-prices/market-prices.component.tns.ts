@@ -9,7 +9,7 @@ import { baseTemplate } from '../../../base/base.template';
 import { baseCss } from '../../../base/base.css';
 import { BaseComponent } from '../../../base/base.component';
 
-import { PriceHistoryService } from "../../../../services/product/pricehistoryservice.generated";
+import { MarketPriceService } from "../../../../services/product/marketpriceservice.generated";
 import { ProductService } from '../../../../services/product/productservice.generated';
 import { QualityService } from '../../../../services/product/qualityservice.generated';
 import { AuthService } from "../../../../services/auth.service";

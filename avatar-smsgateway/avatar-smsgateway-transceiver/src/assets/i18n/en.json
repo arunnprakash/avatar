@@ -1,0 +1,66 @@
+{
+	"home": {
+		"welcome": "Welcome"
+	},
+	"monthNames": {
+		"january" : "January",
+		"february":"February", 
+		"march":"March", 
+		"april":"April", 
+		"may":"May", 
+		"june":"June",
+		"july":"July", 
+		"august":"August", 
+		"september":"September", 
+		"october":"October", 
+		"november":"November", 
+		"december":"December"
+	},
+	"common": {
+		"id": "Id",
+		"createdBy": "Created By",
+		"createdDate": "Created At",
+		"lastModifiedBy": "Last Modified By",
+		"lastModifiedDate": "Last Modified At",
+		"deleted": "Deleted"
+	},
+	"userTitle":"Users",
+	"users": {
+		"userName": "UserName",
+		"mobileNumber": "MobileNumber",
+		"firstName":"FirstName",
+		"lastName":"LastName",
+		"dob":"DateOfBirth",
+		"roles":"Roles",
+		"assets": "Assets",
+		"preferredLanguage":"PreferredLanguage",
+		"village":"Village",
+		"gender": "Gender"
+	},
+	"products": {
+		"productName":"ProductName",
+		"productCode":"ProductCode",
+		"assets": "Assets",
+		"assetTypes": "AssetType"
+	},
+	"prices": {
+		"product":"Product",
+		"quality":"Quality",
+		"price": "Price"
+	},
+	"holidays": {
+		"startDate":"StartDate",
+		"endDate":"EndDate",
+		"description": "Description",
+		"state": "State",
+		"district": "District",
+		"taluk": "Taluk"
+	},
+	"productregions": {
+		"product":"Product",
+		"state": "State",
+		"district": "District",
+		"taluk": "Taluk"
+	}
+}
+

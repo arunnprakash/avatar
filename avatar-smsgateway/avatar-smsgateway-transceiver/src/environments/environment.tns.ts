@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  avatarServiceApiBaseUrl: 'http://localhost:9090',
+  avatarServiceApiBaseUrl: 'http://10.0.2.2:9090',
   masterServiceApiBaseUrl: '/master-service',
   authorizationServiceApiBaseUrl: '/authorization-service',
   productServiceApiBaseUrl: '/product-service',

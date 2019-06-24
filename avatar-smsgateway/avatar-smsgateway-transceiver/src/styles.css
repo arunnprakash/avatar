@@ -1,1 +1,58 @@
 /* You can add global styles to this file, and also import other style files */
+/*@import '~primeng/resources/themes/luna-green/theme.css'; */
+@import '~primeng/resources/themes/nova-light/theme.css'; 
+@import 'assets/themes/nova-light/theme.css'; 
+/* @import '~primeng/resources/themes/south-street/theme.css'; */
+/*@import '~primeng/resources/themes/flick/theme.css';*/
+@import '~primeng/resources/primeng.min.css';
+@import '~primeicons/primeicons.css';
+@import '~primeflex/primeflex.css';
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.hand-cursor {
+	cursor: pointer !important;
+}
+.text-align-left {
+	text-align: left !important;
+}
+.text-align-center {
+	text-align: center !important;
+}
+.text-align-right {
+	text-align: right !important;
+}
+.text-align-bottom {
+	display: inline-block !important;
+	vertical-align: bottom !important;
+}
+.text-bold {
+	font-weight: bold;
+}
+.tableRowHoverCss:hover {
+	background-color: lime !important;
+}
+
+p-menu > div > ul > li > a {
+	text-align: left !important;
+	padding-left:  10px !important;
+	padding-right:  0px !important;
+}
+
+p-menu > div > ul > li {
+	border: 0px;
+	border-image: linear-gradient(to right, green, rgba(0, 0, 0, 0)) 1 100%;
+	border-bottom: 2px solid blue !important;
+}
+
+menu > p-menu > div {
+	width: 100% !important;
+}

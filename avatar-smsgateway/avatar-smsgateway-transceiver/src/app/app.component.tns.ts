@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { device, screen, isAndroid, isIOS } from "tns-core-modules/platform";
 import * as application from "tns-core-modules/application";
 import * as permissions from "nativescript-permissions";
@@ -18,7 +18,7 @@ declare let android: any
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     private readingInbox: boolean = false;
     private checkingSendSms: boolean = false;
     smsGatewayBaseUrl: string = "http://localhost:2050";
@@ -28,23 +28,20 @@ export class AppComponent {
     constructor(private httpClient: HttpClient) { }
     
     ngOnInit() {
-        
         permissions.requestPermission(android.Manifest.permission.SEND_SMS, "This App Need Access for Send Sms")
         .then( (res: any) => {
             console.log("SEND_SMS PERMISSION GRANTED");
             this.smsManager = android.telephony.SmsManager.getDefault();
+            /*setInterval(()=> { 
+            if (this.started) { this.readInbox(); } 
+	        }, 4000);*/
+	        setInterval(()=> { 
+	            if (this.started) { this.checkSendSms(); }
+	        }, 4000);
         })
         .catch( (err) => {
             console.log("SEND_SMS PERMISSION DENIED");
         });
-    }
-     ngAfterViewInit() {
-        /*setInterval(()=> { 
-            if (this.started) { this.readInbox(); } 
-        }, 4000);*/
-        setInterval(()=> { 
-            if (this.started) { this.checkSendSms(); }
-        }, 4000);
     }
     start(){
         this.started = true;

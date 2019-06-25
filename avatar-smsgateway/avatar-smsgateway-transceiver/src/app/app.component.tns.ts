@@ -21,7 +21,7 @@ declare let android: any
 export class AppComponent implements OnInit {
     private readingInbox: boolean = false;
     private checkingSendSms: boolean = false;
-    smsGatewayBaseUrl: string = "http://localhost:2050";
+    smsGatewayBaseUrl: string = "http://192.168.1.181:2050";
     private smsManager: any;
     private reqid: number;
     private started: boolean = false;
@@ -91,28 +91,10 @@ export class AppComponent implements OnInit {
                             this.checkingSendSms = false;
                         });
                     }
-                    /*TNSPhone.sms(sendSms.receipients, sendSms.message)
-                    .then((args) => {
-                        console.log("SMS Send Successfully");
-                        ++smsSendCompleted;
-                        if (numberOfSms == smsSendCompleted) {
-                            this.sendSmsCompleted(sendSmsList).subscribe((ack: any) => {
-                                console.log("Send Sms Completed Ack Done");
-                                this.checkingSendSms = false;
-                            }, (err) => {
-                                console.error('Send Sms Completed Ack Error', err);
-                                this.checkingSendSms = false;
-                            });
-                        }
-                    }, (err) => {
-                        console.error('SMS Sending Error', err);
-                        ++smsSendCompleted;
-                        if (numberOfSms == smsSendCompleted) {
-                            this.checkingSendSms = false;
-                        }
-                    });*/
                 });
-                
+                if (numberOfSms == 0) {
+                    this.checkingSendSms = false;
+                }
             },
             ( error ) => {
                console.error('Error', 'Error while getting SendSmsList List');

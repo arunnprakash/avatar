@@ -28,13 +28,13 @@ export class AppComponent implements OnInit {
     constructor(private httpClient: HttpClient) { }
     
     ngOnInit() {
-        permissions.requestPermission(android.Manifest.permission.SEND_SMS, "This App Need Access for Send Sms")
+        permissions.requestPermission([android.Manifest.permission.SEND_SMS, android.Manifest.permission.READ_SMS], "This App Need Access for Send Sms")
         .then( (res: any) => {
             console.log("SEND_SMS PERMISSION GRANTED");
             this.smsManager = android.telephony.SmsManager.getDefault();
-            /*setInterval(()=> { 
+            setInterval(()=> { 
             if (this.started) { this.readInbox(); } 
-	        }, 4000);*/
+	        }, 4000);
 	        setInterval(()=> { 
 	            if (this.started) { this.checkSendSms(); }
 	        }, 4000);
@@ -52,15 +52,23 @@ export class AppComponent implements OnInit {
     readInbox() {
         if (!this.readingInbox) {
             this.readingInbox = true;
-            let fromNumber: string = "9884850965";
-            TNSInbox.getInboxesFromNumber(fromNumber, { max: 10 }).then((res: any) => {
-                console.log("Inbox", JSON.stringify(res));
-                let receivedSmsDTO: ReceivedSmsDTO = new ReceivedSmsDTO();
-                receivedSmsDTO.message = JSON.stringify(res);
-                this.pushToSmsGateway(receivedSmsDTO).subscribe((result: any) => {
-                    console.log("Received Sms pushed to Offline Service", result);
+            console.log("readingInbox", this.readingInbox);
+            TNSInbox.getInboxes({ max: 2 }).then((res: any) => {
+                let smsList: any[] = res['data'];
+                if (smsList.length == 0) {
                     this.readingInbox = false;
-                });
+                } else {
+                    _.each(smsList, (sms: any) => {
+                        let receivedSmsDTO: ReceivedSmsDTO = new ReceivedSmsDTO();
+                        receivedSmsDTO.message = sms['message'];
+                        receivedSmsDTO.sender = sms['fromNumber'];
+                        this.pushToSmsGateway(receivedSmsDTO).subscribe((result: any) => {
+                            console.log("Received Sms pushed to Smsgateway Service", result);
+                            this.readingInbox = false;
+                        });
+                    });
+                    
+                }
             }, (err) => {
                 console.log('Error: ' + err);
                 this.readingInbox = false;
@@ -116,7 +124,7 @@ export class AppComponent implements OnInit {
     }
     
     getSendSmsList(): Observable<SendSmsDTO[]> {
-        const url = 'http://192.168.1.181:2050/get-send-sms-list';
+        const url = this.smsGatewayBaseUrl + '/get-send-sms-list';
         return this.httpClient.get<SendSmsDTO[]>(url)
             .pipe(catchError(this.handleError));
     }

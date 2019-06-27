@@ -62,6 +62,7 @@ export class AppComponent implements OnInit {
                         let receivedSmsDTO: ReceivedSmsDTO = new ReceivedSmsDTO();
                         receivedSmsDTO.message = sms['message'];
                         receivedSmsDTO.sender = sms['fromNumber'];
+                        console.log(receivedSmsDTO);
                         this.pushToSmsGateway(receivedSmsDTO).subscribe((result: any) => {
                             console.log("Received Sms pushed to Smsgateway Service", result);
                             this.readingInbox = false;

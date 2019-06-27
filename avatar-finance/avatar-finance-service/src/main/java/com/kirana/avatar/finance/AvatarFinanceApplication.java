@@ -26,7 +26,7 @@ import com.kirana.avatar.common.config.CommonConfig;
 @SpringBootApplication
 @EnableScheduling
 @Import(CommonConfig.class)
-public class AvatarNotificationApplication {
+public class AvatarFinanceApplication {
 
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
@@ -46,6 +46,6 @@ public class AvatarNotificationApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(AvatarNotificationApplication.class, args);
+		SpringApplication.run(AvatarFinanceApplication.class, args);
 	}
 }

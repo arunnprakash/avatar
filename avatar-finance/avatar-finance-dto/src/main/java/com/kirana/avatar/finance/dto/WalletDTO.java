@@ -10,7 +10,7 @@
  * Limited
  *
  *******************************************************************************/
-package com.kirana.avatar.notification.dto;
+package com.kirana.avatar.finance.dto;
 
 import java.time.ZonedDateTime;
 
@@ -32,15 +32,11 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @EqualsAndHashCode(callSuper = true)
 @ToString
-public class NotificationDTO extends BaseDTO {
-
-	protected NotificationStatusDTO notificationStatus;
+public class WalletDTO extends BaseDTO {
 
 	@Builder
-	public NotificationDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
-			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, 
-			NotificationStatusDTO notificationStatus) {
+	public WalletDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
+			ZonedDateTime lastModifiedDate, Boolean deleted, Long version) {
 		super(id, createdBy, createdDate, lastModifiedBy, lastModifiedDate, deleted, version);
-		this.notificationStatus = notificationStatus;
 	}
 }

@@ -13,13 +13,11 @@
 package com.kirana.avatar.finance.service;
 
 import com.kirana.avatar.common.service.BaseService;
-import com.kirana.avatar.finance.dto.NotificationDTO;
+import com.kirana.avatar.finance.dto.WalletDTO;
 
 /**
  * @author __ArunPrakash__
  *
  */
-public interface NotificationService extends BaseService<NotificationDTO>{
-
-	public boolean sendPriceUpdateNotification(Long priceHistoryId);
+public interface WalletService extends BaseService<WalletDTO>{
 }

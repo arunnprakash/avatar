@@ -10,20 +10,20 @@
  * Limited
  *
  *******************************************************************************/
-package com.kirana.avatar.notification.feign;
+package com.kirana.avatar.finance.feign;
 
 
 import org.springframework.cloud.openfeign.FeignClient;
 
 import com.kirana.avatar.common.feign.config.FeignClientContract;
-import com.kirana.avatar.notification.resource.NotificationResource;
+import com.kirana.avatar.finance.resource.WalletResource;
 
 
 /**
  * @author __Telmila__
  *
  */
-@FeignClient(name="notification-service", configuration={FeignClientContract.class})
-public interface NotificationClient extends NotificationResource {
+@FeignClient(name="finance-service", configuration={FeignClientContract.class})
+public interface WalletClient extends WalletResource {
 
 }

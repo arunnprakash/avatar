@@ -42,6 +42,7 @@
 		<module>avatar-transaction</module>
 		<module>avatar-notification</module>
 		<module>avatar-offline</module>
+		<module>avatar-finance</module>
 		<module>avatar-smsgateway</module>
 		<module>avatar-service-discovery</module>
 		<module>avatar-gateway</module>

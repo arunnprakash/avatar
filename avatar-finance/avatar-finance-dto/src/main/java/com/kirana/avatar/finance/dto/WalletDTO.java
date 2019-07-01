@@ -13,6 +13,7 @@
 package com.kirana.avatar.finance.dto;
 
 import java.time.ZonedDateTime;
+import java.util.Map;
 
 import com.kirana.avatar.common.dto.BaseDTO;
 
@@ -34,9 +35,15 @@ import lombok.ToString;
 @ToString
 public class WalletDTO extends BaseDTO {
 
-	@Builder
+	protected Map<String, Object> user;
+	protected Double balance;
+	@Builder(toBuilder = true)
 	public WalletDTO(Long id, String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
-			ZonedDateTime lastModifiedDate, Boolean deleted, Long version) {
+			ZonedDateTime lastModifiedDate, Boolean deleted, Long version, 
+			Map<String, Object> user, 
+			Double balance) {
 		super(id, createdBy, createdDate, lastModifiedBy, lastModifiedDate, deleted, version);
+		this.user = user;
+		this.balance = balance;
 	}
 }

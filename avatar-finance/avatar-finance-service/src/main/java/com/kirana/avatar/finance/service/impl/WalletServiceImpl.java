@@ -8,9 +8,11 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kirana.avatar.authorization.dto.UserDTO;
 import com.kirana.avatar.authorization.feign.UserClient;
 import com.kirana.avatar.common.dto.FilterCriteria;
 import com.kirana.avatar.common.exception.ApiException;
+import com.kirana.avatar.common.jpa.entity.BaseEntity_;
 import com.kirana.avatar.common.service.impl.BaseServiceImpl;
 import com.kirana.avatar.finance.dto.WalletDTO;
 import com.kirana.avatar.finance.mapper.WalletMapper;
@@ -18,7 +20,6 @@ import com.kirana.avatar.finance.model.Wallet;
 import com.kirana.avatar.finance.repositories.WalletRepository;
 import com.kirana.avatar.finance.service.WalletService;
 import com.kirana.avatar.finance.specifications.WalletSpecification;
-import com.kirana.avatar.product.feign.SellerPriceHistoryClient;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,24 +37,22 @@ public class WalletServiceImpl extends BaseServiceImpl<Wallet, WalletDTO, Wallet
 	private WalletSpecification notificationSpecification;
 
 	private UserClient userClient;
-	private SellerPriceHistoryClient sellerPriceHistoryClient;
 	private ObjectMapper objectMapper;
 	public WalletServiceImpl(WalletRepository notificationRepository, WalletMapper notificationMapper, 
 			WalletSpecification notificationSpecification,
 			UserClient userClient,
-			SellerPriceHistoryClient sellerPriceHistoryClient,
 			ObjectMapper objectMapper) {
 		super(notificationRepository, notificationMapper, notificationSpecification);
 		this.notificationRepository = notificationRepository;
 		this.notificationMapper = notificationMapper;
 		this.notificationSpecification = notificationSpecification;
 		this.userClient = userClient;
-		this.sellerPriceHistoryClient = sellerPriceHistoryClient;
 		this.objectMapper = objectMapper;
 	}
 
 	@Override
 	protected Wallet beforeUpdate(WalletDTO notificationDTO, Wallet model) {
+		model.setUser((Long)notificationDTO.getUser().get(BaseEntity_.ID));
 		return model;
 	}
 
@@ -67,9 +66,15 @@ public class WalletServiceImpl extends BaseServiceImpl<Wallet, WalletDTO, Wallet
 		return specification;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected WalletDTO afterLoad(WalletDTO resource, Wallet model) {
-		return resource;
+		UserDTO userDTO = userClient.get(model.getUser());
+		Map<String, Object> userMap = objectMapper.convertValue(userDTO, Map.class);
+		return resource
+				.toBuilder()
+				.user(userMap)
+				.build();
 	}
 
 	@Override

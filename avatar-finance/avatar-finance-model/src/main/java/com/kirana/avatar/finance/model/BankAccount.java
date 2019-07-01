@@ -33,18 +33,27 @@ import lombok.ToString;
  */
 
 @Entity
-@Table(name = "wallets")
+@Table(name = "bank_accounts")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @ToString
 @EqualsAndHashCode(callSuper=true)
 @EntityListeners(AuditingEntityListener.class)
-public class Wallet extends BaseEntity<Wallet> {
-	
+public class BankAccount extends BaseEntity<BankAccount> {
+
 	@Column(nullable = false)
 	protected Long user;
+
+	@Column(nullable = false)
+	protected String accountHolderName;
 	
 	@Column(nullable = false)
-	protected Double balance;
+	protected String accountNumber;
+	
+	@Column(nullable = false)
+	protected String ifscCode;
+	
+	@Column(nullable = false)
+	protected String bankName;
 }

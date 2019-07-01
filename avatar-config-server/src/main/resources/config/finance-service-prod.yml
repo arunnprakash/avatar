@@ -1,9 +1,25 @@
 spring:
   profiles: 
     default: dev
-  basic:
-    enabled: false
-
+  security:
+    user:
+      name: "avatar"
+      password: "eureka"
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        default_schema: transaction
+  datasource:
+    platform: postgres
+    url: jdbc:mysql://localhost:3306/avatar?useUnicode=yes&characterEncoding=UTF-8
+    username: root
+    password: admin
+    driverClassName: com.mysql.cj.jdbc.Driver
+    validationQuery: SELECT 1
   # Send distributed traces to zipkin server (using Eureka to find the server)
   sleuth:
     sampler:
@@ -25,6 +41,9 @@ eureka:
     health-check-url-path: /actuator/health
       
   client:
+    healthcheck:
+      enabled: true
+    fetchRegistry: true
     registryFetchIntervalSeconds: 5
     serviceUrl:
       defaultZone: ${EUREKA_SERVICE_URL:http://avatar:eureka@localhost:1100}/eureka/
@@ -41,34 +60,7 @@ management:
 
 # HTTP (Tomcat) port
 server:
-  port: 9090
-
-# zuul config
-zuul:
-  retryable: true
-  sensitiveHeaders: Cookie,Set-Cookie
-  routes:
-      master-service:
-        path: /api/**
-        serviceId: master-service
-      authorization-service:
-        path: /api/**
-        serviceId: authorization-service
-      product-service:
-        path: /api/**
-        serviceId: product-service
-      transaction-service:
-        path: /api/**
-        serviceId: transaction-service
-      notification-service:
-        path: /api/**
-        serviceId: notification-service
-      offline-service:
-        path: /api/**
-        serviceId: offline-service
-      finance-service:
-        path: /api/**
-        serviceId: finance-service
+  port: 1170
 
 # logging
 logging:
@@ -80,19 +72,28 @@ logging:
     org.springframework.web: DEBUG
     org.hibernate: WARN
     com.kirana: DEBUG
-
-ribbon:
-  retryable: true
-  ConnectTimeout: 3000
-  ReadTimeout: 60000
+#Feign Config
 feign:
-  histrix:
-    enabled: false
-
-hystrix:
-  command:
-    choose:
-      default:
-        execution:
-          timeout:
-            enabled: false
+  client:
+    config:
+      authorization-service:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: full
+#        errorDecoder: com.example.SimpleErrorDecoder
+#        retryer: com.example.SimpleRetryer
+        requestInterceptors:
+          - com.kirana.avatar.common.feign.interceptor.FeignRequestInterceptor
+        decode404: false
+#        encoder: com.example.SimpleEncoder
+#        decoder: com.example.SimpleDecoder
+#        contract: com.example.SimpleContract
+#JWT Config
+security:
+  jwt:
+    loginUri: /api/login
+    headerName: Authorization
+    tokenPrefix: Bearer 
+    expiration: 864000000 #10 days
+    secretKey: TelmilaArunPrakashAvatar2019MobileReChargeAndFarmerApplicationSecretKey
+    defaultPassword: avatar

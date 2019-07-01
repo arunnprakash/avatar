@@ -66,6 +66,10 @@ zuul:
       offline-service:
         path: /api/**
         serviceId: offline-service
+      finance-service:
+        path: /api/**
+        serviceId: finance-service
+
 # logging
 logging:
   file: logs/application-debug.log

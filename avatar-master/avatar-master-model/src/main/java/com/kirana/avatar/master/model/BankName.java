@@ -10,16 +10,15 @@
  * Limited
  *
  *******************************************************************************/
-package com.kirana.avatar.finance.model;
+package com.kirana.avatar.master.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.kirana.avatar.common.jpa.entity.BaseEntity;
+import com.kirana.avatar.common.jpa.entity.LocaleEntity;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
@@ -33,24 +32,13 @@ import lombok.ToString;
  */
 
 @Entity
-@Table(name = "bank_accounts")
+@Table(name = "bank_names")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @ToString
 @EqualsAndHashCode(callSuper=true)
 @EntityListeners(AuditingEntityListener.class)
-public class BankAccount extends BaseEntity<BankAccount> {
+public class BankName extends LocaleEntity<BankName> {
 
-	@Column(nullable = false)
-	protected Long user;
-
-	@Column(nullable = false)
-	protected String accountHolderName;
-	
-	@Column(nullable = false)
-	protected String accountNumber;
-	
-	@Column(nullable = false)
-	protected Long bankId;
 }

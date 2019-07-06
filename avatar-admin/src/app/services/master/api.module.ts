@@ -1,20 +1,20 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { BankNameService } from './banknameservice.generated';
-import { AssetTypeService } from './assettypeservice.generated';
-import { VillageService } from './villageservice.generated';
-import { WareHouseService } from './warehouseservice.generated';
-import { CountryService } from './countryservice.generated';
-import { AssetService } from './assetservice.generated';
+import { BankService } from './bankservice.generated';
 import { SellerMerchantCommissionService } from './sellermerchantcommissionservice.generated';
-import { GenderService } from './genderservice.generated';
+import { WareHouseService } from './warehouseservice.generated';
+import { VillageService } from './villageservice.generated';
+import { BankNameService } from './banknameservice.generated';
+import { LanguageService } from './languageservice.generated';
 import { SellerTransportationChargeService } from './sellertransportationchargeservice.generated';
 import { MarketService } from './marketservice.generated';
+import { CountryService } from './countryservice.generated';
 import { TalukService } from './talukservice.generated';
-import { BankService } from './bankservice.generated';
-import { LanguageService } from './languageservice.generated';
-import { SellerAgentCommissionService } from './selleragentcommissionservice.generated';
 import { DistrictService } from './districtservice.generated';
+import { AssetService } from './assetservice.generated';
 import { StateService } from './stateservice.generated';
+import { GenderService } from './genderservice.generated';
+import { SellerAgentCommissionService } from './selleragentcommissionservice.generated';
+import { AssetTypeService } from './assettypeservice.generated';
 import { ServiceConfig } from './serviceconfig';
 
 @NgModule({})
@@ -24,22 +24,22 @@ export class MasterAPIModule {
             ngModule: MasterAPIModule,
             providers: [
                 {provide: ServiceConfig, useValue: serviceConfig},
-                BankNameService,
-                AssetTypeService,
-                VillageService,
-                WareHouseService,
-                CountryService,
-                AssetService,
+                BankService,
                 SellerMerchantCommissionService,
-                GenderService,
+                WareHouseService,
+                VillageService,
+                BankNameService,
+                LanguageService,
                 SellerTransportationChargeService,
                 MarketService,
+                CountryService,
                 TalukService,
-                BankService,
-                LanguageService,
-                SellerAgentCommissionService,
                 DistrictService,
-                StateService
+                AssetService,
+                StateService,
+                GenderService,
+                SellerAgentCommissionService,
+                AssetTypeService
             ]
         };
     }

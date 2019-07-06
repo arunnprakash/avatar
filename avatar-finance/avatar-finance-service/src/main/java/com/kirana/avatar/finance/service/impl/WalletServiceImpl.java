@@ -32,32 +32,33 @@ import lombok.extern.slf4j.Slf4j;
 @SuppressWarnings("unused")
 public class WalletServiceImpl extends BaseServiceImpl<Wallet, WalletDTO, WalletMapper, WalletRepository, WalletSpecification> implements WalletService {
 
-	private WalletRepository notificationRepository;
-	private WalletMapper notificationMapper;
-	private WalletSpecification notificationSpecification;
+	private WalletRepository walletRepository;
+	private WalletMapper walletMapper;
+	private WalletSpecification walletSpecification;
 
 	private UserClient userClient;
 	private ObjectMapper objectMapper;
-	public WalletServiceImpl(WalletRepository notificationRepository, WalletMapper notificationMapper, 
-			WalletSpecification notificationSpecification,
+
+	public WalletServiceImpl(WalletRepository walletRepository, WalletMapper walletMapper, 
+			WalletSpecification walletSpecification,
 			UserClient userClient,
 			ObjectMapper objectMapper) {
-		super(notificationRepository, notificationMapper, notificationSpecification);
-		this.notificationRepository = notificationRepository;
-		this.notificationMapper = notificationMapper;
-		this.notificationSpecification = notificationSpecification;
+		super(walletRepository, walletMapper, walletSpecification);
+		this.walletRepository = walletRepository;
+		this.walletMapper = walletMapper;
+		this.walletSpecification = walletSpecification;
 		this.userClient = userClient;
 		this.objectMapper = objectMapper;
 	}
 
 	@Override
-	protected Wallet beforeUpdate(WalletDTO notificationDTO, Wallet model) {
-		model.setUser((Long)notificationDTO.getUser().get(BaseEntity_.ID));
+	protected Wallet beforeUpdate(WalletDTO walletDTO, Wallet model) {
+		model.setUser((Long)walletDTO.getUser().get(BaseEntity_.ID));
 		return model;
 	}
 
 	@Override
-	protected Wallet afterUpdate(WalletDTO notificationDTO, Wallet model) {
+	protected Wallet afterUpdate(WalletDTO walletDTO, Wallet model) {
 		return model;
 	}
 
@@ -83,7 +84,7 @@ public class WalletServiceImpl extends BaseServiceImpl<Wallet, WalletDTO, Wallet
 	}
 
 	@Override
-	protected Wallet afterSave(WalletDTO notificationDTO, Wallet model) {
+	protected Wallet afterSave(WalletDTO walletDTO, Wallet model) {
 		return model;
 	}
 }

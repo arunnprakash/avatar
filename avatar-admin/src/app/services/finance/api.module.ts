@@ -1,4 +1,5 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
+import { BankAccountService } from './bankaccountservice.generated';
 import { WalletService } from './walletservice.generated';
 import { ServiceConfig } from './serviceconfig';
 
@@ -9,6 +10,7 @@ export class FinanceAPIModule {
             ngModule: FinanceAPIModule,
             providers: [
                 {provide: ServiceConfig, useValue: serviceConfig},
+                BankAccountService,
                 WalletService
             ]
         };

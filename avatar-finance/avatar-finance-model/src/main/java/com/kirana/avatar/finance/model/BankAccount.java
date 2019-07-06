@@ -52,5 +52,5 @@ public class BankAccount extends BaseEntity<BankAccount> {
 	protected String accountNumber;
 	
 	@Column(nullable = false)
-	protected Long bankId;
+	protected Long bank;
 }

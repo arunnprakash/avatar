@@ -20,4 +20,10 @@ import com.kirana.avatar.finance.dto.WalletDTO;
  *
  */
 public interface WalletService extends BaseService<WalletDTO>{
+
+	public WalletDTO transferAmountToUserBankAccount(Long userId, Double amount);
+
+	public WalletDTO transferAllAmountToUserBankAccount(Long userId);
+
+	public WalletDTO creditAmount(Long userId, Double amount);
 }

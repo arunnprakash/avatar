@@ -87,4 +87,34 @@ public class WalletServiceImpl extends BaseServiceImpl<Wallet, WalletDTO, Wallet
 	protected Wallet afterSave(WalletDTO walletDTO, Wallet model) {
 		return model;
 	}
+
+	@Override
+	public WalletDTO transferAmountToUserBankAccount(Long userId, Double amount) {
+		Specification<Wallet> specification = Specification.where(walletSpecification.hasDeleted(false));
+		specification = specification.and(walletSpecification.hasUser(userId));
+		Wallet wallet = walletRepository.findOne(specification).orElseThrow(ApiException::resourceNotFound);
+		wallet.setBalance(wallet.getBalance() - amount);
+		walletRepository.save(wallet);
+		return walletMapper.toDTO(wallet);
+	}
+
+	@Override
+	public WalletDTO transferAllAmountToUserBankAccount(Long userId) {
+		Specification<Wallet> specification = Specification.where(walletSpecification.hasDeleted(false));
+		specification = specification.and(walletSpecification.hasUser(userId));
+		Wallet wallet = walletRepository.findOne(specification).orElseThrow(ApiException::resourceNotFound);
+		wallet.setBalance(0d);
+		walletRepository.save(wallet);
+		return walletMapper.toDTO(wallet);
+	}
+
+	@Override
+	public WalletDTO creditAmount(Long userId, Double amount) {
+		Specification<Wallet> specification = Specification.where(walletSpecification.hasDeleted(false));
+		specification = specification.and(walletSpecification.hasUser(userId));
+		Wallet wallet = walletRepository.findOne(specification).orElseThrow(ApiException::resourceNotFound);
+		wallet.setBalance(wallet.getBalance() + amount);
+		walletRepository.save(wallet);
+		return walletMapper.toDTO(wallet);
+	}
 }

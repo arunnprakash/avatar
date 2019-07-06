@@ -22,4 +22,19 @@ public class WalletController extends BaseController<WalletService, WalletDTO> i
 		this.walletService = walletService;
 	}
 
+	@Override
+	public WalletDTO transferAmountToUserBankAccount(Long userId, Double amount) {
+		return walletService.transferAmountToUserBankAccount(userId, amount);
+	}
+
+	@Override
+	public WalletDTO transferAllAmountToUserBankAccount(Long userId) {
+		return walletService.transferAllAmountToUserBankAccount(userId);
+	}
+
+	@Override
+	public WalletDTO creditAmount(Long userId, Double amount) {
+		return walletService.creditAmount(userId, amount);
+	}
+
 }

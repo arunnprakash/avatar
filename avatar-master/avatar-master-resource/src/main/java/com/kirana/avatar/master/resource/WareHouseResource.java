@@ -26,7 +26,7 @@ import com.kirana.avatar.common.resource.BaseResource;
 @RequestMapping(value= {"/api/warehouse"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 public interface WareHouseResource extends BaseResource<WareHouseDTO>{
 
-	@GetMapping(value= {"/api/find-by-marketid/{marketId}"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+	@GetMapping(value= {"/find-by-marketid/{marketId}"}, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 	public List<WareHouseDTO> getWareHousesByMarket(@PathVariable("marketId") Long marketId);
 
 }

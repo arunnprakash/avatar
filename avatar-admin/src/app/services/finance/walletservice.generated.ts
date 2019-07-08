@@ -46,6 +46,30 @@ export class WalletService {
             .pipe(catchError(this.handleError));
     }
 
+    public creditAmount(userId: number, amount: number): Observable<WalletDTO> {
+        const url = this.serviceBaseURL + '/' + userId + '/credit/' + amount + '';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.get<WalletDTO>(url, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
+    public transferAmountToUserBankAccount(userId: number, amount: number): Observable<WalletDTO> {
+        const url = this.serviceBaseURL + '/' + userId + '/transfer-to-bank-account/' + amount + '';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.get<WalletDTO>(url, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
+    public transferAllAmountToUserBankAccount(userId: number): Observable<WalletDTO> {
+        const url = this.serviceBaseURL + '/' + userId + '/transfer-all-amount-to-bank-account';
+        const params = this.createHttpParams({});
+
+        return this.httpClient.get<WalletDTO>(url, {params: params})
+            .pipe(catchError(this.handleError));
+    }
+
 
     /* HEAD */
 

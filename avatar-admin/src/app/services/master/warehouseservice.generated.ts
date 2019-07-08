@@ -52,7 +52,7 @@ export class WareHouseService {
     }
 
     public getWareHousesByMarket(marketId: number): Observable<WareHouseDTO[]> {
-        const url = this.serviceBaseURL + '/api/find-by-marketid/' + marketId + '';
+        const url = this.serviceBaseURL + '/find-by-marketid/' + marketId + '';
         const params = this.createHttpParams({});
 
         return this.httpClient.get<WareHouseDTO[]>(url, {params: params})

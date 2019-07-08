@@ -1,7 +1,7 @@
 # Config Server
 spring:
   application:
-    name: notification-service
+    name: offline-service
   profiles: 
     active: @spring.profiles.active@
     default: dev

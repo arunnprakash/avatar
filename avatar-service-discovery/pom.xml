@@ -56,24 +56,35 @@
 	</dependencyManagement>
 
 	<build>
-	<resources>
-		<resource>
-			<directory>src/main/resources</directory>
-			<filtering>true</filtering>
-		</resource>
-	</resources>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+							<goal>build-info</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
 					<profiles>
 						<profile>dev</profile>
 					</profiles>
+					<mainClass>com.kirana.avatar.AvatarServiceDiscoveryApplication</mainClass>
+					<addResources>false</addResources>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+
 	<profiles>
 		<profile>
 			<id>dev</id>
@@ -103,6 +114,7 @@
 			</properties>
 		</profile>
 	</profiles>
+
 	<repositories>
 		<repository>
 			<id>spring-milestones</id>
@@ -113,6 +125,5 @@
 			</snapshots>
 		</repository>
 	</repositories>
-
 
 </project>

@@ -201,7 +201,7 @@
 					<profiles>
 						<profile>dev</profile>
 					</profiles>
-					<mainClass>com.kirana.avatar.gateway.AvatarGatewayApplication</mainClass>
+					<mainClass>com.kirana.avatar.master.AvatarMasterApplication</mainClass>
 					<addResources>false</addResources>
 				</configuration>
 			</plugin>

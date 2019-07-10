@@ -36,6 +36,21 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+							<goal>build-info</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<profiles>
+						<profile>dev</profile>
+					</profiles>
+					<mainClass>com.kirana.avatar.ConfigServerApplication</mainClass>
+					<addResources>false</addResources>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

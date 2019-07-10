@@ -25,3 +25,13 @@ spring:
       name: "avatar"
       password: "eureka"
 
+# logging
+logging:
+  file: logs/discovery.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"
+  level:
+    org.springframework.web: DEBUG
+    org.hibernate: WARN
+    com.kirana: DEBUG

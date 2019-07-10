@@ -72,7 +72,7 @@ zuul:
 
 # logging
 logging:
-  file: logs/application-debug.log
+  file: logs/config-server.log
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"

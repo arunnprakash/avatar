@@ -3,7 +3,7 @@ export { PagingAndFilterRequest } from './pagingandfilterrequest.model';
 export { OutgoingSmsDTO } from './outgoingsmsdto.model';
 export { SmsProcessedStatusDTO } from './smsprocessedstatusdto.model';
 export { FilterCriteria } from './filtercriteria.model';
-export { IncomingSmsService } from './incomingsmsservice.generated';
 export { OutgoingSmsService } from './outgoingsmsservice.generated';
+export { IncomingSmsService } from './incomingsmsservice.generated';
 export { ServiceConfig } from './serviceconfig';
 export { OfflineAPIModule } from './api.module';

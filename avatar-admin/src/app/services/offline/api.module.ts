@@ -1,6 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { IncomingSmsService } from './incomingsmsservice.generated';
 import { OutgoingSmsService } from './outgoingsmsservice.generated';
+import { IncomingSmsService } from './incomingsmsservice.generated';
 import { ServiceConfig } from './serviceconfig';
 
 @NgModule({})
@@ -10,8 +10,8 @@ export class OfflineAPIModule {
             ngModule: OfflineAPIModule,
             providers: [
                 {provide: ServiceConfig, useValue: serviceConfig},
-                IncomingSmsService,
-                OutgoingSmsService
+                OutgoingSmsService,
+                IncomingSmsService
             ]
         };
     }

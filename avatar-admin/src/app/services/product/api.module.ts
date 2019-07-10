@@ -2,12 +2,12 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { ProductRegionService } from './productregionservice.generated';
 import { AssetService } from './assetservice.generated';
 import { QualityService } from './qualityservice.generated';
-import { ProductService } from './productservice.generated';
-import { MarketPriceService } from './marketpriceservice.generated';
-import { HolidayService } from './holidayservice.generated';
 import { AssetTypeService } from './assettypeservice.generated';
-import { SellerPriceHistoryService } from './sellerpricehistoryservice.generated';
+import { ProductService } from './productservice.generated';
+import { HolidayService } from './holidayservice.generated';
+import { MarketPriceService } from './marketpriceservice.generated';
 import { ProductAssetService } from './productassetservice.generated';
+import { SellerPriceHistoryService } from './sellerpricehistoryservice.generated';
 import { ServiceConfig } from './serviceconfig';
 
 @NgModule({})
@@ -20,12 +20,12 @@ export class ProductAPIModule {
                 ProductRegionService,
                 AssetService,
                 QualityService,
-                ProductService,
-                MarketPriceService,
-                HolidayService,
                 AssetTypeService,
-                SellerPriceHistoryService,
-                ProductAssetService
+                ProductService,
+                HolidayService,
+                MarketPriceService,
+                ProductAssetService,
+                SellerPriceHistoryService
             ]
         };
     }

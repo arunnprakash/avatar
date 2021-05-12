@@ -31,7 +31,7 @@
     "@angular/router": "~7.0.0",
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
-    "chart.js": "^2.8.0",
+    "chart.js": "^2.9.4",
     "core-js": "^2.6.5",
     "nativescript-angular": "~7.0.0",
     "nativescript-checkbox": "^3.0.3",
